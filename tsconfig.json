@@ -1,0 +1,14 @@
+{
+    "extends": "code-style/tsconfig.json",
+    "compilerOptions": {
+      "declaration": true,
+      "outDir": "./lib",
+      "rootDir": "./src",
+      "skipLibCheck": true,
+      "sourceMap": false,
+      "resolveJsonModule": true
+    },
+    "include": ["./src"],
+    "exclude": ["./src/types", "node_modules"]
+  }
+  
