@@ -1,0 +1,15 @@
+# package directories
+node_modules
+lib
+
+# Other
+.env
+*.log
+.DS_Store
+tsconfig.tsbuildinfo
+
+.vscode
+
+# example deployments
+examples/defender-test-project/.defender
+examples/defender-test-project/.serverless
