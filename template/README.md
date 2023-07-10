@@ -24,7 +24,7 @@ Alternatively, you can install it directly into an existing project with:
 
 ## Setup
 
-This plugin allows you to define Autotasks, Sentinels, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an autotask, a relayer, a policy and a single relayer API key defined:
+This plugin allows you to define Actions, Sentinels, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an action, a relayer, a policy and a single relayer API key defined:
 
 ```yaml
 service: defender-serverless-template
@@ -42,9 +42,9 @@ defender:
   secret: '${env:TEAM_API_SECRET}'
 
 functions:
-  autotask-example-1:
+  action-example-1:
     name: 'Hello world from serverless'
-    path: './autotasks/hello-world'
+    path: './actions/hello-world'
     relayer: ${self:resources.Resources.relayers.relayer-1}
     trigger:
       type: 'schedule'
@@ -86,9 +86,9 @@ This means that all Defender resources, that are not defined in your current tem
 
 Any resource removed from the `serverless.yml` file does _not_ get automatically deleted in order to prevent inadvertent resource deletion. For this behaviour to be anticipated, SSOT mode must be enabled.
 
-### Secrets (Autotask)
+### Secrets (Action)
 
-Autotask secrets can be defined both globally and per stack. Secrets defined under `global` are not affected by changes to the `stackName` and will retain when redeployed under a new stack. Secrets defined under `stack` will be removed (on the condition that [SSOT mode](#SSOT-mode) is enabled) when the stack is redeployed under a new `stackName`. To reference secrets defined under `stack`, use the following format: `<stackname>_<secretkey>`, for example `mystack_test`.
+Action secrets can be defined both globally and per stack. Secrets defined under `global` are not affected by changes to the `stackName` and will retain when redeployed under a new stack. Secrets defined under `stack` will be removed (on the condition that [SSOT mode](#SSOT-mode) is enabled) when the stack is redeployed under a new `stackName`. To reference secrets defined under `stack`, use the following format: `<stackname>_<secretkey>`, for example `mystack_test`.
 
 ```yaml
 secrets:
@@ -107,7 +107,7 @@ We provide auto-generated documentation based on the JSON schemas:
 
 - [Defender Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/defender.md)
 - [Provider Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/provider.md)
-- [Function (Autotask) Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/function.md)
+- [Function (Action) Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/function.md)
 - [Resources Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/resources.md)
 
 More information on types can be found [here](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/index.ts). Specifically, the types preceded with `Y` (e.g. YRelayer). For the schemas, you can check out the [docs-schema](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs-schemas) folder.
@@ -140,11 +140,11 @@ You can use `sls remove` to remove all defender resources defined in the `server
 
 ### Logs
 
-You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve the latest autotask logs for a given autotask identifier (e.g. mystack.autotask-example-1). This command will run continiously and retrieve logs every 2 seconds. The `--data` flag is optional.
+You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve the latest action logs for a given action identifier (e.g. mystack.action-example-1). This command will run continiously and retrieve logs every 2 seconds. The `--data` flag is optional.
 
 ### Invoke
 
-You can use `sls invoke --function <stack_resource_id>` to manually run an autotask, given its identifier (e.g. mystack.autotask-example-1).
+You can use `sls invoke --function <stack_resource_id>` to manually run an action, given its identifier (e.g. mystack.action-example-1).
 
 > Each command has a standard output to a JSON object.
 

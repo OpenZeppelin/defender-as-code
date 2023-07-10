@@ -1,7 +1,8 @@
 import Serverless from 'serverless';
 
 import _ from 'lodash';
-import { AutotaskClient } from '@openzeppelin/defender-autotask-client';
+import { Platform } from '@openzeppelin/platform-sdk';
+import { ActionClient } from '@openzeppelin/platform-sdk-action-client';
 import { SentinelClient } from '@openzeppelin/defender-sentinel-client';
 import { RelayClient } from '@openzeppelin/defender-relay-client';
 import { AdminClient } from '@openzeppelin/defender-admin-client';
@@ -17,7 +18,7 @@ import {
   YDatadogConfig,
   YOpsgenieConfig,
   YPagerdutyConfig,
-  DefenderAutotask,
+  PlatformAction,
   DefenderNotification,
   DefenderBlockSentinel,
   DefenderFortaSentinel,
@@ -29,7 +30,7 @@ import {
   YCategory,
   DefenderCategory,
   DefenderAPIError,
-  YAutotask,
+  YAction,
   DefenderNotificationReference,
 } from '../types';
 import { sanitise } from './sanitise';
@@ -46,7 +47,7 @@ export const getEquivalentResource = <Y, D>(
   currentResources: D[],
 ) => {
   if (resource) {
-    const [key, value] = Object.entries(resources ?? []).find(a => _.isEqual(a[1], resource))!;
+    const [key, value] = Object.entries(resources ?? []).find((a) => _.isEqual(a[1], resource))!;
     return currentResources.find((e: D) => (e as any).stackResourceId === getResourceID(getStackName(context), key));
   }
 };
@@ -81,7 +82,7 @@ export const isTemplateResource = <Y, D>(
   resourceType: ResourceType,
   resources: Y[],
 ): boolean => {
-  return !!Object.entries(resources).find(a =>
+  return !!Object.entries(resources).find((a) =>
     resourceType === 'Secrets'
       ? // if secret, just compare key
         Object.keys(a[1] as unknown as YSecret)[0] === (resource as unknown as string)
@@ -129,8 +130,9 @@ export const getSentinelClient = (key: TeamKey): SentinelClient => {
   return new SentinelClient(key);
 };
 
-export const getAutotaskClient = (key: TeamKey): AutotaskClient => {
-  return new AutotaskClient(key);
+export const getActionClient = (key: TeamKey): ActionClient => {
+  const platformClient = new Platform(key);
+  return platformClient.action;
 };
 
 export const getRelayClient = (key: TeamKey): RelayClient => {
@@ -217,7 +219,7 @@ export const constructNotificationCategory = (
     description: category.description,
     notificationIds: (category['notification-ids']
       ? category['notification-ids']
-          .map(notification => {
+          .map((notification) => {
             const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
               context,
               notification,
@@ -244,17 +246,17 @@ export const constructSentinel = (
   stackResourceId: string,
   sentinel: YSentinel,
   notifications: DefenderNotification[],
-  autotasks: DefenderAutotask[],
+  actions: PlatformAction[],
   blockwatchers: DefenderBlockWatcher[],
   categories: DefenderCategory[],
 ): DefenderBlockSentinel | DefenderFortaSentinel => {
-  const autotaskCondition =
-    sentinel['autotask-condition'] && autotasks.find(a => a.name === sentinel['autotask-condition']!.name);
-  const autotaskTrigger =
-    sentinel['autotask-trigger'] && autotasks.find(a => a.name === sentinel['autotask-trigger']!.name);
+  const actionCondition =
+    sentinel['autotask-condition'] && actions.find((a) => a.name === sentinel['autotask-condition']!.name);
+  const actionTrigger =
+    sentinel['autotask-trigger'] && actions.find((a) => a.name === sentinel['autotask-trigger']!.name);
 
   const notificationChannels = sentinel['notify-config'].channels
-    .map(notification => {
+    .map((notification) => {
       const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
         context,
         notification,
@@ -266,7 +268,8 @@ export const constructSentinel = (
     .filter(isResource);
 
   const sentinelCategory = sentinel['notify-config'].category;
-  const notificationCategoryId = sentinelCategory && categories.find(c => c.name === sentinelCategory.name)?.categoryId;
+  const notificationCategoryId =
+    sentinelCategory && categories.find((c) => c.name === sentinelCategory.name)?.categoryId;
 
   const commonSentinel = {
     type: sentinel.type,
@@ -275,8 +278,8 @@ export const constructSentinel = (
     addresses: sentinel.addresses,
     abi: sentinel.abi && JSON.stringify(typeof sentinel.abi === 'string' ? JSON.parse(sentinel.abi) : sentinel.abi),
     paused: sentinel.paused,
-    autotaskCondition: autotaskCondition && autotaskCondition.autotaskId,
-    autotaskTrigger: autotaskTrigger && autotaskTrigger.autotaskId,
+    autotaskCondition: actionCondition && actionCondition.actionkId,
+    autotaskTrigger: actionTrigger && actionTrigger.actionkId,
     alertThreshold: sentinel['alert-threshold'] && {
       amount: sentinel['alert-threshold'].amount,
       windowSeconds: sentinel['alert-threshold']['window-seconds'],
@@ -307,7 +310,7 @@ export const constructSentinel = (
   }
 
   if (sentinel.type === 'BLOCK') {
-    const compatibleBlockWatcher = blockwatchers.find(b => b.confirmLevel === sentinel['confirm-level']);
+    const compatibleBlockWatcher = blockwatchers.find((b) => b.confirmLevel === sentinel['confirm-level']);
     if (!compatibleBlockWatcher) {
       throw new Error(
         `A blockwatcher with confirmation level (${sentinel['confirm-level']}) does not exist on ${sentinel.network}. Choose another confirmation level.`,
@@ -322,7 +325,7 @@ export const constructSentinel = (
       eventConditions:
         sentinel.conditions &&
         sentinel.conditions.event &&
-        sentinel.conditions.event.map(c => {
+        sentinel.conditions.event.map((c) => {
           return {
             eventSignature: c.signature,
             expression: c.expression,
@@ -331,7 +334,7 @@ export const constructSentinel = (
       functionConditions:
         sentinel.conditions &&
         sentinel.conditions.function &&
-        sentinel.conditions.function.map(c => {
+        sentinel.conditions.function.map((c) => {
           return {
             functionSignature: c.signature,
             expression: c.expression,
@@ -354,22 +357,22 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
   const teamApiKey = getTeamAPIkeysOrThrow(context);
   switch (resourceType) {
     case 'Sentinels':
-      // Check for access to Autotasks
-      // Enumerate all sentinels, and check if any sentinel has an autotask associated
-      const sentinelsWithAutotasks = (Object.values(resources) as unknown as YSentinel[]).filter(
-        r => !!r['autotask-condition'] || !!r['autotask-trigger'],
+      // Check for access to Actions
+      // Enumerate all sentinels, and check if any sentinel has an action associated
+      const sentinelsWithActions = (Object.values(resources) as unknown as YSentinel[]).filter(
+        (r) => !!r['autotask-condition'] || !!r['autotask-trigger'],
       );
-      // If there are sentinels with autotasks associated, then try to list autotasks
-      if (!_.isEmpty(sentinelsWithAutotasks)) {
+      // If there are sentinels with actions associated, then try to list actions
+      if (!_.isEmpty(sentinelsWithActions)) {
         try {
-          await getAutotaskClient(teamApiKey).list();
+          await getActionClient(teamApiKey).list();
           return;
         } catch (e) {
           // catch the error and verify it is an unauthorised access error
           if (isUnauthorisedError(e)) {
             // if this fails (due to permissions issue), we re-throw the error with more context
             throw new Error(
-              'At least one Sentinel is associated with an Autotask. Additional API key permissions are required to access Autotasks. Alternatively, remove the association with the autotask to complete this action.',
+              'At least one Sentinel is associated with an Action. Additional API key permissions are required to access Actions. Alternatively, remove the association with the autotask to complete this action.',
             );
           }
           // also throw with original error if its not a permission issue
@@ -378,10 +381,10 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
       }
     case 'Autotasks':
       // Check for access to Relayers
-      // Enumerate all autotasks, and check if any autotask has a relayer associated
-      const autotasksWithRelayers = (Object.values(resources) as unknown as YAutotask[]).filter(r => !!r.relayer);
-      // If there are autotasks with relayers associated, then try to list relayers
-      if (!_.isEmpty(autotasksWithRelayers)) {
+      // Enumerate all actions, and check if any action has a relayer associated
+      const actionsWithRelayers = (Object.values(resources) as unknown as YAction[]).filter((r) => !!r.relayer);
+      // If there are actions with relayers associated, then try to list relayers
+      if (!_.isEmpty(actionsWithRelayers)) {
         try {
           await getRelayClient(teamApiKey).list();
           return;
@@ -390,7 +393,7 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
           if (isUnauthorisedError(e)) {
             // if this fails (due to permissions issue), we re-throw the error with more context
             throw new Error(
-              'At least one Autotask is associated with a Relayer. Additional API key permissions are required to access Relayers. Alternatively, remove the association with the relayer to complete this action.',
+              'At least one Action is associated with a Relayer. Additional API key permissions are required to access Relayers. Alternatively, remove the association with the relayer to complete this action.',
             );
           }
           // also throw with original error if its not a permission issue

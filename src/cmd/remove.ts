@@ -8,7 +8,7 @@ import Logger from '../utils/logger';
 
 import {
   getAdminClient,
-  getAutotaskClient,
+  getActionClient,
   getConsolidatedSecrets,
   getRelayClient,
   getSentinelClient,
@@ -17,7 +17,7 @@ import {
   isTemplateResource,
 } from '../utils';
 import {
-  DefenderAutotask,
+  PlatformAction,
   DefenderCategory,
   DefenderContract,
   DefenderNotification,
@@ -26,7 +26,7 @@ import {
   DefenderSentinel,
   ResourceType,
   TeamKey,
-  YAutotask,
+  YAction,
   YCategory,
   YContract,
   YNotification,
@@ -70,7 +70,7 @@ export default class DefenderRemove {
   ) {
     try {
       this.log.progress('component-info', `Retrieving ${resourceType}`);
-      const existing = (await retrieveExistingResources()).filter(e =>
+      const existing = (await retrieveExistingResources()).filter((e) =>
         isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
       );
       this.log.progress('component-remove', `Removing ${resourceType} from Defender`);
@@ -113,16 +113,19 @@ export default class DefenderRemove {
     const stdOut: {
       stack: string;
       sentinels: DefenderSentinel[];
-      autotasks: DefenderAutotask[];
+      actions: PlatformAction[];
       contracts: DefenderContract[];
-      relayers: { relayerId: string; relayerApiKeys: DefenderRelayerApiKey[] }[];
+      relayers: {
+        relayerId: string;
+        relayerApiKeys: DefenderRelayerApiKey[];
+      }[];
       notifications: DefenderNotification[];
       categories: DefenderCategory[];
       secrets: string[];
     } = {
       stack: stackName,
       sentinels: [],
-      autotasks: [],
+      actions: [],
       contracts: [],
       relayers: [],
       notifications: [],
@@ -131,7 +134,7 @@ export default class DefenderRemove {
     };
     // Sentinels
     const sentinelClient = getSentinelClient(this.teamKey!);
-    const listSentinels = () => sentinelClient.list().then(i => i.items);
+    const listSentinels = () => sentinelClient.list().then((i) => i.items);
     await this.wrapper<YSentinel, DefenderSentinel>(
       this.serverless,
       'Sentinels',
@@ -139,7 +142,7 @@ export default class DefenderRemove {
       listSentinels,
       async (sentinels: DefenderSentinel[]) => {
         await Promise.all(
-          sentinels.map(async e => {
+          sentinels.map(async (e) => {
             this.log.progress(
               'component-remove-extra',
               `Removing ${e.stackResourceId} (${e.subscriberId}) from Defender`,
@@ -152,27 +155,24 @@ export default class DefenderRemove {
       stdOut.sentinels,
     );
 
-    // Autotasks
-    const autotaskClient = getAutotaskClient(this.teamKey!);
-    const listAutotasks = () => autotaskClient.list().then(i => i.items);
-    await this.wrapper<YAutotask, DefenderAutotask>(
+    // Actions
+    const actionClient = getActionClient(this.teamKey!);
+    const listActions = () => actionClient.list().then((i) => i.items);
+    await this.wrapper<YAction, PlatformAction>(
       this.serverless,
       'Autotasks',
       this.serverless.service.functions as any,
-      listAutotasks,
-      async (autotasks: DefenderAutotask[]) => {
+      listActions,
+      async (actions: PlatformAction[]) => {
         await Promise.all(
-          autotasks.map(async e => {
-            this.log.progress(
-              'component-remove-extra',
-              `Removing ${e.stackResourceId} (${e.autotaskId}) from Defender`,
-            );
-            await autotaskClient.delete(e.autotaskId);
-            this.log.success(`Removed ${e.stackResourceId} (${e.autotaskId})`);
+          actions.map(async (e) => {
+            this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.actionkId}) from Defender`);
+            await actionClient.delete({ actionId: e.actionkId });
+            this.log.success(`Removed ${e.stackResourceId} (${e.actionkId})`);
           }),
         );
       },
-      stdOut.autotasks,
+      stdOut.actions,
     );
 
     // Contracts
@@ -185,7 +185,7 @@ export default class DefenderRemove {
       listContracts,
       async (contracts: DefenderContract[]) => {
         await Promise.all(
-          contracts.map(async e => {
+          contracts.map(async (e) => {
             const id = `${e.network}-${e.address}`;
             this.log.progress('component-remove-extra', `Removing ${id} (${e.name}) from Defender`);
             await adminClient.deleteContract(id);
@@ -200,7 +200,7 @@ export default class DefenderRemove {
       // Relayer API keys
       const relayClient = getRelayClient(this.teamKey!);
       const listRelayers = (await relayClient.list()).items;
-      const existingRelayers = listRelayers.filter(e =>
+      const existingRelayers = listRelayers.filter((e) =>
         isTemplateResource<YRelayer, DefenderRelayer>(
           this.serverless,
           e,
@@ -211,17 +211,20 @@ export default class DefenderRemove {
       this.log.error('Deleting Relayers is currently only possible via the Defender UI.');
       this.log.progress('component-info', `Retrieving Relayer API Keys`);
       await Promise.all(
-        existingRelayers.map(async relayer => {
+        existingRelayers.map(async (relayer) => {
           this.log.progress('component-info', `Retrieving API Keys for relayer ${relayer.stackResourceId}`);
           const relayerApiKeys = await relayClient.listKeys(relayer.relayerId);
           await Promise.all(
-            relayerApiKeys.map(async e => {
+            relayerApiKeys.map(async (e) => {
               this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.keyId}) from Defender`);
               await relayClient.deleteKey(e.relayerId, e.keyId);
               this.log.success(`Removed ${e.stackResourceId} (${e.keyId})`);
             }),
           );
-          stdOut.relayers.push({ relayerId: relayer.relayerId, relayerApiKeys });
+          stdOut.relayers.push({
+            relayerId: relayer.relayerId,
+            relayerApiKeys,
+          });
         }),
       );
     } catch (e) {
@@ -237,7 +240,7 @@ export default class DefenderRemove {
       listNotifications,
       async (notifications: DefenderNotification[]) => {
         await Promise.all(
-          notifications.map(async e => {
+          notifications.map(async (e) => {
             this.log.progress(
               'component-remove-extra',
               `Removing ${e.stackResourceId} (${e.notificationId}) from Defender`,
@@ -275,7 +278,7 @@ export default class DefenderRemove {
     // );
 
     // Secrets
-    const listSecrets = () => autotaskClient.listSecrets().then(r => r.secretNames ?? []);
+    const listSecrets = () => actionClient.listSecrets().then((r) => r.secretNames ?? []);
 
     const allSecrets = getConsolidatedSecrets(this.serverless);
 
@@ -286,7 +289,7 @@ export default class DefenderRemove {
       listSecrets,
       async (secrets: string[]) => {
         this.log.progress('component-remove-extra', `Removing (${secrets.join(', ')}) from Defender`);
-        await autotaskClient.createSecrets({
+        await actionClient.createSecrets({
           deletes: secrets,
           secrets: {},
         });

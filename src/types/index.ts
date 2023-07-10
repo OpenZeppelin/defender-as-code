@@ -26,13 +26,13 @@ import {
   SubscriberRiskCategory,
 } from '@openzeppelin/defender-sentinel-client/lib/models/subscriber';
 import {
-  Autotask,
+  Action,
   SecretsMap,
   ScheduleTrigger,
   WebhookTrigger,
   SentinelTrigger,
   MonitorFilterTrigger,
-} from '@openzeppelin/defender-autotask-client/lib/models/autotask';
+} from '@openzeppelin/platform-sdk-action-client/lib/models/action';
 import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from '@openzeppelin/platform-deploy-client';
 import { OpsgenieConfig } from '@openzeppelin/defender-sentinel-client/lib/models/opsgenie';
 import { PagerDutyConfig } from '@openzeppelin/defender-sentinel-client/lib/models/pager-duty';
@@ -42,7 +42,7 @@ export type DefenderRelayerApiKey = RelayerApiKey;
 export type DefenderSecretsMap = SecretsMap;
 export type DefenderContract = Contract;
 export type DefenderRelayer = RelayerGetResponse;
-export type DefenderAutotask = Autotask;
+export type PlatformAction = Action;
 export type DefenderBlockWatcher = BlockWatcher;
 export type DefenderNotification = NotificationSummary;
 export type DefenderCategory = NotificationCategory;
@@ -85,15 +85,15 @@ export type YPolicy = {
 };
 
 export type YRelayer = {
-  name: string;
-  network: Network;
+  'name': string;
+  'network': Network;
   'min-balance': number;
-  policy?: YPolicy;
+  'policy'?: YPolicy;
   'api-keys': any[];
   'address-from-relayer'?: YRelayer;
 };
 
-export type YAutotask = {
+export type YAction = {
   name: string;
   path: string;
   relayer?: YRelayer;
@@ -145,30 +145,30 @@ export type YNotification = SaveNotificationRequest & {
 };
 
 export type YCategory = {
-  name: string;
-  description: string;
+  'name': string;
+  'description': string;
   'notification-ids': YNotification[];
 };
 
 export type YBlockSentinel = {
-  name: string;
-  type: 'BLOCK';
-  network: Network;
-  addresses: string[];
-  abi?: string | string[] | JsonFragment[];
-  'alert-threshold'?: { amount: number; 'window-seconds': number };
-  paused?: boolean;
-  'autotask-condition'?: YAutotask;
-  'autotask-trigger'?: YAutotask;
+  'name': string;
+  'type': 'BLOCK';
+  'network': Network;
+  'addresses': string[];
+  'abi'?: string | string[] | JsonFragment[];
+  'alert-threshold'?: { 'amount': number; 'window-seconds': number };
+  'paused'?: boolean;
+  'autotask-condition'?: YAction;
+  'autotask-trigger'?: YAction;
   'confirm-level'?: number | 'safe' | 'finalized';
   'notify-config': {
-    timeout?: number;
-    message?: string;
+    'timeout'?: number;
+    'message'?: string;
     'message-subject'?: string;
-    category?: YCategory;
-    channels: YNotification[];
+    'category'?: YCategory;
+    'channels': YNotification[];
   };
-  conditions?: {
+  'conditions'?: {
     event: { signature: string; expression?: string }[];
     function: { signature: string; expression?: string }[];
     transaction?: string;
@@ -177,25 +177,25 @@ export type YBlockSentinel = {
 };
 
 export type YFortaSentinel = {
-  name: string;
-  type: 'FORTA';
-  network?: Network;
-  addresses?: string[];
-  abi?: string | string[] | JsonFragment[];
-  'alert-threshold'?: { amount: number; 'window-seconds': number };
-  paused?: boolean;
-  'autotask-condition'?: YAutotask;
-  'autotask-trigger'?: YAutotask;
+  'name': string;
+  'type': 'FORTA';
+  'network'?: Network;
+  'addresses'?: string[];
+  'abi'?: string | string[] | JsonFragment[];
+  'alert-threshold'?: { 'amount': number; 'window-seconds': number };
+  'paused'?: boolean;
+  'autotask-condition'?: YAction;
+  'autotask-trigger'?: YAction;
   'notify-config': {
-    timeout?: number;
-    message?: string;
+    'timeout'?: number;
+    'message'?: string;
     'message-subject'?: string;
-    category?: YCategory;
-    channels: YNotification[];
+    'category'?: YCategory;
+    'channels': YNotification[];
   };
-  conditions?: {
+  'conditions'?: {
     'min-scanner-count': number;
-    severity?: 0 | 1 | 2 | 3 | 4 | 5;
+    'severity'?: 0 | 1 | 2 | 3 | 4 | 5;
     'alert-ids'?: string[];
   };
   'forta-node-id'?: string;
@@ -207,10 +207,10 @@ export type YFortaSentinel = {
 export type YSentinel = YBlockSentinel | YFortaSentinel;
 
 export type YContract = {
-  name: string;
-  address: string;
-  network: Network;
-  abi?: string | string[] | JsonFragment[];
+  'name': string;
+  'address': string;
+  'network': Network;
+  'abi'?: string | string[] | JsonFragment[];
   'nat-spec'?: string;
 };
 
@@ -236,7 +236,7 @@ export type DeployOutput<T> = { removed: T[]; created: T[]; updated: T[] };
 
 export type ListDefenderResources = {
   sentinels: DefenderSentinel[];
-  autotasks: DefenderAutotask[];
+  actions: PlatformAction[];
   notifications: DefenderNotification[];
   categories: DefenderCategory[];
   contracts: DefenderContract[];

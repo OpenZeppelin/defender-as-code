@@ -15,9 +15,9 @@ defender:
   secret: '${env:TEAM_API_SECRET}'
 
 functions:
-  autotask-example-1:
+  action-example-1:
     name: 'Hello world from serverless'
-    path: './autotasks/hello-world'
+    path: './actions/hello-world'
     relayer: ${self:resources.Resources.relayers.relayer-1}
     trigger:
       type: 'schedule'
