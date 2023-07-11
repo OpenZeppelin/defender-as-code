@@ -41,11 +41,11 @@ export default class DefenderLogs {
       const client = getActionClient(this.teamKey!);
       const list = (await client.list()).items;
 
-      const defenderAutotask = getEquivalentResourceByKey<PlatformAction>(this.options.function!, list);
+      const defenderAction = getEquivalentResourceByKey<PlatformAction>(this.options.function!, list);
 
       // TODO: Update with Platform equivalent once I find it
-      // if (defenderAutotask) await tailLogsFor(client, defenderAutotask!.autotaskId);
-      // else this.log.error(`No autotask with stackResourceId: ${this.options.function} found.`);
+      // if (defenderAction) await tailLogsFor(client, defenderAction!.actionId);
+      // else this.log.error(`No action with stackResourceId: ${this.options.function} found.`);
       this.log.notice('========================================================');
     } catch (e) {
       this.log.tryLogDefenderError(e);

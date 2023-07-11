@@ -363,8 +363,8 @@
           "properties": { "amount": { "type": "integer" }, "window-seconds": { "type": "integer" } }
         },
         "paused": { "type": "boolean" },
-        "autotask-condition": { "$ref": "definitions.schema.json/#/definitions/autotask", "format": "uri-reference" },
-        "autotask-trigger": { "$ref": "definitions.schema.json/#/definitions/autotask", "format": "uri-reference" },
+        "action-condition": { "$ref": "definitions.schema.json/#/definitions/action", "format": "uri-reference" },
+        "action-trigger": { "$ref": "definitions.schema.json/#/definitions/action", "format": "uri-reference" },
         "confirm-level": {
           "oneOf": [{ "type": "string", "enum": ["safe", "finalized"] }, { "type": "integer" }]
         },
@@ -433,8 +433,8 @@
           "properties": { "amount": { "type": "integer" }, "window-seconds": { "type": "integer" } }
         },
         "paused": { "type": "boolean" },
-        "autotask-condition": { "$ref": "definitions.schema.json/#/definitions/autotask", "format": "uri-reference" },
-        "autotask-trigger": { "$ref": "definitions.schema.json/#/definitions/autotask", "format": "uri-reference" },
+        "action-condition": { "$ref": "definitions.schema.json/#/definitions/action", "format": "uri-reference" },
+        "action-trigger": { "$ref": "definitions.schema.json/#/definitions/action", "format": "uri-reference" },
         "notify-config": {
           "title": "NotifyConfig",
           "type": "object",
@@ -490,8 +490,8 @@
         { "$ref": "definitions.schema.json/#/definitions/fortaMonitor", "format": "uri-reference" }
       ]
     },
-    "autotask": {
-      "title": "Autotask",
+    "action": {
+      "title": "Action",
       "type": "object",
       "properties": {
         "name": { "type": "string" },
@@ -501,7 +501,11 @@
           "title": "Trigger",
           "type": "object",
           "properties": {
-            "type": { "title": "TriggerType", "type": "string", "enum": ["schedule", "webhook"] },
+            "type": {
+              "title": "TriggerType",
+              "type": "string",
+              "enum": ["schedule", "webhook", "sentinel", "monitor-filter"]
+            },
             "cron": { "title": "TriggerCron", "type": "string" },
             "frequency": { "title": "TriggerFrequency", "type": "integer" }
           },

@@ -133,7 +133,7 @@ export default class DefenderInfo {
         .then((r) => r.items);
     await this.wrapper<YAction, PlatformAction>(
       this.serverless,
-      'Autotasks',
+      'Actions',
       this.serverless.service.functions as unknown as YAction[],
       listActions,
       (resource: PlatformAction) => `${resource.stackResourceId}: ${resource.actionkId}`,
