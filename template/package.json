@@ -1,7 +1,7 @@
 {
-  "name": "defender-serverless-template",
+  "name": "platform-as-code-template",
   "version": "1.0.0",
-  "description": "Template for the defender-serverless plugin",
+  "description": "A template for the platform-as-code Serverless plugin",
   "main": "handler.js",
   "engines": {
     "node": ">14.16"
@@ -11,10 +11,6 @@
   },
   "contributors": [
     {
-      "name": "Santiago Palladino",
-      "email": "santiago@openzeppelin.com"
-    },
-    {
       "name": "Nami Shah",
       "email": "nami@openzeppelin.com"
     }
@@ -22,6 +18,6 @@
   "license": "MIT",
   "devDependencies": {
     "serverless": "^3.20.0",
-    "@openzeppelin/defender-serverless": "^1.2.0"
+    "@openzeppelin/platform-as-code": "^1.2.0"
   }
 }

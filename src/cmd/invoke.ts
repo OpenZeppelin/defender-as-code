@@ -7,7 +7,7 @@ import Logger from '../utils/logger';
 import { getActionClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
 import { PlatformAction, TeamKey } from '../types';
 
-export default class DefenderInvoke {
+export default class PlatformInvoke {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
@@ -35,7 +35,7 @@ export default class DefenderInvoke {
   async invoke() {
     try {
       this.log.notice('========================================================');
-      this.log.progress('logs', `Running Defender Invoke on stack function: ${this.options.function}`);
+      this.log.progress('logs', `Running Platform Invoke on stack function: ${this.options.function}`);
       const payload = JSON.parse((this.options as any)?.data ?? '{}');
       const client = getActionClient(this.teamKey!);
       const list = (await client.list()).items;
@@ -52,7 +52,7 @@ export default class DefenderInvoke {
       }
       this.log.notice('========================================================');
     } catch (e) {
-      this.log.tryLogDefenderError(e);
+      this.log.tryLogPlatformError(e);
     }
   }
 }

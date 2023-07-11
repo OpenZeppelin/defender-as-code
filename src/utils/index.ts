@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { Platform } from '@openzeppelin/platform-sdk';
 import { ActionClient } from '@openzeppelin/platform-sdk-action-client';
 import { MonitorClient } from '@openzeppelin/platform-sdk-monitor-client';
-import { RelayClient } from '@openzeppelin/defender-relay-client';
+import { RelayClient } from '@openzeppelin/platform-sdk-relay-client';
 import { AdminClient } from '@openzeppelin/defender-admin-client';
 
 import {
@@ -27,7 +27,7 @@ import {
   DefenderBlockWatcher,
   YCategory,
   DefenderCategory,
-  DefenderAPIError,
+  PlatformAPIError,
   YAction,
   DefenderNotificationReference,
   PlatformFortaMonitor,
@@ -37,7 +37,7 @@ import { sanitise } from './sanitise';
 import { BlockExplorerApiKeyClient, DeploymentConfigClient } from '@openzeppelin/platform-deploy-client';
 
 /**
- * @dev this function retrieves the Defender equivalent object of the provided template resource
+ * @dev this function retrieves the Platform equivalent object of the provided template resource
  * This will not work for resources that do not have the stackResourceId property, ie. secrets and contracts
  */
 export const getEquivalentResource = <Y, D>(
@@ -114,16 +114,16 @@ export const isSSOT = (context: Serverless): boolean => {
 };
 
 export const getTeamAPIkeysOrThrow = (context: Serverless): TeamKey => {
-  const defenderConfig: { key: string; secret: string } = context.service.initialServerlessConfig.defender;
-  if (!defenderConfig)
+  const platformConfig: { key: string; secret: string } = context.service.initialServerlessConfig.platform;
+  if (!platformConfig)
     throw new Error(
-      `Missing "defender" top-level property in configuration. Please define "defender" with the "key" and "secret" properties in your serverless.yaml file.`,
+      `Missing "platform" top-level property in configuration. Please define "platform" with the "key" and "secret" properties in your serverless.yaml file.`,
     );
-  if (!defenderConfig.key || !defenderConfig.secret)
+  if (!platformConfig.key || !platformConfig.secret)
     throw new Error(
-      `Missing "defender" key or secret properties in configuration. Please define a "key" and "secret" property under "defender" in your serverless.yaml file.`,
+      `Missing "platform" key or secret properties in configuration. Please define a "key" and "secret" property under "platform" in your serverless.yaml file.`,
     );
-  return { apiKey: defenderConfig.key, apiSecret: defenderConfig.secret };
+  return { apiKey: platformConfig.key, apiSecret: platformConfig.secret };
 };
 
 export const getMonitorClient = (key: TeamKey): MonitorClient => {
@@ -406,10 +406,10 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
 
 export const isUnauthorisedError = (e: any): boolean => {
   try {
-    const defenderErrorStatus = (e as DefenderAPIError).response.status as number;
-    return defenderErrorStatus === 403;
+    const platformErrorStatus = (e as PlatformAPIError).response.status as number;
+    return platformErrorStatus === 403;
   } catch {
-    // if it is not a DefenderApiError,
+    // if it is not a PlatformApiError,
     // the error is most likely caused due to something else
     return false;
   }
