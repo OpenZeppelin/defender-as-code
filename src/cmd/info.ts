@@ -6,7 +6,7 @@ import { Logging } from 'serverless/classes/Plugin';
 import Logger from '../utils/logger';
 
 import {
-  getAdminClient,
+  getProposalClient,
   getActionClient,
   getConsolidatedSecrets,
   getRelayClient,
@@ -141,7 +141,7 @@ export default class DefenderInfo {
     );
 
     // Contracts
-    const listContracts = () => getAdminClient(this.teamKey!).listContracts();
+    const listContracts = () => getProposalClient(this.teamKey!).listContracts();
     await this.wrapper<YContract, DefenderContract>(
       this.serverless,
       'Contracts',
