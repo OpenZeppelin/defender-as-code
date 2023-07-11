@@ -773,7 +773,7 @@ export default class DefenderDeploy {
             abi: addressRule && addressRule.abi,
             paused: match.paused,
             alertThreshold: match.alertThreshold,
-            actionTrigger: match.notifyConfig?.autotaskId,
+            autotaskTrigger: match.notifyConfig?.autotaskId,
             alertTimeoutMs: match.notifyConfig?.timeoutMs,
             alertMessageBody: match.notifyConfig?.messageBody,
             alertMessageSubject: match.notifyConfig?.messageSubject,
@@ -795,7 +795,7 @@ export default class DefenderDeploy {
               blockConditions[0]!.txConditions[0]!.expression,
             privateFortaNodeId: (isForta(match) && match.privateFortaNodeId) || undefined,
             addresses: isBlock(match) ? addressRule && addressRule.addresses : match.fortaRule?.addresses,
-            actionCondition: isBlock(match)
+            autotaskCondition: isBlock(match)
               ? addressRule && addressRule.autotaskCondition?.autotaskId
               : match.fortaRule?.autotaskCondition?.autotaskId,
             fortaLastProcessedTime: (isForta(match) && match.fortaLastProcessedTime) || undefined,
@@ -870,7 +870,7 @@ export default class DefenderDeploy {
 
     await this.wrapper<YAction, PlatformAction>(
       this.serverless,
-      'Autotasks',
+      'Actions',
       actions,
       retrieveExisting,
       // on update

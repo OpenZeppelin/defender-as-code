@@ -41,7 +41,7 @@
           }
         },
         "secrets": {
-          "title": "AutotaskSecrets",
+          "title": "ActionSecrets",
           "type": "object",
           "additionalProperties": false,
           "properties": {

@@ -71,7 +71,7 @@ export type ResourceType =
   | 'Relayers'
   | 'Notifications'
   | 'Categories'
-  | 'Autotasks'
+  | 'Actions'
   | 'Contracts'
   | 'Secrets'
   | 'Deployment Configs'
@@ -158,8 +158,8 @@ export type YBlockMonitor = {
   'abi'?: string | string[] | JsonFragment[];
   'alert-threshold'?: { 'amount': number; 'window-seconds': number };
   'paused'?: boolean;
-  'autotask-condition'?: YAction;
-  'autotask-trigger'?: YAction;
+  'action-condition'?: YAction;
+  'action-trigger'?: YAction;
   'confirm-level'?: number | 'safe' | 'finalized';
   'notify-config': {
     'timeout'?: number;
@@ -184,8 +184,8 @@ export type YFortaMonitor = {
   'abi'?: string | string[] | JsonFragment[];
   'alert-threshold'?: { 'amount': number; 'window-seconds': number };
   'paused'?: boolean;
-  'autotask-condition'?: YAction;
-  'autotask-trigger'?: YAction;
+  'action-condition'?: YAction;
+  'action-trigger'?: YAction;
   'notify-config': {
     'timeout'?: number;
     'message'?: string;

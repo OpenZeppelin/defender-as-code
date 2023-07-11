@@ -8,21 +8,21 @@
 
 # 0 Properties
 
-| Property                                  | Type      | Required | Nullable       | Defined by                                                                                                                                        |
-| :---------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [name](#name)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "#/definitions/blockMonitor/properties/name")                      |
-| [type](#type)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "#/definitions/blockMonitor/properties/type")                      |
-| [network](#network)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/blockMonitor/properties/network")                                        |
-| [addresses](#addresses)                   | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "#/definitions/blockMonitor/properties/addresses")            |
-| [abi](#abi)                               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/blockMonitor/properties/abi")                                            |
-| [alert-threshold](#alert-threshold)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "#/definitions/blockMonitor/properties/alert-threshold") |
-| [paused](#paused)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "#/definitions/blockMonitor/properties/paused")                  |
-| [autotask-condition](#autotask-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/blockMonitor/properties/autotask-condition")                            |
-| [autotask-trigger](#autotask-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/blockMonitor/properties/autotask-trigger")                              |
-| [confirm-level](#confirm-level)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "#/definitions/blockMonitor/properties/confirm-level")    |
-| [notify-config](#notify-config)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "#/definitions/blockMonitor/properties/notify-config")     |
-| [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "#/definitions/blockMonitor/properties/conditions")          |
-| [risk-category](#risk-category)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-riskcategory.md "#/definitions/blockMonitor/properties/risk-category")                             |
+| Property                              | Type      | Required | Nullable       | Defined by                                                                                                                                        |
+| :------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [name](#name)                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "#/definitions/blockMonitor/properties/name")                      |
+| [type](#type)                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "#/definitions/blockMonitor/properties/type")                      |
+| [network](#network)                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/blockMonitor/properties/network")                                        |
+| [addresses](#addresses)               | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "#/definitions/blockMonitor/properties/addresses")            |
+| [abi](#abi)                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/blockMonitor/properties/abi")                                            |
+| [alert-threshold](#alert-threshold)   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "#/definitions/blockMonitor/properties/alert-threshold") |
+| [paused](#paused)                     | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "#/definitions/blockMonitor/properties/paused")                  |
+| [action-condition](#action-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "#/definitions/blockMonitor/properties/action-condition")                                |
+| [action-trigger](#action-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "#/definitions/blockMonitor/properties/action-trigger")                                  |
+| [confirm-level](#confirm-level)       | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "#/definitions/blockMonitor/properties/confirm-level")    |
+| [notify-config](#notify-config)       | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "#/definitions/blockMonitor/properties/notify-config")     |
+| [conditions](#conditions)             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "#/definitions/blockMonitor/properties/conditions")          |
+| [risk-category](#risk-category)       | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-riskcategory.md "#/definitions/blockMonitor/properties/risk-category")                             |
 
 ## name
 
@@ -214,47 +214,47 @@ any of
 
 `boolean`
 
-## autotask-condition
+## action-condition
 
 
 
-`autotask-condition`
+`action-condition`
 
 *   is optional
 
-*   Type: `object` ([Autotask](definitions-definitions-autotask.md))
+*   Type: `object` ([Action](definitions-definitions-action.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/blockMonitor/properties/autotask-condition")
+*   defined in: [Definitions](definitions-definitions-action.md "#/definitions/blockMonitor/properties/action-condition")
 
-### autotask-condition Type
+### action-condition Type
 
-`object` ([Autotask](definitions-definitions-autotask.md))
+`object` ([Action](definitions-definitions-action.md))
 
-### autotask-condition Constraints
+### action-condition Constraints
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
-## autotask-trigger
+## action-trigger
 
 
 
-`autotask-trigger`
+`action-trigger`
 
 *   is optional
 
-*   Type: `object` ([Autotask](definitions-definitions-autotask.md))
+*   Type: `object` ([Action](definitions-definitions-action.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/blockMonitor/properties/autotask-trigger")
+*   defined in: [Definitions](definitions-definitions-action.md "#/definitions/blockMonitor/properties/action-trigger")
 
-### autotask-trigger Type
+### action-trigger Type
 
-`object` ([Autotask](definitions-definitions-autotask.md))
+`object` ([Action](definitions-definitions-action.md))
 
-### autotask-trigger Constraints
+### action-trigger Constraints
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
