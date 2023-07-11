@@ -3,7 +3,7 @@ import Serverless from 'serverless';
 import _ from 'lodash';
 import { ActionClient } from '@openzeppelin/platform-sdk-action-client';
 import { MonitorClient } from '@openzeppelin/platform-sdk-monitor-client';
-import { RelayClient } from '@openzeppelin/defender-relay-client';
+import { RelayClient } from '@openzeppelin/platform-sdk-relay-client';
 import { ProposalClient } from '@openzeppelin/platform-sdk-proposal-client';
 
 import {
@@ -26,7 +26,7 @@ import {
   DefenderBlockWatcher,
   YCategory,
   DefenderCategory,
-  DefenderAPIError,
+  PlatformAPIError,
   YAction,
   DefenderNotificationReference,
   PlatformFortaMonitor,
@@ -36,7 +36,7 @@ import { sanitise } from './sanitise';
 import { BlockExplorerApiKeyClient, DeploymentConfigClient } from '@openzeppelin/platform-deploy-client';
 
 /**
- * @dev this function retrieves the Defender equivalent object of the provided template resource
+ * @dev this function retrieves the Platform equivalent object of the provided template resource
  * This will not work for resources that do not have the stackResourceId property, ie. secrets and contracts
  */
 export const getEquivalentResource = <Y, D>(
@@ -113,16 +113,16 @@ export const isSSOT = (context: Serverless): boolean => {
 };
 
 export const getTeamAPIkeysOrThrow = (context: Serverless): TeamKey => {
-  const defenderConfig: { key: string; secret: string } = context.service.initialServerlessConfig.defender;
-  if (!defenderConfig)
+  const platformConfig: { key: string; secret: string } = context.service.initialServerlessConfig.platform;
+  if (!platformConfig)
     throw new Error(
-      `Missing "defender" top-level property in configuration. Please define "defender" with the "key" and "secret" properties in your serverless.yaml file.`,
+      `Missing "platform" top-level property in configuration. Please define "platform" with the "key" and "secret" properties in your serverless.yaml file.`,
     );
-  if (!defenderConfig.key || !defenderConfig.secret)
+  if (!platformConfig.key || !platformConfig.secret)
     throw new Error(
-      `Missing "defender" key or secret properties in configuration. Please define a "key" and "secret" property under "defender" in your serverless.yaml file.`,
+      `Missing "platform" key or secret properties in configuration. Please define a "key" and "secret" property under "platform" in your serverless.yaml file.`,
     );
-  return { apiKey: defenderConfig.key, apiSecret: defenderConfig.secret };
+  return { apiKey: platformConfig.key, apiSecret: platformConfig.secret };
 };
 
 export const getMonitorClient = (key: TeamKey): MonitorClient => {
@@ -249,9 +249,8 @@ export const constructMonitor = (
   categories: DefenderCategory[],
 ): PlatformBlockMonitor | PlatformFortaMonitor => {
   const actionCondition =
-    monitor['autotask-condition'] && actions.find((a) => a.name === monitor['autotask-condition']!.name);
-  const actionTrigger =
-    monitor['autotask-trigger'] && actions.find((a) => a.name === monitor['autotask-trigger']!.name);
+    monitor['action-condition'] && actions.find((a) => a.name === monitor['action-condition']!.name);
+  const actionTrigger = monitor['action-trigger'] && actions.find((a) => a.name === monitor['action-trigger']!.name);
 
   const notificationChannels = monitor['notify-config'].channels
     .map((notification) => {
@@ -357,7 +356,7 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
       // Check for access to Actions
       // Enumerate all monitors, and check if any monitor has an action associated
       const monitorssWithActions = (Object.values(resources) as unknown as YMonitor[]).filter(
-        (r) => !!r['autotask-condition'] || !!r['autotask-trigger'],
+        (r) => !!r['action-condition'] || !!r['action-trigger'],
       );
       // If there are monitors with actions associated, then try to list actions
       if (!_.isEmpty(monitorssWithActions)) {
@@ -376,7 +375,7 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
           throw e;
         }
       }
-    case 'Autotasks':
+    case 'Actions':
       // Check for access to Relayers
       // Enumerate all actions, and check if any action has a relayer associated
       const actionsWithRelayers = (Object.values(resources) as unknown as YAction[]).filter((r) => !!r.relayer);
@@ -405,10 +404,10 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
 
 export const isUnauthorisedError = (e: any): boolean => {
   try {
-    const defenderErrorStatus = (e as DefenderAPIError).response.status as number;
-    return defenderErrorStatus === 403;
+    const platformErrorStatus = (e as PlatformAPIError).response.status as number;
+    return platformErrorStatus === 403;
   } catch {
-    // if it is not a DefenderApiError,
+    // if it is not a PlatformApiError,
     // the error is most likely caused due to something else
     return false;
   }

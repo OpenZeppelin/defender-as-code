@@ -9,7 +9,7 @@ import Logger from '../utils/logger';
 import { getActionClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
 import { PlatformAction, TeamKey } from '../types';
 
-export default class DefenderLogs {
+export default class PlatformLogs {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
@@ -37,18 +37,18 @@ export default class DefenderLogs {
   async logs() {
     try {
       this.log.notice('========================================================');
-      this.log.progress('logs', `Running Defender Logs on stack function: ${this.options.function}`);
+      this.log.progress('logs', `Running Platform Logs on stack function: ${this.options.function}`);
       const client = getActionClient(this.teamKey!);
       const list = (await client.list()).items;
 
-      const defenderAutotask = getEquivalentResourceByKey<PlatformAction>(this.options.function!, list);
+      const platformAction = getEquivalentResourceByKey<PlatformAction>(this.options.function!, list);
 
       // TODO: Update with Platform equivalent once I find it
-      // if (defenderAutotask) await tailLogsFor(client, defenderAutotask!.autotaskId);
-      // else this.log.error(`No autotask with stackResourceId: ${this.options.function} found.`);
+      // if (platformAction) await tailLogsFor(client, platformAction!.actionId);
+      // else this.log.error(`No action with stackResourceId: ${this.options.function} found.`);
       this.log.notice('========================================================');
     } catch (e) {
-      this.log.tryLogDefenderError(e);
+      this.log.tryLogPlatformError(e);
     }
   }
 }

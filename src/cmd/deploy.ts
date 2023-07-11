@@ -31,9 +31,9 @@ import {
   PlatformAction,
   DefenderContract,
   DefenderNotification,
-  DefenderRelayer,
+  PlatformRelayer,
   PlatformMonitor,
-  DefenderRelayerApiKey,
+  PlatformRelayerApiKey,
   TeamKey,
   YAction,
   YContract,
@@ -61,7 +61,7 @@ import {
 } from '../types';
 import keccak256 from 'keccak256';
 
-export default class DefenderDeploy {
+export default class PlatformDeploy {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
@@ -129,17 +129,17 @@ export default class DefenderDeploy {
     // Relayers API keys
     await Promise.all(
       Object.entries(relayers).map(async ([id, relayer]) => {
-        const dRelayer = getEquivalentResourceByKey<DefenderRelayer>(
+        const dRelayer = getEquivalentResourceByKey<PlatformRelayer>(
           getResourceID(getStackName(this.serverless), id),
           dRelayers,
         );
         if (dRelayer) {
-          const dRelayerApiKeys = await relayerClient.listKeys(dRelayer.relayerId);
+          const dRelayerApiKeys = await relayerClient.listKeys({ relayerId: dRelayer.relayerId });
           const configuredKeys = relayer['api-keys'];
           const relayerApiKeyDifference = _.differenceWith(
             dRelayerApiKeys,
             configuredKeys,
-            (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
+            (a: PlatformRelayerApiKey, b: string) => a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
           );
           difference.relayerApiKeys.push(...relayerApiKeyDifference);
         }
@@ -366,7 +366,7 @@ export default class DefenderDeploy {
         }
 
         this.log.notice(
-          `Contracts will always update regardless of changes due to certain limitations in Defender API clients.`,
+          `Contracts will always update regardless of changes due to certain limitations in Platform API clients.`,
         );
 
         const updatedContract = await client.addContract({
@@ -414,24 +414,24 @@ export default class DefenderDeploy {
   }
 
   private async deployRelayers(
-    output: DeployOutput<DefenderRelayer> & {
-      relayerKeys: DeployOutput<DefenderRelayerApiKey>;
+    output: DeployOutput<PlatformRelayer> & {
+      relayerKeys: DeployOutput<PlatformRelayerApiKey>;
     },
   ) {
     const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
     const client = getRelayClient(this.teamKey!);
     const retrieveExisting = () => client.list().then((r) => r.items);
-    await this.wrapper<YRelayer, DefenderRelayer>(
+    await this.wrapper<YRelayer, PlatformRelayer>(
       this.serverless,
       'Relayers',
       relayers,
       retrieveExisting,
       // on update
-      async (relayer: YRelayer, match: DefenderRelayer) => {
+      async (relayer: YRelayer, match: PlatformRelayer) => {
         // Warn users when they try to change the relayer network
         if (match.network !== relayer.network) {
           this.log.warn(
-            `Detected a network change from ${match.network} to ${relayer.network} for Relayer: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Relayer is created. This change will be ignored. To enforce this change, remove this relayer and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the relayer. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this relayer.`,
+            `Detected a network change from ${match.network} to ${relayer.network} for Relayer: ${match.stackResourceId}. Platform does not currently allow updates to the network once a Relayer is created. This change will be ignored. To enforce this change, remove this relayer and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the relayer. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this relayer.`,
           );
           relayer.network = match.network!;
         }
@@ -446,7 +446,7 @@ export default class DefenderDeploy {
             'eip1559-pricing': match.policies.EIP1559Pricing,
             'private-transactions': match.policies.privateTransactions,
           },
-          // currently not supported by defender-client
+          // currently not supported by platform-sdk-client
           // paused: match.paused
         };
         let updatedRelayer = undefined;
@@ -456,51 +456,59 @@ export default class DefenderDeploy {
             validateTypesAndSanitise(mappedMatch),
           )
         ) {
-          updatedRelayer = await client.update(match.relayerId, {
-            name: relayer.name,
-            minBalance: relayer['min-balance'],
-            policies: relayer.policy && {
-              whitelistReceivers: relayer.policy['whitelist-receivers'],
-              gasPriceCap: relayer.policy['gas-price-cap'],
-              EIP1559Pricing: relayer.policy['eip1559-pricing'],
-              privateTransactions: relayer.policy['private-transactions'],
+          updatedRelayer = await client.update({
+            relayerId: match.relayerId,
+            relayerUpdateParams: {
+              name: relayer.name,
+              minBalance: relayer['min-balance'],
+              policies: relayer.policy && {
+                whitelistReceivers: relayer.policy['whitelist-receivers'],
+                gasPriceCap: relayer.policy['gas-price-cap'],
+                EIP1559Pricing: relayer.policy['eip1559-pricing'],
+                privateTransactions: relayer.policy['private-transactions'],
+              },
             },
           });
         }
 
         // check existing keys and remove / create accordingly
-        const existingRelayerKeys = await client.listKeys(match.relayerId);
+        const existingRelayerKeys = await client.listKeys({ relayerId: match.relayerId });
         const configuredKeys = relayer['api-keys'];
-        const inDefender = _.differenceWith(
+        const inPlatform = _.differenceWith(
           existingRelayerKeys,
           configuredKeys,
-          (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(match.stackResourceId!, b),
+          (a: PlatformRelayerApiKey, b: string) => a.stackResourceId === getResourceID(match.stackResourceId!, b),
         );
 
-        // delete key in Defender thats not defined in template
-        if (isSSOT(this.serverless) && inDefender.length > 0) {
-          this.log.info(`Unused resources found on Defender:`);
-          this.log.info(JSON.stringify(inDefender, null, 2));
-          this.log.progress('component-deploy-extra', `Removing resources from Defender`);
-          await Promise.all(inDefender.map(async (key) => await client.deleteKey(match.relayerId, key.keyId)));
-          this.log.success(`Removed resources from Defender`);
-          output.relayerKeys.removed.push(...inDefender);
+        // delete key in Platform thats not defined in template
+        if (isSSOT(this.serverless) && inPlatform.length > 0) {
+          this.log.info(`Unused resources found on Platform:`);
+          this.log.info(JSON.stringify(inPlatform, null, 2));
+          this.log.progress('component-deploy-extra', `Removing resources from Platform`);
+          await Promise.all(
+            inPlatform.map(async (key) => await client.deleteKey({ relayerId: match.relayerId, keyId: key.keyId })),
+          );
+          this.log.success(`Removed resources from Platform`);
+          output.relayerKeys.removed.push(...inPlatform);
         }
 
         const inTemplate = _.differenceWith(
           configuredKeys,
           existingRelayerKeys,
-          (a: string, b: DefenderRelayerApiKey) => getResourceID(match.stackResourceId!, a) === b.stackResourceId,
+          (a: string, b: PlatformRelayerApiKey) => getResourceID(match.stackResourceId!, a) === b.stackResourceId,
         );
 
-        // create key in Defender thats defined in template
+        // create key in Platform thats defined in template
         if (inTemplate) {
           await Promise.all(
             inTemplate.map(async (key) => {
               const keyStackResource = getResourceID(match.stackResourceId!, key);
-              const createdKey = await client.createKey(match.relayerId, keyStackResource);
+              const createdKey = await client.createKey({
+                relayerId: match.relayerId,
+                stackResourceId: keyStackResource,
+              });
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${match.relayerId})`);
-              const keyPath = `${process.cwd()}/.defender/relayer-keys/${keyStackResource}.json`;
+              const keyPath = `${process.cwd()}/.platform/relayer-keys/${keyStackResource}.json`;
               await this.serverless.utils.writeFile(keyPath, JSON.stringify({ ...createdKey }, null, 2));
               this.log.info(`API Key details stored in ${keyPath}`, 1);
               output.relayerKeys.created.push(createdKey);
@@ -520,7 +528,7 @@ export default class DefenderDeploy {
       async (relayer: YRelayer, stackResourceId: string) => {
         const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<YRelayer | undefined, PlatformRelayer>(
           this.serverless,
           relayer['address-from-relayer'],
           relayers,
@@ -528,17 +536,19 @@ export default class DefenderDeploy {
         );
 
         const createdRelayer = await client.create({
-          name: relayer.name,
-          network: relayer.network,
-          minBalance: relayer['min-balance'],
-          useAddressFromRelayerId: maybeRelayer?.relayerId,
-          policies: relayer.policy && {
-            whitelistReceivers: relayer.policy['whitelist-receivers'],
-            gasPriceCap: relayer.policy['gas-price-cap'],
-            EIP1559Pricing: relayer.policy['eip1559-pricing'],
-            privateTransactions: relayer.policy['private-transactions'],
+          relayer: {
+            name: relayer.name,
+            network: relayer.network,
+            minBalance: relayer['min-balance'],
+            useAddressFromRelayerId: maybeRelayer?.relayerId,
+            policies: relayer.policy && {
+              whitelistReceivers: relayer.policy['whitelist-receivers'],
+              gasPriceCap: relayer.policy['gas-price-cap'],
+              EIP1559Pricing: relayer.policy['eip1559-pricing'],
+              privateTransactions: relayer.policy['private-transactions'],
+            },
+            stackResourceId,
           },
-          stackResourceId,
         });
 
         const relayerKeys = relayer['api-keys'];
@@ -546,9 +556,12 @@ export default class DefenderDeploy {
           await Promise.all(
             relayerKeys.map(async (key) => {
               const keyStackResource = getResourceID(stackResourceId, key);
-              const createdKey = await client.createKey(createdRelayer.relayerId, keyStackResource);
+              const createdKey = await client.createKey({
+                relayerId: createdRelayer.relayerId,
+                stackResourceId: keyStackResource,
+              });
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${createdRelayer.relayerId})`);
-              const keyPath = `${process.cwd()}/.defender/relayer-keys/${keyStackResource}.json`;
+              const keyPath = `${process.cwd()}/.platform/relayer-keys/${keyStackResource}.json`;
               await this.serverless.utils.writeFile(keyPath, JSON.stringify({ ...createdKey }, null, 2));
               this.log.info(`API Key details stored in ${keyPath}`, 1);
               output.relayerKeys.created.push(createdKey);
@@ -773,7 +786,7 @@ export default class DefenderDeploy {
             abi: addressRule && addressRule.abi,
             paused: match.paused,
             alertThreshold: match.alertThreshold,
-            actionTrigger: match.notifyConfig?.autotaskId,
+            autotaskTrigger: match.notifyConfig?.autotaskId,
             alertTimeoutMs: match.notifyConfig?.timeoutMs,
             alertMessageBody: match.notifyConfig?.messageBody,
             alertMessageSubject: match.notifyConfig?.messageSubject,
@@ -795,7 +808,7 @@ export default class DefenderDeploy {
               blockConditions[0]!.txConditions[0]!.expression,
             privateFortaNodeId: (isForta(match) && match.privateFortaNodeId) || undefined,
             addresses: isBlock(match) ? addressRule && addressRule.addresses : match.fortaRule?.addresses,
-            actionCondition: isBlock(match)
+            autotaskCondition: isBlock(match)
               ? addressRule && addressRule.autotaskCondition?.autotaskId
               : match.fortaRule?.autotaskCondition?.autotaskId,
             fortaLastProcessedTime: (isForta(match) && match.fortaLastProcessedTime) || undefined,
@@ -859,7 +872,7 @@ export default class DefenderDeploy {
         this.ssotDifference?.monitors,
       );
     } catch (e) {
-      this.log.tryLogDefenderError(e);
+      this.log.tryLogPlatformError(e);
     }
   }
 
@@ -870,14 +883,14 @@ export default class DefenderDeploy {
 
     await this.wrapper<YAction, PlatformAction>(
       this.serverless,
-      'Autotasks',
+      'Actions',
       actions,
       retrieveExisting,
       // on update
       async (action: YAction, match: PlatformAction) => {
         const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<YRelayer | undefined, PlatformRelayer>(
           this.serverless,
           action.relayer,
           relayers,
@@ -967,7 +980,7 @@ export default class DefenderDeploy {
         const actionRelayer = action.relayer;
         const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<YRelayer | undefined, PlatformRelayer>(
           this.serverless,
           actionRelayer,
           relayers,
@@ -1022,7 +1035,7 @@ export default class DefenderDeploy {
         const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
 
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<YRelayer | undefined, PlatformRelayer>(
           this.serverless,
           deploymentConfigRelayer,
           relayers,
@@ -1059,7 +1072,7 @@ export default class DefenderDeploy {
         const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
 
-        const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<YRelayer | undefined, PlatformRelayer>(
           this.serverless,
           deploymentConfigRelayer,
           relayers,
@@ -1169,11 +1182,11 @@ export default class DefenderDeploy {
       // only remove if template is considered single source of truth
       if (isSSOT(context) && onRemove) {
         if (ssotDifference.length > 0) {
-          this.log.info(`Unused resources found on Defender:`);
+          this.log.info(`Unused resources found on Platform:`);
           this.log.info(JSON.stringify(ssotDifference, null, 2));
-          this.log.progress('component-deploy-extra', `Removing resources from Defender`);
+          this.log.progress('component-deploy-extra', `Removing resources from Platform`);
           await onRemove(ssotDifference);
-          this.log.success(`Removed resources from Defender`);
+          this.log.success(`Removed resources from Platform`);
           output.removed.push(...ssotDifference);
         }
       }
@@ -1210,7 +1223,7 @@ export default class DefenderDeploy {
             if (result.notice) this.log.info(`${result.notice}`, 1);
             if (result.error) this.log.error(`${result.error}`);
           } catch (e) {
-            this.log.tryLogDefenderError(e);
+            this.log.tryLogPlatformError(e);
           }
         } else {
           this.log.progress(
@@ -1228,19 +1241,19 @@ export default class DefenderDeploy {
             if (result.notice) this.log.info(`${result.notice}`, 1);
             if (result.error) this.log.error(`${result.error}`);
           } catch (e) {
-            this.log.tryLogDefenderError(e);
+            this.log.tryLogPlatformError(e);
           }
         }
       }
     } catch (e) {
-      this.log.tryLogDefenderError(e);
+      this.log.tryLogPlatformError(e);
     }
   }
 
   public async deploy() {
     this.log.notice('========================================================');
     const stackName = getStackName(this.serverless);
-    this.log.progress('deploy', `Running Defender Deploy on stack: ${stackName}`);
+    this.log.progress('deploy', `Running Platform Deploy on stack: ${stackName}`);
 
     const monitors: DeployOutput<PlatformMonitor> = {
       removed: [],
@@ -1272,8 +1285,8 @@ export default class DefenderDeploy {
       created: [],
       updated: [],
     };
-    const relayers: DeployOutput<DefenderRelayer> & {
-      relayerKeys: DeployOutput<DefenderRelayerApiKey>;
+    const relayers: DeployOutput<PlatformRelayer> & {
+      relayerKeys: DeployOutput<PlatformRelayerApiKey>;
     } = {
       removed: [],
       created: [],
@@ -1327,7 +1340,7 @@ export default class DefenderDeploy {
 
     if (!process.stdout.isTTY) this.log.stdOut(JSON.stringify(stdOut, null, 2));
 
-    const keyDir = `${process.cwd()}/.defender`;
+    const keyDir = `${process.cwd()}/.platform`;
     if (!this.serverless.utils.dirExistsSync(keyDir)) {
       await this.serverless.utils.writeFile(
         `${keyDir}/deployment-log.${stackName}.json`,

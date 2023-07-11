@@ -1,6 +1,6 @@
 ## type Type
 
-`string` ([TriggerType](function-properties-trigger-properties-triggertype.md))
+`string` ([TriggerType](definitions-definitions-action-properties-trigger-properties-triggertype.md))
 
 ## type Constraints
 
