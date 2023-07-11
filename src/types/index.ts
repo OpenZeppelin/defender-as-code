@@ -12,10 +12,10 @@ import {
   EmailConfig,
   DiscordConfig,
   NotificationType,
-} from '@openzeppelin/defender-sentinel-client/lib/models/notification';
+} from '@openzeppelin/platform-sdk-monitor-client/lib/models/notification';
 
-import { NotificationCategory } from '@openzeppelin/defender-sentinel-client/lib/models/category';
-import { CreateSentinelResponse, BlockWatcher } from '@openzeppelin/defender-sentinel-client';
+import { NotificationCategory } from '@openzeppelin/platform-sdk-monitor-client/lib/models/category';
+import { CreateMonitorResponse, BlockWatcher } from '@openzeppelin/platform-sdk-monitor-client';
 
 import {
   CreateBlockSubscriberResponse,
@@ -24,7 +24,7 @@ import {
   ExternalCreateFortaSubscriberRequest,
   NotificationReference,
   SubscriberRiskCategory,
-} from '@openzeppelin/defender-sentinel-client/lib/models/subscriber';
+} from '@openzeppelin/platform-sdk-monitor-client/lib/models/subscriber';
 import {
   Action,
   SecretsMap,
@@ -34,8 +34,8 @@ import {
   MonitorFilterTrigger,
 } from '@openzeppelin/platform-sdk-action-client/lib/models/action';
 import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from '@openzeppelin/platform-deploy-client';
-import { OpsgenieConfig } from '@openzeppelin/defender-sentinel-client/lib/models/opsgenie';
-import { PagerDutyConfig } from '@openzeppelin/defender-sentinel-client/lib/models/pager-duty';
+import { OpsgenieConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/opsgenie';
+import { PagerDutyConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/pager-duty';
 
 export type DefenderAPIError = DefenderApiResponseError;
 export type DefenderRelayerApiKey = RelayerApiKey;
@@ -47,27 +47,27 @@ export type DefenderBlockWatcher = BlockWatcher;
 export type DefenderNotification = NotificationSummary;
 export type DefenderCategory = NotificationCategory;
 export type DefenderNotificationReference = NotificationReference;
-export type DefenderSentinel = CreateSentinelResponse;
-export type DefenderBlockSentinelResponse = CreateBlockSubscriberResponse;
-export type DefenderFortaSentinelResponse = CreateFortaSubscriberResponse;
-export type DefenderBlockSentinel = ExternalCreateBlockSubscriberRequest;
-export type DefenderFortaSentinel = ExternalCreateFortaSubscriberRequest;
+export type PlatformMonitor = CreateMonitorResponse;
+export type PlatformBlockMonitorResponse = CreateBlockSubscriberResponse;
+export type PlatformFortaMonitorResponse = CreateFortaSubscriberResponse;
+export type PlatformBlockMonitor = ExternalCreateBlockSubscriberRequest;
+export type PlatformFortaMonitor = ExternalCreateFortaSubscriberRequest;
 export type DefenderSlackConfig = SlackConfig;
 export type DefenderDatadogConfig = DatadogConfig;
 export type DefenderDiscordConfig = DiscordConfig;
 export type DefenderTelegramConfig = TelegramBotConfig;
 export type DefenderEmailConfig = EmailConfig;
 export type DefenderNetwork = Network;
-export type DefenderWebhookTrigger = WebhookTrigger;
-export type DefenderScheduleTrigger = ScheduleTrigger;
 export type DefenderDeploymentConfig = DeploymentConfigResponse;
 export type DefenderBlockExplorerApiKey = BlockExplorerApiKeyResponse;
-export type DefenderSentinelTrigger = SentinelTrigger;
-export type DefenderMonitorFilterTrigger = MonitorFilterTrigger;
-export type DefenderSubscriberRiskCategory = SubscriberRiskCategory;
+export type PlatformWebhookTrigger = WebhookTrigger;
+export type PlatformScheduleTrigger = ScheduleTrigger;
+export type PlatformMonitorTrigger = SentinelTrigger;
+export type PlatformMonitorFilterTrigger = MonitorFilterTrigger;
+export type PlatformMonitorRiskCategory = SubscriberRiskCategory;
 
 export type ResourceType =
-  | 'Sentinels'
+  | 'Monitors'
   | 'Relayers'
   | 'Notifications'
   | 'Categories'
@@ -150,7 +150,7 @@ export type YCategory = {
   'notification-ids': YNotification[];
 };
 
-export type YBlockSentinel = {
+export type YBlockMonitor = {
   'name': string;
   'type': 'BLOCK';
   'network': Network;
@@ -173,10 +173,10 @@ export type YBlockSentinel = {
     function: { signature: string; expression?: string }[];
     transaction?: string;
   };
-  'risk-category': DefenderSubscriberRiskCategory;
+  'risk-category': PlatformMonitorRiskCategory;
 };
 
-export type YFortaSentinel = {
+export type YFortaMonitor = {
   'name': string;
   'type': 'FORTA';
   'network'?: Network;
@@ -201,10 +201,10 @@ export type YFortaSentinel = {
   'forta-node-id'?: string;
   'agent-ids'?: string[];
   'forta-last-processed-time'?: string;
-  'risk-category': DefenderSubscriberRiskCategory;
+  'risk-category': PlatformMonitorRiskCategory;
 };
 
-export type YSentinel = YBlockSentinel | YFortaSentinel;
+export type YMonitor = YBlockMonitor | YFortaMonitor;
 
 export type YContract = {
   'name': string;
@@ -234,8 +234,8 @@ export type DeployResponse = {
 
 export type DeployOutput<T> = { removed: T[]; created: T[]; updated: T[] };
 
-export type ListDefenderResources = {
-  sentinels: DefenderSentinel[];
+export type ListPlatformResources = {
+  monitors: PlatformMonitor[];
   actions: PlatformAction[];
   notifications: DefenderNotification[];
   categories: DefenderCategory[];

@@ -244,29 +244,17 @@
     "pagerDutyEventType": {
       "title": "PagerDutyEventType",
       "type": "string",
-      "enum": [
-        "change",
-        "alert"
-      ]
+      "enum": ["change", "alert"]
     },
     "pagerDutyEventAction": {
       "title": "PagerDutyEventAction",
       "type": "string",
-      "enum": [
-        "trigger",
-        "acknowledge",
-        "resolve"
-      ]
+      "enum": ["trigger", "acknowledge", "resolve"]
     },
     "pagerDutySeverity": {
       "title": "PagerDutySeverity",
       "type": "string",
-      "enum": [
-        "critical",
-        "error",
-        "warning",
-        "info"
-      ]
+      "enum": ["critical", "error", "warning", "info"]
     },
     "pagerDutyConfig": {
       "title": "PagerDutyConfig",
@@ -316,16 +304,9 @@
         }
       },
       "then": {
-        "required": [
-          "eventAction",
-          "severity"
-        ]
+        "required": ["eventAction", "severity"]
       },
-      "required": [
-        "token",
-        "eventType",
-        "routingKey"
-      ],
+      "required": ["token", "eventType", "routingKey"],
       "additionalProperties": false
     },
     "notification": {
@@ -363,8 +344,8 @@
       },
       "required": ["name"]
     },
-    "blockSentinel": {
-      "title": "BlockSentinel",
+    "blockMonitor": {
+      "title": "BlockMonitor",
       "type": "object",
       "properties": {
         "name": { "type": "string" },
@@ -433,8 +414,8 @@
       },
       "required": ["name", "type", "network", "addresses", "notify-config"]
     },
-    "fortaSentinel": {
-      "title": "FortaSentinel",
+    "fortaMonitor": {
+      "title": "FortaMonitor",
       "type": "object",
       "properties": {
         "name": { "type": "string" },
@@ -501,12 +482,12 @@
       ],
       "required": ["name", "type", "network", "notify-config"]
     },
-    "sentinel": {
-      "title": "Sentinel",
+    "monitor": {
+      "title": "Monitor",
       "type": "object",
       "oneOf": [
-        { "$ref": "definitions.schema.json/#/definitions/blockSentinel", "format": "uri-reference" },
-        { "$ref": "definitions.schema.json/#/definitions/fortaSentinel", "format": "uri-reference" }
+        { "$ref": "definitions.schema.json/#/definitions/blockMonitor", "format": "uri-reference" },
+        { "$ref": "definitions.schema.json/#/definitions/fortaMonitor", "format": "uri-reference" }
       ]
     },
     "autotask": {

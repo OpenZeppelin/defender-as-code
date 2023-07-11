@@ -1522,29 +1522,29 @@ Reference this group by using
 
 `object[]` ([Notification](definitions-definitions-notification.md))
 
-## Definitions group blockSentinel
+## Definitions group blockMonitor
 
 Reference this group by using
 
 ```json
-{"$ref":"#/definitions/blockSentinel"}
+{"$ref":"#/definitions/blockMonitor"}
 ```
 
-| Property                                  | Type      | Required | Nullable       | Defined by                                                                                                                                          |
-| :---------------------------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-4)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-name.md "#/definitions/blockSentinel/properties/name")                      |
-| [type](#type-2)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-type.md "#/definitions/blockSentinel/properties/type")                      |
-| [network](#network-2)                     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-network.md "#/definitions/blockSentinel/properties/network")                |
-| [addresses](#addresses)                   | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "#/definitions/blockSentinel/properties/addresses")            |
-| [abi](#abi-1)                             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/blockSentinel/properties/abi")                                             |
-| [alert-threshold](#alert-threshold)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-alertthreshold.md "#/definitions/blockSentinel/properties/alert-threshold") |
-| [paused](#paused-1)                       | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-paused.md "#/definitions/blockSentinel/properties/paused")                  |
-| [autotask-condition](#autotask-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-condition")                             |
-| [autotask-trigger](#autotask-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-trigger")                               |
-| [confirm-level](#confirm-level)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "#/definitions/blockSentinel/properties/confirm-level")    |
-| [notify-config](#notify-config)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-notifyconfig.md "#/definitions/blockSentinel/properties/notify-config")     |
-| [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "#/definitions/blockSentinel/properties/conditions")          |
-| [risk-category](#risk-category)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blocksentinel-properties-riskcategory.md "#/definitions/blockSentinel/properties/risk-category")     |
+| Property                                  | Type      | Required | Nullable       | Defined by                                                                                                                                        |
+| :---------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [name](#name-4)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "#/definitions/blockMonitor/properties/name")                      |
+| [type](#type-2)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "#/definitions/blockMonitor/properties/type")                      |
+| [network](#network-2)                     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-network.md "#/definitions/blockMonitor/properties/network")                |
+| [addresses](#addresses)                   | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "#/definitions/blockMonitor/properties/addresses")            |
+| [abi](#abi-1)                             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/blockMonitor/properties/abi")                                            |
+| [alert-threshold](#alert-threshold)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "#/definitions/blockMonitor/properties/alert-threshold") |
+| [paused](#paused-1)                       | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "#/definitions/blockMonitor/properties/paused")                  |
+| [autotask-condition](#autotask-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/blockMonitor/properties/autotask-condition")                            |
+| [autotask-trigger](#autotask-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/blockMonitor/properties/autotask-trigger")                              |
+| [confirm-level](#confirm-level)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "#/definitions/blockMonitor/properties/confirm-level")    |
+| [notify-config](#notify-config)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "#/definitions/blockMonitor/properties/notify-config")     |
+| [conditions](#conditions)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "#/definitions/blockMonitor/properties/conditions")          |
+| [risk-category](#risk-category)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-riskcategory.md "#/definitions/blockMonitor/properties/risk-category")     |
 
 ### name
 
@@ -1558,7 +1558,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-name.md "#/definitions/blockSentinel/properties/name")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-name.md "#/definitions/blockMonitor/properties/name")
 
 #### name Type
 
@@ -1576,7 +1576,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-type.md "#/definitions/blockSentinel/properties/type")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-type.md "#/definitions/blockMonitor/properties/type")
 
 #### type Type
 
@@ -1598,15 +1598,15 @@ Reference this group by using
 
 *   is required
 
-*   Type: `string` ([Network](definitions-definitions-blocksentinel-properties-network.md))
+*   Type: `string` ([Network](definitions-definitions-blockmonitor-properties-network.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-network.md "#/definitions/blockSentinel/properties/network")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-network.md "#/definitions/blockMonitor/properties/network")
 
 #### network Type
 
-`string` ([Network](definitions-definitions-blocksentinel-properties-network.md))
+`string` ([Network](definitions-definitions-blockmonitor-properties-network.md))
 
 #### network Constraints
 
@@ -1666,15 +1666,15 @@ Reference this group by using
 
 *   is required
 
-*   Type: `string[]` ([Address](definitions-definitions-blocksentinel-properties-addresses-address.md))
+*   Type: `string[]` ([Address](definitions-definitions-blockmonitor-properties-addresses-address.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-addresses.md "#/definitions/blockSentinel/properties/addresses")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "#/definitions/blockMonitor/properties/addresses")
 
 #### addresses Type
 
-`string[]` ([Address](definitions-definitions-blocksentinel-properties-addresses-address.md))
+`string[]` ([Address](definitions-definitions-blockmonitor-properties-addresses-address.md))
 
 ### abi
 
@@ -1688,7 +1688,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-abitype.md "#/definitions/blockSentinel/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "#/definitions/blockMonitor/properties/abi")
 
 #### abi Type
 
@@ -1708,15 +1708,15 @@ any of
 
 *   is optional
 
-*   Type: `object` ([AlertThreshold](definitions-definitions-blocksentinel-properties-alertthreshold.md))
+*   Type: `object` ([AlertThreshold](definitions-definitions-blockmonitor-properties-alertthreshold.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-alertthreshold.md "#/definitions/blockSentinel/properties/alert-threshold")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "#/definitions/blockMonitor/properties/alert-threshold")
 
 #### alert-threshold Type
 
-`object` ([AlertThreshold](definitions-definitions-blocksentinel-properties-alertthreshold.md))
+`object` ([AlertThreshold](definitions-definitions-blockmonitor-properties-alertthreshold.md))
 
 ### paused
 
@@ -1730,7 +1730,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-paused.md "#/definitions/blockSentinel/properties/paused")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-paused.md "#/definitions/blockMonitor/properties/paused")
 
 #### paused Type
 
@@ -1748,7 +1748,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-condition")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/blockMonitor/properties/autotask-condition")
 
 #### autotask-condition Type
 
@@ -1770,7 +1770,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/blockSentinel/properties/autotask-trigger")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/blockMonitor/properties/autotask-trigger")
 
 #### autotask-trigger Type
 
@@ -1788,21 +1788,21 @@ any of
 
 *   is optional
 
-*   Type: merged type ([Details](definitions-definitions-blocksentinel-properties-confirm-level.md))
+*   Type: merged type ([Details](definitions-definitions-blockmonitor-properties-confirm-level.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-confirm-level.md "#/definitions/blockSentinel/properties/confirm-level")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "#/definitions/blockMonitor/properties/confirm-level")
 
 #### confirm-level Type
 
-merged type ([Details](definitions-definitions-blocksentinel-properties-confirm-level.md))
+merged type ([Details](definitions-definitions-blockmonitor-properties-confirm-level.md))
 
 one (and only one) of
 
-*   [Untitled string in Definitions](definitions-definitions-blocksentinel-properties-confirm-level-oneof-0.md "check type definition")
+*   [Untitled string in Definitions](definitions-definitions-blockmonitor-properties-confirm-level-oneof-0.md "check type definition")
 
-*   [Untitled integer in Definitions](definitions-definitions-blocksentinel-properties-confirm-level-oneof-1.md "check type definition")
+*   [Untitled integer in Definitions](definitions-definitions-blockmonitor-properties-confirm-level-oneof-1.md "check type definition")
 
 ### notify-config
 
@@ -1812,15 +1812,15 @@ one (and only one) of
 
 *   is required
 
-*   Type: `object` ([NotifyConfig](definitions-definitions-blocksentinel-properties-notifyconfig.md))
+*   Type: `object` ([NotifyConfig](definitions-definitions-blockmonitor-properties-notifyconfig.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-notifyconfig.md "#/definitions/blockSentinel/properties/notify-config")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "#/definitions/blockMonitor/properties/notify-config")
 
 #### notify-config Type
 
-`object` ([NotifyConfig](definitions-definitions-blocksentinel-properties-notifyconfig.md))
+`object` ([NotifyConfig](definitions-definitions-blockmonitor-properties-notifyconfig.md))
 
 ### conditions
 
@@ -1830,15 +1830,15 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `object` ([Conditions](definitions-definitions-blocksentinel-properties-conditions.md))
+*   Type: `object` ([Conditions](definitions-definitions-blockmonitor-properties-conditions.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-conditions.md "#/definitions/blockSentinel/properties/conditions")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "#/definitions/blockMonitor/properties/conditions")
 
 #### conditions Type
 
-`object` ([Conditions](definitions-definitions-blocksentinel-properties-conditions.md))
+`object` ([Conditions](definitions-definitions-blockmonitor-properties-conditions.md))
 
 ### risk-category
 
@@ -1848,15 +1848,15 @@ one (and only one) of
 
 *   is optional
 
-*   Type: `string` ([RiskCategory](definitions-definitions-blocksentinel-properties-riskcategory.md))
+*   Type: `string` ([RiskCategory](definitions-definitions-blockmonitor-properties-riskcategory.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blocksentinel-properties-riskcategory.md "#/definitions/blockSentinel/properties/risk-category")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-riskcategory.md "#/definitions/blockMonitor/properties/risk-category")
 
 #### risk-category Type
 
-`string` ([RiskCategory](definitions-definitions-blocksentinel-properties-riskcategory.md))
+`string` ([RiskCategory](definitions-definitions-blockmonitor-properties-riskcategory.md))
 
 #### risk-category Constraints
 
@@ -1871,30 +1871,30 @@ one (and only one) of
 | `"FINANCIAL"`      |             |
 | `"TECHNICAL"`      |             |
 
-## Definitions group fortaSentinel
+## Definitions group fortaMonitor
 
 Reference this group by using
 
 ```json
-{"$ref":"#/definitions/fortaSentinel"}
+{"$ref":"#/definitions/fortaMonitor"}
 ```
 
-| Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                          |
-| :------------------------------------------ | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-5)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-name.md "#/definitions/fortaSentinel/properties/name")                      |
-| [type](#type-3)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-type.md "#/definitions/fortaSentinel/properties/type")                      |
-| [network](#network-3)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-network.md "#/definitions/fortaSentinel/properties/network")                |
-| [addresses](#addresses-1)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "#/definitions/fortaSentinel/properties/addresses")            |
-| [abi](#abi-2)                               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/fortaSentinel/properties/abi")                                             |
-| [alert-threshold](#alert-threshold-1)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-alertthreshold.md "#/definitions/fortaSentinel/properties/alert-threshold") |
-| [paused](#paused-2)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-paused.md "#/definitions/fortaSentinel/properties/paused")                  |
-| [autotask-condition](#autotask-condition-1) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-condition")                             |
-| [autotask-trigger](#autotask-trigger-1)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-trigger")                               |
-| [notify-config](#notify-config-1)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig.md "#/definitions/fortaSentinel/properties/notify-config")     |
-| [conditions](#conditions-1)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "#/definitions/fortaSentinel/properties/conditions")          |
-| [forta-node-id](#forta-node-id)             | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "#/definitions/fortaSentinel/properties/forta-node-id")    |
-| [agent-ids](#agent-ids)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-agentids.md "#/definitions/fortaSentinel/properties/agent-ids")             |
-| [risk-category](#risk-category-1)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortasentinel-properties-riskcategory.md "#/definitions/fortaSentinel/properties/risk-category")     |
+| Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                        |
+| :------------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [name](#name-5)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "#/definitions/fortaMonitor/properties/name")                      |
+| [type](#type-3)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-type.md "#/definitions/fortaMonitor/properties/type")                      |
+| [network](#network-3)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-network.md "#/definitions/fortaMonitor/properties/network")                |
+| [addresses](#addresses-1)                   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "#/definitions/fortaMonitor/properties/addresses")            |
+| [abi](#abi-2)                               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/fortaMonitor/properties/abi")                                            |
+| [alert-threshold](#alert-threshold-1)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "#/definitions/fortaMonitor/properties/alert-threshold") |
+| [paused](#paused-2)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-paused.md "#/definitions/fortaMonitor/properties/paused")                  |
+| [autotask-condition](#autotask-condition-1) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/fortaMonitor/properties/autotask-condition")                            |
+| [autotask-trigger](#autotask-trigger-1)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-autotask.md "#/definitions/fortaMonitor/properties/autotask-trigger")                              |
+| [notify-config](#notify-config-1)           | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "#/definitions/fortaMonitor/properties/notify-config")     |
+| [conditions](#conditions-1)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "#/definitions/fortaMonitor/properties/conditions")          |
+| [forta-node-id](#forta-node-id)             | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "#/definitions/fortaMonitor/properties/forta-node-id")    |
+| [agent-ids](#agent-ids)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "#/definitions/fortaMonitor/properties/agent-ids")             |
+| [risk-category](#risk-category-1)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-riskcategory.md "#/definitions/fortaMonitor/properties/risk-category")     |
 
 ### name
 
@@ -1908,7 +1908,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-name.md "#/definitions/fortaSentinel/properties/name")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-name.md "#/definitions/fortaMonitor/properties/name")
 
 #### name Type
 
@@ -1926,7 +1926,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-type.md "#/definitions/fortaSentinel/properties/type")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-type.md "#/definitions/fortaMonitor/properties/type")
 
 #### type Type
 
@@ -1948,15 +1948,15 @@ Reference this group by using
 
 *   is required
 
-*   Type: `string` ([Network](definitions-definitions-fortasentinel-properties-network.md))
+*   Type: `string` ([Network](definitions-definitions-fortamonitor-properties-network.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-network.md "#/definitions/fortaSentinel/properties/network")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-network.md "#/definitions/fortaMonitor/properties/network")
 
 #### network Type
 
-`string` ([Network](definitions-definitions-fortasentinel-properties-network.md))
+`string` ([Network](definitions-definitions-fortamonitor-properties-network.md))
 
 #### network Constraints
 
@@ -2016,15 +2016,15 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `string[]` ([Address](definitions-definitions-fortasentinel-properties-addresses-address.md))
+*   Type: `string[]` ([Address](definitions-definitions-fortamonitor-properties-addresses-address.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-addresses.md "#/definitions/fortaSentinel/properties/addresses")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "#/definitions/fortaMonitor/properties/addresses")
 
 #### addresses Type
 
-`string[]` ([Address](definitions-definitions-fortasentinel-properties-addresses-address.md))
+`string[]` ([Address](definitions-definitions-fortamonitor-properties-addresses-address.md))
 
 ### abi
 
@@ -2038,7 +2038,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-abitype.md "#/definitions/fortaSentinel/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "#/definitions/fortaMonitor/properties/abi")
 
 #### abi Type
 
@@ -2058,15 +2058,15 @@ any of
 
 *   is optional
 
-*   Type: `object` ([AlertThreshold](definitions-definitions-fortasentinel-properties-alertthreshold.md))
+*   Type: `object` ([AlertThreshold](definitions-definitions-fortamonitor-properties-alertthreshold.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-alertthreshold.md "#/definitions/fortaSentinel/properties/alert-threshold")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "#/definitions/fortaMonitor/properties/alert-threshold")
 
 #### alert-threshold Type
 
-`object` ([AlertThreshold](definitions-definitions-fortasentinel-properties-alertthreshold.md))
+`object` ([AlertThreshold](definitions-definitions-fortamonitor-properties-alertthreshold.md))
 
 ### paused
 
@@ -2080,7 +2080,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-paused.md "#/definitions/fortaSentinel/properties/paused")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-paused.md "#/definitions/fortaMonitor/properties/paused")
 
 #### paused Type
 
@@ -2098,7 +2098,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-condition")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/fortaMonitor/properties/autotask-condition")
 
 #### autotask-condition Type
 
@@ -2120,7 +2120,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/fortaSentinel/properties/autotask-trigger")
+*   defined in: [Definitions](definitions-definitions-autotask.md "#/definitions/fortaMonitor/properties/autotask-trigger")
 
 #### autotask-trigger Type
 
@@ -2138,15 +2138,15 @@ any of
 
 *   is required
 
-*   Type: `object` ([NotifyConfig](definitions-definitions-fortasentinel-properties-notifyconfig.md))
+*   Type: `object` ([NotifyConfig](definitions-definitions-fortamonitor-properties-notifyconfig.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-notifyconfig.md "#/definitions/fortaSentinel/properties/notify-config")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "#/definitions/fortaMonitor/properties/notify-config")
 
 #### notify-config Type
 
-`object` ([NotifyConfig](definitions-definitions-fortasentinel-properties-notifyconfig.md))
+`object` ([NotifyConfig](definitions-definitions-fortamonitor-properties-notifyconfig.md))
 
 ### conditions
 
@@ -2156,15 +2156,15 @@ any of
 
 *   is optional
 
-*   Type: `object` ([Conditions](definitions-definitions-fortasentinel-properties-conditions.md))
+*   Type: `object` ([Conditions](definitions-definitions-fortamonitor-properties-conditions.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-conditions.md "#/definitions/fortaSentinel/properties/conditions")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "#/definitions/fortaMonitor/properties/conditions")
 
 #### conditions Type
 
-`object` ([Conditions](definitions-definitions-fortasentinel-properties-conditions.md))
+`object` ([Conditions](definitions-definitions-fortamonitor-properties-conditions.md))
 
 ### forta-node-id
 
@@ -2178,7 +2178,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-forta-node-id.md "#/definitions/fortaSentinel/properties/forta-node-id")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "#/definitions/fortaMonitor/properties/forta-node-id")
 
 #### forta-node-id Type
 
@@ -2196,7 +2196,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-agentids.md "#/definitions/fortaSentinel/properties/agent-ids")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "#/definitions/fortaMonitor/properties/agent-ids")
 
 #### agent-ids Type
 
@@ -2210,15 +2210,15 @@ any of
 
 *   is optional
 
-*   Type: `string` ([RiskCategory](definitions-definitions-fortasentinel-properties-riskcategory.md))
+*   Type: `string` ([RiskCategory](definitions-definitions-fortamonitor-properties-riskcategory.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortasentinel-properties-riskcategory.md "#/definitions/fortaSentinel/properties/risk-category")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-riskcategory.md "#/definitions/fortaMonitor/properties/risk-category")
 
 #### risk-category Type
 
-`string` ([RiskCategory](definitions-definitions-fortasentinel-properties-riskcategory.md))
+`string` ([RiskCategory](definitions-definitions-fortamonitor-properties-riskcategory.md))
 
 #### risk-category Constraints
 
@@ -2233,12 +2233,12 @@ any of
 | `"FINANCIAL"`      |             |
 | `"TECHNICAL"`      |             |
 
-## Definitions group sentinel
+## Definitions group monitor
 
 Reference this group by using
 
 ```json
-{"$ref":"#/definitions/sentinel"}
+{"$ref":"#/definitions/monitor"}
 ```
 
 | Property | Type | Required | Nullable | Defined by |

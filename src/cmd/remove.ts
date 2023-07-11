@@ -11,7 +11,7 @@ import {
   getActionClient,
   getConsolidatedSecrets,
   getRelayClient,
-  getSentinelClient,
+  getMonitorClient,
   getStackName,
   getTeamAPIkeysOrThrow,
   isTemplateResource,
@@ -23,16 +23,15 @@ import {
   DefenderNotification,
   DefenderRelayer,
   DefenderRelayerApiKey,
-  DefenderSentinel,
+  PlatformMonitor,
   ResourceType,
   TeamKey,
   YAction,
-  YCategory,
   YContract,
   YNotification,
   YRelayer,
   YSecret,
-  YSentinel,
+  YMonitor,
 } from '../types';
 
 export default class DefenderRemove {
@@ -112,7 +111,7 @@ export default class DefenderRemove {
     this.log.progress('remove', `Running Defender Remove on stack: ${stackName}`);
     const stdOut: {
       stack: string;
-      sentinels: DefenderSentinel[];
+      monitors: PlatformMonitor[];
       actions: PlatformAction[];
       contracts: DefenderContract[];
       relayers: {
@@ -124,7 +123,7 @@ export default class DefenderRemove {
       secrets: string[];
     } = {
       stack: stackName,
-      sentinels: [],
+      monitors: [],
       actions: [],
       contracts: [],
       relayers: [],
@@ -132,27 +131,27 @@ export default class DefenderRemove {
       categories: [],
       secrets: [],
     };
-    // Sentinels
-    const sentinelClient = getSentinelClient(this.teamKey!);
-    const listSentinels = () => sentinelClient.list().then((i) => i.items);
-    await this.wrapper<YSentinel, DefenderSentinel>(
+    // Monitors
+    const monitorClient = getMonitorClient(this.teamKey!);
+    const listMonitors = () => monitorClient.list().then((i) => i.items);
+    await this.wrapper<YMonitor, PlatformMonitor>(
       this.serverless,
-      'Sentinels',
-      this.serverless.service.resources?.Resources?.sentinels,
-      listSentinels,
-      async (sentinels: DefenderSentinel[]) => {
+      'Monitors',
+      this.serverless.service.resources?.Resources?.monitors,
+      listMonitors,
+      async (monitors: PlatformMonitor[]) => {
         await Promise.all(
-          sentinels.map(async (e) => {
+          monitors.map(async (e) => {
             this.log.progress(
               'component-remove-extra',
-              `Removing ${e.stackResourceId} (${e.subscriberId}) from Defender`,
+              `Removing ${e.stackResourceId} (${e.subscriberId}) from Platform`,
             );
-            await sentinelClient.delete(e.subscriberId);
+            await monitorClient.delete({ monitorId: e.subscriberId });
             this.log.success(`Removed ${e.stackResourceId} (${e.subscriberId})`);
           }),
         );
       },
-      stdOut.sentinels,
+      stdOut.monitors,
     );
 
     // Actions
@@ -232,7 +231,7 @@ export default class DefenderRemove {
     }
 
     // Notifications
-    const listNotifications = () => sentinelClient.listNotificationChannels();
+    const listNotifications = () => monitorClient.listNotificationChannels();
     await this.wrapper<YNotification, DefenderNotification>(
       this.serverless,
       'Notifications',
@@ -245,7 +244,7 @@ export default class DefenderRemove {
               'component-remove-extra',
               `Removing ${e.stackResourceId} (${e.notificationId}) from Defender`,
             );
-            await sentinelClient.deleteNotificationChannel(e);
+            await monitorClient.deleteNotificationChannel(e);
             this.log.success(`Removed ${e.stackResourceId} (${e.notificationId})`);
           }),
         );
@@ -256,7 +255,7 @@ export default class DefenderRemove {
     // Categories
 
     // Temporarily Disabled
-    // const listNotificationCategories = () => sentinelClient.listNotificationCategories();
+    // const listNotificationCategories = () => monitorClient.listNotificationCategories();
     // await this.wrapper<YCategory, DefenderCategory>(
     //   this.serverless,
     //   'Categories',
@@ -267,9 +266,9 @@ export default class DefenderRemove {
     //       categories.map(async (e) => {
     //         this.log.progress(
     //           'component-remove-extra',
-    //           `Removing ${e.stackResourceId} (${e.categoryId}) from Defender`,
+    //           `Removing ${e.stackResourceId} (${e.categoryId}) from Platform`,
     //         );
-    //         await sentinelClient.deleteNotificationCategory(e.categoryId);
+    //         await monitorClient.deleteNotificationCategory(e.categoryId);
     //         this.log.success(`Removed ${e.stackResourceId} (${e.categoryId})`);
     //       }),
     //     );
