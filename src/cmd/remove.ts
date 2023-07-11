@@ -21,8 +21,8 @@ import {
   DefenderCategory,
   DefenderContract,
   DefenderNotification,
-  DefenderRelayer,
-  DefenderRelayerApiKey,
+  PlatformRelayer,
+  PlatformRelayerApiKey,
   PlatformMonitor,
   ResourceType,
   TeamKey,
@@ -76,7 +76,7 @@ export default class DefenderRemove {
       await onRemove(existing);
       output.push(...existing);
     } catch (e) {
-      this.log.tryLogDefenderError(e);
+      this.log.tryLogPlatformError(e);
     }
   }
 
@@ -91,7 +91,7 @@ export default class DefenderRemove {
       ];
       prompt.start({
         message:
-          'This action will remove your resources from Defender permanently. Are you sure you wish to continue [y/n]?',
+          'This action will remove your resources from Platform permanently. Are you sure you wish to continue [y/n]?',
       });
       const { confirm } = await prompt.get(properties);
 
@@ -108,7 +108,7 @@ export default class DefenderRemove {
   private async remove() {
     this.log.notice('========================================================');
     const stackName = getStackName(this.serverless);
-    this.log.progress('remove', `Running Defender Remove on stack: ${stackName}`);
+    this.log.progress('remove', `Running Platform Remove on stack: ${stackName}`);
     const stdOut: {
       stack: string;
       monitors: PlatformMonitor[];
@@ -116,7 +116,7 @@ export default class DefenderRemove {
       contracts: DefenderContract[];
       relayers: {
         relayerId: string;
-        relayerApiKeys: DefenderRelayerApiKey[];
+        relayerApiKeys: PlatformRelayerApiKey[];
       }[];
       notifications: DefenderNotification[];
       categories: DefenderCategory[];
@@ -165,7 +165,7 @@ export default class DefenderRemove {
       async (actions: PlatformAction[]) => {
         await Promise.all(
           actions.map(async (e) => {
-            this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.actionkId}) from Defender`);
+            this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.actionkId}) from Platform`);
             await actionClient.delete({ actionId: e.actionkId });
             this.log.success(`Removed ${e.stackResourceId} (${e.actionkId})`);
           }),
@@ -186,7 +186,7 @@ export default class DefenderRemove {
         await Promise.all(
           contracts.map(async (e) => {
             const id = `${e.network}-${e.address}`;
-            this.log.progress('component-remove-extra', `Removing ${id} (${e.name}) from Defender`);
+            this.log.progress('component-remove-extra', `Removing ${id} (${e.name}) from Platform`);
             await adminClient.deleteContract(id);
             this.log.success(`Removed ${id} (${e.name})`);
           }),
@@ -200,7 +200,7 @@ export default class DefenderRemove {
       const relayClient = getRelayClient(this.teamKey!);
       const listRelayers = (await relayClient.list()).items;
       const existingRelayers = listRelayers.filter((e) =>
-        isTemplateResource<YRelayer, DefenderRelayer>(
+        isTemplateResource<YRelayer, PlatformRelayer>(
           this.serverless,
           e,
           'Relayers',
@@ -212,11 +212,11 @@ export default class DefenderRemove {
       await Promise.all(
         existingRelayers.map(async (relayer) => {
           this.log.progress('component-info', `Retrieving API Keys for relayer ${relayer.stackResourceId}`);
-          const relayerApiKeys = await relayClient.listKeys(relayer.relayerId);
+          const relayerApiKeys = await relayClient.listKeys({ relayerId: relayer.relayerId });
           await Promise.all(
             relayerApiKeys.map(async (e) => {
-              this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.keyId}) from Defender`);
-              await relayClient.deleteKey(e.relayerId, e.keyId);
+              this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.keyId}) from Platform`);
+              await relayClient.deleteKey({ relayerId: e.relayerId, keyId: e.keyId });
               this.log.success(`Removed ${e.stackResourceId} (${e.keyId})`);
             }),
           );
@@ -227,7 +227,7 @@ export default class DefenderRemove {
         }),
       );
     } catch (e) {
-      this.log.tryLogDefenderError(e);
+      this.log.tryLogPlatformError(e);
     }
 
     // Notifications
@@ -242,7 +242,7 @@ export default class DefenderRemove {
           notifications.map(async (e) => {
             this.log.progress(
               'component-remove-extra',
-              `Removing ${e.stackResourceId} (${e.notificationId}) from Defender`,
+              `Removing ${e.stackResourceId} (${e.notificationId}) from Platform`,
             );
             await monitorClient.deleteNotificationChannel(e);
             this.log.success(`Removed ${e.stackResourceId} (${e.notificationId})`);
@@ -287,7 +287,7 @@ export default class DefenderRemove {
       allSecrets,
       listSecrets,
       async (secrets: string[]) => {
-        this.log.progress('component-remove-extra', `Removing (${secrets.join(', ')}) from Defender`);
+        this.log.progress('component-remove-extra', `Removing (${secrets.join(', ')}) from Platform`);
         await actionClient.createSecrets({
           deletes: secrets,
           secrets: {},

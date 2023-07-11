@@ -20,8 +20,8 @@ import {
   DefenderCategory,
   DefenderContract,
   DefenderNotification,
-  DefenderRelayer,
-  DefenderRelayerApiKey,
+  PlatformRelayer,
+  PlatformRelayerApiKey,
   PlatformMonitor,
   ResourceType,
   TeamKey,
@@ -77,12 +77,12 @@ export default class DefenderInfo {
       await Promise.all(
         existing.map(async (e) => {
           this.log.notice(`${format(e)}`, 1);
-          let keys: DefenderRelayerApiKey[] = [];
+          let keys: PlatformRelayerApiKey[] = [];
           // Also print relayer API keys
           if (resourceType === 'Relayers') {
-            const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys(
-              (e as unknown as DefenderRelayer).relayerId,
-            );
+            const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys({
+              relayerId: (e as unknown as PlatformRelayer).relayerId,
+            });
             listRelayerAPIKeys.map((k) => {
               this.log.notice(`${k.stackResourceId}: ${k.keyId}`, 2);
             });
@@ -93,14 +93,14 @@ export default class DefenderInfo {
         }),
       );
     } catch (e) {
-      this.log.tryLogDefenderError(e);
+      this.log.tryLogPlatformError(e);
     }
   }
 
   async info() {
     this.log.notice('========================================================');
     const stackName = getStackName(this.serverless);
-    this.log.progress('info', `Running Defender Info on stack: ${stackName}`);
+    this.log.progress('info', `Running Platform Info on stack: ${stackName}`);
     const stdOut = {
       stack: stackName,
       monitors: [],
@@ -156,12 +156,12 @@ export default class DefenderInfo {
       getRelayClient(this.teamKey!)
         .list()
         .then((r) => r.items);
-    await this.wrapper<YRelayer, DefenderRelayer>(
+    await this.wrapper<YRelayer, PlatformRelayer>(
       this.serverless,
       'Relayers',
       this.serverless.service.resources?.Resources?.relayers,
       listRelayers,
-      (resource: DefenderRelayer) => `${resource.stackResourceId}: ${resource.relayerId}`,
+      (resource: PlatformRelayer) => `${resource.stackResourceId}: ${resource.relayerId}`,
       stdOut.relayers,
     );
 

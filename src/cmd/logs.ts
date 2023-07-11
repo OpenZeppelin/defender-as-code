@@ -48,7 +48,7 @@ export default class DefenderLogs {
       // else this.log.error(`No autotask with stackResourceId: ${this.options.function} found.`);
       this.log.notice('========================================================');
     } catch (e) {
-      this.log.tryLogDefenderError(e);
+      this.log.tryLogPlatformError(e);
     }
   }
 }

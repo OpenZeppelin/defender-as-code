@@ -128,9 +128,9 @@ The deploy takes in an optional `--stage` flag, which is defaulted to `dev` when
 
 Moreover, the `serverless.yml` may contain an `ssot` property. More information can be found in the [SSOT mode](#SSOT-mode) section.
 
-This command will append a log entry in the `.defender` folder of the current working directory. Additionally, if any new relayer keys are created, these will be stored as JSON objects in the `.defender/relayer-keys` folder.
+This command will append a log entry in the `.platform` folder of the current working directory. Additionally, if any new relayer keys are created, these will be stored as JSON objects in the `.platform/relayer-keys` folder.
 
-> When installed from the template, we ensure the `.defender` folder is ignored from any git commits. However, when installing directly, make sure to add this folder it your `.gitignore` file.
+> When installed from the template, we ensure the `.platform` folder is ignored from any git commits. However, when installing directly, make sure to add this folder it your `.gitignore` file.
 
 ### Info
 
