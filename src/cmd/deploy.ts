@@ -41,21 +41,21 @@ import {
   YRelayer,
   YSecret,
   YMonitor,
+  YCategory,
+  YBlockExplorerApiKey,
+  YDeploymentConfig,
   DeployOutput,
   DeployResponse,
   ResourceType,
   ListPlatformResources,
   DefenderNotificationReference,
-  DefenderScheduleTrigger,
-  DefenderWebhookTrigger,
-  DefenderSentinelTrigger,
-  DefenderMonitorFilterTrigger,
+  PlatformWebhookTrigger,
+  PlatformScheduleTrigger,
+  PlatformMonitorTrigger,
+  PlatformMonitorFilterTrigger,
   DefenderDeploymentConfig,
-  YDeploymentConfig,
   DefenderBlockExplorerApiKey,
-  YBlockExplorerApiKey,
   DefenderCategory,
-  YCategory,
   PlatformFortaMonitorResponse,
   PlatformBlockMonitorResponse,
 } from '../types';
@@ -712,7 +712,7 @@ export default class DefenderDeploy {
 
   private async deployMonitors(output: DeployOutput<PlatformMonitor>) {
     try {
-      const monitors: YMonitor[] = this.serverless.service.resources?.Resources?.sentinels ?? [];
+      const monitors: YMonitor[] = this.serverless.service.resources?.Resources?.monitors ?? [];
       const client = getMonitorClient(this.teamKey!);
       const actions = await getActionClient(this.teamKey!).list();
       const notifications = await client.listNotificationChannels();
@@ -895,8 +895,8 @@ export default class DefenderDeploy {
         });
 
         const isSchedule = (
-          o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderSentinelTrigger | DefenderMonitorFilterTrigger,
-        ): o is DefenderScheduleTrigger => o.type === 'schedule';
+          o: PlatformWebhookTrigger | PlatformScheduleTrigger | PlatformMonitorTrigger | PlatformMonitorFilterTrigger,
+        ): o is PlatformScheduleTrigger => o.type === 'schedule';
 
         const mappedMatch = {
           name: match.name,

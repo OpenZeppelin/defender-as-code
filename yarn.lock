@@ -526,17 +526,6 @@
     lodash "^4.17.19"
     node-fetch "^2.6.0"
 
-"@openzeppelin/defender-sentinel-client@^1.46.0":
-  version "1.46.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sentinel-client/-/defender-sentinel-client-1.46.0.tgz#b5f27b005a6c1ede7f584b7d1bef95b0deaee242"
-  integrity sha512-oQMmLlDMHzOmX6sU2tOQZEK5jq25fv58e3F6M/vvo9tCXUvNHYHwie2Ug/SSdHhIkPvrGKX1npUI0+MrBAyLPA==
-  dependencies:
-    "@ethersproject/abi" "^5.6.3"
-    "@openzeppelin/defender-base-client" "1.46.0"
-    axios "^0.21.2"
-    lodash "^4.17.19"
-    node-fetch "^2.6.0"
-
 "@openzeppelin/platform-deploy-client@^0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@openzeppelin/platform-deploy-client/-/platform-deploy-client-0.8.0.tgz#af6596275a19c283d6145f0128cc1247d18223c1"

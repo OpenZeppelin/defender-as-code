@@ -24,7 +24,7 @@ Alternatively, you can install it directly into an existing project with:
 
 ## Setup
 
-This plugin allows you to define Actions, Sentinels, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an action, a relayer, a policy and a single relayer API key defined:
+This plugin allows you to define Actions, Monitors, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an action, a relayer, a policy and a single relayer API key defined:
 
 ```yaml
 service: defender-serverless-template

@@ -24,7 +24,7 @@ Alternatively, you can install it directly into an existing project with:
 
 ## Setup
 
-This plugin allows you to define Actions, Sentinels, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an action, a relayer, a policy and a single relayer API key defined:
+This plugin allows you to define Actions, Monitors, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an action, a relayer, a policy and a single relayer API key defined:
 
 ```yaml
 service: defender-serverless-template
@@ -156,7 +156,7 @@ More information can be found on our documentation page [here](https://docs.open
 
 ## Caveats
 
-Note that when setting up the notification configuration for a sentinel, the `channels` property will always be prioritised over `category`. A notification category can only be associated to a sentinel with no linked notification channels. This means that the `channels` property should be assigned the value `[]` in order to prioritise the `category` property.
+Note that when setting up the notification configuration for a monitor, the `channels` property will always be prioritised over `category`. A notification category can only be associated to a monitor with no linked notification channels. This means that the `channels` property should be assigned the value `[]` in order to prioritise the `category` property.
 
 ```yaml
 notify-config:

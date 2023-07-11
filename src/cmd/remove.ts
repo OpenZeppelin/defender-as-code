@@ -137,7 +137,7 @@ export default class DefenderRemove {
     await this.wrapper<YMonitor, PlatformMonitor>(
       this.serverless,
       'Monitors',
-      this.serverless.service.resources?.Resources?.sentinels,
+      this.serverless.service.resources?.Resources?.monitors,
       listMonitors,
       async (monitors: PlatformMonitor[]) => {
         await Promise.all(
@@ -255,7 +255,7 @@ export default class DefenderRemove {
     // Categories
 
     // Temporarily Disabled
-    // const listNotificationCategories = () => sentinelClient.listNotificationCategories();
+    // const listNotificationCategories = () => monitorClient.listNotificationCategories();
     // await this.wrapper<YCategory, DefenderCategory>(
     //   this.serverless,
     //   'Categories',
@@ -266,9 +266,9 @@ export default class DefenderRemove {
     //       categories.map(async (e) => {
     //         this.log.progress(
     //           'component-remove-extra',
-    //           `Removing ${e.stackResourceId} (${e.categoryId}) from Defender`,
+    //           `Removing ${e.stackResourceId} (${e.categoryId}) from Platform`,
     //         );
-    //         await sentinelClient.deleteNotificationCategory(e.categoryId);
+    //         await monitorClient.deleteNotificationCategory(e.categoryId);
     //         this.log.success(`Removed ${e.stackResourceId} (${e.categoryId})`);
     //       }),
     //     );

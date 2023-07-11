@@ -120,7 +120,7 @@ export default class DefenderInfo {
     await this.wrapper<YMonitor, PlatformMonitor>(
       this.serverless,
       'Monitors',
-      this.serverless.service.resources?.Resources?.sentinels,
+      this.serverless.service.resources?.Resources?.monitors,
       listMonitors,
       (resource: PlatformMonitor) => `${resource.stackResourceId}: ${resource.subscriberId}`,
       stdOut.monitors,

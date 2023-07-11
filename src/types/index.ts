@@ -12,7 +12,7 @@ import {
   EmailConfig,
   DiscordConfig,
   NotificationType,
-} from '@openzeppelin/defender-sentinel-client/lib/models/notification';
+} from '@openzeppelin/platform-sdk-monitor-client/lib/models/notification';
 
 import { NotificationCategory } from '@openzeppelin/platform-sdk-monitor-client/lib/models/category';
 import { CreateMonitorResponse, BlockWatcher } from '@openzeppelin/platform-sdk-monitor-client';
@@ -34,8 +34,8 @@ import {
   MonitorFilterTrigger,
 } from '@openzeppelin/platform-sdk-action-client/lib/models/action';
 import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from '@openzeppelin/platform-deploy-client';
-import { OpsgenieConfig } from '@openzeppelin/defender-sentinel-client/lib/models/opsgenie';
-import { PagerDutyConfig } from '@openzeppelin/defender-sentinel-client/lib/models/pager-duty';
+import { OpsgenieConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/opsgenie';
+import { PagerDutyConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/pager-duty';
 
 export type DefenderAPIError = DefenderApiResponseError;
 export type DefenderRelayerApiKey = RelayerApiKey;
@@ -58,13 +58,13 @@ export type DefenderDiscordConfig = DiscordConfig;
 export type DefenderTelegramConfig = TelegramBotConfig;
 export type DefenderEmailConfig = EmailConfig;
 export type DefenderNetwork = Network;
-export type DefenderWebhookTrigger = WebhookTrigger;
-export type DefenderScheduleTrigger = ScheduleTrigger;
 export type DefenderDeploymentConfig = DeploymentConfigResponse;
 export type DefenderBlockExplorerApiKey = BlockExplorerApiKeyResponse;
-export type DefenderSentinelTrigger = SentinelTrigger;
-export type DefenderMonitorFilterTrigger = MonitorFilterTrigger;
-export type DefenderSubscriberRiskCategory = SubscriberRiskCategory;
+export type PlatformWebhookTrigger = WebhookTrigger;
+export type PlatformScheduleTrigger = ScheduleTrigger;
+export type PlatformMonitorTrigger = SentinelTrigger;
+export type PlatformMonitorFilterTrigger = MonitorFilterTrigger;
+export type PlatformMonitorRiskCategory = SubscriberRiskCategory;
 
 export type ResourceType =
   | 'Monitors'
@@ -173,7 +173,7 @@ export type YBlockMonitor = {
     function: { signature: string; expression?: string }[];
     transaction?: string;
   };
-  'risk-category': DefenderSubscriberRiskCategory;
+  'risk-category': PlatformMonitorRiskCategory;
 };
 
 export type YFortaMonitor = {
@@ -201,7 +201,7 @@ export type YFortaMonitor = {
   'forta-node-id'?: string;
   'agent-ids'?: string[];
   'forta-last-processed-time'?: string;
-  'risk-category': DefenderSubscriberRiskCategory;
+  'risk-category': PlatformMonitorRiskCategory;
 };
 
 export type YMonitor = YBlockMonitor | YFortaMonitor;
