@@ -7,7 +7,7 @@ import { Logging } from 'serverless/classes/Plugin';
 import Logger from '../utils/logger';
 
 import {
-  getAdminClient,
+  getProposalClient,
   getActionClient,
   getConsolidatedSecrets,
   getRelayClient,
@@ -19,7 +19,7 @@ import {
 import {
   PlatformAction,
   PlatformCategory,
-  DefenderContract,
+  PlatformContract,
   PlatformNotification,
   PlatformRelayer,
   PlatformRelayerApiKey,
@@ -113,7 +113,7 @@ export default class PlatformRemove {
       stack: string;
       monitors: PlatformMonitor[];
       actions: PlatformAction[];
-      contracts: DefenderContract[];
+      contracts: PlatformContract[];
       relayers: {
         relayerId: string;
         relayerApiKeys: PlatformRelayerApiKey[];
@@ -175,14 +175,14 @@ export default class PlatformRemove {
     );
 
     // Contracts
-    const adminClient = getAdminClient(this.teamKey!);
+    const adminClient = getProposalClient(this.teamKey!);
     const listContracts = () => adminClient.listContracts();
-    await this.wrapper<Omit<YContract, 'abi'> & { abi?: string }, DefenderContract>(
+    await this.wrapper<Omit<YContract, 'abi'> & { abi?: string }, PlatformContract>(
       this.serverless,
       'Contracts',
       this.serverless.service.resources?.Resources?.contracts,
       listContracts,
-      async (contracts: DefenderContract[]) => {
+      async (contracts: PlatformContract[]) => {
         await Promise.all(
           contracts.map(async (e) => {
             const id = `${e.network}-${e.address}`;

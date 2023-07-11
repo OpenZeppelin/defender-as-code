@@ -9,7 +9,7 @@ import Logger from '../utils/logger';
 import {
   getMonitorClient,
   getActionClient,
-  getAdminClient,
+  getProposalClient,
   getRelayClient,
   constructNotification,
   getTeamAPIkeysOrThrow,
@@ -22,14 +22,13 @@ import {
   validateTypesAndSanitise,
   constructNotificationCategory,
   validateAdditionalPermissionsOrThrow,
-  getDeploymentConfigClient,
-  getBlockExplorerApiKeyClient,
+  getDeployClient,
   formatABI,
   constructMonitor,
 } from '../utils';
 import {
   PlatformAction,
-  DefenderContract,
+  PlatformContract,
   PlatformNotification,
   PlatformRelayer,
   PlatformMonitor,
@@ -101,12 +100,12 @@ export default class PlatformDeploy {
     };
     // Contracts
     const contracts: YContract[] = this.serverless.service.resources?.Resources?.contracts ?? [];
-    const adminClient = getAdminClient(this.teamKey!);
+    const adminClient = getProposalClient(this.teamKey!);
     const dContracts = await adminClient.listContracts();
     const contractDifference = _.differenceWith(
       dContracts,
       Object.entries(contracts ?? []),
-      (a: DefenderContract, b: [string, YContract]) =>
+      (a: PlatformContract, b: [string, YContract]) =>
         `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
     );
 
@@ -189,8 +188,8 @@ export default class PlatformDeploy {
     // Deployment Configs
     const deploymentConfigs: YDeploymentConfig[] =
       this.serverless.service.resources?.Resources?.['deployment-configs'] ?? [];
-    const deploymentConfigClient = getDeploymentConfigClient(this.teamKey!);
-    const dDeploymentConfigs = await deploymentConfigClient.list();
+    const deployClient = getDeployClient(this.teamKey!);
+    const dDeploymentConfigs = await deployClient.listConfig();
     const deploymentConfigDifference = _.differenceWith(
       dDeploymentConfigs,
       Object.entries(deploymentConfigs ?? []),
@@ -201,8 +200,7 @@ export default class PlatformDeploy {
     // Block Explorer Api Keys
     const blockExplorerApiKeys: YBlockExplorerApiKey[] =
       this.serverless.service.resources?.Resources?.['block-explorer-api-keys'] ?? [];
-    const blockExplorerApiKeysClient = getBlockExplorerApiKeyClient(this.teamKey!);
-    const dBlockExplorerApiKeys = await blockExplorerApiKeysClient.list();
+    const dBlockExplorerApiKeys = await deployClient.listBlockExplorerApiKeys();
     const blockExplorerApiKeyDifference = _.differenceWith(
       dBlockExplorerApiKeys,
       Object.entries(blockExplorerApiKeys ?? []),
@@ -334,18 +332,18 @@ export default class PlatformDeploy {
     );
   }
 
-  private async deployContracts(output: DeployOutput<DefenderContract>) {
+  private async deployContracts(output: DeployOutput<PlatformContract>) {
     const contracts: YContract[] = this.serverless.service.resources?.Resources?.contracts ?? [];
-    const client = getAdminClient(this.teamKey!);
+    const client = getProposalClient(this.teamKey!);
     const retrieveExisting = () => client.listContracts();
 
-    await this.wrapper<YContract, DefenderContract>(
+    await this.wrapper<YContract, PlatformContract>(
       this.serverless,
       'Contracts',
       contracts,
       retrieveExisting,
       // on update
-      async (contract: YContract, match: DefenderContract) => {
+      async (contract: YContract, match: PlatformContract) => {
         const mappedMatch = {
           'name': match.name,
           'network': match.network,
@@ -401,11 +399,11 @@ export default class PlatformDeploy {
         };
       },
       // on remove
-      async (contracts: DefenderContract[]) => {
+      async (contracts: PlatformContract[]) => {
         await Promise.all(contracts.map(async (c) => await client.deleteContract(`${c.network}-${c.address}`)));
       },
       // overrideMatchDefinition
-      (a: DefenderContract, b: YContract) => {
+      (a: PlatformContract, b: YContract) => {
         return a.address === b.address && a.network === b.network;
       },
       output,
@@ -1021,8 +1019,8 @@ export default class PlatformDeploy {
   private async deployDeploymentConfig(output: DeployOutput<PlatformDeploymentConfig>) {
     const deploymentConfigs: YDeploymentConfig[] =
       this.serverless.service.resources?.Resources?.['deployment-configs'] ?? [];
-    const client = getDeploymentConfigClient(this.teamKey!);
-    const retrieveExisting = () => client.list();
+    const client = getDeployClient(this.teamKey!);
+    const retrieveExisting = () => client.listConfig();
 
     await this.wrapper<YDeploymentConfig, PlatformDeploymentConfig>(
       this.serverless,
@@ -1055,7 +1053,7 @@ export default class PlatformDeploy {
           };
         }
 
-        const updatedDeploymentConfig = await client.update(match.deploymentConfigId, {
+        const updatedDeploymentConfig = await client.updateConfig(match.deploymentConfigId, {
           relayerId: maybeRelayer.relayerId,
           stackResourceId: match.stackResourceId!,
         });
@@ -1081,7 +1079,7 @@ export default class PlatformDeploy {
 
         if (!maybeRelayer) throw new Error(`Cannot find relayer ${deploymentConfigRelayer} in ${stackResourceId}`);
 
-        const importedDeployment = await client.create({
+        const importedDeployment = await client.createConfig({
           relayerId: maybeRelayer.relayerId,
           stackResourceId,
         });
@@ -1095,7 +1093,7 @@ export default class PlatformDeploy {
       },
       // on remove
       async (deploymentConfigs: PlatformDeploymentConfig[]) => {
-        await Promise.all(deploymentConfigs.map(async (c) => await client.remove(c.deploymentConfigId)));
+        await Promise.all(deploymentConfigs.map(async (c) => await client.removeConfig(c.deploymentConfigId)));
       },
       undefined,
       output,
@@ -1106,8 +1104,8 @@ export default class PlatformDeploy {
   private async deployBlockExplorerApiKey(output: DeployOutput<PlatformBlockExplorerApiKey>) {
     const blockExplorerApiKeys: YBlockExplorerApiKey[] =
       this.serverless.service.resources?.Resources?.['block-explorer-api-keys'] ?? [];
-    const client = getBlockExplorerApiKeyClient(this.teamKey!);
-    const retrieveExisting = () => client.list();
+    const client = getDeployClient(this.teamKey!);
+    const retrieveExisting = () => client.listBlockExplorerApiKeys();
 
     await this.wrapper<YBlockExplorerApiKey, PlatformBlockExplorerApiKey>(
       this.serverless,
@@ -1126,7 +1124,7 @@ export default class PlatformDeploy {
           };
         }
 
-        const updatedBlockExplorerApiKey = await client.update(match.blockExplorerApiKeyId, {
+        const updatedBlockExplorerApiKey = await client.updateBlockExplorerApiKey(match.blockExplorerApiKeyId, {
           ...blockExplorerApiKey,
           stackResourceId: match.stackResourceId!,
         });
@@ -1139,7 +1137,7 @@ export default class PlatformDeploy {
       },
       // on create
       async (blockExplorerApiKey: YBlockExplorerApiKey, stackResourceId: string) => {
-        const importedBlockExplorerApiKey = await client.create({
+        const importedBlockExplorerApiKey = await client.createBlockExplorerApiKey({
           ...blockExplorerApiKey,
           stackResourceId,
         });
@@ -1152,7 +1150,9 @@ export default class PlatformDeploy {
       },
       // on remove
       async (blockExplorerApiKeys: PlatformBlockExplorerApiKey[]) => {
-        await Promise.all(blockExplorerApiKeys.map(async (c) => await client.remove(c.blockExplorerApiKeyId)));
+        await Promise.all(
+          blockExplorerApiKeys.map(async (c) => await client.removeBlockExplorerApiKey(c.blockExplorerApiKeyId)),
+        );
       },
       undefined,
       output,
@@ -1207,7 +1207,7 @@ export default class PlatformDeploy {
             'component-deploy-extra',
             `Updating ${
               resourceType === 'Contracts'
-                ? (match as unknown as DefenderContract).name
+                ? (match as unknown as PlatformContract).name
                 : resourceType === 'Secrets'
                 ? match
                 : (match as D & { stackResourceId: string }).stackResourceId
@@ -1265,7 +1265,7 @@ export default class PlatformDeploy {
       created: [],
       updated: [],
     };
-    const contracts: DeployOutput<DefenderContract> = {
+    const contracts: DeployOutput<PlatformContract> = {
       removed: [],
       created: [],
       updated: [],

@@ -6,7 +6,7 @@ import { Logging } from 'serverless/classes/Plugin';
 import Logger from '../utils/logger';
 
 import {
-  getAdminClient,
+  getProposalClient,
   getActionClient,
   getConsolidatedSecrets,
   getRelayClient,
@@ -18,7 +18,7 @@ import {
 import {
   PlatformAction,
   PlatformCategory,
-  DefenderContract,
+  PlatformContract,
   PlatformNotification,
   PlatformRelayer,
   PlatformRelayerApiKey,
@@ -141,13 +141,13 @@ export default class PlatformInfo {
     );
 
     // Contracts
-    const listContracts = () => getAdminClient(this.teamKey!).listContracts();
-    await this.wrapper<YContract, DefenderContract>(
+    const listContracts = () => getProposalClient(this.teamKey!).listContracts();
+    await this.wrapper<YContract, PlatformContract>(
       this.serverless,
       'Contracts',
       this.serverless.service.resources?.Resources?.contracts,
       listContracts,
-      (resource: DefenderContract) => `${resource.network}-${resource.address}: ${resource.name}`,
+      (resource: PlatformContract) => `${resource.network}-${resource.address}: ${resource.name}`,
       stdOut.contracts,
     );
 

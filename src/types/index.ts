@@ -1,5 +1,5 @@
 import { Network } from '@openzeppelin/platform-sdk-base-client';
-import { Contract } from '@openzeppelin/defender-admin-client';
+import { Contract } from '@openzeppelin/platform-sdk-proposal-client/lib/models/contract';
 import { RelayerGetResponse, RelayerApiKey } from '@openzeppelin/platform-sdk-relay-client/lib/models';
 import { JsonFragment } from '@ethersproject/abi';
 import { PlatformApiResponseError } from '@openzeppelin/platform-sdk-base-client/lib/api/api-error';
@@ -34,14 +34,14 @@ import {
   SentinelTrigger,
   MonitorFilterTrigger,
 } from '@openzeppelin/platform-sdk-action-client/lib/models/action';
-import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from '@openzeppelin/platform-deploy-client';
+import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from '@openzeppelin/platform-sdk-deploy-client';
 import { OpsgenieConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/opsgenie';
 import { PagerDutyConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/pager-duty';
 
 export type PlatformAPIError = PlatformApiResponseError;
 export type PlatformRelayerApiKey = RelayerApiKey;
 export type PlatformSecretsMap = SecretsMap;
-export type DefenderContract = Contract;
+export type PlatformContract = Contract;
 export type PlatformRelayer = RelayerGetResponse;
 export type PlatformAction = Action;
 export type PlatformBlockWatcher = BlockWatcher;
@@ -240,7 +240,7 @@ export type ListPlatformResources = {
   actions: PlatformAction[];
   notifications: PlatformNotification[];
   categories: PlatformCategory[];
-  contracts: DefenderContract[];
+  contracts: PlatformContract[];
   relayerApiKeys: PlatformRelayerApiKey[];
   secrets: string[];
   deploymentConfigs: PlatformDeploymentConfig[];
