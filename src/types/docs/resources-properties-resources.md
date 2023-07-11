@@ -10,7 +10,7 @@
 | [relayers](#relayers)                               | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-relayers.md "#/properties/Resources/properties/relayers")                               |
 | [policies](#policies)                               | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-policies.md "#/properties/Resources/properties/policies")                               |
 | [contracts](#contracts)                             | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-contracts.md "#/properties/Resources/properties/contracts")                             |
-| [secrets](#secrets)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-autotasksecrets.md "#/properties/Resources/properties/secrets")                         |
+| [secrets](#secrets)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-actionsecrets.md "#/properties/Resources/properties/secrets")                           |
 | [monitors](#monitors)                               | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-monitors.md "#/properties/Resources/properties/monitors")                               |
 | [deployment-configs](#deployment-configs)           | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-deployment-configs.md "#/properties/Resources/properties/deployment-configs")           |
 | [block-explorer-api-keys](#block-explorer-api-keys) | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-block-explorer-api-keys.md "#/properties/Resources/properties/block-explorer-api-keys") |
@@ -95,15 +95,15 @@
 
 *   is optional
 
-*   Type: `object` ([AutotaskSecrets](resources-properties-resources-properties-autotasksecrets.md))
+*   Type: `object` ([ActionSecrets](resources-properties-resources-properties-actionsecrets.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-resources-properties-autotasksecrets.md "#/properties/Resources/properties/secrets")
+*   defined in: [Resources](resources-properties-resources-properties-actionsecrets.md "#/properties/Resources/properties/secrets")
 
 ### secrets Type
 
-`object` ([AutotaskSecrets](resources-properties-resources-properties-autotasksecrets.md))
+`object` ([ActionSecrets](resources-properties-resources-properties-actionsecrets.md))
 
 ## monitors
 

@@ -159,7 +159,7 @@ export default class DefenderRemove {
     const listActions = () => actionClient.list().then((i) => i.items);
     await this.wrapper<YAction, PlatformAction>(
       this.serverless,
-      'Autotasks',
+      'Actions',
       this.serverless.service.functions as any,
       listActions,
       async (actions: PlatformAction[]) => {

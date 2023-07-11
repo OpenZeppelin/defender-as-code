@@ -251,9 +251,8 @@ export const constructMonitor = (
   categories: DefenderCategory[],
 ): PlatformBlockMonitor | PlatformFortaMonitor => {
   const actionCondition =
-    monitor['autotask-condition'] && actions.find((a) => a.name === monitor['autotask-condition']!.name);
-  const actionTrigger =
-    monitor['autotask-trigger'] && actions.find((a) => a.name === monitor['autotask-trigger']!.name);
+    monitor['action-condition'] && actions.find((a) => a.name === monitor['action-condition']!.name);
+  const actionTrigger = monitor['action-trigger'] && actions.find((a) => a.name === monitor['action-trigger']!.name);
 
   const notificationChannels = monitor['notify-config'].channels
     .map((notification) => {
@@ -359,7 +358,7 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
       // Check for access to Actions
       // Enumerate all monitors, and check if any monitor has an action associated
       const monitorssWithActions = (Object.values(resources) as unknown as YMonitor[]).filter(
-        (r) => !!r['autotask-condition'] || !!r['autotask-trigger'],
+        (r) => !!r['action-condition'] || !!r['action-trigger'],
       );
       // If there are monitors with actions associated, then try to list actions
       if (!_.isEmpty(monitorssWithActions)) {
@@ -378,7 +377,7 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
           throw e;
         }
       }
-    case 'Autotasks':
+    case 'Actions':
       // Check for access to Relayers
       // Enumerate all actions, and check if any action has a relayer associated
       const actionsWithRelayers = (Object.values(resources) as unknown as YAction[]).filter((r) => !!r.relayer);

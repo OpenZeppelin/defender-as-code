@@ -18,9 +18,9 @@ defender:
   secret: ${self:custom.config.keys.secret}
 
 functions:
-  autotask-example-1:
+  action-example-1:
     name: 'Hello world from serverless'
-    path: './autotasks/hello-world'
+    path: './actions/hello-world'
     # optional
     relayer: ${self:resources.Resources.relayers.relayer-1}
     trigger:
@@ -30,16 +30,16 @@ functions:
       # optional
       cron: null
     paused: false
-  autotask-example-2:
+  action-example-2:
     name: 'Hello world from serverless 2'
-    path: './autotasks/hello-world'
+    path: './actions/hello-world'
     trigger:
       type: 'schedule'
       cron: '0 */12 * * *'
     paused: false
-  autotask-example-3:
+  action-example-3:
     name: 'Hello world from serverless 3'
-    path: './autotasks/hello-world'
+    path: './actions/hello-world'
     trigger:
       type: 'webhook'
     paused: false
@@ -144,9 +144,9 @@ resources:
         # optional
         paused: false
         # optional
-        autotask-condition: ${self:functions.autotask-example-1}
+        action-condition: ${self:functions.action-example-1}
         # optional
-        autotask-trigger: null
+        action-trigger: null
         # optional
         confirm-level: 1 # or 'safe' or 'finalized'
         notify-config:
@@ -177,9 +177,9 @@ resources:
         # optional
         paused: false
         # optional
-        autotask-condition: ${self:functions.autotask-example-1}
+        action-condition: ${self:functions.action-example-1}
         # optional
-        autotask-trigger: null
+        action-trigger: null
         notify-config:
           timeout: 0 # optional
           message: null # optional

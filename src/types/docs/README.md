@@ -16,15 +16,15 @@
 
 ### Objects
 
+*   [Action](./definitions-definitions-action.md) – `#/definitions/action`
+
+*   [ActionSecrets](./resources-properties-resources-properties-actionsecrets.md) – `#/properties/Resources/properties/secrets`
+
 *   [AddressFromRelayer](./definitions-definitions-relayer-properties-addressfromrelayer.md) – `#/definitions/relayer/properties/address-from-relayer`
 
 *   [AlertThreshold](./definitions-definitions-blockmonitor-properties-alertthreshold.md) – `#/definitions/blockMonitor/properties/alert-threshold`
 
 *   [AlertThreshold](./definitions-definitions-fortamonitor-properties-alertthreshold.md) – `#/definitions/fortaMonitor/properties/alert-threshold`
-
-*   [Autotask](./definitions-definitions-autotask.md) – `#/definitions/autotask`
-
-*   [AutotaskSecrets](./resources-properties-resources-properties-autotasksecrets.md) – `#/properties/Resources/properties/secrets`
 
 *   [Block Explorer Api Keys](./resources-properties-resources-properties-block-explorer-api-keys.md) – `#/properties/Resources/properties/block-explorer-api-keys`
 
@@ -58,7 +58,7 @@
 
 *   [FunctionItems](./definitions-definitions-blockmonitor-properties-conditions-properties-function-functionitems.md) – `#/definitions/blockMonitor/properties/conditions/properties/function/items`
 
-*   [Global](./resources-properties-resources-properties-autotasksecrets-properties-global.md) – `#/properties/Resources/properties/secrets/properties/global`
+*   [Global](./resources-properties-resources-properties-actionsecrets-properties-global.md) – `#/properties/Resources/properties/secrets/properties/global`
 
 *   [Monitor](./definitions-definitions-monitor.md) – `#/definitions/monitor`
 
@@ -82,11 +82,11 @@
 
 *   [Resources](./resources-properties-resources.md) – `#/properties/Resources`
 
-*   [Stack](./resources-properties-resources-properties-autotasksecrets-properties-stack.md) – `#/properties/Resources/properties/secrets/properties/stack`
+*   [Stack](./resources-properties-resources-properties-actionsecrets-properties-stack.md) – `#/properties/Resources/properties/secrets/properties/stack`
 
 *   [TelegramConfig](./definitions-definitions-telegramconfig.md) – `#/definitions/telegramBotConfig`
 
-*   [Trigger](./definitions-definitions-autotask-properties-trigger.md) – `#/definitions/autotask/properties/trigger`
+*   [Trigger](./definitions-definitions-action-properties-trigger.md) – `#/definitions/action/properties/trigger`
 
 *   [Trigger](./function-properties-trigger.md) – `#/properties/trigger`
 
