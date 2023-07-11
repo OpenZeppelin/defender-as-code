@@ -1,10 +1,12 @@
 import Serverless from 'serverless';
 
 import _ from 'lodash';
+
 import { ActionClient } from '@openzeppelin/platform-sdk-action-client';
 import { MonitorClient } from '@openzeppelin/platform-sdk-monitor-client';
 import { RelayClient } from '@openzeppelin/platform-sdk-relay-client';
 import { ProposalClient } from '@openzeppelin/platform-sdk-proposal-client';
+import { DeployClient } from '@openzeppelin/platform-sdk-deploy-client';
 
 import {
   YSecret,
@@ -18,22 +20,21 @@ import {
   YOpsgenieConfig,
   YPagerdutyConfig,
   PlatformAction,
-  DefenderNotification,
+  PlatformNotification,
   TeamKey,
   YContract,
-  DefenderContract,
+  PlatformContract,
   ResourceType,
-  DefenderBlockWatcher,
+  PlatformBlockWatcher,
   YCategory,
-  DefenderCategory,
+  PlatformCategory,
   PlatformAPIError,
   YAction,
-  DefenderNotificationReference,
+  PlatformNotificationReference,
   PlatformFortaMonitor,
   PlatformBlockMonitor,
 } from '../types';
 import { sanitise } from './sanitise';
-import { BlockExplorerApiKeyClient, DeploymentConfigClient } from '@openzeppelin/platform-deploy-client';
 
 /**
  * @dev this function retrieves the Platform equivalent object of the provided template resource
@@ -87,8 +88,8 @@ export const isTemplateResource = <Y, D>(
         Object.keys(a[1] as unknown as YSecret)[0] === (resource as unknown as string)
       : resourceType === 'Contracts'
       ? // if contracts, compare network and address
-        (a[1] as unknown as YContract).network === (resource as unknown as DefenderContract).network &&
-        (a[1] as unknown as YContract).address === (resource as unknown as DefenderContract).address
+        (a[1] as unknown as YContract).network === (resource as unknown as PlatformContract).network &&
+        (a[1] as unknown as YContract).address === (resource as unknown as PlatformContract).address
       : // anything else, compare stackResourceId
         getResourceID(getStackName(context), a[0]) === (resource as D & { stackResourceId: string }).stackResourceId,
   );
@@ -141,12 +142,8 @@ export const getProposalClient = (key: TeamKey): ProposalClient => {
   return new ProposalClient(key);
 };
 
-export const getDeploymentConfigClient = (key: TeamKey): DeploymentConfigClient => {
-  return new DeploymentConfigClient(key);
-};
-
-export const getBlockExplorerApiKeyClient = (key: TeamKey): BlockExplorerApiKeyClient => {
-  return new BlockExplorerApiKeyClient(key);
+export const getDeployClient = (key: TeamKey): DeployClient => {
+  return new DeployClient(key);
 };
 
 export const constructNotification = (notification: YNotification, stackResourceId: string) => {
@@ -210,7 +207,7 @@ export const constructNotificationCategory = (
   context: Serverless,
   category: YCategory,
   stackResourceId: string,
-  notifications: DefenderNotification[],
+  notifications: PlatformNotification[],
 ) => {
   return {
     name: category.name,
@@ -218,7 +215,7 @@ export const constructNotificationCategory = (
     notificationIds: (category['notification-ids']
       ? category['notification-ids']
           .map((notification) => {
-            const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
+            const maybeNotification = getEquivalentResource<YNotification, PlatformNotification>(
               context,
               notification,
               context.service.resources?.Resources?.notifications,
@@ -228,10 +225,10 @@ export const constructNotificationCategory = (
               return {
                 notificationId: maybeNotification.notificationId,
                 type: maybeNotification.type,
-              } as DefenderNotificationReference;
+              } as PlatformNotificationReference;
           })
           .filter(isResource)
-      : []) as [] | [DefenderNotificationReference] | [DefenderNotificationReference, DefenderNotificationReference],
+      : []) as [] | [PlatformNotificationReference] | [PlatformNotificationReference, PlatformNotificationReference],
     stackResourceId,
   };
 };
@@ -243,10 +240,10 @@ export const constructMonitor = (
   context: Serverless,
   stackResourceId: string,
   monitor: YMonitor,
-  notifications: DefenderNotification[],
+  notifications: PlatformNotification[],
   actions: PlatformAction[],
-  blockwatchers: DefenderBlockWatcher[],
-  categories: DefenderCategory[],
+  blockwatchers: PlatformBlockWatcher[],
+  categories: PlatformCategory[],
 ): PlatformBlockMonitor | PlatformFortaMonitor => {
   const actionCondition =
     monitor['action-condition'] && actions.find((a) => a.name === monitor['action-condition']!.name);
@@ -254,7 +251,7 @@ export const constructMonitor = (
 
   const notificationChannels = monitor['notify-config'].channels
     .map((notification) => {
-      const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
+      const maybeNotification = getEquivalentResource<YNotification, PlatformNotification>(
         context,
         notification,
         context.service.resources?.Resources?.notifications,

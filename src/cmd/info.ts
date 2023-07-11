@@ -17,9 +17,9 @@ import {
 } from '../utils';
 import {
   PlatformAction,
-  DefenderCategory,
-  DefenderContract,
-  DefenderNotification,
+  PlatformCategory,
+  PlatformContract,
+  PlatformNotification,
   PlatformRelayer,
   PlatformRelayerApiKey,
   PlatformMonitor,
@@ -142,12 +142,12 @@ export default class PlatformInfo {
 
     // Contracts
     const listContracts = () => getProposalClient(this.teamKey!).listContracts();
-    await this.wrapper<YContract, DefenderContract>(
+    await this.wrapper<YContract, PlatformContract>(
       this.serverless,
       'Contracts',
       this.serverless.service.resources?.Resources?.contracts,
       listContracts,
-      (resource: DefenderContract) => `${resource.network}-${resource.address}: ${resource.name}`,
+      (resource: PlatformContract) => `${resource.network}-${resource.address}: ${resource.name}`,
       stdOut.contracts,
     );
 
@@ -167,23 +167,23 @@ export default class PlatformInfo {
 
     // Notifications
     const listNotifications = () => getMonitorClient(this.teamKey!).listNotificationChannels();
-    await this.wrapper<YNotification, DefenderNotification>(
+    await this.wrapper<YNotification, PlatformNotification>(
       this.serverless,
       'Notifications',
       this.serverless.service.resources?.Resources?.notifications,
       listNotifications,
-      (resource: DefenderNotification) => `${resource.stackResourceId}: ${resource.notificationId}`,
+      (resource: PlatformNotification) => `${resource.stackResourceId}: ${resource.notificationId}`,
       stdOut.notifications,
     );
 
     // Categories
     const listNotificationCategories = () => getMonitorClient(this.teamKey!).listNotificationCategories();
-    await this.wrapper<YCategory, DefenderCategory>(
+    await this.wrapper<YCategory, PlatformCategory>(
       this.serverless,
       'Categories',
       this.serverless.service.resources?.Resources?.categories,
       listNotificationCategories,
-      (resource: DefenderCategory) => `${resource.stackResourceId}: ${resource.categoryId}`,
+      (resource: PlatformCategory) => `${resource.stackResourceId}: ${resource.categoryId}`,
       stdOut.categories,
     );
 
