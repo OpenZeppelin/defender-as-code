@@ -49,11 +49,11 @@
             "stack": { "title": "Stack", "type": "object", "additionalProperties": { "type": "string" } }
           }
         },
-        "sentinels": {
-          "title": "Sentinels",
+        "monitors": {
+          "title": "Monitors",
           "type": "object",
           "additionalProperties": {
-            "$ref": "definitions.schema.json/#/definitions/sentinel",
+            "$ref": "definitions.schema.json/#/definitions/monitor",
             "format": "uri-reference"
           }
         },

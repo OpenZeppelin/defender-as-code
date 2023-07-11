@@ -14,8 +14,8 @@ import {
   NotificationType,
 } from '@openzeppelin/defender-sentinel-client/lib/models/notification';
 
-import { NotificationCategory } from '@openzeppelin/defender-sentinel-client/lib/models/category';
-import { CreateSentinelResponse, BlockWatcher } from '@openzeppelin/defender-sentinel-client';
+import { NotificationCategory } from '@openzeppelin/platform-sdk-monitor-client/lib/models/category';
+import { CreateMonitorResponse, BlockWatcher } from '@openzeppelin/platform-sdk-monitor-client';
 
 import {
   CreateBlockSubscriberResponse,
@@ -24,7 +24,7 @@ import {
   ExternalCreateFortaSubscriberRequest,
   NotificationReference,
   SubscriberRiskCategory,
-} from '@openzeppelin/defender-sentinel-client/lib/models/subscriber';
+} from '@openzeppelin/platform-sdk-monitor-client/lib/models/subscriber';
 import {
   Action,
   SecretsMap,
@@ -47,11 +47,11 @@ export type DefenderBlockWatcher = BlockWatcher;
 export type DefenderNotification = NotificationSummary;
 export type DefenderCategory = NotificationCategory;
 export type DefenderNotificationReference = NotificationReference;
-export type DefenderSentinel = CreateSentinelResponse;
-export type DefenderBlockSentinelResponse = CreateBlockSubscriberResponse;
-export type DefenderFortaSentinelResponse = CreateFortaSubscriberResponse;
-export type DefenderBlockSentinel = ExternalCreateBlockSubscriberRequest;
-export type DefenderFortaSentinel = ExternalCreateFortaSubscriberRequest;
+export type PlatformMonitor = CreateMonitorResponse;
+export type PlatformBlockMonitorResponse = CreateBlockSubscriberResponse;
+export type PlatformFortaMonitorResponse = CreateFortaSubscriberResponse;
+export type PlatformBlockMonitor = ExternalCreateBlockSubscriberRequest;
+export type PlatformFortaMonitor = ExternalCreateFortaSubscriberRequest;
 export type DefenderSlackConfig = SlackConfig;
 export type DefenderDatadogConfig = DatadogConfig;
 export type DefenderDiscordConfig = DiscordConfig;
@@ -67,7 +67,7 @@ export type DefenderMonitorFilterTrigger = MonitorFilterTrigger;
 export type DefenderSubscriberRiskCategory = SubscriberRiskCategory;
 
 export type ResourceType =
-  | 'Sentinels'
+  | 'Monitors'
   | 'Relayers'
   | 'Notifications'
   | 'Categories'
@@ -150,7 +150,7 @@ export type YCategory = {
   'notification-ids': YNotification[];
 };
 
-export type YBlockSentinel = {
+export type YBlockMonitor = {
   'name': string;
   'type': 'BLOCK';
   'network': Network;
@@ -176,7 +176,7 @@ export type YBlockSentinel = {
   'risk-category': DefenderSubscriberRiskCategory;
 };
 
-export type YFortaSentinel = {
+export type YFortaMonitor = {
   'name': string;
   'type': 'FORTA';
   'network'?: Network;
@@ -204,7 +204,7 @@ export type YFortaSentinel = {
   'risk-category': DefenderSubscriberRiskCategory;
 };
 
-export type YSentinel = YBlockSentinel | YFortaSentinel;
+export type YMonitor = YBlockMonitor | YFortaMonitor;
 
 export type YContract = {
   'name': string;
@@ -234,8 +234,8 @@ export type DeployResponse = {
 
 export type DeployOutput<T> = { removed: T[]; created: T[]; updated: T[] };
 
-export type ListDefenderResources = {
-  sentinels: DefenderSentinel[];
+export type ListPlatformResources = {
+  monitors: PlatformMonitor[];
   actions: PlatformAction[];
   notifications: DefenderNotification[];
   categories: DefenderCategory[];

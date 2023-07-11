@@ -10,7 +10,7 @@ import {
   getActionClient,
   getConsolidatedSecrets,
   getRelayClient,
-  getSentinelClient,
+  getMonitorClient,
   getStackName,
   getTeamAPIkeysOrThrow,
   isTemplateResource,
@@ -22,7 +22,7 @@ import {
   DefenderNotification,
   DefenderRelayer,
   DefenderRelayerApiKey,
-  DefenderSentinel,
+  PlatformMonitor,
   ResourceType,
   TeamKey,
   YAction,
@@ -31,7 +31,7 @@ import {
   YNotification,
   YRelayer,
   YSecret,
-  YSentinel,
+  YMonitor,
 } from '../types';
 
 export default class DefenderInfo {
@@ -103,7 +103,7 @@ export default class DefenderInfo {
     this.log.progress('info', `Running Defender Info on stack: ${stackName}`);
     const stdOut = {
       stack: stackName,
-      sentinels: [],
+      monitors: [],
       actions: [],
       contracts: [],
       relayers: [],
@@ -111,19 +111,19 @@ export default class DefenderInfo {
       categories: [],
       secrets: [],
     };
-    // Sentinels
-    const listSentinels = () =>
-      getSentinelClient(this.teamKey!)
+    // Monitors
+    const listMonitors = () =>
+      getMonitorClient(this.teamKey!)
         .list()
         .then((i) => i.items);
 
-    await this.wrapper<YSentinel, DefenderSentinel>(
+    await this.wrapper<YMonitor, PlatformMonitor>(
       this.serverless,
-      'Sentinels',
+      'Monitors',
       this.serverless.service.resources?.Resources?.sentinels,
-      listSentinels,
-      (resource: DefenderSentinel) => `${resource.stackResourceId}: ${resource.subscriberId}`,
-      stdOut.sentinels,
+      listMonitors,
+      (resource: PlatformMonitor) => `${resource.stackResourceId}: ${resource.subscriberId}`,
+      stdOut.monitors,
     );
 
     // Actions
@@ -166,7 +166,7 @@ export default class DefenderInfo {
     );
 
     // Notifications
-    const listNotifications = () => getSentinelClient(this.teamKey!).listNotificationChannels();
+    const listNotifications = () => getMonitorClient(this.teamKey!).listNotificationChannels();
     await this.wrapper<YNotification, DefenderNotification>(
       this.serverless,
       'Notifications',
@@ -177,7 +177,7 @@ export default class DefenderInfo {
     );
 
     // Categories
-    const listNotificationCategories = () => getSentinelClient(this.teamKey!).listNotificationCategories();
+    const listNotificationCategories = () => getMonitorClient(this.teamKey!).listNotificationCategories();
     await this.wrapper<YCategory, DefenderCategory>(
       this.serverless,
       'Categories',
