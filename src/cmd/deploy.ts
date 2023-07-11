@@ -7,11 +7,10 @@ import { Logging } from 'serverless/classes/Plugin';
 import Logger from '../utils/logger';
 
 import {
-  getSentinelClient,
-  getAutotaskClient,
+  getMonitorClient,
+  getActionClient,
   getAdminClient,
   getRelayClient,
-  constructSentinel,
   constructNotification,
   getTeamAPIkeysOrThrow,
   getStackName,
@@ -26,38 +25,39 @@ import {
   getDeploymentConfigClient,
   getBlockExplorerApiKeyClient,
   formatABI,
+  constructMonitor,
 } from '../utils';
 import {
-  DefenderAutotask,
+  PlatformAction,
   DefenderContract,
   DefenderNotification,
   DefenderRelayer,
-  DefenderSentinel,
+  PlatformMonitor,
   DefenderRelayerApiKey,
   TeamKey,
-  YAutotask,
+  YAction,
   YContract,
   YNotification,
   YRelayer,
   YSecret,
-  YSentinel,
+  YMonitor,
+  YCategory,
+  YBlockExplorerApiKey,
+  YDeploymentConfig,
   DeployOutput,
   DeployResponse,
   ResourceType,
-  ListDefenderResources,
+  ListPlatformResources,
   DefenderNotificationReference,
-  DefenderBlockSentinelResponse,
-  DefenderFortaSentinelResponse,
-  DefenderScheduleTrigger,
-  DefenderWebhookTrigger,
-  DefenderSentinelTrigger,
-  DefenderMonitorFilterTrigger,
+  PlatformWebhookTrigger,
+  PlatformScheduleTrigger,
+  PlatformMonitorTrigger,
+  PlatformMonitorFilterTrigger,
   DefenderDeploymentConfig,
-  YDeploymentConfig,
   DefenderBlockExplorerApiKey,
-  YBlockExplorerApiKey,
   DefenderCategory,
-  YCategory,
+  PlatformFortaMonitorResponse,
+  PlatformBlockMonitorResponse,
 } from '../types';
 import keccak256 from 'keccak256';
 
@@ -68,7 +68,7 @@ export default class DefenderDeploy {
   log: Logger;
   hooks: any;
   teamKey?: TeamKey;
-  ssotDifference?: ListDefenderResources;
+  ssotDifference?: ListPlatformResources;
 
   constructor(serverless: Serverless, options: Serverless.Options, logging: Logging) {
     this.serverless = serverless;
@@ -87,10 +87,10 @@ export default class DefenderDeploy {
     this.teamKey = getTeamAPIkeysOrThrow(this.serverless);
   }
 
-  private async getSSOTDifference(): Promise<ListDefenderResources> {
-    const difference: ListDefenderResources = {
-      sentinels: [],
-      autotasks: [],
+  private async getSSOTDifference(): Promise<ListPlatformResources> {
+    const difference: ListPlatformResources = {
+      monitors: [],
+      actions: [],
       notifications: [],
       categories: [],
       contracts: [],
@@ -110,14 +110,14 @@ export default class DefenderDeploy {
         `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
     );
 
-    // Sentinels
-    const sentinels: YSentinel[] = this.serverless.service.resources?.Resources?.sentinels ?? [];
-    const sentinelClient = getSentinelClient(this.teamKey!);
-    const dSentinels = (await sentinelClient.list()).items;
-    const sentinelDifference = _.differenceWith(
-      dSentinels,
-      Object.entries(sentinels ?? []),
-      (a: DefenderSentinel, b: [string, YSentinel]) =>
+    // Monitors
+    const monitors: YMonitor[] = this.serverless.service.resources?.Resources?.monitors ?? [];
+    const monitorClient = getMonitorClient(this.teamKey!);
+    const monitorItems = (await monitorClient.list()).items;
+    const monitorDifference = _.differenceWith(
+      monitorItems,
+      Object.entries(monitors ?? []),
+      (a: PlatformMonitor, b: [string, YMonitor]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
@@ -148,7 +148,7 @@ export default class DefenderDeploy {
 
     // Notifications
     const notifications: YNotification[] = this.serverless.service.resources?.Resources?.notifications ?? [];
-    const dNotifications = await sentinelClient.listNotificationChannels();
+    const dNotifications = await monitorClient.listNotificationChannels();
     const notificationDifference = _.differenceWith(
       dNotifications,
       Object.entries(notifications ?? []),
@@ -158,7 +158,7 @@ export default class DefenderDeploy {
 
     // Notification Categories
     const categories: YCategory[] = this.serverless.service.resources?.Resources?.categories ?? [];
-    const dCategories = await sentinelClient.listNotificationCategories();
+    const dCategories = await monitorClient.listNotificationCategories();
     const categoryDifference = _.differenceWith(
       dCategories,
       Object.entries(categories ?? []),
@@ -166,20 +166,20 @@ export default class DefenderDeploy {
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
-    // Autotasks
-    const autotasks: YAutotask[] = this.serverless.service.functions as any;
-    const autotaskClient = getAutotaskClient(this.teamKey!);
-    const dAutotasks = (await autotaskClient.list()).items;
-    const autotaskDifference = _.differenceWith(
-      dAutotasks,
-      Object.entries(autotasks ?? []),
-      (a: DefenderAutotask, b: [string, YAutotask]) =>
+    // Actions
+    const actions: YAction[] = this.serverless.service.functions as any;
+    const actionClient = getActionClient(this.teamKey!);
+    const dActions = (await actionClient.list()).items;
+    const actionDifference = _.differenceWith(
+      dActions,
+      Object.entries(actions ?? []),
+      (a: PlatformAction, b: [string, YAction]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
     // Secrets
     const allSecrets = getConsolidatedSecrets(this.serverless);
-    const dSecrets = (await autotaskClient.listSecrets()).secretNames ?? [];
+    const dSecrets = (await actionClient.listSecrets()).secretNames ?? [];
     const secretsDifference = _.differenceWith(
       dSecrets,
       Object.values(allSecrets).map((k, _) => Object.keys(k)[0] ?? ''),
@@ -211,42 +211,42 @@ export default class DefenderDeploy {
     );
 
     difference.contracts = contractDifference;
-    difference.sentinels = sentinelDifference;
+    difference.monitors = monitorDifference;
     difference.notifications = notificationDifference;
     difference.categories = categoryDifference;
-    difference.autotasks = autotaskDifference;
+    difference.actions = actionDifference;
     difference.secrets = secretsDifference;
     difference.deploymentConfigs = deploymentConfigDifference;
     difference.blockExplorerApiKeys = blockExplorerApiKeyDifference;
 
     return difference;
   }
-  private async constructConfirmationMessage(withResources: ListDefenderResources): Promise<string> {
-    const start = `You have SSOT enabled. This might remove resources from Defender permanently.\nHaving SSOT enabled will interpret the resources defined in the serverless.yml file as the Single Source Of Truth, and will remove any existing Defender resource which is not defined in the YAML file (with the exception of Relayers).\nIf you continue, the following resources will be removed from Defender:`;
+  private async constructConfirmationMessage(withResources: ListPlatformResources): Promise<string> {
+    const start = `You have SSOT enabled. This might remove resources from Platform permanently.\nHaving SSOT enabled will interpret the resources defined in the serverless.yml file as the Single Source Of Truth, and will remove any existing Platform resource which is not defined in the YAML file (with the exception of Relayers).\nIf you continue, the following resources will be removed from Platform:`;
     const end = `Are you sure you wish to continue [y/n]?`;
 
     const formattedResources = {
-      autotasks:
-        withResources.autotasks.length > 0
-          ? withResources.autotasks.map(a => `${a.stackResourceId ?? a.name} (${a.autotaskId})`)
+      actions:
+        withResources.actions.length > 0
+          ? withResources.actions.map((a) => `${a.stackResourceId ?? a.name} (${a.actionkId})`)
           : undefined,
-      sentinels:
-        withResources.sentinels.length > 0
-          ? withResources.sentinels.map(a => `${a.stackResourceId ?? a.name} (${a.subscriberId})`)
+      monitors:
+        withResources.monitors.length > 0
+          ? withResources.monitors.map((a) => `${a.stackResourceId ?? a.name} (${a.subscriberId})`)
           : undefined,
       notifications:
         withResources.notifications.length > 0
-          ? withResources.notifications.map(a => `${a.stackResourceId ?? a.name} (${a.notificationId})`)
+          ? withResources.notifications.map((a) => `${a.stackResourceId ?? a.name} (${a.notificationId})`)
           : undefined,
       contracts:
         withResources.contracts.length > 0
-          ? withResources.contracts.map(a => `${a.network}-${a.address} (${a.name})`)
+          ? withResources.contracts.map((a) => `${a.network}-${a.address} (${a.name})`)
           : undefined,
       relayerApiKeys:
         withResources.relayerApiKeys.length > 0
-          ? withResources.relayerApiKeys.map(a => `${a.stackResourceId ?? a.apiKey} (${a.keyId})`)
+          ? withResources.relayerApiKeys.map((a) => `${a.stackResourceId ?? a.apiKey} (${a.keyId})`)
           : undefined,
-      secrets: withResources.secrets.length > 0 ? withResources.secrets.map(a => `${a}`) : undefined,
+      secrets: withResources.secrets.length > 0 ? withResources.secrets.map((a) => `${a}`) : undefined,
     };
     return `${start}\n${
       _.isEmpty(validateTypesAndSanitise(formattedResources))
@@ -287,8 +287,8 @@ export default class DefenderDeploy {
 
   private async deploySecrets(output: DeployOutput<string>) {
     const allSecrets = getConsolidatedSecrets(this.serverless);
-    const client = getAutotaskClient(this.teamKey!);
-    const retrieveExisting = () => client.listSecrets().then(r => r.secretNames ?? []);
+    const client = getActionClient(this.teamKey!);
+    const retrieveExisting = () => client.listSecrets().then((r) => r.secretNames ?? []);
     await this.wrapper<YSecret, string>(
       this.serverless,
       'Secrets',
@@ -347,10 +347,10 @@ export default class DefenderDeploy {
       // on update
       async (contract: YContract, match: DefenderContract) => {
         const mappedMatch = {
-          name: match.name,
-          network: match.network,
-          address: match.address,
-          abi: match.abi && JSON.stringify(JSON.parse(match.abi)),
+          'name': match.name,
+          'network': match.network,
+          'address': match.address,
+          'abi': match.abi && JSON.stringify(JSON.parse(match.abi)),
           'nat-spec': match.natSpec ? match.natSpec : undefined,
         };
 
@@ -402,7 +402,7 @@ export default class DefenderDeploy {
       },
       // on remove
       async (contracts: DefenderContract[]) => {
-        await Promise.all(contracts.map(async c => await client.deleteContract(`${c.network}-${c.address}`)));
+        await Promise.all(contracts.map(async (c) => await client.deleteContract(`${c.network}-${c.address}`)));
       },
       // overrideMatchDefinition
       (a: DefenderContract, b: YContract) => {
@@ -420,7 +420,7 @@ export default class DefenderDeploy {
   ) {
     const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
     const client = getRelayClient(this.teamKey!);
-    const retrieveExisting = () => client.list().then(r => r.items);
+    const retrieveExisting = () => client.list().then((r) => r.items);
     await this.wrapper<YRelayer, DefenderRelayer>(
       this.serverless,
       'Relayers',
@@ -437,10 +437,10 @@ export default class DefenderDeploy {
         }
 
         const mappedMatch = {
-          name: match.name,
-          network: match.network,
+          'name': match.name,
+          'network': match.network,
           'min-balance': parseInt(match.minBalance.toString()),
-          policy: {
+          'policy': {
             'gas-price-cap': match.policies.gasPriceCap,
             'whitelist-receivers': match.policies.whitelistReceivers,
             'eip1559-pricing': match.policies.EIP1559Pricing,
@@ -482,7 +482,7 @@ export default class DefenderDeploy {
           this.log.info(`Unused resources found on Defender:`);
           this.log.info(JSON.stringify(inDefender, null, 2));
           this.log.progress('component-deploy-extra', `Removing resources from Defender`);
-          await Promise.all(inDefender.map(async key => await client.deleteKey(match.relayerId, key.keyId)));
+          await Promise.all(inDefender.map(async (key) => await client.deleteKey(match.relayerId, key.keyId)));
           this.log.success(`Removed resources from Defender`);
           output.relayerKeys.removed.push(...inDefender);
         }
@@ -496,7 +496,7 @@ export default class DefenderDeploy {
         // create key in Defender thats defined in template
         if (inTemplate) {
           await Promise.all(
-            inTemplate.map(async key => {
+            inTemplate.map(async (key) => {
               const keyStackResource = getResourceID(match.stackResourceId!, key);
               const createdKey = await client.createKey(match.relayerId, keyStackResource);
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${match.relayerId})`);
@@ -544,7 +544,7 @@ export default class DefenderDeploy {
         const relayerKeys = relayer['api-keys'];
         if (relayerKeys) {
           await Promise.all(
-            relayerKeys.map(async key => {
+            relayerKeys.map(async (key) => {
               const keyStackResource = getResourceID(stackResourceId, key);
               const createdKey = await client.createKey(createdRelayer.relayerId, keyStackResource);
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${createdRelayer.relayerId})`);
@@ -572,7 +572,7 @@ export default class DefenderDeploy {
 
   private async deployNotifications(output: DeployOutput<DefenderNotification>) {
     const notifications: YNotification[] = this.serverless.service.resources?.Resources?.notifications ?? [];
-    const client = getSentinelClient(this.teamKey!);
+    const client = getMonitorClient(this.teamKey!);
     const retrieveExisting = () => client.listNotificationChannels();
 
     await this.wrapper<YNotification, DefenderNotification>(
@@ -623,7 +623,7 @@ export default class DefenderDeploy {
       },
       // on remove
       async (notifications: DefenderNotification[]) => {
-        await Promise.all(notifications.map(async n => await client.deleteNotificationChannel(n)));
+        await Promise.all(notifications.map(async (n) => await client.deleteNotificationChannel(n)));
       },
       undefined,
       output,
@@ -633,7 +633,7 @@ export default class DefenderDeploy {
 
   private async deployCategories(output: DeployOutput<DefenderCategory>) {
     const categories: YCategory[] = this.serverless.service.resources?.Resources?.categories ?? [];
-    const client = getSentinelClient(this.teamKey!);
+    const client = getMonitorClient(this.teamKey!);
     const notifications = await client.listNotificationChannels();
     const retrieveExisting = () => client.listNotificationCategories();
 
@@ -710,51 +710,51 @@ export default class DefenderDeploy {
     );
   }
 
-  private async deploySentinels(output: DeployOutput<DefenderSentinel>) {
+  private async deployMonitors(output: DeployOutput<PlatformMonitor>) {
     try {
-      const sentinels: YSentinel[] = this.serverless.service.resources?.Resources?.sentinels ?? [];
-      const client = getSentinelClient(this.teamKey!);
-      const autotasks = await getAutotaskClient(this.teamKey!).list();
+      const monitors: YMonitor[] = this.serverless.service.resources?.Resources?.monitors ?? [];
+      const client = getMonitorClient(this.teamKey!);
+      const actions = await getActionClient(this.teamKey!).list();
       const notifications = await client.listNotificationChannels();
       const categories = await client.listNotificationCategories();
-      const retrieveExisting = () => client.list().then(r => r.items);
+      const retrieveExisting = () => client.list().then((r) => r.items);
 
-      await this.wrapper<YSentinel, DefenderSentinel>(
+      await this.wrapper<YMonitor, PlatformMonitor>(
         this.serverless,
-        'Sentinels',
-        sentinels,
+        'Monitors',
+        monitors,
         retrieveExisting,
         // on update
-        async (sentinel: YSentinel, match: DefenderSentinel) => {
-          const isForta = (o: DefenderSentinel): o is DefenderFortaSentinelResponse => o.type === 'FORTA';
-          const isBlock = (o: DefenderSentinel): o is DefenderBlockSentinelResponse => o.type === 'BLOCK';
+        async (monitor: YMonitor, match: PlatformMonitor) => {
+          const isForta = (o: PlatformMonitor): o is PlatformFortaMonitorResponse => o.type === 'FORTA';
+          const isBlock = (o: PlatformMonitor): o is PlatformBlockMonitorResponse => o.type === 'BLOCK';
 
-          // Warn users when they try to change the sentinel network
-          if (match.network !== sentinel.network) {
+          // Warn users when they try to change the monitor network
+          if (match.network !== monitor.network) {
             this.log.warn(
-              `Detected a network change from ${match.network} to ${sentinel.network} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this sentinel.`,
+              `Detected a network change from ${match.network} to ${monitor.network} for Monitor: ${match.stackResourceId}. Platform does not currently allow updates to the network once a Monitor is created. This change will be ignored. To enforce this change, remove this monitor and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the monitor. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this monitor.`,
             );
-            sentinel.network = match.network!;
+            monitor.network = match.network!;
           }
 
-          // Warn users when they try to change the sentinel type
-          if (sentinel.type !== match.type) {
+          // Warn users when they try to change the monitor type
+          if (monitor.type !== match.type) {
             this.log.warn(
-              `Detected a type change from ${match.type} to ${sentinel.type} for Sentinel: ${match.stackResourceId}. Defender does not currently allow updates to the type once a Sentinel is created. This change will be ignored. To enforce this change, remove this sentinel and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the sentinel. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this sentinel.`,
+              `Detected a type change from ${match.type} to ${monitor.type} for Monitor: ${match.stackResourceId}. Platform does not currently allow updates to the type once a Monitor is created. This change will be ignored. To enforce this change, remove this monitor and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the monitor. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this monitor.`,
             );
-            sentinel.type = match.type;
+            monitor.type = match.type;
           }
 
           const blockwatchersForNetwork = (await client.listBlockwatchers()).filter(
-            b => b.network === sentinel.network,
+            (b) => b.network === monitor.network,
           );
 
-          const newSentinel = constructSentinel(
+          const newMonitor = constructMonitor(
             this.serverless,
             match.stackResourceId!,
-            sentinel,
+            monitor,
             notifications,
-            autotasks.items,
+            actions.items,
             blockwatchersForNetwork,
             categories,
           );
@@ -773,7 +773,7 @@ export default class DefenderDeploy {
             abi: addressRule && addressRule.abi,
             paused: match.paused,
             alertThreshold: match.alertThreshold,
-            autotaskTrigger: match.notifyConfig?.autotaskId,
+            actionTrigger: match.notifyConfig?.autotaskId,
             alertTimeoutMs: match.notifyConfig?.timeoutMs,
             alertMessageBody: match.notifyConfig?.messageBody,
             alertMessageSubject: match.notifyConfig?.messageSubject,
@@ -795,7 +795,7 @@ export default class DefenderDeploy {
               blockConditions[0]!.txConditions[0]!.expression,
             privateFortaNodeId: (isForta(match) && match.privateFortaNodeId) || undefined,
             addresses: isBlock(match) ? addressRule && addressRule.addresses : match.fortaRule?.addresses,
-            autotaskCondition: isBlock(match)
+            actionCondition: isBlock(match)
               ? addressRule && addressRule.autotaskCondition?.autotaskId
               : match.fortaRule?.autotaskCondition?.autotaskId,
             fortaLastProcessedTime: (isForta(match) && match.fortaLastProcessedTime) || undefined,
@@ -804,7 +804,7 @@ export default class DefenderDeploy {
             riskCategory: match.riskCategory,
           };
 
-          if (_.isEqual(validateTypesAndSanitise(newSentinel), validateTypesAndSanitise(mappedMatch))) {
+          if (_.isEqual(validateTypesAndSanitise(newMonitor), validateTypesAndSanitise(mappedMatch))) {
             return {
               name: match.stackResourceId!,
               id: match.subscriberId,
@@ -814,83 +814,89 @@ export default class DefenderDeploy {
             };
           }
 
-          const updatedSentinel = await client.update(
-            match.subscriberId,
-            // Do not allow to update network of (existing) sentinels
-            _.omit(newSentinel, ['network']),
-          );
+          const updatedMonitor = await client.update({
+            monitorId: match.subscriberId,
+            // Do not allow to update network of (existing) monitors
+            ..._.omit(newMonitor, ['network']),
+          });
 
           return {
-            name: updatedSentinel.stackResourceId!,
-            id: updatedSentinel.subscriberId,
+            name: updatedMonitor.stackResourceId!,
+            id: updatedMonitor.subscriberId,
             success: true,
-            response: updatedSentinel,
+            response: updatedMonitor,
           };
         },
         // on create
-        async (sentinel: YSentinel, stackResourceId: string) => {
+        async (monitor: YMonitor, stackResourceId: string) => {
           const blockwatchersForNetwork = (await client.listBlockwatchers()).filter(
-            b => b.network === sentinel.network,
+            (b) => b.network === monitor.network,
           );
-          const createdSentinel = await client.create(
-            constructSentinel(
+          const createdMonitor = await client.create(
+            constructMonitor(
               this.serverless,
               stackResourceId,
-              sentinel,
+              monitor,
               notifications,
-              autotasks.items,
+              actions.items,
               blockwatchersForNetwork,
               categories,
             ),
           );
           return {
             name: stackResourceId,
-            id: createdSentinel.subscriberId,
+            id: createdMonitor.subscriberId,
             success: true,
-            response: createdSentinel,
+            response: createdMonitor,
           };
         },
         // on remove
-        async (sentinels: DefenderSentinel[]) => {
-          await Promise.all(sentinels.map(async s => await client.delete(s.subscriberId)));
+        async (monitors: PlatformMonitor[]) => {
+          await Promise.all(monitors.map(async (s) => await client.delete({ monitorId: s.subscriberId })));
         },
         undefined,
         output,
-        this.ssotDifference?.sentinels,
+        this.ssotDifference?.monitors,
       );
     } catch (e) {
       this.log.tryLogDefenderError(e);
     }
   }
 
-  private async deployAutotasks(output: DeployOutput<DefenderAutotask>) {
-    const autotasks: YAutotask[] = this.serverless.service.functions as any;
-    const client = getAutotaskClient(this.teamKey!);
-    const retrieveExisting = () => client.list().then(r => r.items);
+  private async deployActions(output: DeployOutput<PlatformAction>) {
+    const actions: YAction[] = this.serverless.service.functions as any;
+    const client = getActionClient(this.teamKey!);
+    const retrieveExisting = () => client.list().then((r) => r.items);
 
-    await this.wrapper<YAutotask, DefenderAutotask>(
+    await this.wrapper<YAction, PlatformAction>(
       this.serverless,
       'Autotasks',
-      autotasks,
+      actions,
       retrieveExisting,
       // on update
-      async (autotask: YAutotask, match: DefenderAutotask) => {
+      async (action: YAction, match: PlatformAction) => {
         const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
         const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
           this.serverless,
-          autotask.relayer,
+          action.relayer,
           relayers,
           existingRelayers,
         );
         // Get new code digest
-        const code = await client.getEncodedZippedCodeFromFolder(autotask.path);
-        const newDigest = client.getCodeDigest(code);
-        const { codeDigest } = await client.get(match.autotaskId);
+        const code = await client.getEncodedZippedCodeFromFolder({
+          path: action.path,
+        });
+        const newDigest = client.getCodeDigest({
+          encodedZippedCode: code,
+        });
+        const { codeDigest } = await client.get({
+          actionId: match.actionkId,
+        });
 
         const isSchedule = (
-          o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderSentinelTrigger | DefenderMonitorFilterTrigger,
-        ): o is DefenderScheduleTrigger => o.type === 'schedule';
+          o: PlatformWebhookTrigger | PlatformScheduleTrigger | PlatformMonitorTrigger | PlatformMonitorFilterTrigger,
+        ): o is PlatformScheduleTrigger => o.type === 'schedule';
 
         const mappedMatch = {
           name: match.name,
@@ -907,7 +913,7 @@ export default class DefenderDeploy {
         if (
           _.isEqual(
             validateTypesAndSanitise({
-              ..._.omit(autotask, ['events', 'package', 'relayer', 'path']),
+              ..._.omit(action, ['events', 'package', 'relayer', 'path']),
               relayerId: maybeRelayer?.relayerId,
               codeDigest: newDigest,
             }),
@@ -916,21 +922,21 @@ export default class DefenderDeploy {
         ) {
           return {
             name: match.stackResourceId!,
-            id: match.autotaskId,
+            id: match.actionkId,
             success: false,
             response: match,
             notice: `Skipped ${match.stackResourceId} - no changes detected`,
           };
         }
 
-        const updatesAutotask = await client.update({
-          autotaskId: match.autotaskId,
-          name: autotask.name,
-          paused: autotask.paused,
+        const updatesAction = await client.update({
+          actionId: match.actionkId,
+          name: action.name,
+          paused: action.paused,
           trigger: {
-            type: autotask.trigger.type,
-            frequencyMinutes: autotask.trigger.frequency ?? undefined,
-            cron: autotask.trigger.cron ?? undefined,
+            type: action.trigger.type,
+            frequencyMinutes: action.trigger.frequency ?? undefined,
+            cron: action.trigger.cron ?? undefined,
           },
           relayerId: maybeRelayer?.relayerId,
         });
@@ -938,59 +944,64 @@ export default class DefenderDeploy {
         if (newDigest === codeDigest) {
           return {
             name: match.stackResourceId!,
-            id: match.autotaskId,
+            id: match.actionkId,
             success: true,
             notice: `Skipped code upload - no changes detected for ${match.stackResourceId}`,
-            response: updatesAutotask,
+            response: updatesAction,
           };
         } else {
-          await client.updateCodeFromFolder(match.autotaskId, autotask.path);
+          await client.updateCodeFromFolder({
+            actionId: match.actionkId,
+            path: action.path,
+          });
           return {
             name: match.stackResourceId!,
-            id: match.autotaskId,
+            id: match.actionkId,
             success: true,
-            response: updatesAutotask,
+            response: updatesAction,
           };
         }
       },
       // on create
-      async (autotask: YAutotask, stackResourceId: string) => {
-        const autotaskRelayer = autotask.relayer;
+      async (action: YAction, stackResourceId: string) => {
+        const actionRelayer = action.relayer;
         const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
         const maybeRelayer = getEquivalentResource<YRelayer | undefined, DefenderRelayer>(
           this.serverless,
-          autotaskRelayer,
+          actionRelayer,
           relayers,
           existingRelayers,
         );
 
-        const createdAutotask = await client.create({
-          name: autotask.name,
+        const createdAction = await client.create({
+          name: action.name,
           trigger: {
-            type: autotask.trigger.type,
-            frequencyMinutes: autotask.trigger.frequency ?? undefined,
-            cron: autotask.trigger.cron ?? undefined,
+            type: action.trigger.type,
+            frequencyMinutes: action.trigger.frequency ?? undefined,
+            cron: action.trigger.cron ?? undefined,
           },
-          encodedZippedCode: await client.getEncodedZippedCodeFromFolder(autotask.path),
-          paused: autotask.paused,
+          encodedZippedCode: await client.getEncodedZippedCodeFromFolder({
+            path: action.path,
+          }),
+          paused: action.paused,
           relayerId: maybeRelayer?.relayerId,
           stackResourceId: stackResourceId,
         });
         return {
           name: stackResourceId,
-          id: createdAutotask.autotaskId,
+          id: createdAction.actionkId,
           success: true,
-          response: createdAutotask,
+          response: createdAction,
         };
       },
       // on remove
-      async (autotasks: DefenderAutotask[]) => {
-        await Promise.all(autotasks.map(async a => await client.delete(a.autotaskId)));
+      async (actions: PlatformAction[]) => {
+        await Promise.all(actions.map(async (a) => await client.delete({ actionId: a.actionkId })));
       },
       undefined,
       output,
-      this.ssotDifference?.autotasks,
+      this.ssotDifference?.actions,
     );
   }
 
@@ -1057,7 +1068,10 @@ export default class DefenderDeploy {
 
         if (!maybeRelayer) throw new Error(`Cannot find relayer ${deploymentConfigRelayer} in ${stackResourceId}`);
 
-        const importedDeployment = await client.create({ relayerId: maybeRelayer.relayerId, stackResourceId });
+        const importedDeployment = await client.create({
+          relayerId: maybeRelayer.relayerId,
+          stackResourceId,
+        });
 
         return {
           name: stackResourceId,
@@ -1068,7 +1082,7 @@ export default class DefenderDeploy {
       },
       // on remove
       async (deploymentConfigs: DefenderDeploymentConfig[]) => {
-        await Promise.all(deploymentConfigs.map(async c => await client.remove(c.deploymentConfigId)));
+        await Promise.all(deploymentConfigs.map(async (c) => await client.remove(c.deploymentConfigId)));
       },
       undefined,
       output,
@@ -1112,7 +1126,10 @@ export default class DefenderDeploy {
       },
       // on create
       async (blockExplorerApiKey: YBlockExplorerApiKey, stackResourceId: string) => {
-        const importedBlockExplorerApiKey = await client.create({ ...blockExplorerApiKey, stackResourceId });
+        const importedBlockExplorerApiKey = await client.create({
+          ...blockExplorerApiKey,
+          stackResourceId,
+        });
         return {
           name: stackResourceId,
           id: importedBlockExplorerApiKey.blockExplorerApiKeyId,
@@ -1122,7 +1139,7 @@ export default class DefenderDeploy {
       },
       // on remove
       async (blockExplorerApiKeys: DefenderBlockExplorerApiKey[]) => {
-        await Promise.all(blockExplorerApiKeys.map(async c => await client.remove(c.blockExplorerApiKeyId)));
+        await Promise.all(blockExplorerApiKeys.map(async (c) => await client.remove(c.blockExplorerApiKeyId)));
       },
       undefined,
       output,
@@ -1225,12 +1242,12 @@ export default class DefenderDeploy {
     const stackName = getStackName(this.serverless);
     this.log.progress('deploy', `Running Defender Deploy on stack: ${stackName}`);
 
-    const sentinels: DeployOutput<DefenderSentinel> = {
+    const monitors: DeployOutput<PlatformMonitor> = {
       removed: [],
       created: [],
       updated: [],
     };
-    const autotasks: DeployOutput<DefenderAutotask> = {
+    const actions: DeployOutput<PlatformAction> = {
       removed: [],
       created: [],
       updated: [],
@@ -1283,8 +1300,8 @@ export default class DefenderDeploy {
     const stdOut = {
       stack: stackName,
       timestamp: new Date().toISOString(),
-      sentinels,
-      autotasks,
+      monitors,
+      actions: actions,
       contracts,
       relayers,
       notifications,
@@ -1295,13 +1312,13 @@ export default class DefenderDeploy {
     };
     await this.deploySecrets(stdOut.secrets);
     await this.deployContracts(stdOut.contracts);
-    // Always deploy relayers before autotasks
+    // Always deploy relayers before actions
     await this.deployRelayers(stdOut.relayers);
-    await this.deployAutotasks(stdOut.autotasks);
-    // Deploy notifications before sentinels and categories
+    await this.deployActions(stdOut.actions);
+    // Deploy notifications before monitors and categories
     await this.deployNotifications(stdOut.notifications);
     await this.deployCategories(stdOut.categories);
-    await this.deploySentinels(stdOut.sentinels);
+    await this.deployMonitors(stdOut.monitors);
 
     await this.deployDeploymentConfig(stdOut.deploymentConfigs);
     await this.deployBlockExplorerApiKey(stdOut.blockExplorerApiKeys);

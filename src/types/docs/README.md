@@ -2,11 +2,11 @@
 
 ## Top-level Schemas
 
-*   [Defender](./defender.md) – `-`
-
 *   [Definitions](./definitions.md) – `-`
 
 *   [Function](./function.md) – `-`
+
+*   [Platform](./platform.md) – `-`
 
 *   [Provider](./provider.md) – `-`
 
@@ -18,9 +18,9 @@
 
 *   [AddressFromRelayer](./definitions-definitions-relayer-properties-addressfromrelayer.md) – `#/definitions/relayer/properties/address-from-relayer`
 
-*   [AlertThreshold](./definitions-definitions-blocksentinel-properties-alertthreshold.md) – `#/definitions/blockSentinel/properties/alert-threshold`
+*   [AlertThreshold](./definitions-definitions-blockmonitor-properties-alertthreshold.md) – `#/definitions/blockMonitor/properties/alert-threshold`
 
-*   [AlertThreshold](./definitions-definitions-fortasentinel-properties-alertthreshold.md) – `#/definitions/fortaSentinel/properties/alert-threshold`
+*   [AlertThreshold](./definitions-definitions-fortamonitor-properties-alertthreshold.md) – `#/definitions/fortaMonitor/properties/alert-threshold`
 
 *   [Autotask](./definitions-definitions-autotask.md) – `#/definitions/autotask`
 
@@ -30,13 +30,13 @@
 
 *   [BlockExplorerApiKey](./definitions-definitions-blockexplorerapikey.md) – `#/definitions/blockExplorerApiKey`
 
-*   [BlockSentinel](./definitions-definitions-blocksentinel.md) – `#/definitions/blockSentinel`
+*   [BlockMonitor](./definitions-definitions-blockmonitor.md) – `#/definitions/blockMonitor`
 
 *   [Category](./definitions-definitions-category.md) – `#/definitions/category`
 
-*   [Conditions](./definitions-definitions-blocksentinel-properties-conditions.md) – `#/definitions/blockSentinel/properties/conditions`
+*   [Conditions](./definitions-definitions-blockmonitor-properties-conditions.md) – `#/definitions/blockMonitor/properties/conditions`
 
-*   [Conditions](./definitions-definitions-fortasentinel-properties-conditions.md) – `#/definitions/fortaSentinel/properties/conditions`
+*   [Conditions](./definitions-definitions-fortamonitor-properties-conditions.md) – `#/definitions/fortaMonitor/properties/conditions`
 
 *   [Config](./definitions-definitions-notification-properties-config.md) – `#/definitions/notification/properties/config`
 
@@ -52,21 +52,25 @@
 
 *   [EmailConfig](./definitions-definitions-emailconfig.md) – `#/definitions/emailConfig`
 
-*   [EventItems](./definitions-definitions-blocksentinel-properties-conditions-properties-event-eventitems.md) – `#/definitions/blockSentinel/properties/conditions/properties/event/items`
+*   [EventItems](./definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems.md) – `#/definitions/blockMonitor/properties/conditions/properties/event/items`
 
-*   [FortaSentinel](./definitions-definitions-fortasentinel.md) – `#/definitions/fortaSentinel`
+*   [FortaMonitor](./definitions-definitions-fortamonitor.md) – `#/definitions/fortaMonitor`
 
-*   [FunctionItems](./definitions-definitions-blocksentinel-properties-conditions-properties-function-functionitems.md) – `#/definitions/blockSentinel/properties/conditions/properties/function/items`
+*   [FunctionItems](./definitions-definitions-blockmonitor-properties-conditions-properties-function-functionitems.md) – `#/definitions/blockMonitor/properties/conditions/properties/function/items`
 
 *   [Global](./resources-properties-resources-properties-autotasksecrets-properties-global.md) – `#/properties/Resources/properties/secrets/properties/global`
+
+*   [Monitor](./definitions-definitions-monitor.md) – `#/definitions/monitor`
+
+*   [Monitors](./resources-properties-resources-properties-monitors.md) – `#/properties/Resources/properties/monitors`
 
 *   [Notification](./definitions-definitions-notification.md) – `#/definitions/notification`
 
 *   [Notifications](./resources-properties-resources-properties-notifications.md) – `#/properties/Resources/properties/notifications`
 
-*   [NotifyConfig](./definitions-definitions-blocksentinel-properties-notifyconfig.md) – `#/definitions/blockSentinel/properties/notify-config`
+*   [NotifyConfig](./definitions-definitions-blockmonitor-properties-notifyconfig.md) – `#/definitions/blockMonitor/properties/notify-config`
 
-*   [NotifyConfig](./definitions-definitions-fortasentinel-properties-notifyconfig.md) – `#/definitions/fortaSentinel/properties/notify-config`
+*   [NotifyConfig](./definitions-definitions-fortamonitor-properties-notifyconfig.md) – `#/definitions/fortaMonitor/properties/notify-config`
 
 *   [Policies](./resources-properties-resources-properties-policies.md) – `#/properties/Resources/properties/policies`
 
@@ -77,10 +81,6 @@
 *   [Relayers](./resources-properties-resources-properties-relayers.md) – `#/properties/Resources/properties/relayers`
 
 *   [Resources](./resources-properties-resources.md) – `#/properties/Resources`
-
-*   [Sentinel](./definitions-definitions-sentinel.md) – `#/definitions/sentinel`
-
-*   [Sentinels](./resources-properties-resources-properties-sentinels.md) – `#/properties/Resources/properties/sentinels`
 
 *   [Stack](./resources-properties-resources-properties-autotasksecrets-properties-stack.md) – `#/properties/Resources/properties/secrets/properties/stack`
 
@@ -100,25 +100,25 @@
 
 ### Arrays
 
-*   [Addresses](./definitions-definitions-blocksentinel-properties-addresses.md) – `#/definitions/blockSentinel/properties/addresses`
+*   [Addresses](./definitions-definitions-blockmonitor-properties-addresses.md) – `#/definitions/blockMonitor/properties/addresses`
 
-*   [Addresses](./definitions-definitions-fortasentinel-properties-addresses.md) – `#/definitions/fortaSentinel/properties/addresses`
+*   [Addresses](./definitions-definitions-fortamonitor-properties-addresses.md) – `#/definitions/fortaMonitor/properties/addresses`
 
-*   [AgentIDs](./definitions-definitions-fortasentinel-properties-agentids.md) – `#/definitions/fortaSentinel/properties/agent-ids`
+*   [AgentIDs](./definitions-definitions-fortamonitor-properties-agentids.md) – `#/definitions/fortaMonitor/properties/agent-ids`
 
-*   [AlertIDs](./definitions-definitions-fortasentinel-properties-conditions-properties-alertids.md) – `#/definitions/fortaSentinel/properties/conditions/properties/alert-ids`
+*   [AlertIDs](./definitions-definitions-fortamonitor-properties-conditions-properties-alertids.md) – `#/definitions/fortaMonitor/properties/conditions/properties/alert-ids`
 
 *   [ArrayABI](./definitions-definitions-abitype-anyof-arrayabi.md) – `#/definitions/abi/anyOf/1`
 
-*   [Channels](./definitions-definitions-blocksentinel-properties-notifyconfig-properties-channels.md) – `#/definitions/blockSentinel/properties/notify-config/properties/channels`
+*   [Channels](./definitions-definitions-blockmonitor-properties-notifyconfig-properties-channels.md) – `#/definitions/blockMonitor/properties/notify-config/properties/channels`
 
-*   [Channels](./definitions-definitions-fortasentinel-properties-notifyconfig-properties-channels.md) – `#/definitions/fortaSentinel/properties/notify-config/properties/channels`
+*   [Channels](./definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md) – `#/definitions/fortaMonitor/properties/notify-config/properties/channels`
 
 *   [Emails](./definitions-definitions-emailconfig-properties-emails.md) – `#/definitions/emailConfig/properties/emails`
 
-*   [Event](./definitions-definitions-blocksentinel-properties-conditions-properties-event.md) – `#/definitions/blockSentinel/properties/conditions/properties/event`
+*   [Event](./definitions-definitions-blockmonitor-properties-conditions-properties-event.md) – `#/definitions/blockMonitor/properties/conditions/properties/event`
 
-*   [Function](./definitions-definitions-blocksentinel-properties-conditions-properties-function.md) – `#/definitions/blockSentinel/properties/conditions/properties/function`
+*   [Function](./definitions-definitions-blockmonitor-properties-conditions-properties-function.md) – `#/definitions/blockMonitor/properties/conditions/properties/function`
 
 *   [RelayerAPIKeys](./definitions-definitions-relayer-properties-relayerapikeys.md) – `#/definitions/relayer/properties/api-keys`
 

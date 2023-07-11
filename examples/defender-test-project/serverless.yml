@@ -126,7 +126,7 @@ resources:
           - ${self:resources.Resources.notifications.email-1}
           - ${self:resources.Resources.notifications.slack-1}
 
-    sentinels:
+    monitors:
       # unique resource name
       block-example:
         name: 'Block Example'

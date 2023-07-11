@@ -1,14 +1,15 @@
 import Serverless from 'serverless';
 
 import _ from 'lodash';
-import { AutotaskClient } from '@openzeppelin/defender-autotask-client';
-import { SentinelClient } from '@openzeppelin/defender-sentinel-client';
+import { Platform } from '@openzeppelin/platform-sdk';
+import { ActionClient } from '@openzeppelin/platform-sdk-action-client';
+import { MonitorClient } from '@openzeppelin/platform-sdk-monitor-client';
 import { RelayClient } from '@openzeppelin/defender-relay-client';
 import { AdminClient } from '@openzeppelin/defender-admin-client';
 
 import {
   YSecret,
-  YSentinel,
+  YMonitor,
   YNotification,
   YTelegramConfig,
   YSlackConfig,
@@ -17,10 +18,8 @@ import {
   YDatadogConfig,
   YOpsgenieConfig,
   YPagerdutyConfig,
-  DefenderAutotask,
+  PlatformAction,
   DefenderNotification,
-  DefenderBlockSentinel,
-  DefenderFortaSentinel,
   TeamKey,
   YContract,
   DefenderContract,
@@ -29,8 +28,10 @@ import {
   YCategory,
   DefenderCategory,
   DefenderAPIError,
-  YAutotask,
+  YAction,
   DefenderNotificationReference,
+  PlatformFortaMonitor,
+  PlatformBlockMonitor,
 } from '../types';
 import { sanitise } from './sanitise';
 import { BlockExplorerApiKeyClient, DeploymentConfigClient } from '@openzeppelin/platform-deploy-client';
@@ -46,7 +47,7 @@ export const getEquivalentResource = <Y, D>(
   currentResources: D[],
 ) => {
   if (resource) {
-    const [key, value] = Object.entries(resources ?? []).find(a => _.isEqual(a[1], resource))!;
+    const [key, value] = Object.entries(resources ?? []).find((a) => _.isEqual(a[1], resource))!;
     return currentResources.find((e: D) => (e as any).stackResourceId === getResourceID(getStackName(context), key));
   }
 };
@@ -81,7 +82,7 @@ export const isTemplateResource = <Y, D>(
   resourceType: ResourceType,
   resources: Y[],
 ): boolean => {
-  return !!Object.entries(resources).find(a =>
+  return !!Object.entries(resources).find((a) =>
     resourceType === 'Secrets'
       ? // if secret, just compare key
         Object.keys(a[1] as unknown as YSecret)[0] === (resource as unknown as string)
@@ -125,12 +126,13 @@ export const getTeamAPIkeysOrThrow = (context: Serverless): TeamKey => {
   return { apiKey: defenderConfig.key, apiSecret: defenderConfig.secret };
 };
 
-export const getSentinelClient = (key: TeamKey): SentinelClient => {
-  return new SentinelClient(key);
+export const getMonitorClient = (key: TeamKey): MonitorClient => {
+  return new MonitorClient(key);
 };
 
-export const getAutotaskClient = (key: TeamKey): AutotaskClient => {
-  return new AutotaskClient(key);
+export const getActionClient = (key: TeamKey): ActionClient => {
+  const platformClient = new Platform(key);
+  return platformClient.action;
 };
 
 export const getRelayClient = (key: TeamKey): RelayClient => {
@@ -217,7 +219,7 @@ export const constructNotificationCategory = (
     description: category.description,
     notificationIds: (category['notification-ids']
       ? category['notification-ids']
-          .map(notification => {
+          .map((notification) => {
             const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
               context,
               notification,
@@ -239,22 +241,22 @@ const isResource = <T>(item: T | undefined): item is T => {
   return !!item;
 };
 
-export const constructSentinel = (
+export const constructMonitor = (
   context: Serverless,
   stackResourceId: string,
-  sentinel: YSentinel,
+  monitor: YMonitor,
   notifications: DefenderNotification[],
-  autotasks: DefenderAutotask[],
+  actions: PlatformAction[],
   blockwatchers: DefenderBlockWatcher[],
   categories: DefenderCategory[],
-): DefenderBlockSentinel | DefenderFortaSentinel => {
-  const autotaskCondition =
-    sentinel['autotask-condition'] && autotasks.find(a => a.name === sentinel['autotask-condition']!.name);
-  const autotaskTrigger =
-    sentinel['autotask-trigger'] && autotasks.find(a => a.name === sentinel['autotask-trigger']!.name);
+): PlatformBlockMonitor | PlatformFortaMonitor => {
+  const actionCondition =
+    monitor['autotask-condition'] && actions.find((a) => a.name === monitor['autotask-condition']!.name);
+  const actionTrigger =
+    monitor['autotask-trigger'] && actions.find((a) => a.name === monitor['autotask-trigger']!.name);
 
-  const notificationChannels = sentinel['notify-config'].channels
-    .map(notification => {
+  const notificationChannels = monitor['notify-config'].channels
+    .map((notification) => {
       const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
         context,
         notification,
@@ -265,84 +267,84 @@ export const constructSentinel = (
     })
     .filter(isResource);
 
-  const sentinelCategory = sentinel['notify-config'].category;
-  const notificationCategoryId = sentinelCategory && categories.find(c => c.name === sentinelCategory.name)?.categoryId;
+  const monitorCategory = monitor['notify-config'].category;
+  const notificationCategoryId = monitorCategory && categories.find((c) => c.name === monitorCategory.name)?.categoryId;
 
-  const commonSentinel = {
-    type: sentinel.type,
-    name: sentinel.name,
-    network: sentinel.network,
-    addresses: sentinel.addresses,
-    abi: sentinel.abi && JSON.stringify(typeof sentinel.abi === 'string' ? JSON.parse(sentinel.abi) : sentinel.abi),
-    paused: sentinel.paused,
-    autotaskCondition: autotaskCondition && autotaskCondition.autotaskId,
-    autotaskTrigger: autotaskTrigger && autotaskTrigger.autotaskId,
-    alertThreshold: sentinel['alert-threshold'] && {
-      amount: sentinel['alert-threshold'].amount,
-      windowSeconds: sentinel['alert-threshold']['window-seconds'],
+  const commonMonitor = {
+    type: monitor.type,
+    name: monitor.name,
+    network: monitor.network,
+    addresses: monitor.addresses,
+    abi: monitor.abi && JSON.stringify(typeof monitor.abi === 'string' ? JSON.parse(monitor.abi) : monitor.abi),
+    paused: monitor.paused,
+    autotaskCondition: actionCondition && actionCondition.actionkId,
+    autotaskTrigger: actionTrigger && actionTrigger.actionkId,
+    alertThreshold: monitor['alert-threshold'] && {
+      amount: monitor['alert-threshold'].amount,
+      windowSeconds: monitor['alert-threshold']['window-seconds'],
     },
-    alertMessageBody: sentinel['notify-config'].message,
-    alertMessageSubject: sentinel['notify-config']['message-subject'],
-    alertTimeoutMs: sentinel['notify-config'].timeout,
+    alertMessageBody: monitor['notify-config'].message,
+    alertMessageSubject: monitor['notify-config']['message-subject'],
+    alertTimeoutMs: monitor['notify-config'].timeout,
     notificationChannels,
     notificationCategoryId: _.isEmpty(notificationChannels) ? notificationCategoryId : undefined,
-    riskCategory: sentinel['risk-category'],
+    riskCategory: monitor['risk-category'],
     stackResourceId: stackResourceId,
   };
 
-  if (sentinel.type === 'FORTA') {
-    const fortaSentinel: DefenderFortaSentinel = {
-      ...commonSentinel,
+  if (monitor.type === 'FORTA') {
+    const fortaMonitor: PlatformFortaMonitor = {
+      ...commonMonitor,
       type: 'FORTA',
-      privateFortaNodeId: sentinel['forta-node-id'],
-      agentIDs: sentinel['agent-ids'],
+      privateFortaNodeId: monitor['forta-node-id'],
+      agentIDs: monitor['agent-ids'],
       fortaConditions: {
-        alertIDs: sentinel.conditions && sentinel.conditions['alert-ids'],
-        minimumScannerCount: (sentinel.conditions && sentinel.conditions['min-scanner-count']) || 1, // default to 1
-        severity: sentinel.conditions?.severity,
+        alertIDs: monitor.conditions && monitor.conditions['alert-ids'],
+        minimumScannerCount: (monitor.conditions && monitor.conditions['min-scanner-count']) || 1, // default to 1
+        severity: monitor.conditions?.severity,
       },
-      fortaLastProcessedTime: sentinel['forta-last-processed-time'],
+      fortaLastProcessedTime: monitor['forta-last-processed-time'],
     };
-    return fortaSentinel;
+    return fortaMonitor;
   }
 
-  if (sentinel.type === 'BLOCK') {
-    const compatibleBlockWatcher = blockwatchers.find(b => b.confirmLevel === sentinel['confirm-level']);
+  if (monitor.type === 'BLOCK') {
+    const compatibleBlockWatcher = blockwatchers.find((b) => b.confirmLevel === monitor['confirm-level']);
     if (!compatibleBlockWatcher) {
       throw new Error(
-        `A blockwatcher with confirmation level (${sentinel['confirm-level']}) does not exist on ${sentinel.network}. Choose another confirmation level.`,
+        `A blockwatcher with confirmation level (${monitor['confirm-level']}) does not exist on ${monitor.network}. Choose another confirmation level.`,
       );
     }
-    const blockSentinel: DefenderBlockSentinel = {
-      ...commonSentinel,
+    const blockMonitor: PlatformBlockMonitor = {
+      ...commonMonitor,
       type: 'BLOCK',
-      network: sentinel.network,
-      addresses: sentinel.addresses,
+      network: monitor.network,
+      addresses: monitor.addresses,
       confirmLevel: compatibleBlockWatcher!.confirmLevel,
       eventConditions:
-        sentinel.conditions &&
-        sentinel.conditions.event &&
-        sentinel.conditions.event.map(c => {
+        monitor.conditions &&
+        monitor.conditions.event &&
+        monitor.conditions.event.map((c) => {
           return {
             eventSignature: c.signature,
             expression: c.expression,
           };
         }),
       functionConditions:
-        sentinel.conditions &&
-        sentinel.conditions.function &&
-        sentinel.conditions.function.map(c => {
+        monitor.conditions &&
+        monitor.conditions.function &&
+        monitor.conditions.function.map((c) => {
           return {
             functionSignature: c.signature,
             expression: c.expression,
           };
         }),
-      txCondition: sentinel.conditions && sentinel.conditions.transaction,
+      txCondition: monitor.conditions && monitor.conditions.transaction,
     };
-    return blockSentinel;
+    return blockMonitor;
   }
 
-  throw new Error('Incompatible sentinel type. Type must be either FORTA or BLOCK');
+  throw new Error('Incompatible monitor type. Type must be either FORTA or BLOCK');
 };
 
 export const validateAdditionalPermissionsOrThrow = async <T>(
@@ -353,23 +355,23 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
   if (!resources) return;
   const teamApiKey = getTeamAPIkeysOrThrow(context);
   switch (resourceType) {
-    case 'Sentinels':
-      // Check for access to Autotasks
-      // Enumerate all sentinels, and check if any sentinel has an autotask associated
-      const sentinelsWithAutotasks = (Object.values(resources) as unknown as YSentinel[]).filter(
-        r => !!r['autotask-condition'] || !!r['autotask-trigger'],
+    case 'Monitors':
+      // Check for access to Actions
+      // Enumerate all monitors, and check if any monitor has an action associated
+      const monitorssWithActions = (Object.values(resources) as unknown as YMonitor[]).filter(
+        (r) => !!r['autotask-condition'] || !!r['autotask-trigger'],
       );
-      // If there are sentinels with autotasks associated, then try to list autotasks
-      if (!_.isEmpty(sentinelsWithAutotasks)) {
+      // If there are monitors with actions associated, then try to list actions
+      if (!_.isEmpty(monitorssWithActions)) {
         try {
-          await getAutotaskClient(teamApiKey).list();
+          await getActionClient(teamApiKey).list();
           return;
         } catch (e) {
           // catch the error and verify it is an unauthorised access error
           if (isUnauthorisedError(e)) {
             // if this fails (due to permissions issue), we re-throw the error with more context
             throw new Error(
-              'At least one Sentinel is associated with an Autotask. Additional API key permissions are required to access Autotasks. Alternatively, remove the association with the autotask to complete this action.',
+              'At least one Monitor is associated with an Action. Additional API key permissions are required to access Actions. Alternatively, remove the association with the action to complete this action.',
             );
           }
           // also throw with original error if its not a permission issue
@@ -378,10 +380,10 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
       }
     case 'Autotasks':
       // Check for access to Relayers
-      // Enumerate all autotasks, and check if any autotask has a relayer associated
-      const autotasksWithRelayers = (Object.values(resources) as unknown as YAutotask[]).filter(r => !!r.relayer);
-      // If there are autotasks with relayers associated, then try to list relayers
-      if (!_.isEmpty(autotasksWithRelayers)) {
+      // Enumerate all actions, and check if any action has a relayer associated
+      const actionsWithRelayers = (Object.values(resources) as unknown as YAction[]).filter((r) => !!r.relayer);
+      // If there are actions with relayers associated, then try to list relayers
+      if (!_.isEmpty(actionsWithRelayers)) {
         try {
           await getRelayClient(teamApiKey).list();
           return;
@@ -390,7 +392,7 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
           if (isUnauthorisedError(e)) {
             // if this fails (due to permissions issue), we re-throw the error with more context
             throw new Error(
-              'At least one Autotask is associated with a Relayer. Additional API key permissions are required to access Relayers. Alternatively, remove the association with the relayer to complete this action.',
+              'At least one Action is associated with a Relayer. Additional API key permissions are required to access Relayers. Alternatively, remove the association with the relayer to complete this action.',
             );
           }
           // also throw with original error if its not a permission issue

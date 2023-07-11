@@ -4,10 +4,10 @@ import { Logging } from 'serverless/classes/Plugin';
 
 import Logger from '../utils/logger';
 
-import { tailLogsFor } from '@openzeppelin/defender-autotask-client/lib/utils';
+// import { tailLogsFor } from '@openzeppelin/defender-autotask-client/lib/utils';
 
-import { getAutotaskClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
-import { DefenderAutotask, TeamKey } from '../types';
+import { getActionClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
+import { PlatformAction, TeamKey } from '../types';
 
 export default class DefenderLogs {
   serverless: Serverless;
@@ -38,13 +38,14 @@ export default class DefenderLogs {
     try {
       this.log.notice('========================================================');
       this.log.progress('logs', `Running Defender Logs on stack function: ${this.options.function}`);
-      const client = getAutotaskClient(this.teamKey!);
+      const client = getActionClient(this.teamKey!);
       const list = (await client.list()).items;
 
-      const defenderAutotask = getEquivalentResourceByKey<DefenderAutotask>(this.options.function!, list);
+      const defenderAutotask = getEquivalentResourceByKey<PlatformAction>(this.options.function!, list);
 
-      if (defenderAutotask) await tailLogsFor(client, defenderAutotask!.autotaskId);
-      else this.log.error(`No autotask with stackResourceId: ${this.options.function} found.`);
+      // TODO: Update with Platform equivalent once I find it
+      // if (defenderAutotask) await tailLogsFor(client, defenderAutotask!.autotaskId);
+      // else this.log.error(`No autotask with stackResourceId: ${this.options.function} found.`);
       this.log.notice('========================================================');
     } catch (e) {
       this.log.tryLogDefenderError(e);

@@ -11,7 +11,7 @@
 | [policies](#policies)                               | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-policies.md "#/properties/Resources/properties/policies")                               |
 | [contracts](#contracts)                             | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-contracts.md "#/properties/Resources/properties/contracts")                             |
 | [secrets](#secrets)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-autotasksecrets.md "#/properties/Resources/properties/secrets")                         |
-| [sentinels](#sentinels)                             | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-sentinels.md "#/properties/Resources/properties/sentinels")                             |
+| [monitors](#monitors)                               | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-monitors.md "#/properties/Resources/properties/monitors")                               |
 | [deployment-configs](#deployment-configs)           | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-deployment-configs.md "#/properties/Resources/properties/deployment-configs")           |
 | [block-explorer-api-keys](#block-explorer-api-keys) | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-block-explorer-api-keys.md "#/properties/Resources/properties/block-explorer-api-keys") |
 
@@ -105,23 +105,23 @@
 
 `object` ([AutotaskSecrets](resources-properties-resources-properties-autotasksecrets.md))
 
-## sentinels
+## monitors
 
 
 
-`sentinels`
+`monitors`
 
 *   is optional
 
-*   Type: `object` ([Sentinels](resources-properties-resources-properties-sentinels.md))
+*   Type: `object` ([Monitors](resources-properties-resources-properties-monitors.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-resources-properties-sentinels.md "#/properties/Resources/properties/sentinels")
+*   defined in: [Resources](resources-properties-resources-properties-monitors.md "#/properties/Resources/properties/monitors")
 
-### sentinels Type
+### monitors Type
 
-`object` ([Sentinels](resources-properties-resources-properties-sentinels.md))
+`object` ([Monitors](resources-properties-resources-properties-monitors.md))
 
 ## deployment-configs
 

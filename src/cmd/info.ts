@@ -7,31 +7,31 @@ import Logger from '../utils/logger';
 
 import {
   getAdminClient,
-  getAutotaskClient,
+  getActionClient,
   getConsolidatedSecrets,
   getRelayClient,
-  getSentinelClient,
+  getMonitorClient,
   getStackName,
   getTeamAPIkeysOrThrow,
   isTemplateResource,
 } from '../utils';
 import {
-  DefenderAutotask,
+  PlatformAction,
   DefenderCategory,
   DefenderContract,
   DefenderNotification,
   DefenderRelayer,
   DefenderRelayerApiKey,
-  DefenderSentinel,
+  PlatformMonitor,
   ResourceType,
   TeamKey,
-  YAutotask,
+  YAction,
   YCategory,
   YContract,
   YNotification,
   YRelayer,
   YSecret,
-  YSentinel,
+  YMonitor,
 } from '../types';
 
 export default class DefenderInfo {
@@ -70,12 +70,12 @@ export default class DefenderInfo {
     try {
       this.log.progress('component-info', `Retrieving ${resourceType}`);
       this.log.notice(`${resourceType}`);
-      const existing = (await retrieveExistingResources()).filter(e =>
+      const existing = (await retrieveExistingResources()).filter((e) =>
         isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
       );
 
       await Promise.all(
-        existing.map(async e => {
+        existing.map(async (e) => {
           this.log.notice(`${format(e)}`, 1);
           let keys: DefenderRelayerApiKey[] = [];
           // Also print relayer API keys
@@ -83,7 +83,7 @@ export default class DefenderInfo {
             const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys(
               (e as unknown as DefenderRelayer).relayerId,
             );
-            listRelayerAPIKeys.map(k => {
+            listRelayerAPIKeys.map((k) => {
               this.log.notice(`${k.stackResourceId}: ${k.keyId}`, 2);
             });
             keys = listRelayerAPIKeys;
@@ -103,41 +103,41 @@ export default class DefenderInfo {
     this.log.progress('info', `Running Defender Info on stack: ${stackName}`);
     const stdOut = {
       stack: stackName,
-      sentinels: [],
-      autotasks: [],
+      monitors: [],
+      actions: [],
       contracts: [],
       relayers: [],
       notifications: [],
       categories: [],
       secrets: [],
     };
-    // Sentinels
-    const listSentinels = () =>
-      getSentinelClient(this.teamKey!)
+    // Monitors
+    const listMonitors = () =>
+      getMonitorClient(this.teamKey!)
         .list()
-        .then(i => i.items);
+        .then((i) => i.items);
 
-    await this.wrapper<YSentinel, DefenderSentinel>(
+    await this.wrapper<YMonitor, PlatformMonitor>(
       this.serverless,
-      'Sentinels',
-      this.serverless.service.resources?.Resources?.sentinels,
-      listSentinels,
-      (resource: DefenderSentinel) => `${resource.stackResourceId}: ${resource.subscriberId}`,
-      stdOut.sentinels,
+      'Monitors',
+      this.serverless.service.resources?.Resources?.monitors,
+      listMonitors,
+      (resource: PlatformMonitor) => `${resource.stackResourceId}: ${resource.subscriberId}`,
+      stdOut.monitors,
     );
 
-    // Autotasks
-    const listAutotasks = () =>
-      getAutotaskClient(this.teamKey!)
+    // Actions
+    const listActions = () =>
+      getActionClient(this.teamKey!)
         .list()
-        .then(r => r.items);
-    await this.wrapper<YAutotask, DefenderAutotask>(
+        .then((r) => r.items);
+    await this.wrapper<YAction, PlatformAction>(
       this.serverless,
       'Autotasks',
-      this.serverless.service.functions as unknown as YAutotask[],
-      listAutotasks,
-      (resource: DefenderAutotask) => `${resource.stackResourceId}: ${resource.autotaskId}`,
-      stdOut.autotasks,
+      this.serverless.service.functions as unknown as YAction[],
+      listActions,
+      (resource: PlatformAction) => `${resource.stackResourceId}: ${resource.actionkId}`,
+      stdOut.actions,
     );
 
     // Contracts
@@ -155,7 +155,7 @@ export default class DefenderInfo {
     const listRelayers = () =>
       getRelayClient(this.teamKey!)
         .list()
-        .then(r => r.items);
+        .then((r) => r.items);
     await this.wrapper<YRelayer, DefenderRelayer>(
       this.serverless,
       'Relayers',
@@ -166,7 +166,7 @@ export default class DefenderInfo {
     );
 
     // Notifications
-    const listNotifications = () => getSentinelClient(this.teamKey!).listNotificationChannels();
+    const listNotifications = () => getMonitorClient(this.teamKey!).listNotificationChannels();
     await this.wrapper<YNotification, DefenderNotification>(
       this.serverless,
       'Notifications',
@@ -177,7 +177,7 @@ export default class DefenderInfo {
     );
 
     // Categories
-    const listNotificationCategories = () => getSentinelClient(this.teamKey!).listNotificationCategories();
+    const listNotificationCategories = () => getMonitorClient(this.teamKey!).listNotificationCategories();
     await this.wrapper<YCategory, DefenderCategory>(
       this.serverless,
       'Categories',
@@ -189,9 +189,9 @@ export default class DefenderInfo {
 
     // Secrets
     const listSecrets = () =>
-      getAutotaskClient(this.teamKey!)
+      getActionClient(this.teamKey!)
         .listSecrets()
-        .then(r => r.secretNames ?? []);
+        .then((r) => r.secretNames ?? []);
 
     const allSecrets = getConsolidatedSecrets(this.serverless);
 
