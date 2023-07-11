@@ -1,8 +1,9 @@
-import { Network } from '@openzeppelin/defender-base-client';
+import { Network } from '@openzeppelin/platform-sdk-base-client';
 import { Contract } from '@openzeppelin/defender-admin-client';
 import { RelayerGetResponse, RelayerApiKey } from '@openzeppelin/platform-sdk-relay-client/lib/models';
 import { JsonFragment } from '@ethersproject/abi';
-import { DefenderApiResponseError } from '@openzeppelin/defender-base-client/lib/api/api-error';
+import { PlatformApiResponseError } from '@openzeppelin/platform-sdk-base-client/lib/api/api-error';
+
 import {
   SaveNotificationRequest,
   NotificationSummary,
@@ -37,29 +38,29 @@ import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from '@openzepp
 import { OpsgenieConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/opsgenie';
 import { PagerDutyConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/pager-duty';
 
-export type PlatformAPIError = DefenderApiResponseError;
+export type PlatformAPIError = PlatformApiResponseError;
 export type PlatformRelayerApiKey = RelayerApiKey;
 export type PlatformSecretsMap = SecretsMap;
 export type DefenderContract = Contract;
 export type PlatformRelayer = RelayerGetResponse;
 export type PlatformAction = Action;
-export type DefenderBlockWatcher = BlockWatcher;
-export type DefenderNotification = NotificationSummary;
-export type DefenderCategory = NotificationCategory;
-export type DefenderNotificationReference = NotificationReference;
+export type PlatformBlockWatcher = BlockWatcher;
+export type PlatformNotification = NotificationSummary;
+export type PlatformCategory = NotificationCategory;
+export type PlatformNotificationReference = NotificationReference;
 export type PlatformMonitor = CreateMonitorResponse;
 export type PlatformBlockMonitorResponse = CreateBlockSubscriberResponse;
 export type PlatformFortaMonitorResponse = CreateFortaSubscriberResponse;
 export type PlatformBlockMonitor = ExternalCreateBlockSubscriberRequest;
 export type PlatformFortaMonitor = ExternalCreateFortaSubscriberRequest;
-export type DefenderSlackConfig = SlackConfig;
-export type DefenderDatadogConfig = DatadogConfig;
-export type DefenderDiscordConfig = DiscordConfig;
-export type DefenderTelegramConfig = TelegramBotConfig;
-export type DefenderEmailConfig = EmailConfig;
-export type DefenderNetwork = Network;
-export type DefenderDeploymentConfig = DeploymentConfigResponse;
-export type DefenderBlockExplorerApiKey = BlockExplorerApiKeyResponse;
+export type PlatformSlackConfig = SlackConfig;
+export type PlatformDatadogConfig = DatadogConfig;
+export type PlatformDiscordConfig = DiscordConfig;
+export type PlatformTelegramConfig = TelegramBotConfig;
+export type PlatformEmailConfig = EmailConfig;
+export type PlatformNetwork = Network;
+export type PlatformDeploymentConfig = DeploymentConfigResponse;
+export type PlatformBlockExplorerApiKey = BlockExplorerApiKeyResponse;
 export type PlatformWebhookTrigger = WebhookTrigger;
 export type PlatformScheduleTrigger = ScheduleTrigger;
 export type PlatformMonitorTrigger = SentinelTrigger;
@@ -237,13 +238,13 @@ export type DeployOutput<T> = { removed: T[]; created: T[]; updated: T[] };
 export type ListPlatformResources = {
   monitors: PlatformMonitor[];
   actions: PlatformAction[];
-  notifications: DefenderNotification[];
-  categories: DefenderCategory[];
+  notifications: PlatformNotification[];
+  categories: PlatformCategory[];
   contracts: DefenderContract[];
   relayerApiKeys: PlatformRelayerApiKey[];
   secrets: string[];
-  deploymentConfigs: DefenderDeploymentConfig[];
-  blockExplorerApiKeys: DefenderBlockExplorerApiKey[];
+  deploymentConfigs: PlatformDeploymentConfig[];
+  blockExplorerApiKeys: PlatformBlockExplorerApiKey[];
 };
 
 export type YDeploymentConfig = {

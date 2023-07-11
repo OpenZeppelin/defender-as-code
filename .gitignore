@@ -11,6 +11,6 @@ tsconfig.tsbuildinfo
 .vscode
 
 # example deployments
-examples/defender-test-project/.defender
-examples/defender-test-project/.platform
-examples/defender-test-project/.serverless
+examples/platform-test-project/.defender
+examples/platform-test-project/.platform
+examples/platform-test-project/.serverless

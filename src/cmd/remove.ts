@@ -18,9 +18,9 @@ import {
 } from '../utils';
 import {
   PlatformAction,
-  DefenderCategory,
+  PlatformCategory,
   DefenderContract,
-  DefenderNotification,
+  PlatformNotification,
   PlatformRelayer,
   PlatformRelayerApiKey,
   PlatformMonitor,
@@ -118,8 +118,8 @@ export default class PlatformRemove {
         relayerId: string;
         relayerApiKeys: PlatformRelayerApiKey[];
       }[];
-      notifications: DefenderNotification[];
-      categories: DefenderCategory[];
+      notifications: PlatformNotification[];
+      categories: PlatformCategory[];
       secrets: string[];
     } = {
       stack: stackName,
@@ -232,12 +232,12 @@ export default class PlatformRemove {
 
     // Notifications
     const listNotifications = () => monitorClient.listNotificationChannels();
-    await this.wrapper<YNotification, DefenderNotification>(
+    await this.wrapper<YNotification, PlatformNotification>(
       this.serverless,
       'Notifications',
       this.serverless.service.resources?.Resources?.notifications,
       listNotifications,
-      async (notifications: DefenderNotification[]) => {
+      async (notifications: PlatformNotification[]) => {
         await Promise.all(
           notifications.map(async (e) => {
             this.log.progress(
@@ -256,12 +256,12 @@ export default class PlatformRemove {
 
     // Temporarily Disabled
     // const listNotificationCategories = () => monitorClient.listNotificationCategories();
-    // await this.wrapper<YCategory, DefenderCategory>(
+    // await this.wrapper<YCategory, PlatformCategory>(
     //   this.serverless,
     //   'Categories',
     //   this.serverless.service.resources?.Resources?.categories,
     //   listNotificationCategories,
-    //   async (categories: DefenderCategory[]) => {
+    //   async (categories: PlatformCategory[]) => {
     //     await Promise.all(
     //       categories.map(async (e) => {
     //         this.log.progress(

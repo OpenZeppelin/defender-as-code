@@ -19,17 +19,17 @@ import {
   YOpsgenieConfig,
   YPagerdutyConfig,
   PlatformAction,
-  DefenderNotification,
+  PlatformNotification,
   TeamKey,
   YContract,
   DefenderContract,
   ResourceType,
-  DefenderBlockWatcher,
+  PlatformBlockWatcher,
   YCategory,
-  DefenderCategory,
+  PlatformCategory,
   PlatformAPIError,
   YAction,
-  DefenderNotificationReference,
+  PlatformNotificationReference,
   PlatformFortaMonitor,
   PlatformBlockMonitor,
 } from '../types';
@@ -212,7 +212,7 @@ export const constructNotificationCategory = (
   context: Serverless,
   category: YCategory,
   stackResourceId: string,
-  notifications: DefenderNotification[],
+  notifications: PlatformNotification[],
 ) => {
   return {
     name: category.name,
@@ -220,7 +220,7 @@ export const constructNotificationCategory = (
     notificationIds: (category['notification-ids']
       ? category['notification-ids']
           .map((notification) => {
-            const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
+            const maybeNotification = getEquivalentResource<YNotification, PlatformNotification>(
               context,
               notification,
               context.service.resources?.Resources?.notifications,
@@ -230,10 +230,10 @@ export const constructNotificationCategory = (
               return {
                 notificationId: maybeNotification.notificationId,
                 type: maybeNotification.type,
-              } as DefenderNotificationReference;
+              } as PlatformNotificationReference;
           })
           .filter(isResource)
-      : []) as [] | [DefenderNotificationReference] | [DefenderNotificationReference, DefenderNotificationReference],
+      : []) as [] | [PlatformNotificationReference] | [PlatformNotificationReference, PlatformNotificationReference],
     stackResourceId,
   };
 };
@@ -245,10 +245,10 @@ export const constructMonitor = (
   context: Serverless,
   stackResourceId: string,
   monitor: YMonitor,
-  notifications: DefenderNotification[],
+  notifications: PlatformNotification[],
   actions: PlatformAction[],
-  blockwatchers: DefenderBlockWatcher[],
-  categories: DefenderCategory[],
+  blockwatchers: PlatformBlockWatcher[],
+  categories: PlatformCategory[],
 ): PlatformBlockMonitor | PlatformFortaMonitor => {
   const actionCondition =
     monitor['action-condition'] && actions.find((a) => a.name === monitor['action-condition']!.name);
@@ -256,7 +256,7 @@ export const constructMonitor = (
 
   const notificationChannels = monitor['notify-config'].channels
     .map((notification) => {
-      const maybeNotification = getEquivalentResource<YNotification, DefenderNotification>(
+      const maybeNotification = getEquivalentResource<YNotification, PlatformNotification>(
         context,
         notification,
         context.service.resources?.Resources?.notifications,
