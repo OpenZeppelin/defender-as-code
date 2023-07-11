@@ -10,7 +10,7 @@ provider:
   # This will delete Defender resources (with the exception of Relayers) not found in this template upon deployment.
   ssot: false
 
-defender:
+platform:
   key: '${env:TEAM_API_KEY}'
   secret: '${env:TEAM_API_SECRET}'
 
@@ -42,6 +42,16 @@ resources:
         policy: ${self:resources.Resources.policies.policy-1}
         api-keys:
           - key1
+
+    contracts:
+      contract-1:
+        name: 'Demo-Flash'
+        address: '0xA91382E82fB676d4c935E601305E5253b3829dCD'
+        network: 'mainnet'
+        # optional
+        abi: ${file(./abis/demoflash.json.abi)}
+        # optional
+        nat-spec: null
 
 plugins:
   - '@openzeppelin/defender-serverless'
