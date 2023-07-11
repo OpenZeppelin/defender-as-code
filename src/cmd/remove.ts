@@ -34,7 +34,7 @@ import {
   YMonitor,
 } from '../types';
 
-export default class DefenderRemove {
+export default class PlatformRemove {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
@@ -72,7 +72,7 @@ export default class DefenderRemove {
       const existing = (await retrieveExistingResources()).filter((e) =>
         isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
       );
-      this.log.progress('component-remove', `Removing ${resourceType} from Defender`);
+      this.log.progress('component-remove', `Removing ${resourceType} from Platform`);
       await onRemove(existing);
       output.push(...existing);
     } catch (e) {
@@ -207,7 +207,7 @@ export default class DefenderRemove {
           this.serverless.service.resources?.Resources?.relayers ?? [],
         ),
       );
-      this.log.error('Deleting Relayers is currently only possible via the Defender UI.');
+      this.log.error('Deleting Relayers is currently only possible via the Platform UI.');
       this.log.progress('component-info', `Retrieving Relayer API Keys`);
       await Promise.all(
         existingRelayers.map(async (relayer) => {

@@ -34,7 +34,7 @@ import {
   YMonitor,
 } from '../types';
 
-export default class DefenderInfo {
+export default class PlatformInfo {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;

@@ -37,7 +37,7 @@ import { sanitise } from './sanitise';
 import { BlockExplorerApiKeyClient, DeploymentConfigClient } from '@openzeppelin/platform-deploy-client';
 
 /**
- * @dev this function retrieves the Defender equivalent object of the provided template resource
+ * @dev this function retrieves the Platform equivalent object of the provided template resource
  * This will not work for resources that do not have the stackResourceId property, ie. secrets and contracts
  */
 export const getEquivalentResource = <Y, D>(
@@ -406,8 +406,8 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
 
 export const isUnauthorisedError = (e: any): boolean => {
   try {
-    const defenderErrorStatus = (e as PlatformAPIError).response.status as number;
-    return defenderErrorStatus === 403;
+    const platformErrorStatus = (e as PlatformAPIError).response.status as number;
+    return platformErrorStatus === 403;
   } catch {
     // if it is not a PlatformApiError,
     // the error is most likely caused due to something else

@@ -1,19 +1,19 @@
-service: defender-serverless-test-project
+service: platform-serverless-test-project
 configValidationMode: error
 frameworkVersion: '3'
 
 provider:
-  name: defender
+  name: platform
   stage: ${opt:stage, 'dev'}
   stackName: 'mystack'
   # SSOT: use this template as a single source of truth.
-  # This will delete Defender resources (with the exception of Relayers) not found in this template upon deployment.
+  # This will delete Platform resources (with the exception of Relayers) not found in this template upon deployment.
   ssot: false
 
 custom:
   config: ${file(secrets.${self:provider.stage}.yml)}
 
-defender:
+platform:
   key: ${self:custom.config.keys.api}
   secret: ${self:custom.config.keys.secret}
 
@@ -202,4 +202,4 @@ resources:
         forta-last-processed-time: null
 
 plugins:
-  - '@openzeppelin/defender-serverless'
+  - '@openzeppelin/platform-as-code'

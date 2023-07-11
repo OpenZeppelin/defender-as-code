@@ -1,7 +1,7 @@
 {
-  "name": "defender-test-project",
+  "name": "platform-test-project",
   "version": "1.0.0",
-  "description": "Test project for the defender-serverless plugin",
+  "description": "A test project for the platform-as-code Serverless plugin",
   "main": "handler.js",
   "engines": {
     "node": ">14.16"
@@ -11,17 +11,13 @@
   },
   "contributors": [
     {
-      "name": "Santiago Palladino",
-      "email": "santiago@openzeppelin.com"
-    },
-    {
       "name": "Nami Shah",
       "email": "nami@openzeppelin.com"
     }
   ],
   "license": "MIT",
   "devDependencies": {
-    "@openzeppelin/defender-serverless": "^1.2.0",
+    "@openzeppelin/platform-as-code": "../../lib",
     "serverless": "^3.20.0"
   }
 }

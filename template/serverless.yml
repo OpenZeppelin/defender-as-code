@@ -1,16 +1,16 @@
-service: defender-serverless-template
+service: platform-as-code-template
 configValidationMode: error
 frameworkVersion: '3'
 
 provider:
-  name: defender
+  name: platform
   stage: ${opt:stage, 'dev'}
   stackName: 'mystack'
   # SSOT: use this template as a single source of truth.
-  # This will delete Defender resources (with the exception of Relayers) not found in this template upon deployment.
+  # This will delete Platform resources (with the exception of Relayers) not found in this template upon deployment.
   ssot: false
 
-defender:
+platform:
   key: '${env:TEAM_API_KEY}'
   secret: '${env:TEAM_API_SECRET}'
 
@@ -44,4 +44,4 @@ resources:
           - key1
 
 plugins:
-  - '@openzeppelin/defender-serverless'
+  - '@openzeppelin/platform-as-code'

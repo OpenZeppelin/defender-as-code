@@ -1,6 +1,6 @@
-# Defender Serverless Plugin
+# Platform as Code Serverless Plugin
 
-Defender Serverless is a Serverless Framework plugin for automated resource management on Defender.
+Platform as Code (PaC) is a Serverless Framework plugin for automated resource management on Platform.
 
 :warning: **This plugin is still under development. Bugs are expected. Use with care.**
 
@@ -13,31 +13,31 @@ Serverless Framework: https://www.serverless.com/framework/docs/getting-started/
 You can initialise your Serverless project directly using our pre-configured template:
 
 ```
-sls install --url https://github.com/OpenZeppelin/defender-serverless/tree/main/template -n my-service
+sls install --url https://github.com/OpenZeppelin/platform-as-code/tree/main/template -n my-service
 ```
 
 Note: for the command above to work correctly you need access to this repo.
 
 Alternatively, you can install it directly into an existing project with:
 
-`yarn add @openzeppelin/defender-serverless`
+`yarn add @openzeppelin/platform-as-code`
 
 ## Setup
 
 This plugin allows you to define Actions, Monitors, Notifications, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an action, a relayer, a policy and a single relayer API key defined:
 
 ```yaml
-service: defender-serverless-template
+service: platform-serverless-template
 configValidationMode: error
 frameworkVersion: '3'
 
 provider:
-  name: defender
+  name: platform
   stage: ${opt:stage, 'dev'}
   stackName: 'mystack'
   ssot: false
 
-defender:
+platform:
   key: '${env:TEAM_API_KEY}'
   secret: '${env:TEAM_API_SECRET}'
 
@@ -70,21 +70,25 @@ resources:
           - key1
 
 plugins:
-  - defender-serverless
+  - '@openzeppelin/platform-as-code'
 ```
 
-This requires setting the `key` and `secret` under the `defender` property of the YAML file. We recommend using environment variables or a secure (gitignored) configuration file to retrieve these values. Modify the `serverless.yml` accordingly.
+This requires setting the `key` and `secret` under the `platform` property of the YAML file. We recommend using environment variables or a secure (gitignored) configuration file to retrieve these values. Modify the `serverless.yml` accordingly.
 
-Ensure the Defender Team API Keys are setup with all appropriate API capabilities.
+Ensure the Platform Team API Keys are setup with all appropriate API capabilities.
 
-The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same Defender team.
+The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same Platform team.
 
 ### SSOT mode
 
-Under the `provider` property in the `serverless.yml` file, you can optionally add a `ssot` boolean. SSOT or Single Source of Truth, ensures that the state of your stack in Defender is perfectly in sync with the `serverless.yml` template.
-This means that all Defender resources, that are not defined in your current template file, are removed from Defender, with the exception of Relayers, upon deployment. If SSOT is not defined in the template, it will default to `false`.
+Under the `provider` property in the `serverless.yml` file, you can optionally add a `ssot` boolean. SSOT or Single Source of Truth, ensures that the state of your stack in Platform is perfectly in sync with the `serverless.yml` template.
+This means that all Platform resources, that are not defined in your current template file, are removed from Platform, with the exception of Relayers, upon deployment. If SSOT is not defined in the template, it will default to `false`.
 
 Any resource removed from the `serverless.yml` file does _not_ get automatically deleted in order to prevent inadvertent resource deletion. For this behaviour to be anticipated, SSOT mode must be enabled.
+
+### Block Explorer Api Keys
+
+Exported serverless configurations with Block Explorer Api Keys will not contain the `key` field but instead a `key-hash` field which is a keccak256 hash of the key. This must be replaced with the actual `key` field (and `key-hash` removed) before deploying
 
 ### Secrets (Action)
 
@@ -105,20 +109,20 @@ secrets:
 
 We provide auto-generated documentation based on the JSON schemas:
 
-- [Defender Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/defender.md)
-- [Provider Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/provider.md)
-- [Function (Action) Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/function.md)
-- [Resources Property](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs/resources.md)
+- [Platform Property](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/docs/platform.md)
+- [Provider Property](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/docs/provider.md)
+- [Function (Action) Property](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/docs/function.md)
+- [Resources Property](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/docs/resources.md)
 
-More information on types can be found [here](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/index.ts). Specifically, the types preceded with `Y` (e.g. YRelayer). For the schemas, you can check out the [docs-schema](https://github.com/OpenZeppelin/defender-serverless/blob/main/src/types/docs-schemas) folder.
+More information on types can be found [here](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/index.ts). Specifically, the types preceded with `Y` (e.g. YRelayer). For the schemas, you can check out the [docs-schema](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/docs-schemas) folder.
 
-Additionally, an [example project](https://github.com/OpenZeppelin/defender-serverless/blob/main/examples/defender-test-project/serverless.yml) is available which provides majority of properties that can be defined in the `serverless.yml` file.
+Additionally, an [example project](https://github.com/OpenZeppelin/platform-as-code/blob/main/examples/platform-test-project/serverless.yml) is available which provides majority of properties that can be defined in the `serverless.yml` file.
 
 ## Commands
 
 ### Deploy
 
-You can use `sls deploy` to deploy your current stack to Defender.
+You can use `sls deploy` to deploy your current stack to Platform.
 
 The deploy takes in an optional `--stage` flag, which is defaulted to `dev` when installed from the template above.
 
@@ -130,13 +134,13 @@ This command will append a log entry in the `.platform` folder of the current wo
 
 ### Info
 
-You can use `sls info` to retrieve information on every resource defined in the `serverless.yml` file, including unique identifiers, and properties unique to each Defender component.
+You can use `sls info` to retrieve information on every resource defined in the `serverless.yml` file, including unique identifiers, and properties unique to each Platform component.
 
 ### Remove
 
-You can use `sls remove` to remove all defender resources defined in the `serverless.yml` file.
+You can use `sls remove` to remove all Platform resources defined in the `serverless.yml` file.
 
-> To avoid potential loss of funds, Relayers can only be deleted from the Defender UI directly.
+> To avoid potential loss of funds, Relayers can only be deleted from the Platform UI directly.
 
 ### Logs
 
@@ -152,6 +156,14 @@ More information can be found on our documentation page [here](https://docs.open
 
 ## Caveats
 
+Note that when setting up the notification configuration for a monitor, the `channels` property will always be prioritised over `category`. A notification category can only be associated to a monitor with no linked notification channels. This means that the `channels` property should be assigned the value `[]` in order to prioritise the `category` property.
+
+```yaml
+notify-config:
+  channels: [] # assign channels as empty list if you wish to use a category
+  category: ${self:resources.Resources.categories.medium-severity} # optional
+```
+
 Errors thrown during the `deploy` process, will not revert any prior changes. Common errors are:
 
 - Not having set the API key and secret
@@ -159,3 +171,16 @@ Errors thrown during the `deploy` process, will not revert any prior changes. Co
 - Validation error of the `serverless.yml` file (see [Types and Schema validation](#Types-and-Schema-validation))
 
 Usually, fixing the error and retrying the deploy should suffice as any existing resources will fall within the `update` clause of the deployment. However, if unsure, you can always call `sls remove` to remove the entire stack, and retry.
+
+## Publish a new release
+
+```bash
+npm login
+git checkout main
+git pull origin main
+yarn publish --no-git-tag-version
+# enter new version at prompt
+git add package.json
+git commit -m 'v{version here}'
+git push origin main
+```

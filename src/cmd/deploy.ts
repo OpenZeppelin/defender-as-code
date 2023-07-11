@@ -61,7 +61,7 @@ import {
 } from '../types';
 import keccak256 from 'keccak256';
 
-export default class DefenderDeploy {
+export default class PlatformDeploy {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
@@ -1182,11 +1182,11 @@ export default class DefenderDeploy {
       // only remove if template is considered single source of truth
       if (isSSOT(context) && onRemove) {
         if (ssotDifference.length > 0) {
-          this.log.info(`Unused resources found on Defender:`);
+          this.log.info(`Unused resources found on Platform:`);
           this.log.info(JSON.stringify(ssotDifference, null, 2));
-          this.log.progress('component-deploy-extra', `Removing resources from Defender`);
+          this.log.progress('component-deploy-extra', `Removing resources from Platform`);
           await onRemove(ssotDifference);
-          this.log.success(`Removed resources from Defender`);
+          this.log.success(`Removed resources from Platform`);
           output.removed.push(...ssotDifference);
         }
       }

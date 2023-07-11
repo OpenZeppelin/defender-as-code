@@ -7,7 +7,7 @@ import Logger from '../utils/logger';
 import { getActionClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
 import { PlatformAction, TeamKey } from '../types';
 
-export default class DefenderInvoke {
+export default class PlatformInvoke {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
