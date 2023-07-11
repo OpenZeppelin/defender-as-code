@@ -1,5 +1,5 @@
 import { Network } from '@openzeppelin/defender-base-client';
-import { Contract } from '@openzeppelin/defender-admin-client';
+import { Contract } from '@openzeppelin/platform-sdk-proposal-client/lib/models/contract';
 import { RelayerGetResponse, RelayerApiKey } from '@openzeppelin/platform-sdk-relay-client/lib/models';
 import { JsonFragment } from '@ethersproject/abi';
 import { DefenderApiResponseError } from '@openzeppelin/defender-base-client/lib/api/api-error';

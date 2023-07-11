@@ -9,7 +9,7 @@ import Logger from '../utils/logger';
 import {
   getMonitorClient,
   getActionClient,
-  getAdminClient,
+  getProposalClient,
   getRelayClient,
   constructNotification,
   getTeamAPIkeysOrThrow,
@@ -101,7 +101,7 @@ export default class PlatformDeploy {
     };
     // Contracts
     const contracts: YContract[] = this.serverless.service.resources?.Resources?.contracts ?? [];
-    const adminClient = getAdminClient(this.teamKey!);
+    const adminClient = getProposalClient(this.teamKey!);
     const dContracts = await adminClient.listContracts();
     const contractDifference = _.differenceWith(
       dContracts,
@@ -336,7 +336,7 @@ export default class PlatformDeploy {
 
   private async deployContracts(output: DeployOutput<DefenderContract>) {
     const contracts: YContract[] = this.serverless.service.resources?.Resources?.contracts ?? [];
-    const client = getAdminClient(this.teamKey!);
+    const client = getProposalClient(this.teamKey!);
     const retrieveExisting = () => client.listContracts();
 
     await this.wrapper<YContract, DefenderContract>(

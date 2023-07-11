@@ -1,11 +1,10 @@
 import Serverless from 'serverless';
 
 import _ from 'lodash';
-import { Platform } from '@openzeppelin/platform-sdk';
 import { ActionClient } from '@openzeppelin/platform-sdk-action-client';
 import { MonitorClient } from '@openzeppelin/platform-sdk-monitor-client';
 import { RelayClient } from '@openzeppelin/platform-sdk-relay-client';
-import { AdminClient } from '@openzeppelin/defender-admin-client';
+import { ProposalClient } from '@openzeppelin/platform-sdk-proposal-client';
 
 import {
   YSecret,
@@ -131,16 +130,15 @@ export const getMonitorClient = (key: TeamKey): MonitorClient => {
 };
 
 export const getActionClient = (key: TeamKey): ActionClient => {
-  const platformClient = new Platform(key);
-  return platformClient.action;
+  return new ActionClient(key);
 };
 
 export const getRelayClient = (key: TeamKey): RelayClient => {
   return new RelayClient(key);
 };
 
-export const getAdminClient = (key: TeamKey): AdminClient => {
-  return new AdminClient(key);
+export const getProposalClient = (key: TeamKey): ProposalClient => {
+  return new ProposalClient(key);
 };
 
 export const getDeploymentConfigClient = (key: TeamKey): DeploymentConfigClient => {

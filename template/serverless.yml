@@ -43,5 +43,15 @@ resources:
         api-keys:
           - key1
 
+    contracts:
+      contract-1:
+        name: 'Demo-Flash'
+        address: '0xA91382E82fB676d4c935E601305E5253b3829dCD'
+        network: 'mainnet'
+        # optional
+        abi: ${file(./abis/demoflash.json.abi)}
+        # optional
+        nat-spec: null
+
 plugins:
   - '@openzeppelin/platform-as-code'

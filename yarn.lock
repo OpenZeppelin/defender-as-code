@@ -493,18 +493,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@openzeppelin/defender-admin-client@^1.46.0":
-  version "1.46.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-admin-client/-/defender-admin-client-1.46.0.tgz#b8af0269bda215a01108ce04d2bc6db872d84367"
-  integrity sha512-ZOt8z6Vce3vC1CgwZ3wt5paepfw1EHNcb0hssLkrbXBNeANcHI8e37p+VE6/DdEECoAKdQj2qQwggcsPqc19OQ==
-  dependencies:
-    "@openzeppelin/defender-base-client" "1.46.0"
-    axios "^0.21.2"
-    ethers "^5.7.2"
-    lodash "^4.17.19"
-    node-fetch "^2.6.0"
-
-"@openzeppelin/defender-base-client@1.46.0", "@openzeppelin/defender-base-client@^1.46.0":
+"@openzeppelin/defender-base-client@^1.46.0":
   version "1.46.0"
   resolved "https://registry.yarnpkg.com/@openzeppelin/defender-base-client/-/defender-base-client-1.46.0.tgz#aa5177f8fbad23fd03d78f3dbe06664bbe9333ff"
   integrity sha512-EMnVBcfE6ZN5yMxfaxrFF3eqyGp2RQp3oSRSRP+R3yuCRJf8VCc2ArdZf1QPmQQzbq70nl8EZa03mmAqPauNlQ==
