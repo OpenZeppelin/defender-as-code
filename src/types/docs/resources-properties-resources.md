@@ -7,6 +7,7 @@
 | Property                                            | Type     | Required | Nullable       | Defined by                                                                                                                                             |
 | :-------------------------------------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [notifications](#notifications)                     | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-notifications.md "#/properties/Resources/properties/notifications")                     |
+| [categories](#categories)                           | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-categories.md "#/properties/Resources/properties/categories")                           |
 | [relayers](#relayers)                               | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-relayers.md "#/properties/Resources/properties/relayers")                               |
 | [policies](#policies)                               | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-policies.md "#/properties/Resources/properties/policies")                               |
 | [contracts](#contracts)                             | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-contracts.md "#/properties/Resources/properties/contracts")                             |
@@ -31,6 +32,24 @@
 ### notifications Type
 
 `object` ([Notifications](resources-properties-resources-properties-notifications.md))
+
+## categories
+
+
+
+`categories`
+
+*   is optional
+
+*   Type: `object` ([Categories](resources-properties-resources-properties-categories.md))
+
+*   cannot be null
+
+*   defined in: [Resources](resources-properties-resources-properties-categories.md "#/properties/Resources/properties/categories")
+
+### categories Type
+
+`object` ([Categories](resources-properties-resources-properties-categories.md))
 
 ## relayers
 
