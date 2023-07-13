@@ -16,6 +16,14 @@
             "format": "uri-reference"
           }
         },
+        "categories": {
+          "title": "Categories",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "definitions.schema.json/#/definitions/category",
+            "format": "uri-reference"
+          }
+        },
         "relayers": {
           "title": "Relayers",
           "type": "object",

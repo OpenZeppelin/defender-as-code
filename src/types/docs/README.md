@@ -32,6 +32,8 @@
 
 *   [BlockMonitor](./definitions-definitions-blockmonitor.md) – `#/definitions/blockMonitor`
 
+*   [Categories](./resources-properties-resources-properties-categories.md) – `#/properties/Resources/properties/categories`
+
 *   [Category](./definitions-definitions-category.md) – `#/definitions/category`
 
 *   [Conditions](./definitions-definitions-blockmonitor-properties-conditions.md) – `#/definitions/blockMonitor/properties/conditions`
