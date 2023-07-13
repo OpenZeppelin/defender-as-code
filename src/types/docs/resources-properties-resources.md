@@ -12,7 +12,6 @@
 | [contracts](#contracts)                             | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-contracts.md "#/properties/Resources/properties/contracts")                             |
 | [secrets](#secrets)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-actionsecrets.md "#/properties/Resources/properties/secrets")                           |
 | [monitors](#monitors)                               | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-monitors.md "#/properties/Resources/properties/monitors")                               |
-| [deployment-configs](#deployment-configs)           | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-deployment-configs.md "#/properties/Resources/properties/deployment-configs")           |
 | [block-explorer-api-keys](#block-explorer-api-keys) | `object` | Optional | cannot be null | [Resources](resources-properties-resources-properties-block-explorer-api-keys.md "#/properties/Resources/properties/block-explorer-api-keys") |
 
 ## notifications
@@ -122,24 +121,6 @@
 ### monitors Type
 
 `object` ([Monitors](resources-properties-resources-properties-monitors.md))
-
-## deployment-configs
-
-
-
-`deployment-configs`
-
-*   is optional
-
-*   Type: `object` ([Deployment Configs](resources-properties-resources-properties-deployment-configs.md))
-
-*   cannot be null
-
-*   defined in: [Resources](resources-properties-resources-properties-deployment-configs.md "#/properties/Resources/properties/deployment-configs")
-
-### deployment-configs Type
-
-`object` ([Deployment Configs](resources-properties-resources-properties-deployment-configs.md))
 
 ## block-explorer-api-keys
 

@@ -2354,40 +2354,6 @@ Reference this group by using
 
 `boolean`
 
-## Definitions group deploymentConfig
-
-Reference this group by using
-
-```json
-{"$ref":"#/definitions/deploymentConfig"}
-```
-
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                     |
-| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------- |
-| [relayer](#relayer-1) | `object` | Required | cannot be null | [Definitions](definitions-definitions-relayer.md "#/definitions/deploymentConfig/properties/relayer") |
-
-### relayer
-
-
-
-`relayer`
-
-*   is required
-
-*   Type: `object` ([Relayer](definitions-definitions-relayer.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-relayer.md "#/definitions/deploymentConfig/properties/relayer")
-
-#### relayer Type
-
-`object` ([Relayer](definitions-definitions-relayer.md))
-
-#### relayer Constraints
-
-**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
-
 ## Definitions group blockExplorerApiKey
 
 Reference this group by using

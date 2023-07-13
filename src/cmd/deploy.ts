@@ -42,7 +42,6 @@ import {
   YMonitor,
   YCategory,
   YBlockExplorerApiKey,
-  YDeploymentConfig,
   DeployOutput,
   DeployResponse,
   ResourceType,
@@ -52,7 +51,6 @@ import {
   PlatformScheduleTrigger,
   PlatformMonitorTrigger,
   PlatformMonitorFilterTrigger,
-  PlatformDeploymentConfig,
   PlatformBlockExplorerApiKey,
   PlatformCategory,
   PlatformFortaMonitorResponse,
@@ -95,7 +93,6 @@ export default class PlatformDeploy {
       contracts: [],
       relayerApiKeys: [],
       secrets: [],
-      deploymentConfigs: [],
       blockExplorerApiKeys: [],
     };
     // Contracts
@@ -185,21 +182,10 @@ export default class PlatformDeploy {
       (a: string, b: string) => a === b,
     );
 
-    // Deployment Configs
-    const deploymentConfigs: YDeploymentConfig[] =
-      this.serverless.service.resources?.Resources?.['deployment-configs'] ?? [];
-    const deployClient = getDeployClient(this.teamKey!);
-    const dDeploymentConfigs = await deployClient.listConfig();
-    const deploymentConfigDifference = _.differenceWith(
-      dDeploymentConfigs,
-      Object.entries(deploymentConfigs ?? []),
-      (a: PlatformDeploymentConfig, b: [string, YDeploymentConfig]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
-    );
-
     // Block Explorer Api Keys
     const blockExplorerApiKeys: YBlockExplorerApiKey[] =
       this.serverless.service.resources?.Resources?.['block-explorer-api-keys'] ?? [];
+    const deployClient = getDeployClient(this.teamKey!);
     const dBlockExplorerApiKeys = await deployClient.listBlockExplorerApiKeys();
     const blockExplorerApiKeyDifference = _.differenceWith(
       dBlockExplorerApiKeys,
@@ -214,7 +200,6 @@ export default class PlatformDeploy {
     difference.categories = categoryDifference;
     difference.actions = actionDifference;
     difference.secrets = secretsDifference;
-    difference.deploymentConfigs = deploymentConfigDifference;
     difference.blockExplorerApiKeys = blockExplorerApiKeyDifference;
 
     return difference;
@@ -1016,91 +1001,6 @@ export default class PlatformDeploy {
     );
   }
 
-  private async deployDeploymentConfig(output: DeployOutput<PlatformDeploymentConfig>) {
-    const deploymentConfigs: YDeploymentConfig[] =
-      this.serverless.service.resources?.Resources?.['deployment-configs'] ?? [];
-    const client = getDeployClient(this.teamKey!);
-    const retrieveExisting = () => client.listConfig();
-
-    await this.wrapper<YDeploymentConfig, PlatformDeploymentConfig>(
-      this.serverless,
-      'Deployment Configs',
-      deploymentConfigs,
-      retrieveExisting,
-      // on update
-      async (deploymentConfig: YDeploymentConfig, match: PlatformDeploymentConfig) => {
-        const deploymentConfigRelayer = deploymentConfig.relayer;
-        const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
-
-        const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<YRelayer | undefined, PlatformRelayer>(
-          this.serverless,
-          deploymentConfigRelayer,
-          relayers,
-          existingRelayers,
-        );
-
-        if (!maybeRelayer)
-          throw new Error(`Cannot find relayer ${deploymentConfigRelayer} in ${match.stackResourceId!}`);
-
-        if (_.isEqual(maybeRelayer.relayerId, match.relayerId)) {
-          return {
-            name: match.stackResourceId!,
-            id: match.deploymentConfigId,
-            success: false,
-            response: match,
-            notice: `Skipped ${match.stackResourceId} - no changes detected`,
-          };
-        }
-
-        const updatedDeploymentConfig = await client.updateConfig(match.deploymentConfigId, {
-          relayerId: maybeRelayer.relayerId,
-          stackResourceId: match.stackResourceId!,
-        });
-        return {
-          name: updatedDeploymentConfig.stackResourceId!,
-          id: updatedDeploymentConfig.deploymentConfigId,
-          success: true,
-          response: updatedDeploymentConfig,
-        };
-      },
-      // on create
-      async (deploymentConfig: YDeploymentConfig, stackResourceId: string) => {
-        const deploymentConfigRelayer = deploymentConfig.relayer;
-        const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
-        const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-
-        const maybeRelayer = getEquivalentResource<YRelayer | undefined, PlatformRelayer>(
-          this.serverless,
-          deploymentConfigRelayer,
-          relayers,
-          existingRelayers,
-        );
-
-        if (!maybeRelayer) throw new Error(`Cannot find relayer ${deploymentConfigRelayer} in ${stackResourceId}`);
-
-        const importedDeployment = await client.createConfig({
-          relayerId: maybeRelayer.relayerId,
-          stackResourceId,
-        });
-
-        return {
-          name: stackResourceId,
-          id: importedDeployment.deploymentConfigId,
-          success: true,
-          response: importedDeployment,
-        };
-      },
-      // on remove
-      async (deploymentConfigs: PlatformDeploymentConfig[]) => {
-        await Promise.all(deploymentConfigs.map(async (c) => await client.removeConfig(c.deploymentConfigId)));
-      },
-      undefined,
-      output,
-      this.ssotDifference?.deploymentConfigs,
-    );
-  }
-
   private async deployBlockExplorerApiKey(output: DeployOutput<PlatformBlockExplorerApiKey>) {
     const blockExplorerApiKeys: YBlockExplorerApiKey[] =
       this.serverless.service.resources?.Resources?.['block-explorer-api-keys'] ?? [];
@@ -1298,12 +1198,6 @@ export default class PlatformDeploy {
       },
     };
 
-    const deploymentConfigs: DeployOutput<PlatformDeploymentConfig> = {
-      removed: [],
-      created: [],
-      updated: [],
-    };
-
     const blockExplorerApiKeys: DeployOutput<PlatformBlockExplorerApiKey> = {
       removed: [],
       created: [],
@@ -1320,7 +1214,6 @@ export default class PlatformDeploy {
       notifications,
       categories,
       secrets,
-      deploymentConfigs,
       blockExplorerApiKeys,
     };
     await this.deploySecrets(stdOut.secrets);
@@ -1332,8 +1225,6 @@ export default class PlatformDeploy {
     await this.deployNotifications(stdOut.notifications);
     await this.deployCategories(stdOut.categories);
     await this.deployMonitors(stdOut.monitors);
-
-    await this.deployDeploymentConfig(stdOut.deploymentConfigs);
     await this.deployBlockExplorerApiKey(stdOut.blockExplorerApiKeys);
 
     this.log.notice('========================================================');
