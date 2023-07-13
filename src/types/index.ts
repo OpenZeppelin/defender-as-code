@@ -34,7 +34,7 @@ import {
   SentinelTrigger,
   MonitorFilterTrigger,
 } from '@openzeppelin/platform-sdk-action-client/lib/models/action';
-import { BlockExplorerApiKeyResponse, DeploymentConfigResponse } from '@openzeppelin/platform-sdk-deploy-client';
+import { BlockExplorerApiKeyResponse } from '@openzeppelin/platform-sdk-deploy-client';
 import { OpsgenieConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/opsgenie';
 import { PagerDutyConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/pager-duty';
 
@@ -59,7 +59,6 @@ export type PlatformDiscordConfig = DiscordConfig;
 export type PlatformTelegramConfig = TelegramBotConfig;
 export type PlatformEmailConfig = EmailConfig;
 export type PlatformNetwork = Network;
-export type PlatformDeploymentConfig = DeploymentConfigResponse;
 export type PlatformBlockExplorerApiKey = BlockExplorerApiKeyResponse;
 export type PlatformWebhookTrigger = WebhookTrigger;
 export type PlatformScheduleTrigger = ScheduleTrigger;
@@ -75,7 +74,6 @@ export type ResourceType =
   | 'Actions'
   | 'Contracts'
   | 'Secrets'
-  | 'Deployment Configs'
   | 'Block Explorer Api Keys';
 
 export type YPolicy = {
@@ -243,12 +241,7 @@ export type ListPlatformResources = {
   contracts: PlatformContract[];
   relayerApiKeys: PlatformRelayerApiKey[];
   secrets: string[];
-  deploymentConfigs: PlatformDeploymentConfig[];
   blockExplorerApiKeys: PlatformBlockExplorerApiKey[];
-};
-
-export type YDeploymentConfig = {
-  relayer: YRelayer;
 };
 
 export type YBlockExplorerApiKey = {

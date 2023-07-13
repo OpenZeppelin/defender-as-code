@@ -46,10 +46,6 @@
 
 *   [DatadogConfig](./definitions-definitions-datadogconfig.md) – `#/definitions/datadogConfig`
 
-*   [Deployment Configs](./resources-properties-resources-properties-deployment-configs.md) – `#/properties/Resources/properties/deployment-configs`
-
-*   [DeploymentConfig](./definitions-definitions-deploymentconfig.md) – `#/definitions/deploymentConfig`
-
 *   [EmailConfig](./definitions-definitions-emailconfig.md) – `#/definitions/emailConfig`
 
 *   [EventItems](./definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems.md) – `#/definitions/blockMonitor/properties/conditions/properties/event/items`
