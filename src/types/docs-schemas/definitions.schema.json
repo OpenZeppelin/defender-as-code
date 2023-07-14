@@ -146,7 +146,7 @@
       "required": ["emails"]
     },
     "opsgenieUserType": {
-      "title": "opsgenieUserType",
+      "title": "OpsgenieUserType",
       "type": "string",
       "enum": ["team", "user", "escalation", "schedule"]
     },
