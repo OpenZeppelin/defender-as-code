@@ -1,4 +1,4 @@
-service: platform-serverless-test-project
+service: platform-as-code-test-project
 configValidationMode: error
 frameworkVersion: '3'
 
