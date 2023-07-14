@@ -780,7 +780,7 @@ Reference this group by using
 
 *   is required
 
-*   Type: `string` ([opsgenieUserType](definitions-definitions-opsgenieuser-properties-opsgenieusertype.md))
+*   Type: `string` ([OpsgenieUserType](definitions-definitions-opsgenieuser-properties-opsgenieusertype.md))
 
 *   cannot be null
 
@@ -788,7 +788,7 @@ Reference this group by using
 
 #### type Type
 
-`string` ([opsgenieUserType](definitions-definitions-opsgenieuser-properties-opsgenieusertype.md))
+`string` ([OpsgenieUserType](definitions-definitions-opsgenieuser-properties-opsgenieusertype.md))
 
 #### type Constraints
 

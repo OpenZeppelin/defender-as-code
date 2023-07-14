@@ -73,7 +73,7 @@
 
 *   is required
 
-*   Type: `string` ([opsgenieUserType](definitions-definitions-opsgenieusertype.md))
+*   Type: `string` ([OpsgenieUserType](definitions-definitions-opsgenieusertype.md))
 
 *   cannot be null
 
@@ -81,7 +81,7 @@
 
 ### type Type
 
-`string` ([opsgenieUserType](definitions-definitions-opsgenieusertype.md))
+`string` ([OpsgenieUserType](definitions-definitions-opsgenieusertype.md))
 
 ### type Constraints
 

@@ -1,6 +1,6 @@
 ## type Type
 
-`string` ([opsgenieUserType](definitions-definitions-opsgenieusertype.md))
+`string` ([OpsgenieUserType](definitions-definitions-opsgenieusertype.md))
 
 ## type Constraints
 
