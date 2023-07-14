@@ -18,6 +18,6 @@
   "license": "MIT",
   "devDependencies": {
     "serverless": "^3.20.0",
-    "@openzeppelin/platform-as-code": "^1.3.0"
+    "@openzeppelin/platform-as-code": "^1.3.1"
   }
 }
