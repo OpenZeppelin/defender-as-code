@@ -7,6 +7,20 @@ lib
 *.log
 .DS_Store
 tsconfig.tsbuildinfo
+**/.DS_Store
+**/.env
+
+.defender
+.platform
+.serverless
+secrets.*.yml
+
+**/.defender
+**/.platform
+**/.serverless
+**/secrets.*.yml
+
+
 
 .vscode
 

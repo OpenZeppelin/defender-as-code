@@ -1,6 +1,6 @@
 {
   "name": "@openzeppelin/platform-as-code",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Configure your Platform environment via code",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
