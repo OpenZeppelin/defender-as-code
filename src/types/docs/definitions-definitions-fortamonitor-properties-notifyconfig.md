@@ -4,12 +4,13 @@
 
 # notify-config Properties
 
-| Property              | Type      | Required | Nullable       | Defined by                                                                                                                                                                            |
-| :-------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [timeout](#timeout)   | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-timeout.md "#/definitions/fortaMonitor/properties/notify-config/properties/timeout")   |
-| [message](#message)   | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message.md "#/definitions/fortaMonitor/properties/notify-config/properties/message")   |
-| [category](#category) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-category.md "#/definitions/fortaMonitor/properties/notify-config/properties/category")                                                 |
-| [channels](#channels) | `array`   | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md "#/definitions/fortaMonitor/properties/notify-config/properties/channels") |
+| Property                            | Type      | Required | Nullable       | Defined by                                                                                                                                                                                          |
+| :---------------------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [timeout](#timeout)                 | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-timeout.md "#/definitions/fortaMonitor/properties/notify-config/properties/timeout")                 |
+| [message](#message)                 | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message.md "#/definitions/fortaMonitor/properties/notify-config/properties/message")                 |
+| [message-subject](#message-subject) | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message-subject.md "#/definitions/fortaMonitor/properties/notify-config/properties/message-subject") |
+| [category](#category)               | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-category.md "#/definitions/fortaMonitor/properties/notify-config/properties/category")                                                               |
+| [channels](#channels)               | `array`   | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md "#/definitions/fortaMonitor/properties/notify-config/properties/channels")               |
 
 ## timeout
 
@@ -44,6 +45,24 @@
 *   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message.md "#/definitions/fortaMonitor/properties/notify-config/properties/message")
 
 ### message Type
+
+`string`
+
+## message-subject
+
+
+
+`message-subject`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message-subject.md "#/definitions/fortaMonitor/properties/notify-config/properties/message-subject")
+
+### message-subject Type
 
 `string`
 

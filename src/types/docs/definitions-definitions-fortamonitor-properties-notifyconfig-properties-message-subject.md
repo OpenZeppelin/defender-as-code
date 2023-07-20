@@ -1,0 +1,3 @@
+## message-subject Type
+
+`string`
