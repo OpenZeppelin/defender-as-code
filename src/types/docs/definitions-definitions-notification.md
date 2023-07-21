@@ -8,12 +8,12 @@
 
 # additionalProperties Properties
 
-| Property          | Type      | Required | Nullable       | Defined by                                                                                                                       |
-| :---------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| [type](#type)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notificationtype.md "#/definitions/notification/properties/type")                 |
-| [name](#name)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-name.md "#/definitions/notification/properties/name")     |
-| [paused](#paused) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-paused.md "#/definitions/notification/properties/paused") |
-| [config](#config) | Merged    | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-config.md "#/definitions/notification/properties/config") |
+| Property          | Type      | Required | Nullable       | Defined by                                                                                                                                     |
+| :---------------- | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
+| [type](#type)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notificationtype.md "definitions.schema.json#/definitions/notification/properties/type")                 |
+| [name](#name)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-name.md "definitions.schema.json#/definitions/notification/properties/name")     |
+| [paused](#paused) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-paused.md "definitions.schema.json#/definitions/notification/properties/paused") |
+| [config](#config) | Merged    | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-config.md "definitions.schema.json#/definitions/notification/properties/config") |
 
 ## type
 
@@ -27,7 +27,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-notificationtype.md "#/definitions/notification/properties/type")
+*   defined in: [Definitions](definitions-definitions-notificationtype.md "definitions.schema.json#/definitions/notification/properties/type")
 
 ### type Type
 
@@ -62,7 +62,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-notification-properties-name.md "#/definitions/notification/properties/name")
+*   defined in: [Definitions](definitions-definitions-notification-properties-name.md "definitions.schema.json#/definitions/notification/properties/name")
 
 ### name Type
 
@@ -80,7 +80,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-notification-properties-paused.md "#/definitions/notification/properties/paused")
+*   defined in: [Definitions](definitions-definitions-notification-properties-paused.md "definitions.schema.json#/definitions/notification/properties/paused")
 
 ### paused Type
 
@@ -98,7 +98,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-notification-properties-config.md "#/definitions/notification/properties/config")
+*   defined in: [Definitions](definitions-definitions-notification-properties-config.md "definitions.schema.json#/definitions/notification/properties/config")
 
 ### config Type
 

@@ -4,9 +4,9 @@ unknown
 
 # if Properties
 
-| Property      | Type          | Required | Nullable       | Defined by                                                                                                                                                   |
-| :------------ | :------------ | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [type](#type) | Not specified | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-trigger-if-properties-type.md "#/definitions/action/properties/trigger/if/properties/type") |
+| Property      | Type          | Required | Nullable       | Defined by                                                                                                                                                                 |
+| :------------ | :------------ | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [type](#type) | Not specified | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-trigger-if-properties-type.md "definitions.schema.json#/definitions/action/properties/trigger/if/properties/type") |
 
 ## type
 
@@ -20,7 +20,7 @@ unknown
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action-properties-trigger-if-properties-type.md "#/definitions/action/properties/trigger/if/properties/type")
+*   defined in: [Definitions](definitions-definitions-action-properties-trigger-if-properties-type.md "definitions.schema.json#/definitions/action/properties/trigger/if/properties/type")
 
 ### type Type
 

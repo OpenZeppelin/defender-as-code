@@ -8,14 +8,14 @@
 
 # additionalProperties Properties
 
-| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                       |
-| :-------------------------------------------- | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "#/definitions/relayer/properties/name")                               |
-| [network](#network)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/relayer/properties/network")                                            |
-| [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "#/definitions/relayer/properties/min-balance")                 |
-| [address-from-relayer](#address-from-relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "#/definitions/relayer/properties/address-from-relayer") |
-| [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "#/definitions/relayer/properties/policy")                                              |
-| [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "#/definitions/relayer/properties/api-keys")                 |
+| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                                     |
+| :-------------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "definitions.schema.json#/definitions/relayer/properties/name")                               |
+| [network](#network)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/relayer/properties/network")                                            |
+| [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "definitions.schema.json#/definitions/relayer/properties/min-balance")                 |
+| [address-from-relayer](#address-from-relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
+| [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer/properties/policy")                                              |
+| [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "definitions.schema.json#/definitions/relayer/properties/api-keys")                 |
 
 ## name
 
@@ -29,7 +29,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-name.md "#/definitions/relayer/properties/name")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-name.md "definitions.schema.json#/definitions/relayer/properties/name")
 
 ### name Type
 
@@ -47,7 +47,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "#/definitions/relayer/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/relayer/properties/network")
 
 ### network Type
 
@@ -61,9 +61,6 @@
 | :------------------------ | :---------- |
 | `"mainnet"`               |             |
 | `"sepolia"`               |             |
-| `"rinkeby"`               |             |
-| `"ropsten"`               |             |
-| `"kovan"`                 |             |
 | `"goerli"`                |             |
 | `"xdai"`                  |             |
 | `"sokol"`                 |             |
@@ -80,11 +77,9 @@
 | `"avalanche"`             |             |
 | `"fuji"`                  |             |
 | `"optimism"`              |             |
-| `"optimism-kovan"`        |             |
 | `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
 | `"arbitrum-nova"`         |             |
-| `"arbitrum-rinkeby"`      |             |
 | `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
 | `"alfajores"`             |             |
@@ -115,7 +110,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-min-balance.md "#/definitions/relayer/properties/min-balance")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-min-balance.md "definitions.schema.json#/definitions/relayer/properties/min-balance")
 
 ### min-balance Type
 
@@ -133,7 +128,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "#/definitions/relayer/properties/address-from-relayer")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer")
 
 ### address-from-relayer Type
 
@@ -151,7 +146,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-policy.md "#/definitions/relayer/properties/policy")
+*   defined in: [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer/properties/policy")
 
 ### policy Type
 
@@ -173,7 +168,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "#/definitions/relayer/properties/api-keys")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "definitions.schema.json#/definitions/relayer/properties/api-keys")
 
 ### api-keys Type
 

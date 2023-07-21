@@ -66,28 +66,18 @@ export type PlatformMonitorTrigger = SentinelTrigger;
 export type PlatformMonitorFilterTrigger = MonitorFilterTrigger;
 export type PlatformMonitorRiskCategory = SubscriberRiskCategory;
 
+// Generated Interfaces from Schemas
+import * as SchemaPlatform from '../types/types/platform.schema';
+import * as SchemaResources from '../types/types/resources.schema';
+import * as SchemaProvider from '../types/types/provider.schema';
+
+export type Resources = SchemaResources.Resources;
+export type Provider = SchemaProvider.Provider;
+export type Platform = SchemaPlatform.Platform;
 export interface IPlatformServerless {
-  provider: {
-    name: 'platform';
-    stage: string;
-    stackName: string;
-    ssot?: boolean;
-  };
-  platform: {
-    key: string;
-    secret: string;
-  };
-  resources: {
-    'actions'?: { [k: string]: YAction };
-    'notifications'?: { [k: string]: YNotification };
-    'categories'?: { [k: string]: YCategory };
-    'relayers'?: { [k: string]: YRelayer };
-    'policies'?: { [k: string]: YPolicy };
-    'contracts'?: { [k: string]: YContract };
-    'secrets'?: { [k: string]: YSecret };
-    'monitors'?: { [k: string]: YMonitor };
-    'block-explorer-api-keys'?: { [k: string]: YBlockExplorerApiKey };
-  };
+  provider: { name: 'platform' } & Provider;
+  platform: Platform;
+  resources: Resources;
 }
 
 export type ResourceType =

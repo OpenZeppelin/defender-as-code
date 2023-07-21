@@ -4,10 +4,10 @@
 
 # secrets Properties
 
-| Property          | Type     | Required | Nullable       | Defined by                                                                                                             |
-| :---------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| [global](#global) | `object` | Optional | cannot be null | [Resources](resources-properties-actionsecrets-properties-global.md "#/properties/secrets/properties/global") |
-| [stack](#stack)   | `object` | Optional | cannot be null | [Resources](resources-properties-actionsecrets-properties-stack.md "#/properties/secrets/properties/stack")   |
+| Property          | Type     | Required | Nullable       | Defined by                                                                                                                                |
+| :---------------- | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| [global](#global) | `object` | Optional | cannot be null | [Resources](resources-properties-actionsecrets-properties-globalsecrets.md "resources.schema.json#/properties/secrets/properties/global") |
+| [stack](#stack)   | `object` | Optional | cannot be null | [Resources](resources-properties-actionsecrets-properties-stacksecrets.md "resources.schema.json#/properties/secrets/properties/stack")   |
 
 ## global
 
@@ -17,15 +17,15 @@
 
 *   is optional
 
-*   Type: `object` ([Global](resources-properties-actionsecrets-properties-global.md))
+*   Type: `object` ([GlobalSecrets](resources-properties-actionsecrets-properties-globalsecrets.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-actionsecrets-properties-global.md "#/properties/secrets/properties/global")
+*   defined in: [Resources](resources-properties-actionsecrets-properties-globalsecrets.md "resources.schema.json#/properties/secrets/properties/global")
 
 ### global Type
 
-`object` ([Global](resources-properties-actionsecrets-properties-global.md))
+`object` ([GlobalSecrets](resources-properties-actionsecrets-properties-globalsecrets.md))
 
 ## stack
 
@@ -35,12 +35,12 @@
 
 *   is optional
 
-*   Type: `object` ([Stack](resources-properties-actionsecrets-properties-stack.md))
+*   Type: `object` ([StackSecrets](resources-properties-actionsecrets-properties-stacksecrets.md))
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-actionsecrets-properties-stack.md "#/properties/secrets/properties/stack")
+*   defined in: [Resources](resources-properties-actionsecrets-properties-stacksecrets.md "resources.schema.json#/properties/secrets/properties/stack")
 
 ### stack Type
 
-`object` ([Stack](resources-properties-actionsecrets-properties-stack.md))
+`object` ([StackSecrets](resources-properties-actionsecrets-properties-stacksecrets.md))

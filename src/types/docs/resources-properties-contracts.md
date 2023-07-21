@@ -4,9 +4,9 @@
 
 # contracts Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                              |
-| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------ |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-contract.md "#/properties/contracts/additionalProperties") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                          |
+| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------ |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-contract.md "resources.schema.json#/properties/contracts/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-contract.md "#/properties/contracts/additionalProperties")
+*   defined in: [Resources](definitions-definitions-contract.md "resources.schema.json#/properties/contracts/additionalProperties")
 
 ### additionalProperties Type
 

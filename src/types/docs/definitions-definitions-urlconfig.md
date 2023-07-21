@@ -8,9 +8,9 @@
 
 # 3 Properties
 
-| Property    | Type     | Required | Nullable       | Defined by                                                                                                           |
-| :---------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------- |
-| [url](#url) | `string` | Required | cannot be null | [Definitions](definitions-definitions-urlconfig-properties-url.md "#/definitions/urlConfig/properties/url") |
+| Property    | Type     | Required | Nullable       | Defined by                                                                                                                         |
+| :---------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| [url](#url) | `string` | Required | cannot be null | [Definitions](definitions-definitions-urlconfig-properties-url.md "definitions.schema.json#/definitions/urlConfig/properties/url") |
 
 ## url
 
@@ -24,7 +24,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-urlconfig-properties-url.md "#/definitions/urlConfig/properties/url")
+*   defined in: [Definitions](definitions-definitions-urlconfig-properties-url.md "definitions.schema.json#/definitions/urlConfig/properties/url")
 
 ### url Type
 

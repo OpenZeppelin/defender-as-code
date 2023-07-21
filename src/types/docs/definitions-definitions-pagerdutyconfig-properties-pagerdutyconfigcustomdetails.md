@@ -4,9 +4,9 @@
 
 # customDetails Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                    |
-| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Additional Properties | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails-additionalproperties.md "#/definitions/pagerDutyConfig/properties/customDetails/additionalProperties") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                  |
+| :-------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails-additionalproperties.md "definitions.schema.json#/definitions/pagerDutyConfig/properties/customDetails/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails-additionalproperties.md "#/definitions/pagerDutyConfig/properties/customDetails/additionalProperties")
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails-additionalproperties.md "definitions.schema.json#/definitions/pagerDutyConfig/properties/customDetails/additionalProperties")
 
 ### additionalProperties Type
 

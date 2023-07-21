@@ -159,7 +159,7 @@ Note that when setting up the notification configuration for a monitor, the `cha
 ```yaml
 notify-config:
   channels: [] # assign channels as empty list if you wish to use a category
-  category: ${self:resources.Resources.categories.medium-severity} # optional
+  category: ${self:resources.categories.medium-severity} # optional
 ```
 
 Errors thrown during the `deploy` process, will not revert any prior changes. Common errors are:

@@ -4,12 +4,12 @@
 
 # items Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                                           |
-| :-------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| [username](#username) | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieuser-properties-username.md "#/definitions/opsgenieUser/properties/username") |
-| [fullName](#fullname) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieuser-properties-fullname.md "#/definitions/opsgenieUser/properties/fullName") |
-| [id](#id)             | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieuser-properties-id.md "#/definitions/opsgenieUser/properties/id")             |
-| [type](#type)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieusertype.md "#/definitions/opsgenieUser/properties/type")                     |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                         |
+| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [username](#username) | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieuser-properties-username.md "definitions.schema.json#/definitions/opsgenieUser/properties/username") |
+| [fullName](#fullname) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieuser-properties-fullname.md "definitions.schema.json#/definitions/opsgenieUser/properties/fullName") |
+| [id](#id)             | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieuser-properties-id.md "definitions.schema.json#/definitions/opsgenieUser/properties/id")             |
+| [type](#type)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieusertype.md "definitions.schema.json#/definitions/opsgenieUser/properties/type")                     |
 
 ## username
 
@@ -23,7 +23,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieuser-properties-username.md "#/definitions/opsgenieUser/properties/username")
+*   defined in: [Definitions](definitions-definitions-opsgenieuser-properties-username.md "definitions.schema.json#/definitions/opsgenieUser/properties/username")
 
 ### username Type
 
@@ -41,7 +41,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieuser-properties-fullname.md "#/definitions/opsgenieUser/properties/fullName")
+*   defined in: [Definitions](definitions-definitions-opsgenieuser-properties-fullname.md "definitions.schema.json#/definitions/opsgenieUser/properties/fullName")
 
 ### fullName Type
 
@@ -59,7 +59,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieuser-properties-id.md "#/definitions/opsgenieUser/properties/id")
+*   defined in: [Definitions](definitions-definitions-opsgenieuser-properties-id.md "definitions.schema.json#/definitions/opsgenieUser/properties/id")
 
 ### id Type
 
@@ -77,7 +77,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieusertype.md "#/definitions/opsgenieUser/properties/type")
+*   defined in: [Definitions](definitions-definitions-opsgenieusertype.md "definitions.schema.json#/definitions/opsgenieUser/properties/type")
 
 ### type Type
 

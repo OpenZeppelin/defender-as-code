@@ -4,9 +4,9 @@
 
 # monitors Properties
 
-| Property              | Type   | Required | Nullable       | Defined by                                                                                            |
-| :-------------------- | :----- | :------- | :------------- | :---------------------------------------------------------------------------------------------------- |
-| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-monitor.md "#/properties/monitors/additionalProperties") |
+| Property              | Type   | Required | Nullable       | Defined by                                                                                                        |
+| :-------------------- | :----- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-monitor.md "resources.schema.json#/properties/monitors/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-monitor.md "#/properties/monitors/additionalProperties")
+*   defined in: [Resources](definitions-definitions-monitor.md "resources.schema.json#/properties/monitors/additionalProperties")
 
 ### additionalProperties Type
 
@@ -30,11 +30,7 @@ one (and only one) of
 
 *   [BlockMonitor](definitions-definitions-blockmonitor.md "check type definition")
 
-*   any of
-
-    *   [Untitled  type in Definitions](definitions-definitions-fortamonitor-anyof-0.md "check type definition")
-
-    *   [Untitled  type in Definitions](definitions-definitions-fortamonitor-anyof-1.md "check type definition")
+*   [FortaMonitor](definitions-definitions-fortamonitor.md "check type definition")
 
 ### additionalProperties Constraints
 

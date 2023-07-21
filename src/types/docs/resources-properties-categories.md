@@ -4,9 +4,9 @@
 
 # categories Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                               |
-| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-category.md "#/properties/categories/additionalProperties") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                           |
+| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-category.md "resources.schema.json#/properties/categories/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-category.md "#/properties/categories/additionalProperties")
+*   defined in: [Resources](definitions-definitions-category.md "resources.schema.json#/properties/categories/additionalProperties")
 
 ### additionalProperties Type
 

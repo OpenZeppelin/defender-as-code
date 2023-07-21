@@ -8,21 +8,21 @@
 
 # 0 Properties
 
-| Property                              | Type      | Required | Nullable       | Defined by                                                                                                                                        |
-| :------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [name](#name)                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "#/definitions/blockMonitor/properties/name")                      |
-| [type](#type)                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "#/definitions/blockMonitor/properties/type")                      |
-| [network](#network)                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/blockMonitor/properties/network")                                        |
-| [addresses](#addresses)               | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "#/definitions/blockMonitor/properties/addresses")            |
-| [abi](#abi)                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/blockMonitor/properties/abi")                                            |
-| [alert-threshold](#alert-threshold)   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "#/definitions/blockMonitor/properties/alert-threshold") |
-| [paused](#paused)                     | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "#/definitions/blockMonitor/properties/paused")                  |
-| [action-condition](#action-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "#/definitions/blockMonitor/properties/action-condition")                                |
-| [action-trigger](#action-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "#/definitions/blockMonitor/properties/action-trigger")                                  |
-| [confirm-level](#confirm-level)       | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "#/definitions/blockMonitor/properties/confirm-level")    |
-| [notify-config](#notify-config)       | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "#/definitions/blockMonitor/properties/notify-config")     |
-| [conditions](#conditions)             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "#/definitions/blockMonitor/properties/conditions")          |
-| [risk-category](#risk-category)       | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-riskcategory.md "#/definitions/blockMonitor/properties/risk-category")                             |
+| Property                              | Type      | Required | Nullable       | Defined by                                                                                                                                                      |
+| :------------------------------------ | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/blockMonitor/properties/name")                      |
+| [type](#type)                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/blockMonitor/properties/type")                      |
+| [network](#network)                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockMonitor/properties/network")                                        |
+| [addresses](#addresses)               | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/blockMonitor/properties/addresses")            |
+| [abi](#abi)                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/blockMonitor/properties/abi")                                            |
+| [alert-threshold](#alert-threshold)   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold") |
+| [paused](#paused)                     | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/blockMonitor/properties/paused")                  |
+| [action-condition](#action-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-condition")                                |
+| [action-trigger](#action-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-trigger")                                  |
+| [confirm-level](#confirm-level)       | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/blockMonitor/properties/confirm-level")    |
+| [notify-config](#notify-config)       | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config")     |
+| [conditions](#conditions)             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions")          |
+| [risk-category](#risk-category)       | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-riskcategory.md "definitions.schema.json#/definitions/blockMonitor/properties/risk-category")                             |
 
 ## name
 
@@ -36,7 +36,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-name.md "#/definitions/blockMonitor/properties/name")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/blockMonitor/properties/name")
 
 ### name Type
 
@@ -54,7 +54,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-type.md "#/definitions/blockMonitor/properties/type")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/blockMonitor/properties/type")
 
 ### type Type
 
@@ -80,7 +80,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "#/definitions/blockMonitor/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockMonitor/properties/network")
 
 ### network Type
 
@@ -94,9 +94,6 @@
 | :------------------------ | :---------- |
 | `"mainnet"`               |             |
 | `"sepolia"`               |             |
-| `"rinkeby"`               |             |
-| `"ropsten"`               |             |
-| `"kovan"`                 |             |
 | `"goerli"`                |             |
 | `"xdai"`                  |             |
 | `"sokol"`                 |             |
@@ -113,11 +110,9 @@
 | `"avalanche"`             |             |
 | `"fuji"`                  |             |
 | `"optimism"`              |             |
-| `"optimism-kovan"`        |             |
 | `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
 | `"arbitrum-nova"`         |             |
-| `"arbitrum-rinkeby"`      |             |
 | `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
 | `"alfajores"`             |             |
@@ -148,7 +143,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "#/definitions/blockMonitor/properties/addresses")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/blockMonitor/properties/addresses")
 
 ### addresses Type
 
@@ -166,7 +161,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-abitype.md "#/definitions/blockMonitor/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/blockMonitor/properties/abi")
 
 ### abi Type
 
@@ -190,7 +185,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "#/definitions/blockMonitor/properties/alert-threshold")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold")
 
 ### alert-threshold Type
 
@@ -208,7 +203,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-paused.md "#/definitions/blockMonitor/properties/paused")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/blockMonitor/properties/paused")
 
 ### paused Type
 
@@ -226,7 +221,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "#/definitions/blockMonitor/properties/action-condition")
+*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-condition")
 
 ### action-condition Type
 
@@ -248,7 +243,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "#/definitions/blockMonitor/properties/action-trigger")
+*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-trigger")
 
 ### action-trigger Type
 
@@ -270,7 +265,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "#/definitions/blockMonitor/properties/confirm-level")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/blockMonitor/properties/confirm-level")
 
 ### confirm-level Type
 
@@ -294,7 +289,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "#/definitions/blockMonitor/properties/notify-config")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config")
 
 ### notify-config Type
 
@@ -312,7 +307,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "#/definitions/blockMonitor/properties/conditions")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions")
 
 ### conditions Type
 
@@ -330,7 +325,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-riskcategory.md "#/definitions/blockMonitor/properties/risk-category")
+*   defined in: [Definitions](definitions-definitions-riskcategory.md "definitions.schema.json#/definitions/blockMonitor/properties/risk-category")
 
 ### risk-category Type
 

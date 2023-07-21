@@ -4,9 +4,9 @@
 
 # actions Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                          |
-| :-------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-action.md "#/properties/actions/additionalProperties") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                      |
+| :-------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-action.md "resources.schema.json#/properties/actions/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-action.md "#/properties/actions/additionalProperties")
+*   defined in: [Resources](definitions-definitions-action.md "resources.schema.json#/properties/actions/additionalProperties")
 
 ### additionalProperties Type
 

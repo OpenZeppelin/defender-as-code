@@ -4,30 +4,11 @@
 
 # Provider Properties
 
-| Property                | Type      | Required | Nullable       | Defined by                                                                     |
-| :---------------------- | :-------- | :------- | :------------- | :----------------------------------------------------------------------------- |
-| [name](#name)           | `string`  | Required | cannot be null | [Provider](provider-properties-name.md "#/properties/name")           |
-| [stage](#stage)         | `string`  | Required | cannot be null | [Provider](provider-properties-stage.md "#/properties/stage")         |
-| [stackName](#stackname) | `string`  | Required | cannot be null | [Provider](provider-properties-stackname.md "#/properties/stackName") |
-| [ssot](#ssot)           | `boolean` | Optional | cannot be null | [Provider](provider-properties-ssot.md "#/properties/ssot")           |
-
-## name
-
-
-
-`name`
-
-*   is required
-
-*   Type: `string`
-
-*   cannot be null
-
-*   defined in: [Provider](provider-properties-name.md "#/properties/name")
-
-### name Type
-
-`string`
+| Property                | Type      | Required | Nullable       | Defined by                                                                                |
+| :---------------------- | :-------- | :------- | :------------- | :---------------------------------------------------------------------------------------- |
+| [stage](#stage)         | `string`  | Required | cannot be null | [Provider](provider-properties-stage.md "provider.schema.json#/properties/stage")         |
+| [stackName](#stackname) | `string`  | Required | cannot be null | [Provider](provider-properties-stackname.md "provider.schema.json#/properties/stackName") |
+| [ssot](#ssot)           | `boolean` | Optional | cannot be null | [Provider](provider-properties-ssot.md "provider.schema.json#/properties/ssot")           |
 
 ## stage
 
@@ -41,7 +22,7 @@
 
 *   cannot be null
 
-*   defined in: [Provider](provider-properties-stage.md "#/properties/stage")
+*   defined in: [Provider](provider-properties-stage.md "provider.schema.json#/properties/stage")
 
 ### stage Type
 
@@ -59,7 +40,7 @@
 
 *   cannot be null
 
-*   defined in: [Provider](provider-properties-stackname.md "#/properties/stackName")
+*   defined in: [Provider](provider-properties-stackname.md "provider.schema.json#/properties/stackName")
 
 ### stackName Type
 
@@ -77,7 +58,7 @@
 
 *   cannot be null
 
-*   defined in: [Provider](provider-properties-ssot.md "#/properties/ssot")
+*   defined in: [Provider](provider-properties-ssot.md "provider.schema.json#/properties/ssot")
 
 ### ssot Type
 

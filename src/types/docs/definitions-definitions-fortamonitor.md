@@ -2,34 +2,29 @@
 
 `object` ([FortaMonitor](definitions-definitions-fortamonitor.md))
 
-any of
-
-*   [Untitled  type in Definitions](definitions-definitions-fortamonitor-anyof-0.md "check type definition")
-
-*   [Untitled  type in Definitions](definitions-definitions-fortamonitor-anyof-1.md "check type definition")
-
 ## 1 Constraints
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
 # 1 Properties
 
-| Property                              | Type      | Required | Nullable       | Defined by                                                                                                                                        |
-| :------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [name](#name)                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "#/definitions/fortaMonitor/properties/name")                      |
-| [type](#type)                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-type.md "#/definitions/fortaMonitor/properties/type")                      |
-| [network](#network)                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/fortaMonitor/properties/network")                                        |
-| [addresses](#addresses)               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "#/definitions/fortaMonitor/properties/addresses")            |
-| [abi](#abi)                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/fortaMonitor/properties/abi")                                            |
-| [alert-threshold](#alert-threshold)   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "#/definitions/fortaMonitor/properties/alert-threshold") |
-| [paused](#paused)                     | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-paused.md "#/definitions/fortaMonitor/properties/paused")                  |
-| [action-condition](#action-condition) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "#/definitions/fortaMonitor/properties/action-condition")                                |
-| [action-trigger](#action-trigger)     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "#/definitions/fortaMonitor/properties/action-trigger")                                  |
-| [notify-config](#notify-config)       | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "#/definitions/fortaMonitor/properties/notify-config")     |
-| [conditions](#conditions)             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "#/definitions/fortaMonitor/properties/conditions")          |
-| [forta-node-id](#forta-node-id)       | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "#/definitions/fortaMonitor/properties/forta-node-id")    |
-| [agent-ids](#agent-ids)               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "#/definitions/fortaMonitor/properties/agent-ids")             |
-| [risk-category](#risk-category)       | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-riskcategory.md "#/definitions/fortaMonitor/properties/risk-category")                             |
+| Property                                                | Type      | Required | Nullable       | Defined by                                                                                                                                                                           |
+| :------------------------------------------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/fortaMonitor/properties/name")                                           |
+| [type](#type)                                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/fortaMonitor/properties/type")                                           |
+| [network](#network)                                     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/fortaMonitor/properties/network")                                                             |
+| [addresses](#addresses)                                 | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/fortaMonitor/properties/addresses")                                 |
+| [abi](#abi)                                             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/fortaMonitor/properties/abi")                                                                 |
+| [alert-threshold](#alert-threshold)                     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/fortaMonitor/properties/alert-threshold")                      |
+| [paused](#paused)                                       | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-paused.md "definitions.schema.json#/definitions/fortaMonitor/properties/paused")                                       |
+| [action-condition](#action-condition)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/fortaMonitor/properties/action-condition")                                                     |
+| [action-trigger](#action-trigger)                       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/fortaMonitor/properties/action-trigger")                                                       |
+| [notify-config](#notify-config)                         | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config")                          |
+| [conditions](#conditions)                               | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "definitions.schema.json#/definitions/fortaMonitor/properties/conditions")                               |
+| [forta-node-id](#forta-node-id)                         | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "definitions.schema.json#/definitions/fortaMonitor/properties/forta-node-id")                         |
+| [forta-last-processed-time](#forta-last-processed-time) | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-last-processed-time.md "definitions.schema.json#/definitions/fortaMonitor/properties/forta-last-processed-time") |
+| [agent-ids](#agent-ids)                                 | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "definitions.schema.json#/definitions/fortaMonitor/properties/agent-ids")                                  |
+| [risk-category](#risk-category)                         | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-riskcategory.md "definitions.schema.json#/definitions/fortaMonitor/properties/risk-category")                                                  |
 
 ## name
 
@@ -43,7 +38,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-name.md "#/definitions/fortaMonitor/properties/name")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/fortaMonitor/properties/name")
 
 ### name Type
 
@@ -61,7 +56,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-type.md "#/definitions/fortaMonitor/properties/type")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/fortaMonitor/properties/type")
 
 ### type Type
 
@@ -87,7 +82,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "#/definitions/fortaMonitor/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/fortaMonitor/properties/network")
 
 ### network Type
 
@@ -101,9 +96,6 @@ any of
 | :------------------------ | :---------- |
 | `"mainnet"`               |             |
 | `"sepolia"`               |             |
-| `"rinkeby"`               |             |
-| `"ropsten"`               |             |
-| `"kovan"`                 |             |
 | `"goerli"`                |             |
 | `"xdai"`                  |             |
 | `"sokol"`                 |             |
@@ -120,11 +112,9 @@ any of
 | `"avalanche"`             |             |
 | `"fuji"`                  |             |
 | `"optimism"`              |             |
-| `"optimism-kovan"`        |             |
 | `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
 | `"arbitrum-nova"`         |             |
-| `"arbitrum-rinkeby"`      |             |
 | `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
 | `"alfajores"`             |             |
@@ -155,7 +145,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "#/definitions/fortaMonitor/properties/addresses")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/fortaMonitor/properties/addresses")
 
 ### addresses Type
 
@@ -173,7 +163,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-abitype.md "#/definitions/fortaMonitor/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/fortaMonitor/properties/abi")
 
 ### abi Type
 
@@ -197,7 +187,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "#/definitions/fortaMonitor/properties/alert-threshold")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/fortaMonitor/properties/alert-threshold")
 
 ### alert-threshold Type
 
@@ -215,7 +205,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-paused.md "#/definitions/fortaMonitor/properties/paused")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-paused.md "definitions.schema.json#/definitions/fortaMonitor/properties/paused")
 
 ### paused Type
 
@@ -233,7 +223,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "#/definitions/fortaMonitor/properties/action-condition")
+*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/fortaMonitor/properties/action-condition")
 
 ### action-condition Type
 
@@ -255,7 +245,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "#/definitions/fortaMonitor/properties/action-trigger")
+*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/fortaMonitor/properties/action-trigger")
 
 ### action-trigger Type
 
@@ -277,7 +267,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "#/definitions/fortaMonitor/properties/notify-config")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config")
 
 ### notify-config Type
 
@@ -295,7 +285,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "#/definitions/fortaMonitor/properties/conditions")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "definitions.schema.json#/definitions/fortaMonitor/properties/conditions")
 
 ### conditions Type
 
@@ -313,9 +303,27 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "#/definitions/fortaMonitor/properties/forta-node-id")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "definitions.schema.json#/definitions/fortaMonitor/properties/forta-node-id")
 
 ### forta-node-id Type
+
+`string`
+
+## forta-last-processed-time
+
+
+
+`forta-last-processed-time`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-forta-last-processed-time.md "definitions.schema.json#/definitions/fortaMonitor/properties/forta-last-processed-time")
+
+### forta-last-processed-time Type
 
 `string`
 
@@ -331,7 +339,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "#/definitions/fortaMonitor/properties/agent-ids")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "definitions.schema.json#/definitions/fortaMonitor/properties/agent-ids")
 
 ### agent-ids Type
 
@@ -349,7 +357,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-riskcategory.md "#/definitions/fortaMonitor/properties/risk-category")
+*   defined in: [Definitions](definitions-definitions-riskcategory.md "definitions.schema.json#/definitions/fortaMonitor/properties/risk-category")
 
 ### risk-category Type
 

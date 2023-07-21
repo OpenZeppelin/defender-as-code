@@ -4,13 +4,13 @@
 
 # notify-config Properties
 
-| Property                            | Type      | Required | Nullable       | Defined by                                                                                                                                                                                          |
-| :---------------------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [timeout](#timeout)                 | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-timeout.md "#/definitions/blockMonitor/properties/notify-config/properties/timeout")                 |
-| [message](#message)                 | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-message.md "#/definitions/blockMonitor/properties/notify-config/properties/message")                 |
-| [message-subject](#message-subject) | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-message-subject.md "#/definitions/blockMonitor/properties/notify-config/properties/message-subject") |
-| [category](#category)               | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-category.md "#/definitions/blockMonitor/properties/notify-config/properties/category")                                                               |
-| [channels](#channels)               | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-channels.md "#/definitions/blockMonitor/properties/notify-config/properties/channels")               |
+| Property                            | Type      | Required | Nullable       | Defined by                                                                                                                                                                                                        |
+| :---------------------------------- | :-------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [timeout](#timeout)                 | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-timeout.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/timeout")                 |
+| [message](#message)                 | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-message.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/message")                 |
+| [message-subject](#message-subject) | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-message-subject.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/message-subject") |
+| [category](#category)               | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-category.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/category")                                                               |
+| [channels](#channels)               | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-channels.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/channels")               |
 
 ## timeout
 
@@ -24,7 +24,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-timeout.md "#/definitions/blockMonitor/properties/notify-config/properties/timeout")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-timeout.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/timeout")
 
 ### timeout Type
 
@@ -42,7 +42,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-message.md "#/definitions/blockMonitor/properties/notify-config/properties/message")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-message.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/message")
 
 ### message Type
 
@@ -60,7 +60,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-message-subject.md "#/definitions/blockMonitor/properties/notify-config/properties/message-subject")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-message-subject.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/message-subject")
 
 ### message-subject Type
 
@@ -78,7 +78,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-category.md "#/definitions/blockMonitor/properties/notify-config/properties/category")
+*   defined in: [Definitions](definitions-definitions-category.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/category")
 
 ### category Type
 
@@ -100,7 +100,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-channels.md "#/definitions/blockMonitor/properties/notify-config/properties/channels")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig-properties-channels.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/channels")
 
 ### channels Type
 

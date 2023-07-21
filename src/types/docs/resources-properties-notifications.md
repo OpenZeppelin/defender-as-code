@@ -4,9 +4,9 @@
 
 # notifications Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                      |
-| :-------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-notification.md "#/properties/notifications/additionalProperties") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                  |
+| :-------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-notification.md "resources.schema.json#/properties/notifications/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-notification.md "#/properties/notifications/additionalProperties")
+*   defined in: [Resources](definitions-definitions-notification.md "resources.schema.json#/properties/notifications/additionalProperties")
 
 ### additionalProperties Type
 

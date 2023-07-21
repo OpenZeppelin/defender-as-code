@@ -25,14 +25,10 @@ import {
   PlatformMonitor,
   ResourceType,
   TeamKey,
-  YAction,
-  YCategory,
-  YContract,
-  YNotification,
-  YRelayer,
   YSecret,
-  YMonitor,
+  Resources,
 } from '../types';
+import { Action, Contract, Monitor, Relayer, Notification, Category } from '../types/types/resources.schema';
 
 export default class PlatformInfo {
   serverless: Serverless;
@@ -41,11 +37,14 @@ export default class PlatformInfo {
   log: Logger;
   hooks: any;
   teamKey?: TeamKey;
+  resources: Resources;
 
   constructor(serverless: Serverless, options: Serverless.Options, logging: Logging) {
     this.serverless = serverless;
     this.options = options;
     this.logging = logging;
+
+    this.resources = this.serverless.service.resources as Resources;
 
     this.log = Logger.getInstance();
 
@@ -62,7 +61,7 @@ export default class PlatformInfo {
   private async wrapper<Y, D>(
     context: Serverless,
     resourceType: ResourceType,
-    resources: Y[] | undefined,
+    resources: { [k: string]: Y } | Y[] | undefined,
     retrieveExistingResources: () => Promise<D[]>,
     format: (resource: D) => string,
     output: any[],
@@ -71,7 +70,7 @@ export default class PlatformInfo {
       this.log.progress('component-info', `Retrieving ${resourceType}`);
       this.log.notice(`${resourceType}`);
       const existing = (await retrieveExistingResources()).filter((e) =>
-        isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
+        isTemplateResource<Y, D>(context, e, resourceType, resources ?? {}),
       );
 
       await Promise.all(
@@ -117,10 +116,10 @@ export default class PlatformInfo {
         .list()
         .then((i) => i.items);
 
-    await this.wrapper<YMonitor, PlatformMonitor>(
+    await this.wrapper<Monitor, PlatformMonitor>(
       this.serverless,
       'Monitors',
-      this.serverless.service.resources?.Resources?.monitors,
+      this.resources?.monitors,
       listMonitors,
       (resource: PlatformMonitor) => `${resource.stackResourceId}: ${resource.subscriberId}`,
       stdOut.monitors,
@@ -131,10 +130,10 @@ export default class PlatformInfo {
       getActionClient(this.teamKey!)
         .list()
         .then((r) => r.items);
-    await this.wrapper<YAction, PlatformAction>(
+    await this.wrapper<Action, PlatformAction>(
       this.serverless,
       'Actions',
-      this.serverless.service.functions as unknown as YAction[],
+      this.resources.actions,
       listActions,
       (resource: PlatformAction) => `${resource.stackResourceId}: ${resource.actionkId}`,
       stdOut.actions,
@@ -142,10 +141,10 @@ export default class PlatformInfo {
 
     // Contracts
     const listContracts = () => getProposalClient(this.teamKey!).listContracts();
-    await this.wrapper<YContract, PlatformContract>(
+    await this.wrapper<Contract, PlatformContract>(
       this.serverless,
       'Contracts',
-      this.serverless.service.resources?.Resources?.contracts,
+      this.resources?.contracts,
       listContracts,
       (resource: PlatformContract) => `${resource.network}-${resource.address}: ${resource.name}`,
       stdOut.contracts,
@@ -156,10 +155,10 @@ export default class PlatformInfo {
       getRelayClient(this.teamKey!)
         .list()
         .then((r) => r.items);
-    await this.wrapper<YRelayer, PlatformRelayer>(
+    await this.wrapper<Relayer, PlatformRelayer>(
       this.serverless,
       'Relayers',
-      this.serverless.service.resources?.Resources?.relayers,
+      this.resources?.relayers,
       listRelayers,
       (resource: PlatformRelayer) => `${resource.stackResourceId}: ${resource.relayerId}`,
       stdOut.relayers,
@@ -167,10 +166,10 @@ export default class PlatformInfo {
 
     // Notifications
     const listNotifications = () => getMonitorClient(this.teamKey!).listNotificationChannels();
-    await this.wrapper<YNotification, PlatformNotification>(
+    await this.wrapper<Notification, PlatformNotification>(
       this.serverless,
       'Notifications',
-      this.serverless.service.resources?.Resources?.notifications,
+      this.resources?.notifications,
       listNotifications,
       (resource: PlatformNotification) => `${resource.stackResourceId}: ${resource.notificationId}`,
       stdOut.notifications,
@@ -178,10 +177,10 @@ export default class PlatformInfo {
 
     // Categories
     const listNotificationCategories = () => getMonitorClient(this.teamKey!).listNotificationCategories();
-    await this.wrapper<YCategory, PlatformCategory>(
+    await this.wrapper<Category, PlatformCategory>(
       this.serverless,
       'Categories',
-      this.serverless.service.resources?.Resources?.categories,
+      this.resources?.categories,
       listNotificationCategories,
       (resource: PlatformCategory) => `${resource.stackResourceId}: ${resource.categoryId}`,
       stdOut.categories,
@@ -193,7 +192,7 @@ export default class PlatformInfo {
         .listSecrets()
         .then((r) => r.secretNames ?? []);
 
-    const allSecrets = getConsolidatedSecrets(this.serverless);
+    const allSecrets = getConsolidatedSecrets(this.serverless, this.resources);
 
     await this.wrapper<YSecret, string>(
       this.serverless,

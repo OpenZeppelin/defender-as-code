@@ -4,9 +4,9 @@
 
 # relayers Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                            |
-| :-------------------- | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-relayer.md "#/properties/relayers/additionalProperties") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                        |
+| :-------------------- | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-relayer.md "resources.schema.json#/properties/relayers/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-relayer.md "#/properties/relayers/additionalProperties")
+*   defined in: [Resources](definitions-definitions-relayer.md "resources.schema.json#/properties/relayers/additionalProperties")
 
 ### additionalProperties Type
 

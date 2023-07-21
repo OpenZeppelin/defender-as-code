@@ -8,11 +8,11 @@
 
 # additionalProperties Properties
 
-| Property                            | Type     | Required | Nullable       | Defined by                                                                                                                                         |
-| :---------------------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-category-properties-name.md "#/definitions/category/properties/name")                               |
-| [description](#description)         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-description.md "#/definitions/category/properties/description")                 |
-| [notificationIds](#notificationids) | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-categorynotificationids.md "#/definitions/category/properties/notificationIds") |
+| Property                              | Type     | Required | Nullable       | Defined by                                                                                                                                                        |
+| :------------------------------------ | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                         | `string` | Required | cannot be null | [Definitions](definitions-definitions-category-properties-name.md "definitions.schema.json#/definitions/category/properties/name")                                |
+| [description](#description)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-description.md "definitions.schema.json#/definitions/category/properties/description")                  |
+| [notification-ids](#notification-ids) | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-categorynotificationids.md "definitions.schema.json#/definitions/category/properties/notification-ids") |
 
 ## name
 
@@ -26,7 +26,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-category-properties-name.md "#/definitions/category/properties/name")
+*   defined in: [Definitions](definitions-definitions-category-properties-name.md "definitions.schema.json#/definitions/category/properties/name")
 
 ### name Type
 
@@ -44,17 +44,17 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-category-properties-description.md "#/definitions/category/properties/description")
+*   defined in: [Definitions](definitions-definitions-category-properties-description.md "definitions.schema.json#/definitions/category/properties/description")
 
 ### description Type
 
 `string`
 
-## notificationIds
+## notification-ids
 
 
 
-`notificationIds`
+`notification-ids`
 
 *   is optional
 
@@ -62,8 +62,8 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-category-properties-categorynotificationids.md "#/definitions/category/properties/notificationIds")
+*   defined in: [Definitions](definitions-definitions-category-properties-categorynotificationids.md "definitions.schema.json#/definitions/category/properties/notification-ids")
 
-### notificationIds Type
+### notification-ids Type
 
 `object[]` ([Notification](definitions-definitions-notification.md))

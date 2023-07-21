@@ -8,10 +8,10 @@
 
 # 1 Properties
 
-| Property                | Type     | Required | Nullable       | Defined by                                                                                                                                    |
-| :---------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
-| [bot-token](#bot-token) | `string` | Required | cannot be null | [Definitions](definitions-definitions-telegramconfig-properties-bot-token.md "#/definitions/telegramBotConfig/properties/bot-token") |
-| [chat-id](#chat-id)     | `string` | Required | cannot be null | [Definitions](definitions-definitions-telegramconfig-properties-chat-id.md "#/definitions/telegramBotConfig/properties/chat-id")     |
+| Property                | Type     | Required | Nullable       | Defined by                                                                                                                                                  |
+| :---------------------- | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [bot-token](#bot-token) | `string` | Required | cannot be null | [Definitions](definitions-definitions-telegramconfig-properties-bot-token.md "definitions.schema.json#/definitions/telegramBotConfig/properties/bot-token") |
+| [chat-id](#chat-id)     | `string` | Required | cannot be null | [Definitions](definitions-definitions-telegramconfig-properties-chat-id.md "definitions.schema.json#/definitions/telegramBotConfig/properties/chat-id")     |
 
 ## bot-token
 
@@ -25,7 +25,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-telegramconfig-properties-bot-token.md "#/definitions/telegramBotConfig/properties/bot-token")
+*   defined in: [Definitions](definitions-definitions-telegramconfig-properties-bot-token.md "definitions.schema.json#/definitions/telegramBotConfig/properties/bot-token")
 
 ### bot-token Type
 
@@ -43,7 +43,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-telegramconfig-properties-chat-id.md "#/definitions/telegramBotConfig/properties/chat-id")
+*   defined in: [Definitions](definitions-definitions-telegramconfig-properties-chat-id.md "definitions.schema.json#/definitions/telegramBotConfig/properties/chat-id")
 
 ### chat-id Type
 

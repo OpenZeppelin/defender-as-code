@@ -8,10 +8,10 @@
 
 # 2 Properties
 
-| Property                        | Type     | Required | Nullable       | Defined by                                                                                                                                       |
-| :------------------------------ | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [api-key](#api-key)             | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "#/definitions/datadogConfig/properties/api-key")             |
-| [metric-prefix](#metric-prefix) | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "#/definitions/datadogConfig/properties/metric-prefix") |
+| Property                        | Type     | Required | Nullable       | Defined by                                                                                                                                                     |
+| :------------------------------ | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [api-key](#api-key)             | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "definitions.schema.json#/definitions/datadogConfig/properties/api-key")             |
+| [metric-prefix](#metric-prefix) | `string` | Required | cannot be null | [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "definitions.schema.json#/definitions/datadogConfig/properties/metric-prefix") |
 
 ## api-key
 
@@ -25,7 +25,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "#/definitions/datadogConfig/properties/api-key")
+*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-api-key.md "definitions.schema.json#/definitions/datadogConfig/properties/api-key")
 
 ### api-key Type
 
@@ -43,7 +43,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "#/definitions/datadogConfig/properties/metric-prefix")
+*   defined in: [Definitions](definitions-definitions-datadogconfig-properties-metric-prefix.md "definitions.schema.json#/definitions/datadogConfig/properties/metric-prefix")
 
 ### metric-prefix Type
 

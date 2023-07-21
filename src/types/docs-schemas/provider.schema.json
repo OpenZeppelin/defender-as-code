@@ -1,12 +1,12 @@
 {
+  "$id": "provider.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Provider",
   "type": "object",
   "properties": {
-    "name": { "type": "string" },
     "stage": { "type": "string" },
     "stackName": { "type": "string" },
     "ssot": { "type": "boolean" }
   },
-  "required": ["name", "stage", "stackName"]
+  "required": ["stage", "stackName"]
 }

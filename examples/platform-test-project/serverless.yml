@@ -83,6 +83,8 @@ resources:
       min-balance: 1000
       # optional
       policy: ${self:resources.policies.policy-1}
+      api-keys:
+        - key1
     relayer-2:
       name: 'Test Relayer 2'
       network: 'mainnet'
@@ -95,10 +97,10 @@ resources:
   notifications:
     email-1:
       type: 'email'
-      name: 'Nami'
+      name: 'CTO Email'
       config:
         emails:
-          - ${self:custom.config.notifications.nami}
+          - ${self:custom.config.notifications.cto-email}
       paused: false
     slack-1:
       type: 'slack'
@@ -190,8 +192,7 @@ resources:
         severity: 2 # optional (unknown=0, info=1, low=2, medium=3, high=4, critical=5)
         # optional
         alert-ids:
-          - '123'
-          - '456'
+          - '0x1ef2600454e8ed808cc0411a4d653679cc7a1b73d320388cee1e0fc0412490a3'
       # optional
       forta-node-id: '123'
       # optional if addresses is defined

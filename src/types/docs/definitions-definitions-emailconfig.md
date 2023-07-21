@@ -8,9 +8,9 @@
 
 # 0 Properties
 
-| Property          | Type    | Required | Nullable       | Defined by                                                                                                                     |
-| :---------------- | :------ | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------- |
-| [emails](#emails) | `array` | Required | cannot be null | [Definitions](definitions-definitions-emailconfig-properties-emails.md "#/definitions/emailConfig/properties/emails") |
+| Property          | Type    | Required | Nullable       | Defined by                                                                                                                                   |
+| :---------------- | :------ | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| [emails](#emails) | `array` | Required | cannot be null | [Definitions](definitions-definitions-emailconfig-properties-emails.md "definitions.schema.json#/definitions/emailConfig/properties/emails") |
 
 ## emails
 
@@ -24,7 +24,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-emailconfig-properties-emails.md "#/definitions/emailConfig/properties/emails")
+*   defined in: [Definitions](definitions-definitions-emailconfig-properties-emails.md "definitions.schema.json#/definitions/emailConfig/properties/emails")
 
 ### emails Type
 

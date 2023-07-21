@@ -4,11 +4,11 @@
 
 # trigger Properties
 
-| Property                | Type      | Required | Nullable       | Defined by                                                                                                                                                              |
-| :---------------------- | :-------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [type](#type)           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger-properties-triggertype.md "#/definitions/action/properties/trigger/properties/type")           |
-| [cron](#cron)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-trigger-properties-triggercron.md "#/definitions/action/properties/trigger/properties/cron")           |
-| [frequency](#frequency) | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-trigger-properties-triggerfrequency.md "#/definitions/action/properties/trigger/properties/frequency") |
+| Property                | Type      | Required | Nullable       | Defined by                                                                                                                                                                            |
+| :---------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [type](#type)           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger-properties-triggertype.md "definitions.schema.json#/definitions/action/properties/trigger/properties/type")           |
+| [cron](#cron)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-trigger-properties-triggercron.md "definitions.schema.json#/definitions/action/properties/trigger/properties/cron")           |
+| [frequency](#frequency) | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-trigger-properties-triggerfrequency.md "definitions.schema.json#/definitions/action/properties/trigger/properties/frequency") |
 
 ## type
 
@@ -22,7 +22,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action-properties-trigger-properties-triggertype.md "#/definitions/action/properties/trigger/properties/type")
+*   defined in: [Definitions](definitions-definitions-action-properties-trigger-properties-triggertype.md "definitions.schema.json#/definitions/action/properties/trigger/properties/type")
 
 ### type Type
 
@@ -51,7 +51,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action-properties-trigger-properties-triggercron.md "#/definitions/action/properties/trigger/properties/cron")
+*   defined in: [Definitions](definitions-definitions-action-properties-trigger-properties-triggercron.md "definitions.schema.json#/definitions/action/properties/trigger/properties/cron")
 
 ### cron Type
 
@@ -69,7 +69,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action-properties-trigger-properties-triggerfrequency.md "#/definitions/action/properties/trigger/properties/frequency")
+*   defined in: [Definitions](definitions-definitions-action-properties-trigger-properties-triggerfrequency.md "definitions.schema.json#/definitions/action/properties/trigger/properties/frequency")
 
 ### frequency Type
 

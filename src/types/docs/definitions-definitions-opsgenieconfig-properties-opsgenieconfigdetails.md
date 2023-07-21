@@ -4,9 +4,9 @@
 
 # details Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                                                                     |
-| :-------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails-additionalproperties.md "#/definitions/opsgenieConfig/properties/details/additionalProperties") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                   |
+| :-------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails-additionalproperties.md "definitions.schema.json#/definitions/opsgenieConfig/properties/details/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails-additionalproperties.md "#/definitions/opsgenieConfig/properties/details/additionalProperties")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails-additionalproperties.md "definitions.schema.json#/definitions/opsgenieConfig/properties/details/additionalProperties")
 
 ### additionalProperties Type
 

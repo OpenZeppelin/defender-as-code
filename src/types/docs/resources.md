@@ -4,17 +4,17 @@
 
 # Resources Properties
 
-| Property                                            | Type     | Required | Nullable       | Defined by                                                                                                   |
-| :-------------------------------------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------- |
-| [actions](#actions)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-actions.md "#/properties/actions")                                 |
-| [notifications](#notifications)                     | `object` | Optional | cannot be null | [Resources](resources-properties-notifications.md "#/properties/notifications")                     |
-| [categories](#categories)                           | `object` | Optional | cannot be null | [Resources](resources-properties-categories.md "#/properties/categories")                           |
-| [relayers](#relayers)                               | `object` | Optional | cannot be null | [Resources](resources-properties-relayers.md "#/properties/relayers")                               |
-| [policies](#policies)                               | `object` | Optional | cannot be null | [Resources](resources-properties-policies.md "#/properties/policies")                               |
-| [contracts](#contracts)                             | `object` | Optional | cannot be null | [Resources](resources-properties-contracts.md "#/properties/contracts")                             |
-| [secrets](#secrets)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-actionsecrets.md "#/properties/secrets")                           |
-| [monitors](#monitors)                               | `object` | Optional | cannot be null | [Resources](resources-properties-monitors.md "#/properties/monitors")                               |
-| [block-explorer-api-keys](#block-explorer-api-keys) | `object` | Optional | cannot be null | [Resources](resources-properties-block-explorer-api-keys.md "#/properties/block-explorer-api-keys") |
+| Property                                            | Type     | Required | Nullable       | Defined by                                                                                                               |
+| :-------------------------------------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------- |
+| [actions](#actions)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-actions.md "resources.schema.json#/properties/actions")                                 |
+| [notifications](#notifications)                     | `object` | Optional | cannot be null | [Resources](resources-properties-notifications.md "resources.schema.json#/properties/notifications")                     |
+| [categories](#categories)                           | `object` | Optional | cannot be null | [Resources](resources-properties-categories.md "resources.schema.json#/properties/categories")                           |
+| [relayers](#relayers)                               | `object` | Optional | cannot be null | [Resources](resources-properties-relayers.md "resources.schema.json#/properties/relayers")                               |
+| [policies](#policies)                               | `object` | Optional | cannot be null | [Resources](resources-properties-policies.md "resources.schema.json#/properties/policies")                               |
+| [contracts](#contracts)                             | `object` | Optional | cannot be null | [Resources](resources-properties-contracts.md "resources.schema.json#/properties/contracts")                             |
+| [secrets](#secrets)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-actionsecrets.md "resources.schema.json#/properties/secrets")                           |
+| [monitors](#monitors)                               | `object` | Optional | cannot be null | [Resources](resources-properties-monitors.md "resources.schema.json#/properties/monitors")                               |
+| [block-explorer-api-keys](#block-explorer-api-keys) | `object` | Optional | cannot be null | [Resources](resources-properties-block-explorer-api-keys.md "resources.schema.json#/properties/block-explorer-api-keys") |
 
 ## actions
 
@@ -28,7 +28,7 @@
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-actions.md "#/properties/actions")
+*   defined in: [Resources](resources-properties-actions.md "resources.schema.json#/properties/actions")
 
 ### actions Type
 
@@ -46,7 +46,7 @@
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-notifications.md "#/properties/notifications")
+*   defined in: [Resources](resources-properties-notifications.md "resources.schema.json#/properties/notifications")
 
 ### notifications Type
 
@@ -64,7 +64,7 @@
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-categories.md "#/properties/categories")
+*   defined in: [Resources](resources-properties-categories.md "resources.schema.json#/properties/categories")
 
 ### categories Type
 
@@ -82,7 +82,7 @@
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-relayers.md "#/properties/relayers")
+*   defined in: [Resources](resources-properties-relayers.md "resources.schema.json#/properties/relayers")
 
 ### relayers Type
 
@@ -100,7 +100,7 @@
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-policies.md "#/properties/policies")
+*   defined in: [Resources](resources-properties-policies.md "resources.schema.json#/properties/policies")
 
 ### policies Type
 
@@ -118,7 +118,7 @@
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-contracts.md "#/properties/contracts")
+*   defined in: [Resources](resources-properties-contracts.md "resources.schema.json#/properties/contracts")
 
 ### contracts Type
 
@@ -136,7 +136,7 @@
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-actionsecrets.md "#/properties/secrets")
+*   defined in: [Resources](resources-properties-actionsecrets.md "resources.schema.json#/properties/secrets")
 
 ### secrets Type
 
@@ -154,7 +154,7 @@
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-monitors.md "#/properties/monitors")
+*   defined in: [Resources](resources-properties-monitors.md "resources.schema.json#/properties/monitors")
 
 ### monitors Type
 
@@ -172,7 +172,7 @@
 
 *   cannot be null
 
-*   defined in: [Resources](resources-properties-block-explorer-api-keys.md "#/properties/block-explorer-api-keys")
+*   defined in: [Resources](resources-properties-block-explorer-api-keys.md "resources.schema.json#/properties/block-explorer-api-keys")
 
 ### block-explorer-api-keys Type
 

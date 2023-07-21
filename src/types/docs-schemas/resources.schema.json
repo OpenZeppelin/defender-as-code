@@ -1,4 +1,5 @@
 {
+  "$id": "resources.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Resources",
   "type": "object",
@@ -8,7 +9,7 @@
       "title": "Actions",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json/#/definitions/action",
+        "$ref": "definitions.schema.json#/definitions/action",
         "format": "uri-reference"
       }
     },
@@ -16,7 +17,7 @@
       "title": "Notifications",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json/#/definitions/notification",
+        "$ref": "definitions.schema.json#/definitions/notification",
         "format": "uri-reference"
       }
     },
@@ -24,7 +25,7 @@
       "title": "Categories",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json/#/definitions/category",
+        "$ref": "definitions.schema.json#/definitions/category",
         "format": "uri-reference"
       }
     },
@@ -32,7 +33,7 @@
       "title": "Relayers",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json/#/definitions/relayer",
+        "$ref": "definitions.schema.json#/definitions/relayer",
         "format": "uri-reference"
       }
     },
@@ -40,7 +41,7 @@
       "title": "Policies",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json/#/definitions/policy",
+        "$ref": "definitions.schema.json#/definitions/policy",
         "format": "uri-reference"
       }
     },
@@ -48,7 +49,7 @@
       "title": "Contracts",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json/#/definitions/contract",
+        "$ref": "definitions.schema.json#/definitions/contract",
         "format": "uri-reference"
       }
     },
@@ -57,15 +58,15 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "global": { "title": "Global", "type": "object", "additionalProperties": { "type": "string" } },
-        "stack": { "title": "Stack", "type": "object", "additionalProperties": { "type": "string" } }
+        "global": { "title": "GlobalSecrets", "type": "object", "additionalProperties": { "type": "string" } },
+        "stack": { "title": "StackSecrets", "type": "object", "additionalProperties": { "type": "string" } }
       }
     },
     "monitors": {
       "title": "Monitors",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json/#/definitions/monitor",
+        "$ref": "definitions.schema.json#/definitions/monitor",
         "format": "uri-reference"
       }
     },
@@ -73,7 +74,7 @@
       "title": "Block Explorer Api Keys",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json/#/definitions/blockExplorerApiKey",
+        "$ref": "definitions.schema.json#/definitions/blockExplorerApiKey",
         "format": "uri-reference"
       }
     }

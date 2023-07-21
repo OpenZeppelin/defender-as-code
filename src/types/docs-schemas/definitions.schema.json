@@ -1,4 +1,5 @@
 {
+  "$id": "definitions.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Definitions",
   "definitions": {
@@ -14,9 +15,6 @@
       "enum": [
         "mainnet",
         "sepolia",
-        "rinkeby",
-        "ropsten",
-        "kovan",
         "goerli",
         "xdai",
         "sokol",
@@ -33,11 +31,9 @@
         "avalanche",
         "fuji",
         "optimism",
-        "optimism-kovan",
         "optimism-goerli",
         "arbitrum",
         "arbitrum-nova",
-        "arbitrum-rinkeby",
         "arbitrum-goerli",
         "celo",
         "alfajores",
@@ -70,13 +66,13 @@
       "type": "object",
       "properties": {
         "name": { "type": "string" },
-        "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
+        "network": { "$ref": "definitions.schema.json#/definitions/network", "format": "uri-reference" },
         "min-balance": { "type": "integer" },
         "address-from-relayer": {
           "title": "AddressFromRelayer",
           "type": "object"
         },
-        "policy": { "$ref": "definitions.schema.json/#/definitions/policy", "format": "uri-reference" },
+        "policy": { "$ref": "definitions.schema.json#/definitions/policy", "format": "uri-reference" },
         "api-keys": {
           "title": "RelayerAPIKeys",
           "type": "array",
@@ -90,9 +86,9 @@
       "type": "object",
       "properties": {
         "name": { "type": "string" },
-        "address": { "$ref": "definitions.schema.json/#/definitions/address", "format": "uri-reference" },
-        "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
-        "abi": { "$ref": "definitions.schema.json/#/definitions/abi" },
+        "address": { "$ref": "definitions.schema.json#/definitions/address", "format": "uri-reference" },
+        "network": { "$ref": "definitions.schema.json#/definitions/network", "format": "uri-reference" },
+        "abi": { "$ref": "definitions.schema.json#/definitions/abi" },
         "nat-spec": { "type": "string" }
       },
       "required": ["name", "address", "network"]
@@ -174,7 +170,7 @@
           "type": "string"
         },
         "type": {
-          "$ref": "definitions.schema.json/#/definitions/opsgenieUserType"
+          "$ref": "definitions.schema.json#/definitions/opsgenieUserType"
         }
       },
       "required": ["type", "username"],
@@ -187,7 +183,7 @@
           "type": "string"
         },
         "instanceLocation": {
-          "$ref": "definitions.schema.json/#/definitions/opsgenieInstanceLocation"
+          "$ref": "definitions.schema.json#/definitions/opsgenieInstanceLocation"
         },
         "alias": {
           "type": "string",
@@ -197,14 +193,14 @@
           "title": "OpsgenieConfigResponders",
           "type": "array",
           "items": {
-            "$ref": "definitions.schema.json/#/definitions/opsgenieUser"
+            "$ref": "definitions.schema.json#/definitions/opsgenieUser"
           }
         },
         "visibleTo": {
           "title": "OpsgenieConfigVisibleTo",
           "type": "array",
           "items": {
-            "$ref": "definitions.schema.json/#/definitions/opsgenieUser"
+            "$ref": "definitions.schema.json#/definitions/opsgenieUser"
           }
         },
         "actions": {
@@ -237,7 +233,7 @@
           "maxLength": 512
         },
         "priority": {
-          "$ref": "definitions.schema.json/#/definitions/opsgeniePriorityLevel"
+          "$ref": "definitions.schema.json#/definitions/opsgeniePriorityLevel"
         },
         "note": {
           "type": "string",
@@ -269,7 +265,7 @@
           "type": "string"
         },
         "eventType": {
-          "$ref": "definitions.schema.json/#/definitions/pagerDutyEventType"
+          "$ref": "definitions.schema.json#/definitions/pagerDutyEventType"
         },
         "routingKey": {
           "type": "string",
@@ -277,14 +273,14 @@
           "minLength": 32
         },
         "eventAction": {
-          "$ref": "definitions.schema.json/#/definitions/pagerDutyEventAction"
+          "$ref": "definitions.schema.json#/definitions/pagerDutyEventAction"
         },
         "dedupKey": {
           "type": "string",
           "maxLength": 255
         },
         "severity": {
-          "$ref": "definitions.schema.json/#/definitions/pagerDutySeverity"
+          "$ref": "definitions.schema.json#/definitions/pagerDutySeverity"
         },
         "component": {
           "type": "string"
@@ -320,19 +316,19 @@
       "title": "Notification",
       "type": "object",
       "properties": {
-        "type": { "$ref": "definitions.schema.json/#/definitions/notificationType", "format": "uri-reference" },
+        "type": { "$ref": "definitions.schema.json#/definitions/notificationType", "format": "uri-reference" },
         "name": { "type": "string" },
         "paused": { "type": "boolean" },
         "config": {
           "title": "Config",
           "type": "object",
           "oneOf": [
-            { "$ref": "definitions.schema.json/#/definitions/emailConfig", "format": "uri-reference" },
-            { "$ref": "definitions.schema.json/#/definitions/telegramBotConfig", "format": "uri-reference" },
-            { "$ref": "definitions.schema.json/#/definitions/datadogConfig", "format": "uri-reference" },
-            { "$ref": "definitions.schema.json/#/definitions/urlConfig", "format": "uri-reference" },
-            { "$ref": "definitions.schema.json/#/definitions/opsgenieConfig", "format": "uri-reference" },
-            { "$ref": "definitions.schema.json/#/definitions/pagerDutyConfig", "format": "uri-reference" }
+            { "$ref": "definitions.schema.json#/definitions/emailConfig", "format": "uri-reference" },
+            { "$ref": "definitions.schema.json#/definitions/telegramBotConfig", "format": "uri-reference" },
+            { "$ref": "definitions.schema.json#/definitions/datadogConfig", "format": "uri-reference" },
+            { "$ref": "definitions.schema.json#/definitions/urlConfig", "format": "uri-reference" },
+            { "$ref": "definitions.schema.json#/definitions/opsgenieConfig", "format": "uri-reference" },
+            { "$ref": "definitions.schema.json#/definitions/pagerDutyConfig", "format": "uri-reference" }
           ]
         }
       },
@@ -344,10 +340,10 @@
       "properties": {
         "name": { "type": "string" },
         "description": { "type": "string" },
-        "notificationIds": {
+        "notification-ids": {
           "title": "CategoryNotificationIds",
           "type": "array",
-          "items": { "$ref": "definitions.schema.json/#/definitions/notification", "format": "uri-reference" }
+          "items": { "$ref": "definitions.schema.json#/definitions/notification", "format": "uri-reference" }
         }
       },
       "required": ["name"]
@@ -358,21 +354,22 @@
       "properties": {
         "name": { "type": "string" },
         "type": { "type": "string", "enum": ["BLOCK"] },
-        "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
+        "network": { "$ref": "definitions.schema.json#/definitions/network", "format": "uri-reference" },
         "addresses": {
           "title": "Addresses",
           "type": "array",
-          "items": { "$ref": "definitions.schema.json/#/definitions/address", "format": "uri-reference" }
+          "items": { "$ref": "definitions.schema.json#/definitions/address", "format": "uri-reference" }
         },
-        "abi": { "$ref": "definitions.schema.json/#/definitions/abi" },
+        "abi": { "$ref": "definitions.schema.json#/definitions/abi" },
         "alert-threshold": {
           "title": "AlertThreshold",
           "type": "object",
-          "properties": { "amount": { "type": "integer" }, "window-seconds": { "type": "integer" } }
+          "properties": { "amount": { "type": "integer" }, "window-seconds": { "type": "integer" } },
+          "required": ["amount", "window-seconds"]
         },
         "paused": { "type": "boolean" },
-        "action-condition": { "$ref": "definitions.schema.json/#/definitions/action", "format": "uri-reference" },
-        "action-trigger": { "$ref": "definitions.schema.json/#/definitions/action", "format": "uri-reference" },
+        "action-condition": { "$ref": "definitions.schema.json#/definitions/action", "format": "uri-reference" },
+        "action-trigger": { "$ref": "definitions.schema.json#/definitions/action", "format": "uri-reference" },
         "confirm-level": {
           "oneOf": [{ "type": "string", "enum": ["safe", "finalized"] }, { "type": "integer" }]
         },
@@ -383,11 +380,11 @@
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
             "message-subject": { "type": "string" },
-            "category": { "$ref": "definitions.schema.json/#/definitions/category", "format": "uri-reference" },
+            "category": { "$ref": "definitions.schema.json#/definitions/category", "format": "uri-reference" },
             "channels": {
               "title": "Channels",
               "type": "array",
-              "items": { "$ref": "definitions.schema.json/#/definitions/notification", "format": "uri-reference" }
+              "items": { "$ref": "definitions.schema.json#/definitions/notification", "format": "uri-reference" }
             }
           },
           "required": ["channels"]
@@ -419,7 +416,7 @@
             "transaction": { "type": "string" }
           }
         },
-        "risk-category": { "$ref": "definitions.schema.json/#/definitions/risk-category" }
+        "risk-category": { "$ref": "definitions.schema.json#/definitions/risk-category" }
       },
       "required": ["name", "type", "network", "addresses", "notify-config"]
     },
@@ -429,21 +426,21 @@
       "properties": {
         "name": { "type": "string" },
         "type": { "type": "string", "enum": ["FORTA"] },
-        "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" },
+        "network": { "$ref": "definitions.schema.json#/definitions/network", "format": "uri-reference" },
         "addresses": {
           "title": "Addresses",
           "type": "array",
-          "items": { "$ref": "definitions.schema.json/#/definitions/address", "format": "uri-reference" }
+          "items": { "$ref": "definitions.schema.json#/definitions/address", "format": "uri-reference" }
         },
-        "abi": { "$ref": "definitions.schema.json/#/definitions/abi" },
+        "abi": { "$ref": "definitions.schema.json#/definitions/abi" },
         "alert-threshold": {
           "title": "AlertThreshold",
           "type": "object",
           "properties": { "amount": { "type": "integer" }, "window-seconds": { "type": "integer" } }
         },
         "paused": { "type": "boolean" },
-        "action-condition": { "$ref": "definitions.schema.json/#/definitions/action", "format": "uri-reference" },
-        "action-trigger": { "$ref": "definitions.schema.json/#/definitions/action", "format": "uri-reference" },
+        "action-condition": { "$ref": "definitions.schema.json#/definitions/action", "format": "uri-reference" },
+        "action-trigger": { "$ref": "definitions.schema.json#/definitions/action", "format": "uri-reference" },
         "notify-config": {
           "title": "NotifyConfig",
           "type": "object",
@@ -451,11 +448,11 @@
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
             "message-subject": { "type": "string" },
-            "category": { "$ref": "definitions.schema.json/#/definitions/category", "format": "uri-reference" },
+            "category": { "$ref": "definitions.schema.json#/definitions/category", "format": "uri-reference" },
             "channels": {
               "title": "Channels",
               "type": "array",
-              "items": { "$ref": "definitions.schema.json/#/definitions/notification", "format": "uri-reference" }
+              "items": { "$ref": "definitions.schema.json#/definitions/notification", "format": "uri-reference" }
             }
           },
           "required": ["channels"]
@@ -475,29 +472,22 @@
           "required": ["min-scanner-count"]
         },
         "forta-node-id": { "type": "string" },
+        "forta-last-processed-time": { "type": "string" },
         "agent-ids": {
           "title": "AgentIDs",
           "type": "array",
           "items": { "type": "string" }
         },
-        "risk-category": { "$ref": "definitions.schema.json/#/definitions/risk-category" }
+        "risk-category": { "$ref": "definitions.schema.json#/definitions/risk-category" }
       },
-      "anyOf": [
-        {
-          "required": ["agent-ids"]
-        },
-        {
-          "required": ["addresses"]
-        }
-      ],
       "required": ["name", "type", "network", "notify-config"]
     },
     "monitor": {
       "title": "Monitor",
       "type": "object",
       "oneOf": [
-        { "$ref": "definitions.schema.json/#/definitions/blockMonitor", "format": "uri-reference" },
-        { "$ref": "definitions.schema.json/#/definitions/fortaMonitor", "format": "uri-reference" }
+        { "$ref": "definitions.schema.json#/definitions/blockMonitor", "format": "uri-reference" },
+        { "$ref": "definitions.schema.json#/definitions/fortaMonitor", "format": "uri-reference" }
       ]
     },
     "action": {
@@ -506,7 +496,7 @@
       "properties": {
         "name": { "type": "string" },
         "path": { "type": "string" },
-        "relayer": { "$ref": "definitions.schema.json/#/definitions/relayer", "format": "uri-reference" },
+        "relayer": { "$ref": "definitions.schema.json#/definitions/relayer", "format": "uri-reference" },
         "trigger": {
           "title": "Trigger",
           "type": "object",
@@ -544,7 +534,7 @@
       "type": "object",
       "properties": {
         "key": { "type": "string" },
-        "network": { "$ref": "definitions.schema.json/#/definitions/network", "format": "uri-reference" }
+        "network": { "$ref": "definitions.schema.json#/definitions/network", "format": "uri-reference" }
       },
       "required": ["key", "network"]
     },

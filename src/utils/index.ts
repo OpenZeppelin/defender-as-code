@@ -10,8 +10,6 @@ import { DeployClient } from '@openzeppelin/platform-sdk-deploy-client';
 
 import {
   YSecret,
-  YMonitor,
-  YNotification,
   YTelegramConfig,
   YSlackConfig,
   YEmailConfig,
@@ -22,19 +20,27 @@ import {
   PlatformAction,
   PlatformNotification,
   TeamKey,
-  YContract,
   PlatformContract,
   ResourceType,
   PlatformBlockWatcher,
-  YCategory,
   PlatformCategory,
   PlatformAPIError,
-  YAction,
   PlatformNotificationReference,
   PlatformFortaMonitor,
   PlatformBlockMonitor,
+  Resources,
 } from '../types';
 import { sanitise } from './sanitise';
+import {
+  Action,
+  ActionSecrets,
+  AlertThreshold,
+  Category,
+  Contract,
+  Monitor,
+  Notification,
+  NotifyConfig,
+} from '../types/types/resources.schema';
 
 /**
  * @dev this function retrieves the Platform equivalent object of the provided template resource
@@ -43,11 +49,11 @@ import { sanitise } from './sanitise';
 export const getEquivalentResource = <Y, D>(
   context: Serverless,
   resource: Y,
-  resources: Y[] | undefined,
+  resources: { [k: string]: Y } | undefined,
   currentResources: D[],
 ) => {
   if (resource) {
-    const [key, value] = Object.entries(resources ?? []).find((a) => _.isEqual(a[1], resource))!;
+    const [key, value] = Object.entries(resources ?? {}).find((a) => _.isEqual(a[1], resource))!;
     return currentResources.find((e: D) => (e as any).stackResourceId === getResourceID(getStackName(context), key));
   }
 };
@@ -63,9 +69,11 @@ export const getEquivalentResourceByKey = <D>(resourceKey: string, currentResour
 /**
  * @dev returns both a list of consolidated secrets for both global and stack, where the latter will be preceded with the stack name.
  * */
-export const getConsolidatedSecrets = (context: Serverless): YSecret[] => {
-  const globalSecrets: YSecret = context.service.resources?.Resources?.secrets?.global ?? {};
-  const stackSecrets: YSecret = context.service.resources?.Resources?.secrets?.stack ?? {};
+export const getConsolidatedSecrets = (context: Serverless, resources: Resources): YSecret[] => {
+  const secrets: ActionSecrets = resources?.secrets ?? {};
+  const globalSecrets = secrets.global ?? {};
+  const stackSecrets = secrets.stack ?? {};
+
   const stackSecretsPrecededWithStackName = Object.entries(stackSecrets).map(([ssk, ssv]) => {
     return {
       [`${getStackName(context)}_${ssk}`]: ssv,
@@ -80,7 +88,7 @@ export const isTemplateResource = <Y, D>(
   context: Serverless,
   resource: D,
   resourceType: ResourceType,
-  resources: Y[],
+  resources: { [k: string]: Y } | Y[],
 ): boolean => {
   return !!Object.entries(resources).find((a) =>
     resourceType === 'Secrets'
@@ -88,8 +96,8 @@ export const isTemplateResource = <Y, D>(
         Object.keys(a[1] as unknown as YSecret)[0] === (resource as unknown as string)
       : resourceType === 'Contracts'
       ? // if contracts, compare network and address
-        (a[1] as unknown as YContract).network === (resource as unknown as PlatformContract).network &&
-        (a[1] as unknown as YContract).address === (resource as unknown as PlatformContract).address
+        (a[1] as unknown as Contract).network === (resource as unknown as PlatformContract).network &&
+        (a[1] as unknown as Contract).address === (resource as unknown as PlatformContract).address
       : // anything else, compare stackResourceId
         getResourceID(getStackName(context), a[0]) === (resource as D & { stackResourceId: string }).stackResourceId,
   );
@@ -146,7 +154,7 @@ export const getDeployClient = (key: TeamKey): DeployClient => {
   return new DeployClient(key);
 };
 
-export const constructNotification = (notification: YNotification, stackResourceId: string) => {
+export const constructNotification = (notification: Notification, stackResourceId: string) => {
   const commonNotification = {
     type: notification.type,
     name: notification.name,
@@ -205,7 +213,8 @@ export const constructNotification = (notification: YNotification, stackResource
 
 export const constructNotificationCategory = (
   context: Serverless,
-  category: YCategory,
+  resources: Resources,
+  category: Category,
   stackResourceId: string,
   notifications: PlatformNotification[],
 ) => {
@@ -215,10 +224,10 @@ export const constructNotificationCategory = (
     notificationIds: (category['notification-ids']
       ? category['notification-ids']
           .map((notification) => {
-            const maybeNotification = getEquivalentResource<YNotification, PlatformNotification>(
+            const maybeNotification = getEquivalentResource<Notification, PlatformNotification>(
               context,
               notification,
-              context.service.resources?.Resources?.notifications,
+              resources?.notifications,
               notifications,
             );
             if (maybeNotification)
@@ -238,30 +247,36 @@ const isResource = <T>(item: T | undefined): item is T => {
 
 export const constructMonitor = (
   context: Serverless,
+  resources: Resources,
   stackResourceId: string,
-  monitor: YMonitor,
+  monitor: Monitor,
   notifications: PlatformNotification[],
   actions: PlatformAction[],
   blockwatchers: PlatformBlockWatcher[],
   categories: PlatformCategory[],
 ): PlatformBlockMonitor | PlatformFortaMonitor => {
-  const actionCondition =
-    monitor['action-condition'] && actions.find((a) => a.name === monitor['action-condition']!.name);
-  const actionTrigger = monitor['action-trigger'] && actions.find((a) => a.name === monitor['action-trigger']!.name);
+  const actionCondition: PlatformAction | undefined =
+    (monitor['action-condition'] as Action) &&
+    actions.find((a) => a.name === (monitor['action-condition'] as Action)!.name);
+  const actionTrigger: PlatformAction | undefined =
+    (monitor['action-trigger'] as Action) &&
+    actions.find((a) => a.name === (monitor['action-trigger'] as Action)!.name);
 
-  const notificationChannels = monitor['notify-config'].channels
+  const notifyConfig = monitor['notify-config'] as NotifyConfig;
+  const threshold = monitor['alert-threshold'] as AlertThreshold;
+  const notificationChannels = notifyConfig.channels
     .map((notification) => {
-      const maybeNotification = getEquivalentResource<YNotification, PlatformNotification>(
+      const maybeNotification = getEquivalentResource<Notification, PlatformNotification>(
         context,
         notification,
-        context.service.resources?.Resources?.notifications,
+        resources?.notifications,
         notifications,
       );
       return maybeNotification?.notificationId;
     })
     .filter(isResource);
 
-  const monitorCategory = monitor['notify-config'].category;
+  const monitorCategory = notifyConfig.category;
   const notificationCategoryId = monitorCategory && categories.find((c) => c.name === monitorCategory.name)?.categoryId;
 
   const commonMonitor = {
@@ -273,13 +288,13 @@ export const constructMonitor = (
     paused: monitor.paused,
     autotaskCondition: actionCondition && actionCondition.actionkId,
     autotaskTrigger: actionTrigger && actionTrigger.actionkId,
-    alertThreshold: monitor['alert-threshold'] && {
-      amount: monitor['alert-threshold'].amount,
-      windowSeconds: monitor['alert-threshold']['window-seconds'],
+    alertThreshold: threshold && {
+      amount: threshold.amount,
+      windowSeconds: threshold['window-seconds'],
     },
-    alertMessageBody: monitor['notify-config'].message,
-    alertMessageSubject: monitor['notify-config']['message-subject'],
-    alertTimeoutMs: monitor['notify-config'].timeout,
+    alertMessageBody: notifyConfig.message,
+    alertMessageSubject: notifyConfig['message-subject'],
+    alertTimeoutMs: notifyConfig.timeout,
     notificationChannels,
     notificationCategoryId: _.isEmpty(notificationChannels) ? notificationCategoryId : undefined,
     riskCategory: monitor['risk-category'],
@@ -343,7 +358,7 @@ export const constructMonitor = (
 
 export const validateAdditionalPermissionsOrThrow = async <T>(
   context: Serverless,
-  resources: T[] | undefined,
+  resources: { [k: string]: T } | T[] | undefined,
   resourceType: ResourceType,
 ) => {
   if (!resources) return;
@@ -352,7 +367,7 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
     case 'Monitors':
       // Check for access to Actions
       // Enumerate all monitors, and check if any monitor has an action associated
-      const monitorssWithActions = (Object.values(resources) as unknown as YMonitor[]).filter(
+      const monitorssWithActions = (Object.values(resources) as unknown as Monitor[]).filter(
         (r) => !!r['action-condition'] || !!r['action-trigger'],
       );
       // If there are monitors with actions associated, then try to list actions
@@ -375,7 +390,7 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
     case 'Actions':
       // Check for access to Relayers
       // Enumerate all actions, and check if any action has a relayer associated
-      const actionsWithRelayers = (Object.values(resources) as unknown as YAction[]).filter((r) => !!r.relayer);
+      const actionsWithRelayers = (Object.values(resources) as unknown as Action[]).filter((r) => !!r.relayer);
       // If there are actions with relayers associated, then try to list relayers
       if (!_.isEmpty(actionsWithRelayers)) {
         try {
@@ -410,6 +425,6 @@ export const isUnauthorisedError = (e: any): boolean => {
   }
 };
 
-export const formatABI = (abi: YContract['abi']) => {
+export const formatABI = (abi: Contract['abi']) => {
   return abi && JSON.stringify(typeof abi === 'string' ? JSON.parse(abi) : abi);
 };

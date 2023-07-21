@@ -2,131 +2,131 @@
 
 ## Top-level Schemas
 
-*   [Definitions](./definitions.md) – `-`
+*   [Definitions](./definitions.md) – `definitions.schema.json`
 
-*   [Platform](./platform.md) – `-`
+*   [Platform](./platform.md) – `platform.schema.json`
 
-*   [Provider](./provider.md) – `-`
+*   [Provider](./provider.md) – `provider.schema.json`
 
-*   [Resources](./resources.md) – `-`
+*   [Resources](./resources.md) – `resources.schema.json`
 
 ## Other Schemas
 
 ### Objects
 
-*   [Action](./definitions-definitions-action.md) – `#/definitions/action`
+*   [Action](./definitions-definitions-action.md) – `definitions.schema.json#/definitions/action`
 
-*   [ActionSecrets](./resources-properties-actionsecrets.md) – `#/properties/secrets`
+*   [ActionSecrets](./resources-properties-actionsecrets.md) – `resources.schema.json#/properties/secrets`
 
-*   [Actions](./resources-properties-actions.md) – `#/properties/actions`
+*   [Actions](./resources-properties-actions.md) – `resources.schema.json#/properties/actions`
 
-*   [AddressFromRelayer](./definitions-definitions-relayer-properties-addressfromrelayer.md) – `#/definitions/relayer/properties/address-from-relayer`
+*   [AddressFromRelayer](./definitions-definitions-relayer-properties-addressfromrelayer.md) – `definitions.schema.json#/definitions/relayer/properties/address-from-relayer`
 
-*   [AlertThreshold](./definitions-definitions-blockmonitor-properties-alertthreshold.md) – `#/definitions/blockMonitor/properties/alert-threshold`
+*   [AlertThreshold](./definitions-definitions-blockmonitor-properties-alertthreshold.md) – `definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold`
 
-*   [AlertThreshold](./definitions-definitions-fortamonitor-properties-alertthreshold.md) – `#/definitions/fortaMonitor/properties/alert-threshold`
+*   [AlertThreshold](./definitions-definitions-fortamonitor-properties-alertthreshold.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/alert-threshold`
 
-*   [Block Explorer Api Keys](./resources-properties-block-explorer-api-keys.md) – `#/properties/block-explorer-api-keys`
+*   [Block Explorer Api Keys](./resources-properties-block-explorer-api-keys.md) – `resources.schema.json#/properties/block-explorer-api-keys`
 
-*   [BlockExplorerApiKey](./definitions-definitions-blockexplorerapikey.md) – `#/definitions/blockExplorerApiKey`
+*   [BlockExplorerApiKey](./definitions-definitions-blockexplorerapikey.md) – `definitions.schema.json#/definitions/blockExplorerApiKey`
 
-*   [BlockMonitor](./definitions-definitions-blockmonitor.md) – `#/definitions/blockMonitor`
+*   [BlockMonitor](./definitions-definitions-blockmonitor.md) – `definitions.schema.json#/definitions/blockMonitor`
 
-*   [Categories](./resources-properties-categories.md) – `#/properties/categories`
+*   [Categories](./resources-properties-categories.md) – `resources.schema.json#/properties/categories`
 
-*   [Category](./definitions-definitions-category.md) – `#/definitions/category`
+*   [Category](./definitions-definitions-category.md) – `definitions.schema.json#/definitions/category`
 
-*   [Conditions](./definitions-definitions-blockmonitor-properties-conditions.md) – `#/definitions/blockMonitor/properties/conditions`
+*   [Conditions](./definitions-definitions-blockmonitor-properties-conditions.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions`
 
-*   [Conditions](./definitions-definitions-fortamonitor-properties-conditions.md) – `#/definitions/fortaMonitor/properties/conditions`
+*   [Conditions](./definitions-definitions-fortamonitor-properties-conditions.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/conditions`
 
-*   [Config](./definitions-definitions-notification-properties-config.md) – `#/definitions/notification/properties/config`
+*   [Config](./definitions-definitions-notification-properties-config.md) – `definitions.schema.json#/definitions/notification/properties/config`
 
-*   [Contract](./definitions-definitions-contract.md) – `#/definitions/contract`
+*   [Contract](./definitions-definitions-contract.md) – `definitions.schema.json#/definitions/contract`
 
-*   [Contracts](./resources-properties-contracts.md) – `#/properties/contracts`
+*   [Contracts](./resources-properties-contracts.md) – `resources.schema.json#/properties/contracts`
 
-*   [DatadogConfig](./definitions-definitions-datadogconfig.md) – `#/definitions/datadogConfig`
+*   [DatadogConfig](./definitions-definitions-datadogconfig.md) – `definitions.schema.json#/definitions/datadogConfig`
 
-*   [EmailConfig](./definitions-definitions-emailconfig.md) – `#/definitions/emailConfig`
+*   [EmailConfig](./definitions-definitions-emailconfig.md) – `definitions.schema.json#/definitions/emailConfig`
 
-*   [EventItems](./definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems.md) – `#/definitions/blockMonitor/properties/conditions/properties/event/items`
+*   [EventItems](./definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/event/items`
 
-*   [FortaMonitor](./definitions-definitions-fortamonitor.md) – `#/definitions/fortaMonitor`
+*   [FortaMonitor](./definitions-definitions-fortamonitor.md) – `definitions.schema.json#/definitions/fortaMonitor`
 
-*   [FunctionItems](./definitions-definitions-blockmonitor-properties-conditions-properties-function-functionitems.md) – `#/definitions/blockMonitor/properties/conditions/properties/function/items`
+*   [FunctionItems](./definitions-definitions-blockmonitor-properties-conditions-properties-function-functionitems.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/function/items`
 
-*   [Global](./resources-properties-actionsecrets-properties-global.md) – `#/properties/secrets/properties/global`
+*   [GlobalSecrets](./resources-properties-actionsecrets-properties-globalsecrets.md) – `resources.schema.json#/properties/secrets/properties/global`
 
-*   [Monitor](./definitions-definitions-monitor.md) – `#/definitions/monitor`
+*   [Monitor](./definitions-definitions-monitor.md) – `definitions.schema.json#/definitions/monitor`
 
-*   [Monitors](./resources-properties-monitors.md) – `#/properties/monitors`
+*   [Monitors](./resources-properties-monitors.md) – `resources.schema.json#/properties/monitors`
 
-*   [Notification](./definitions-definitions-notification.md) – `#/definitions/notification`
+*   [Notification](./definitions-definitions-notification.md) – `definitions.schema.json#/definitions/notification`
 
-*   [Notifications](./resources-properties-notifications.md) – `#/properties/notifications`
+*   [Notifications](./resources-properties-notifications.md) – `resources.schema.json#/properties/notifications`
 
-*   [NotifyConfig](./definitions-definitions-blockmonitor-properties-notifyconfig.md) – `#/definitions/blockMonitor/properties/notify-config`
+*   [NotifyConfig](./definitions-definitions-blockmonitor-properties-notifyconfig.md) – `definitions.schema.json#/definitions/blockMonitor/properties/notify-config`
 
-*   [NotifyConfig](./definitions-definitions-fortamonitor-properties-notifyconfig.md) – `#/definitions/fortaMonitor/properties/notify-config`
+*   [NotifyConfig](./definitions-definitions-fortamonitor-properties-notifyconfig.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/notify-config`
 
-*   [OpsgenieConfigDetails](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md) – `#/definitions/opsgenieConfig/properties/details`
+*   [OpsgenieConfigDetails](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md) – `definitions.schema.json#/definitions/opsgenieConfig/properties/details`
 
-*   [OpsgenieUser](./definitions-definitions-opsgenieuser.md) – `#/definitions/opsgenieUser`
+*   [OpsgenieUser](./definitions-definitions-opsgenieuser.md) – `definitions.schema.json#/definitions/opsgenieUser`
 
-*   [PagerDutyConfigCustomDetails](./definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails.md) – `#/definitions/pagerDutyConfig/properties/customDetails`
+*   [PagerDutyConfigCustomDetails](./definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails.md) – `definitions.schema.json#/definitions/pagerDutyConfig/properties/customDetails`
 
-*   [Policies](./resources-properties-policies.md) – `#/properties/policies`
+*   [Policies](./resources-properties-policies.md) – `resources.schema.json#/properties/policies`
 
-*   [Policy](./definitions-definitions-policy.md) – `#/definitions/policy`
+*   [Policy](./definitions-definitions-policy.md) – `definitions.schema.json#/definitions/policy`
 
-*   [Relayer](./definitions-definitions-relayer.md) – `#/definitions/relayer`
+*   [Relayer](./definitions-definitions-relayer.md) – `definitions.schema.json#/definitions/relayer`
 
-*   [Relayers](./resources-properties-relayers.md) – `#/properties/relayers`
+*   [Relayers](./resources-properties-relayers.md) – `resources.schema.json#/properties/relayers`
 
-*   [Stack](./resources-properties-actionsecrets-properties-stack.md) – `#/properties/secrets/properties/stack`
+*   [StackSecrets](./resources-properties-actionsecrets-properties-stacksecrets.md) – `resources.schema.json#/properties/secrets/properties/stack`
 
-*   [TelegramConfig](./definitions-definitions-telegramconfig.md) – `#/definitions/telegramBotConfig`
+*   [TelegramConfig](./definitions-definitions-telegramconfig.md) – `definitions.schema.json#/definitions/telegramBotConfig`
 
-*   [Trigger](./definitions-definitions-action-properties-trigger.md) – `#/definitions/action/properties/trigger`
+*   [Trigger](./definitions-definitions-action-properties-trigger.md) – `definitions.schema.json#/definitions/action/properties/trigger`
 
-*   [UrlConfig](./definitions-definitions-urlconfig.md) – `#/definitions/urlConfig`
+*   [UrlConfig](./definitions-definitions-urlconfig.md) – `definitions.schema.json#/definitions/urlConfig`
 
 ### Arrays
 
-*   [Addresses](./definitions-definitions-blockmonitor-properties-addresses.md) – `#/definitions/blockMonitor/properties/addresses`
+*   [Addresses](./definitions-definitions-blockmonitor-properties-addresses.md) – `definitions.schema.json#/definitions/blockMonitor/properties/addresses`
 
-*   [Addresses](./definitions-definitions-fortamonitor-properties-addresses.md) – `#/definitions/fortaMonitor/properties/addresses`
+*   [Addresses](./definitions-definitions-fortamonitor-properties-addresses.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/addresses`
 
-*   [AgentIDs](./definitions-definitions-fortamonitor-properties-agentids.md) – `#/definitions/fortaMonitor/properties/agent-ids`
+*   [AgentIDs](./definitions-definitions-fortamonitor-properties-agentids.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/agent-ids`
 
-*   [AlertIDs](./definitions-definitions-fortamonitor-properties-conditions-properties-alertids.md) – `#/definitions/fortaMonitor/properties/conditions/properties/alert-ids`
+*   [AlertIDs](./definitions-definitions-fortamonitor-properties-conditions-properties-alertids.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/conditions/properties/alert-ids`
 
-*   [ArrayABI](./definitions-definitions-abitype-anyof-arrayabi.md) – `#/definitions/abi/anyOf/1`
+*   [ArrayABI](./definitions-definitions-abitype-anyof-arrayabi.md) – `definitions.schema.json#/definitions/abi/anyOf/1`
 
-*   [CategoryNotificationIds](./definitions-definitions-category-properties-categorynotificationids.md) – `#/definitions/category/properties/notificationIds`
+*   [CategoryNotificationIds](./definitions-definitions-category-properties-categorynotificationids.md) – `definitions.schema.json#/definitions/category/properties/notification-ids`
 
-*   [Channels](./definitions-definitions-blockmonitor-properties-notifyconfig-properties-channels.md) – `#/definitions/blockMonitor/properties/notify-config/properties/channels`
+*   [Channels](./definitions-definitions-blockmonitor-properties-notifyconfig-properties-channels.md) – `definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/channels`
 
-*   [Channels](./definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md) – `#/definitions/fortaMonitor/properties/notify-config/properties/channels`
+*   [Channels](./definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/channels`
 
-*   [Emails](./definitions-definitions-emailconfig-properties-emails.md) – `#/definitions/emailConfig/properties/emails`
+*   [Emails](./definitions-definitions-emailconfig-properties-emails.md) – `definitions.schema.json#/definitions/emailConfig/properties/emails`
 
-*   [Event](./definitions-definitions-blockmonitor-properties-conditions-properties-event.md) – `#/definitions/blockMonitor/properties/conditions/properties/event`
+*   [Event](./definitions-definitions-blockmonitor-properties-conditions-properties-event.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/event`
 
-*   [Function](./definitions-definitions-blockmonitor-properties-conditions-properties-function.md) – `#/definitions/blockMonitor/properties/conditions/properties/function`
+*   [Function](./definitions-definitions-blockmonitor-properties-conditions-properties-function.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/function`
 
-*   [OpsgenieConfigActions](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigactions.md) – `#/definitions/opsgenieConfig/properties/actions`
+*   [OpsgenieConfigActions](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigactions.md) – `definitions.schema.json#/definitions/opsgenieConfig/properties/actions`
 
-*   [OpsgenieConfigResponders](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigresponders.md) – `#/definitions/opsgenieConfig/properties/responders`
+*   [OpsgenieConfigResponders](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigresponders.md) – `definitions.schema.json#/definitions/opsgenieConfig/properties/responders`
 
-*   [OpsgenieConfigTags](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigtags.md) – `#/definitions/opsgenieConfig/properties/tags`
+*   [OpsgenieConfigTags](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigtags.md) – `definitions.schema.json#/definitions/opsgenieConfig/properties/tags`
 
-*   [OpsgenieConfigVisibleTo](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigvisibleto.md) – `#/definitions/opsgenieConfig/properties/visibleTo`
+*   [OpsgenieConfigVisibleTo](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigvisibleto.md) – `definitions.schema.json#/definitions/opsgenieConfig/properties/visibleTo`
 
-*   [RelayerAPIKeys](./definitions-definitions-relayer-properties-relayerapikeys.md) – `#/definitions/relayer/properties/api-keys`
+*   [RelayerAPIKeys](./definitions-definitions-relayer-properties-relayerapikeys.md) – `definitions.schema.json#/definitions/relayer/properties/api-keys`
 
-*   [WhitelistReceivers](./definitions-definitions-policy-properties-whitelistreceivers.md) – `#/definitions/policy/properties/whitelist-receivers`
+*   [WhitelistReceivers](./definitions-definitions-policy-properties-whitelistreceivers.md) – `definitions.schema.json#/definitions/policy/properties/whitelist-receivers`
 
 ## Version Note
 

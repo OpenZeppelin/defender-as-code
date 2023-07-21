@@ -4,9 +4,9 @@
 
 # policies Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                           |
-| :-------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-policy.md "#/properties/policies/additionalProperties") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                       |
+| :-------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-policy.md "resources.schema.json#/properties/policies/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-policy.md "#/properties/policies/additionalProperties")
+*   defined in: [Resources](definitions-definitions-policy.md "resources.schema.json#/properties/policies/additionalProperties")
 
 ### additionalProperties Type
 

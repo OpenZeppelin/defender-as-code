@@ -4,9 +4,9 @@
 
 # block-explorer-api-keys Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                                       |
-| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-blockexplorerapikey.md "#/properties/block-explorer-api-keys/additionalProperties") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                   |
+| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-blockexplorerapikey.md "resources.schema.json#/properties/block-explorer-api-keys/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-blockexplorerapikey.md "#/properties/block-explorer-api-keys/additionalProperties")
+*   defined in: [Resources](definitions-definitions-blockexplorerapikey.md "resources.schema.json#/properties/block-explorer-api-keys/additionalProperties")
 
 ### additionalProperties Type
 
