@@ -814,11 +814,11 @@ Reference this group by using
 | [apiKey](#apikey)                     | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-apikey.md "#/definitions/opsgenieConfig/properties/apiKey")                             |
 | [instanceLocation](#instancelocation) | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieinstancelocation.md "#/definitions/opsgenieConfig/properties/instanceLocation") |
 | [alias](#alias)                       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-alias.md "#/definitions/opsgenieConfig/properties/alias")                               |
-| [responders](#responders)             | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-responders.md "#/definitions/opsgenieConfig/properties/responders")                     |
-| [visibleTo](#visibleto)               | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-visibleto.md "#/definitions/opsgenieConfig/properties/visibleTo")                       |
-| [actions](#actions)                   | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-actions.md "#/definitions/opsgenieConfig/properties/actions")                           |
-| [tags](#tags)                         | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-tags.md "#/definitions/opsgenieConfig/properties/tags")                                 |
-| [details](#details)                   | `object` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-details.md "#/definitions/opsgenieConfig/properties/details")                           |
+| [responders](#responders)             | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigresponders.md "#/definitions/opsgenieConfig/properties/responders")       |
+| [visibleTo](#visibleto)               | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigvisibleto.md "#/definitions/opsgenieConfig/properties/visibleTo")         |
+| [actions](#actions)                   | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigactions.md "#/definitions/opsgenieConfig/properties/actions")             |
+| [tags](#tags)                         | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigtags.md "#/definitions/opsgenieConfig/properties/tags")                   |
+| [details](#details)                   | `object` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md "#/definitions/opsgenieConfig/properties/details")             |
 | [entity](#entity)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-entity.md "#/definitions/opsgenieConfig/properties/entity")                             |
 | [priority](#priority)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieprioritylevel.md "#/definitions/opsgenieConfig/properties/priority")            |
 | [note](#note)                         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-note.md "#/definitions/opsgenieConfig/properties/note")                                 |
@@ -898,15 +898,15 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object[]` ([Details](definitions-definitions-opsgenieuser.md))
+*   Type: `object[]` ([OpsgenieUser](definitions-definitions-opsgenieuser.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-responders.md "#/definitions/opsgenieConfig/properties/responders")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigresponders.md "#/definitions/opsgenieConfig/properties/responders")
 
 #### responders Type
 
-`object[]` ([Details](definitions-definitions-opsgenieuser.md))
+`object[]` ([OpsgenieUser](definitions-definitions-opsgenieuser.md))
 
 ### visibleTo
 
@@ -916,15 +916,15 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object[]` ([Details](definitions-definitions-opsgenieuser.md))
+*   Type: `object[]` ([OpsgenieUser](definitions-definitions-opsgenieuser.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-visibleto.md "#/definitions/opsgenieConfig/properties/visibleTo")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigvisibleto.md "#/definitions/opsgenieConfig/properties/visibleTo")
 
 #### visibleTo Type
 
-`object[]` ([Details](definitions-definitions-opsgenieuser.md))
+`object[]` ([OpsgenieUser](definitions-definitions-opsgenieuser.md))
 
 ### actions
 
@@ -938,7 +938,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-actions.md "#/definitions/opsgenieConfig/properties/actions")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigactions.md "#/definitions/opsgenieConfig/properties/actions")
 
 #### actions Type
 
@@ -960,7 +960,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-tags.md "#/definitions/opsgenieConfig/properties/tags")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigtags.md "#/definitions/opsgenieConfig/properties/tags")
 
 #### tags Type
 
@@ -978,15 +978,15 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-opsgenieconfig-properties-details.md))
+*   Type: `object` ([OpsgenieConfigDetails](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-details.md "#/definitions/opsgenieConfig/properties/details")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md "#/definitions/opsgenieConfig/properties/details")
 
 #### details Type
 
-`object` ([Details](definitions-definitions-opsgenieconfig-properties-details.md))
+`object` ([OpsgenieConfigDetails](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md))
 
 ### entity
 
@@ -1103,18 +1103,18 @@ Reference this group by using
 {"$ref":"#/definitions/pagerDutyConfig"}
 ```
 
-| Property                        | Type     | Required | Nullable       | Defined by                                                                                                                                                |
-| :------------------------------ | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [token](#token)                 | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-token.md "#/definitions/pagerDutyConfig/properties/token")                      |
-| [eventType](#eventtype)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventtype.md "#/definitions/pagerDutyConfig/properties/eventType")     |
-| [routingKey](#routingkey)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-routingkey.md "#/definitions/pagerDutyConfig/properties/routingKey")            |
-| [eventAction](#eventaction)     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventaction.md "#/definitions/pagerDutyConfig/properties/eventAction") |
-| [dedupKey](#dedupkey)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-dedupkey.md "#/definitions/pagerDutyConfig/properties/dedupKey")                |
-| [severity](#severity)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyseverity.md "#/definitions/pagerDutyConfig/properties/severity")       |
-| [component](#component)         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-component.md "#/definitions/pagerDutyConfig/properties/component")              |
-| [group](#group)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-group.md "#/definitions/pagerDutyConfig/properties/group")                      |
-| [class](#class)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-class.md "#/definitions/pagerDutyConfig/properties/class")                      |
-| [customDetails](#customdetails) | `object` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-customdetails.md "#/definitions/pagerDutyConfig/properties/customDetails")      |
+| Property                        | Type     | Required | Nullable       | Defined by                                                                                                                                                          |
+| :------------------------------ | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [token](#token)                 | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-token.md "#/definitions/pagerDutyConfig/properties/token")                                |
+| [eventType](#eventtype)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventtype.md "#/definitions/pagerDutyConfig/properties/eventType")               |
+| [routingKey](#routingkey)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-routingkey.md "#/definitions/pagerDutyConfig/properties/routingKey")                      |
+| [eventAction](#eventaction)     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventaction.md "#/definitions/pagerDutyConfig/properties/eventAction")           |
+| [dedupKey](#dedupkey)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-dedupkey.md "#/definitions/pagerDutyConfig/properties/dedupKey")                          |
+| [severity](#severity)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyseverity.md "#/definitions/pagerDutyConfig/properties/severity")                 |
+| [component](#component)         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-component.md "#/definitions/pagerDutyConfig/properties/component")                        |
+| [group](#group)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-group.md "#/definitions/pagerDutyConfig/properties/group")                                |
+| [class](#class)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-class.md "#/definitions/pagerDutyConfig/properties/class")                                |
+| [customDetails](#customdetails) | `object` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails.md "#/definitions/pagerDutyConfig/properties/customDetails") |
 
 ### token
 
@@ -1326,15 +1326,15 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-pagerdutyconfig-properties-customdetails.md))
+*   Type: `object` ([PagerDutyConfigCustomDetails](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-customdetails.md "#/definitions/pagerDutyConfig/properties/customDetails")
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails.md "#/definitions/pagerDutyConfig/properties/customDetails")
 
 #### customDetails Type
 
-`object` ([Details](definitions-definitions-pagerdutyconfig-properties-customdetails.md))
+`object` ([PagerDutyConfigCustomDetails](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails.md))
 
 ## Definitions group notification
 
@@ -1462,11 +1462,11 @@ Reference this group by using
 {"$ref":"#/definitions/category"}
 ```
 
-| Property                            | Type     | Required | Nullable       | Defined by                                                                                                                                 |
-| :---------------------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-3)                     | `string` | Required | cannot be null | [Definitions](definitions-definitions-category-properties-name.md "#/definitions/category/properties/name")                       |
-| [description](#description)         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-description.md "#/definitions/category/properties/description")         |
-| [notificationIds](#notificationids) | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-notificationids.md "#/definitions/category/properties/notificationIds") |
+| Property                            | Type     | Required | Nullable       | Defined by                                                                                                                                         |
+| :---------------------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name-3)                     | `string` | Required | cannot be null | [Definitions](definitions-definitions-category-properties-name.md "#/definitions/category/properties/name")                               |
+| [description](#description)         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-description.md "#/definitions/category/properties/description")                 |
+| [notificationIds](#notificationids) | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-categorynotificationids.md "#/definitions/category/properties/notificationIds") |
 
 ### name
 
@@ -1516,7 +1516,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-category-properties-notificationids.md "#/definitions/category/properties/notificationIds")
+*   defined in: [Definitions](definitions-definitions-category-properties-categorynotificationids.md "#/definitions/category/properties/notificationIds")
 
 #### notificationIds Type
 

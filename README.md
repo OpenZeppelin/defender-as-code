@@ -41,33 +41,32 @@ platform:
   key: '${env:TEAM_API_KEY}'
   secret: '${env:TEAM_API_SECRET}'
 
-functions:
-  action-example-1:
-    name: 'Hello world from serverless'
-    path: './actions/hello-world'
-    relayer: ${self:resources.Resources.relayers.relayer-1}
-    trigger:
-      type: 'schedule'
-      frequency: 1500
-    paused: false
-
 resources:
-  Resources:
-    policies:
-      policy-1:
-        gas-price-cap: 1000
-        whitelist-receivers:
-          - '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
-        eip1559-pricing: true
+  actions:
+    action-example-1:
+      name: 'Hello world from serverless'
+      path: './actions/hello-world'
+      relayer: ${self:resources.relayers.relayer-1}
+      trigger:
+        type: 'schedule'
+        frequency: 1500
+      paused: false
 
-    relayers:
-      relayer-1:
-        name: 'Test Relayer 1'
-        network: 'goerli'
-        min-balance: 1000
-        policy: ${self:resources.Resources.policies.policy-1}
-        api-keys:
-          - key1
+  policies:
+    policy-1:
+      gas-price-cap: 1000
+      whitelist-receivers:
+        - '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
+      eip1559-pricing: true
+
+  relayers:
+    relayer-1:
+      name: 'Test Relayer 1'
+      network: 'goerli'
+      min-balance: 1000
+      policy: ${self:resources.policies.policy-1}
+      api-keys:
+        - key1
 
 plugins:
   - '@openzeppelin/platform-as-code'
@@ -111,7 +110,6 @@ We provide auto-generated documentation based on the JSON schemas:
 
 - [Platform Property](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/docs/platform.md)
 - [Provider Property](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/docs/provider.md)
-- [Function (Action) Property](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/docs/function.md)
 - [Resources Property](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/docs/resources.md)
 
 More information on types can be found [here](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/index.ts). Specifically, the types preceded with `Y` (e.g. YRelayer). For the schemas, you can check out the [docs-schema](https://github.com/OpenZeppelin/platform-as-code/blob/main/src/types/docs-schemas) folder.

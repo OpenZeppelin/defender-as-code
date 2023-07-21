@@ -15,6 +15,7 @@
     "format": "yarn format:check --write",
     "format:check": "prettier --check 'src/**/*.(js|ts)'",
     "style": "yarn lint && yarn format",
+    "build:types": "yarn json2ts -i src/types/docs-schemas/ -o src/types/types/",
     "build:schemas": "yarn generate:schemas && yarn format:schemas",
     "generate:schemas": "rm -rf src/types/docs && jsonschema2md -d src/types/docs-schemas -o src/types/docs -x src/types/schemas -v 07 -h false",
     "format:schemas": "replace-in-file --configFile=src/types/schemas/configs/replace-ref-config.ts && replace-in-file --configFile=src/types/schemas/configs/replace-undefined-config.ts"
@@ -60,6 +61,7 @@
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "json-schema-to-typescript": "^13.0.2",
     "prettier": "^2.7.1",
     "replace-in-file": "^6.3.5",
     "typescript": "^4.9.5"

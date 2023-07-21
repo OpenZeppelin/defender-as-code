@@ -161,6 +161,7 @@
       "enum": ["US", "EU"]
     },
     "opsgenieUser": {
+      "title": "OpsgenieUser",
       "type": "object",
       "properties": {
         "username": {
@@ -193,18 +194,21 @@
           "maxLength": 512
         },
         "responders": {
+          "title": "OpsgenieConfigResponders",
           "type": "array",
           "items": {
             "$ref": "definitions.schema.json/#/definitions/opsgenieUser"
           }
         },
         "visibleTo": {
+          "title": "OpsgenieConfigVisibleTo",
           "type": "array",
           "items": {
             "$ref": "definitions.schema.json/#/definitions/opsgenieUser"
           }
         },
         "actions": {
+          "title": "OpsgenieConfigActions",
           "type": "array",
           "maxItems": 10,
           "items": {
@@ -213,6 +217,7 @@
           }
         },
         "tags": {
+          "title": "OpsgenieConfigTags",
           "type": "array",
           "maxItems": 10,
           "items": {
@@ -221,6 +226,7 @@
           }
         },
         "details": {
+          "title": "OpsgenieConfigDetails",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -290,6 +296,7 @@
           "type": "string"
         },
         "customDetails": {
+          "title": "PagerDutyConfigCustomDetails",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -338,6 +345,7 @@
         "name": { "type": "string" },
         "description": { "type": "string" },
         "notificationIds": {
+          "title": "CategoryNotificationIds",
           "type": "array",
           "items": { "$ref": "definitions.schema.json/#/definitions/notification", "format": "uri-reference" }
         }

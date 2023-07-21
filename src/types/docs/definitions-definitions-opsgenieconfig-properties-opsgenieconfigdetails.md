@@ -1,12 +1,12 @@
-## customDetails Type
+## details Type
 
-`object` ([Details](definitions-definitions-pagerdutyconfig-properties-customdetails.md))
+`object` ([OpsgenieConfigDetails](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md))
 
-# customDetails Properties
+# details Properties
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                                                                                     |
 | :-------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-customdetails-additionalproperties.md "#/definitions/pagerDutyConfig/properties/customDetails/additionalProperties") |
+| Additional Properties | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails-additionalproperties.md "#/definitions/opsgenieConfig/properties/details/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-customdetails-additionalproperties.md "#/definitions/pagerDutyConfig/properties/customDetails/additionalProperties")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails-additionalproperties.md "#/definitions/opsgenieConfig/properties/details/additionalProperties")
 
 ### additionalProperties Type
 

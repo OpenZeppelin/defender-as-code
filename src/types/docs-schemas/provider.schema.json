@@ -3,9 +3,10 @@
   "title": "Provider",
   "type": "object",
   "properties": {
+    "name": { "type": "string" },
     "stage": { "type": "string" },
     "stackName": { "type": "string" },
     "ssot": { "type": "boolean" }
   },
-  "required": ["stage", "stackName"]
+  "required": ["name", "stage", "stackName"]
 }

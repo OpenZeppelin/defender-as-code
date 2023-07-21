@@ -14,44 +14,43 @@ platform:
   key: '${env:TEAM_API_KEY}'
   secret: '${env:TEAM_API_SECRET}'
 
-functions:
-  action-example-1:
-    name: 'Hello world from serverless'
-    path: './actions/hello-world'
-    relayer: ${self:resources.Resources.relayers.relayer-1}
-    trigger:
-      type: 'schedule'
-      frequency: 1500
-    paused: false
-
 resources:
-  Resources:
-    policies:
-      policy-1:
-        gas-price-cap: 1000
-        whitelist-receivers:
-          - '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
-        eip1559-pricing: true
-        private-transactions: true
+  actions:
+    action-example-1:
+      name: 'Hello world from serverless'
+      path: './actions/hello-world'
+      relayer: ${self:resources.relayers.relayer-1}
+      trigger:
+        type: 'schedule'
+        frequency: 1500
+      paused: false
 
-    relayers:
-      relayer-1:
-        name: 'My Relayer'
-        network: 'goerli'
-        min-balance: 1000
-        policy: ${self:resources.Resources.policies.policy-1}
-        api-keys:
-          - key1
+  policies:
+    policy-1:
+      gas-price-cap: 1000
+      whitelist-receivers:
+        - '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
+      eip1559-pricing: true
+      private-transactions: true
 
-    contracts:
-      contract-1:
-        name: 'Demo-Flash'
-        address: '0xA91382E82fB676d4c935E601305E5253b3829dCD'
-        network: 'mainnet'
-        # optional
-        abi: ${file(./abis/demoflash.json.abi)}
-        # optional
-        nat-spec: null
+  relayers:
+    relayer-1:
+      name: 'My Relayer'
+      network: 'goerli'
+      min-balance: 1000
+      policy: ${self:resources.policies.policy-1}
+      api-keys:
+        - key1
+
+  contracts:
+    contract-1:
+      name: 'Demo-Flash'
+      address: '0xA91382E82fB676d4c935E601305E5253b3829dCD'
+      network: 'mainnet'
+      # optional
+      abi: ${file(./abis/demoflash.json.abi)}
+      # optional
+      nat-spec: null
 
 plugins:
   - '@openzeppelin/platform-as-code'

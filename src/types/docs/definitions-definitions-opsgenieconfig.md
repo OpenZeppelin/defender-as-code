@@ -8,19 +8,19 @@ unknown ([OpsgenieConfig](definitions-definitions-opsgenieconfig.md))
 
 # 4 Properties
 
-| Property                              | Type     | Required | Nullable       | Defined by                                                                                                                                   |
-| :------------------------------------ | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
-| [apiKey](#apikey)                     | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-apikey.md "#/definitions/opsgenieConfig/properties/apiKey")         |
-| [instanceLocation](#instancelocation) | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieinstancelocation.md "#/definitions/opsgenieConfig/properties/instanceLocation")       |
-| [alias](#alias)                       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-alias.md "#/definitions/opsgenieConfig/properties/alias")           |
-| [responders](#responders)             | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-responders.md "#/definitions/opsgenieConfig/properties/responders") |
-| [visibleTo](#visibleto)               | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-visibleto.md "#/definitions/opsgenieConfig/properties/visibleTo")   |
-| [actions](#actions)                   | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-actions.md "#/definitions/opsgenieConfig/properties/actions")       |
-| [tags](#tags)                         | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-tags.md "#/definitions/opsgenieConfig/properties/tags")             |
-| [details](#details)                   | `object` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-details.md "#/definitions/opsgenieConfig/properties/details")       |
-| [entity](#entity)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-entity.md "#/definitions/opsgenieConfig/properties/entity")         |
-| [priority](#priority)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieprioritylevel.md "#/definitions/opsgenieConfig/properties/priority")                  |
-| [note](#note)                         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-note.md "#/definitions/opsgenieConfig/properties/note")             |
+| Property                              | Type     | Required | Nullable       | Defined by                                                                                                                                                 |
+| :------------------------------------ | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [apiKey](#apikey)                     | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-apikey.md "#/definitions/opsgenieConfig/properties/apiKey")                       |
+| [instanceLocation](#instancelocation) | `string` | Required | cannot be null | [Definitions](definitions-definitions-opsgenieinstancelocation.md "#/definitions/opsgenieConfig/properties/instanceLocation")                     |
+| [alias](#alias)                       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-alias.md "#/definitions/opsgenieConfig/properties/alias")                         |
+| [responders](#responders)             | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigresponders.md "#/definitions/opsgenieConfig/properties/responders") |
+| [visibleTo](#visibleto)               | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigvisibleto.md "#/definitions/opsgenieConfig/properties/visibleTo")   |
+| [actions](#actions)                   | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigactions.md "#/definitions/opsgenieConfig/properties/actions")       |
+| [tags](#tags)                         | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigtags.md "#/definitions/opsgenieConfig/properties/tags")             |
+| [details](#details)                   | `object` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md "#/definitions/opsgenieConfig/properties/details")       |
+| [entity](#entity)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-entity.md "#/definitions/opsgenieConfig/properties/entity")                       |
+| [priority](#priority)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieprioritylevel.md "#/definitions/opsgenieConfig/properties/priority")                                |
+| [note](#note)                         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-opsgenieconfig-properties-note.md "#/definitions/opsgenieConfig/properties/note")                           |
 
 ## apiKey
 
@@ -97,15 +97,15 @@ unknown ([OpsgenieConfig](definitions-definitions-opsgenieconfig.md))
 
 *   is optional
 
-*   Type: `object[]` ([Details](definitions-definitions-opsgenieuser.md))
+*   Type: `object[]` ([OpsgenieUser](definitions-definitions-opsgenieuser.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-responders.md "#/definitions/opsgenieConfig/properties/responders")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigresponders.md "#/definitions/opsgenieConfig/properties/responders")
 
 ### responders Type
 
-`object[]` ([Details](definitions-definitions-opsgenieuser.md))
+`object[]` ([OpsgenieUser](definitions-definitions-opsgenieuser.md))
 
 ## visibleTo
 
@@ -115,15 +115,15 @@ unknown ([OpsgenieConfig](definitions-definitions-opsgenieconfig.md))
 
 *   is optional
 
-*   Type: `object[]` ([Details](definitions-definitions-opsgenieuser.md))
+*   Type: `object[]` ([OpsgenieUser](definitions-definitions-opsgenieuser.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-visibleto.md "#/definitions/opsgenieConfig/properties/visibleTo")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigvisibleto.md "#/definitions/opsgenieConfig/properties/visibleTo")
 
 ### visibleTo Type
 
-`object[]` ([Details](definitions-definitions-opsgenieuser.md))
+`object[]` ([OpsgenieUser](definitions-definitions-opsgenieuser.md))
 
 ## actions
 
@@ -137,7 +137,7 @@ unknown ([OpsgenieConfig](definitions-definitions-opsgenieconfig.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-actions.md "#/definitions/opsgenieConfig/properties/actions")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigactions.md "#/definitions/opsgenieConfig/properties/actions")
 
 ### actions Type
 
@@ -159,7 +159,7 @@ unknown ([OpsgenieConfig](definitions-definitions-opsgenieconfig.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-tags.md "#/definitions/opsgenieConfig/properties/tags")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigtags.md "#/definitions/opsgenieConfig/properties/tags")
 
 ### tags Type
 
@@ -177,15 +177,15 @@ unknown ([OpsgenieConfig](definitions-definitions-opsgenieconfig.md))
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-opsgenieconfig-properties-details.md))
+*   Type: `object` ([OpsgenieConfigDetails](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-details.md "#/definitions/opsgenieConfig/properties/details")
+*   defined in: [Definitions](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md "#/definitions/opsgenieConfig/properties/details")
 
 ### details Type
 
-`object` ([Details](definitions-definitions-opsgenieconfig-properties-details.md))
+`object` ([OpsgenieConfigDetails](definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md))
 
 ## entity
 

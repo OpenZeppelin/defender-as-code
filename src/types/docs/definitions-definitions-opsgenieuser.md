@@ -1,6 +1,6 @@
 ## items Type
 
-`object` ([Details](definitions-definitions-opsgenieuser.md))
+`object` ([OpsgenieUser](definitions-definitions-opsgenieuser.md))
 
 # items Properties
 

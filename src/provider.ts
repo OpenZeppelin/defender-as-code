@@ -1,6 +1,6 @@
 import Serverless from 'serverless';
 
-import { PlatformSchema, DefinitionsSchema, ResourcesSchema, FunctionSchema, ProviderSchema } from './types/schemas';
+import { PlatformSchema, DefinitionsSchema, ResourcesSchema, ProviderSchema } from './types/schemas';
 
 export default class PlatformProvider {
   constructor(serverless: Serverless) {
@@ -9,7 +9,6 @@ export default class PlatformProvider {
       definitions: DefinitionsSchema.definitions,
       provider: ProviderSchema,
       resources: ResourcesSchema,
-      function: FunctionSchema,
     });
   }
 }

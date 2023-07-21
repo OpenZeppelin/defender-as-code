@@ -1,12 +1,12 @@
 ## monitors Type
 
-`object` ([Monitors](resources-properties-resources-properties-monitors.md))
+`object` ([Monitors](resources-properties-monitors.md))
 
 # monitors Properties
 
-| Property              | Type   | Required | Nullable       | Defined by                                                                                                                 |
-| :-------------------- | :----- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-monitor.md "#/properties/Resources/properties/monitors/additionalProperties") |
+| Property              | Type   | Required | Nullable       | Defined by                                                                                            |
+| :-------------------- | :----- | :------- | :------------- | :---------------------------------------------------------------------------------------------------- |
+| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-monitor.md "#/properties/monitors/additionalProperties") |
 
 ## Additional Properties
 
@@ -20,7 +20,7 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-monitor.md "#/properties/Resources/properties/monitors/additionalProperties")
+*   defined in: [Resources](definitions-definitions-monitor.md "#/properties/monitors/additionalProperties")
 
 ### additionalProperties Type
 

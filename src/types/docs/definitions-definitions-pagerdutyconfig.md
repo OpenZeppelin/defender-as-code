@@ -8,18 +8,18 @@ unknown ([PagerDutyConfig](definitions-definitions-pagerdutyconfig.md))
 
 # 5 Properties
 
-| Property                        | Type     | Required | Nullable       | Defined by                                                                                                                                           |
-| :------------------------------ | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [token](#token)                 | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-token.md "#/definitions/pagerDutyConfig/properties/token")                 |
-| [eventType](#eventtype)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyeventtype.md "#/definitions/pagerDutyConfig/properties/eventType")                           |
-| [routingKey](#routingkey)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-routingkey.md "#/definitions/pagerDutyConfig/properties/routingKey")       |
-| [eventAction](#eventaction)     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyeventaction.md "#/definitions/pagerDutyConfig/properties/eventAction")                       |
-| [dedupKey](#dedupkey)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-dedupkey.md "#/definitions/pagerDutyConfig/properties/dedupKey")           |
-| [severity](#severity)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyseverity.md "#/definitions/pagerDutyConfig/properties/severity")                             |
-| [component](#component)         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-component.md "#/definitions/pagerDutyConfig/properties/component")         |
-| [group](#group)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-group.md "#/definitions/pagerDutyConfig/properties/group")                 |
-| [class](#class)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-class.md "#/definitions/pagerDutyConfig/properties/class")                 |
-| [customDetails](#customdetails) | `object` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-customdetails.md "#/definitions/pagerDutyConfig/properties/customDetails") |
+| Property                        | Type     | Required | Nullable       | Defined by                                                                                                                                                          |
+| :------------------------------ | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [token](#token)                 | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-token.md "#/definitions/pagerDutyConfig/properties/token")                                |
+| [eventType](#eventtype)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyeventtype.md "#/definitions/pagerDutyConfig/properties/eventType")                                          |
+| [routingKey](#routingkey)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-routingkey.md "#/definitions/pagerDutyConfig/properties/routingKey")                      |
+| [eventAction](#eventaction)     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyeventaction.md "#/definitions/pagerDutyConfig/properties/eventAction")                                      |
+| [dedupKey](#dedupkey)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-dedupkey.md "#/definitions/pagerDutyConfig/properties/dedupKey")                          |
+| [severity](#severity)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyseverity.md "#/definitions/pagerDutyConfig/properties/severity")                                            |
+| [component](#component)         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-component.md "#/definitions/pagerDutyConfig/properties/component")                        |
+| [group](#group)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-group.md "#/definitions/pagerDutyConfig/properties/group")                                |
+| [class](#class)                 | `string` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-class.md "#/definitions/pagerDutyConfig/properties/class")                                |
+| [customDetails](#customdetails) | `object` | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails.md "#/definitions/pagerDutyConfig/properties/customDetails") |
 
 ## token
 
@@ -231,12 +231,12 @@ unknown ([PagerDutyConfig](definitions-definitions-pagerdutyconfig.md))
 
 *   is optional
 
-*   Type: `object` ([Details](definitions-definitions-pagerdutyconfig-properties-customdetails.md))
+*   Type: `object` ([PagerDutyConfigCustomDetails](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-customdetails.md "#/definitions/pagerDutyConfig/properties/customDetails")
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails.md "#/definitions/pagerDutyConfig/properties/customDetails")
 
 ### customDetails Type
 
-`object` ([Details](definitions-definitions-pagerdutyconfig-properties-customdetails.md))
+`object` ([PagerDutyConfigCustomDetails](definitions-definitions-pagerdutyconfig-properties-pagerdutyconfigcustomdetails.md))

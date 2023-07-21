@@ -66,6 +66,30 @@ export type PlatformMonitorTrigger = SentinelTrigger;
 export type PlatformMonitorFilterTrigger = MonitorFilterTrigger;
 export type PlatformMonitorRiskCategory = SubscriberRiskCategory;
 
+export interface IPlatformServerless {
+  provider: {
+    name: 'platform';
+    stage: string;
+    stackName: string;
+    ssot?: boolean;
+  };
+  platform: {
+    key: string;
+    secret: string;
+  };
+  resources: {
+    'actions'?: { [k: string]: YAction };
+    'notifications'?: { [k: string]: YNotification };
+    'categories'?: { [k: string]: YCategory };
+    'relayers'?: { [k: string]: YRelayer };
+    'policies'?: { [k: string]: YPolicy };
+    'contracts'?: { [k: string]: YContract };
+    'secrets'?: { [k: string]: YSecret };
+    'monitors'?: { [k: string]: YMonitor };
+    'block-explorer-api-keys'?: { [k: string]: YBlockExplorerApiKey };
+  };
+}
+
 export type ResourceType =
   | 'Monitors'
   | 'Relayers'
@@ -245,6 +269,7 @@ export type ListPlatformResources = {
 };
 
 export type YBlockExplorerApiKey = {
-  key: string;
-  network: Network;
+  'key': string;
+  'key-hash'?: string;
+  'network': Network;
 };
