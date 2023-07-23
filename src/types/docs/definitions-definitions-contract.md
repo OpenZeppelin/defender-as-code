@@ -8,13 +8,13 @@
 
 # additionalProperties Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                                   |
-| :-------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "#/definitions/contract/properties/name")         |
-| [address](#address)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-address.md "#/definitions/contract/properties/address")                       |
-| [network](#network)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-network.md "#/definitions/contract/properties/network")                       |
-| [abi](#abi)           | Merged   | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "#/definitions/contract/properties/abi")                           |
-| [nat-spec](#nat-spec) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-nat-spec.md "#/definitions/contract/properties/nat-spec") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                 |
+| :-------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "definitions.schema.json#/definitions/contract/properties/name")         |
+| [address](#address)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-address.md "definitions.schema.json#/definitions/contract/properties/address")                       |
+| [network](#network)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/contract/properties/network")                       |
+| [abi](#abi)           | Merged   | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/contract/properties/abi")                           |
+| [nat-spec](#nat-spec) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-nat-spec.md "definitions.schema.json#/definitions/contract/properties/nat-spec") |
 
 ## name
 
@@ -28,7 +28,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-name.md "#/definitions/contract/properties/name")
+*   defined in: [Definitions](definitions-definitions-contract-properties-name.md "definitions.schema.json#/definitions/contract/properties/name")
 
 ### name Type
 
@@ -46,7 +46,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-address.md "#/definitions/contract/properties/address")
+*   defined in: [Definitions](definitions-definitions-address.md "definitions.schema.json#/definitions/contract/properties/address")
 
 ### address Type
 
@@ -76,7 +76,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "#/definitions/contract/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/contract/properties/network")
 
 ### network Type
 
@@ -90,9 +90,6 @@
 | :------------------------ | :---------- |
 | `"mainnet"`               |             |
 | `"sepolia"`               |             |
-| `"rinkeby"`               |             |
-| `"ropsten"`               |             |
-| `"kovan"`                 |             |
 | `"goerli"`                |             |
 | `"xdai"`                  |             |
 | `"sokol"`                 |             |
@@ -109,11 +106,9 @@
 | `"avalanche"`             |             |
 | `"fuji"`                  |             |
 | `"optimism"`              |             |
-| `"optimism-kovan"`        |             |
 | `"optimism-goerli"`       |             |
 | `"arbitrum"`              |             |
 | `"arbitrum-nova"`         |             |
-| `"arbitrum-rinkeby"`      |             |
 | `"arbitrum-goerli"`       |             |
 | `"celo"`                  |             |
 | `"alfajores"`             |             |
@@ -144,7 +139,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-abitype.md "#/definitions/contract/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/contract/properties/abi")
 
 ### abi Type
 
@@ -168,7 +163,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-nat-spec.md "#/definitions/contract/properties/nat-spec")
+*   defined in: [Definitions](definitions-definitions-contract-properties-nat-spec.md "definitions.schema.json#/definitions/contract/properties/nat-spec")
 
 ### nat-spec Type
 

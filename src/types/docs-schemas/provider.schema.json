@@ -1,4 +1,5 @@
 {
+  "$id": "provider.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Provider",
   "type": "object",

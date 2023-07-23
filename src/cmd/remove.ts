@@ -26,13 +26,10 @@ import {
   PlatformMonitor,
   ResourceType,
   TeamKey,
-  YAction,
-  YContract,
-  YNotification,
-  YRelayer,
   YSecret,
-  YMonitor,
+  Resources,
 } from '../types';
+import { Action, Contract, Monitor, Relayer, Notification } from '../types/types/resources.schema';
 
 export default class PlatformRemove {
   serverless: Serverless;
@@ -41,11 +38,14 @@ export default class PlatformRemove {
   log: Logger;
   hooks: any;
   teamKey?: TeamKey;
+  resources: Resources;
 
   constructor(serverless: Serverless, options: Serverless.Options, logging: Logging) {
     this.serverless = serverless;
     this.options = options;
     this.logging = logging;
+
+    this.resources = this.serverless.service.resources as Resources;
 
     this.log = Logger.getInstance();
 
@@ -62,7 +62,7 @@ export default class PlatformRemove {
   private async wrapper<Y, D>(
     context: Serverless,
     resourceType: ResourceType,
-    resources: Y[] | undefined,
+    resources: { [k: string]: Y } | Y[] | undefined,
     retrieveExistingResources: () => Promise<D[]>,
     onRemove: (resources: D[]) => Promise<void>,
     output: any[] = [],
@@ -134,10 +134,10 @@ export default class PlatformRemove {
     // Monitors
     const monitorClient = getMonitorClient(this.teamKey!);
     const listMonitors = () => monitorClient.list().then((i) => i.items);
-    await this.wrapper<YMonitor, PlatformMonitor>(
+    await this.wrapper<Monitor, PlatformMonitor>(
       this.serverless,
       'Monitors',
-      this.serverless.service.resources?.Resources?.monitors,
+      this.resources?.monitors,
       listMonitors,
       async (monitors: PlatformMonitor[]) => {
         await Promise.all(
@@ -157,10 +157,10 @@ export default class PlatformRemove {
     // Actions
     const actionClient = getActionClient(this.teamKey!);
     const listActions = () => actionClient.list().then((i) => i.items);
-    await this.wrapper<YAction, PlatformAction>(
+    await this.wrapper<Action, PlatformAction>(
       this.serverless,
       'Actions',
-      this.serverless.service.functions as any,
+      this.resources.actions,
       listActions,
       async (actions: PlatformAction[]) => {
         await Promise.all(
@@ -177,10 +177,10 @@ export default class PlatformRemove {
     // Contracts
     const adminClient = getProposalClient(this.teamKey!);
     const listContracts = () => adminClient.listContracts();
-    await this.wrapper<Omit<YContract, 'abi'> & { abi?: string }, PlatformContract>(
+    await this.wrapper<Contract, PlatformContract>(
       this.serverless,
       'Contracts',
-      this.serverless.service.resources?.Resources?.contracts,
+      this.resources?.contracts,
       listContracts,
       async (contracts: PlatformContract[]) => {
         await Promise.all(
@@ -200,12 +200,7 @@ export default class PlatformRemove {
       const relayClient = getRelayClient(this.teamKey!);
       const listRelayers = (await relayClient.list()).items;
       const existingRelayers = listRelayers.filter((e) =>
-        isTemplateResource<YRelayer, PlatformRelayer>(
-          this.serverless,
-          e,
-          'Relayers',
-          this.serverless.service.resources?.Resources?.relayers ?? [],
-        ),
+        isTemplateResource<Relayer, PlatformRelayer>(this.serverless, e, 'Relayers', this.resources?.relayers ?? {}),
       );
       this.log.error('Deleting Relayers is currently only possible via the Platform UI.');
       this.log.progress('component-info', `Retrieving Relayer API Keys`);
@@ -232,10 +227,10 @@ export default class PlatformRemove {
 
     // Notifications
     const listNotifications = () => monitorClient.listNotificationChannels();
-    await this.wrapper<YNotification, PlatformNotification>(
+    await this.wrapper<Notification, PlatformNotification>(
       this.serverless,
       'Notifications',
-      this.serverless.service.resources?.Resources?.notifications,
+      this.resources?.notifications,
       listNotifications,
       async (notifications: PlatformNotification[]) => {
         await Promise.all(
@@ -256,10 +251,10 @@ export default class PlatformRemove {
 
     // Temporarily Disabled
     // const listNotificationCategories = () => monitorClient.listNotificationCategories();
-    // await this.wrapper<YCategory, PlatformCategory>(
+    // await this.wrapper<Category, PlatformCategory>(
     //   this.serverless,
     //   'Categories',
-    //   this.serverless.service.resources?.Resources?.categories,
+    //   this.resources??.categories,
     //   listNotificationCategories,
     //   async (categories: PlatformCategory[]) => {
     //     await Promise.all(
@@ -279,7 +274,7 @@ export default class PlatformRemove {
     // Secrets
     const listSecrets = () => actionClient.listSecrets().then((r) => r.secretNames ?? []);
 
-    const allSecrets = getConsolidatedSecrets(this.serverless);
+    const allSecrets = getConsolidatedSecrets(this.serverless, this.resources);
 
     await this.wrapper<YSecret, string>(
       this.serverless,

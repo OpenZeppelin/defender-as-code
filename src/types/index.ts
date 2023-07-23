@@ -66,6 +66,20 @@ export type PlatformMonitorTrigger = SentinelTrigger;
 export type PlatformMonitorFilterTrigger = MonitorFilterTrigger;
 export type PlatformMonitorRiskCategory = SubscriberRiskCategory;
 
+// Generated Interfaces from Schemas
+import * as SchemaPlatform from '../types/types/platform.schema';
+import * as SchemaResources from '../types/types/resources.schema';
+import * as SchemaProvider from '../types/types/provider.schema';
+
+export type Resources = SchemaResources.Resources;
+export type Provider = SchemaProvider.Provider;
+export type Platform = SchemaPlatform.Platform;
+export interface IPlatformServerless {
+  provider: { name: 'platform' } & Provider;
+  platform: Platform;
+  resources: Resources;
+}
+
 export type ResourceType =
   | 'Monitors'
   | 'Relayers'
@@ -245,6 +259,7 @@ export type ListPlatformResources = {
 };
 
 export type YBlockExplorerApiKey = {
-  key: string;
-  network: Network;
+  'key': string;
+  'key-hash'?: string;
+  'network': Network;
 };

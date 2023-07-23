@@ -4,9 +4,9 @@ unknown
 
 # if Properties
 
-| Property                | Type          | Required | Nullable       | Defined by                                                                                                                                         |
-| :---------------------- | :------------ | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [eventType](#eventtype) | Not specified | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-if-properties-eventtype.md "#/definitions/pagerDutyConfig/if/properties/eventType") |
+| Property                | Type          | Required | Nullable       | Defined by                                                                                                                                                       |
+| :---------------------- | :------------ | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [eventType](#eventtype) | Not specified | Optional | cannot be null | [Definitions](definitions-definitions-pagerdutyconfig-if-properties-eventtype.md "definitions.schema.json#/definitions/pagerDutyConfig/if/properties/eventType") |
 
 ## eventType
 
@@ -20,7 +20,7 @@ unknown
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-if-properties-eventtype.md "#/definitions/pagerDutyConfig/if/properties/eventType")
+*   defined in: [Definitions](definitions-definitions-pagerdutyconfig-if-properties-eventtype.md "definitions.schema.json#/definitions/pagerDutyConfig/if/properties/eventType")
 
 ### eventType Type
 

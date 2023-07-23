@@ -34,14 +34,7 @@ import {
   PlatformMonitor,
   PlatformRelayerApiKey,
   TeamKey,
-  YAction,
-  YContract,
-  YNotification,
-  YRelayer,
   YSecret,
-  YMonitor,
-  YCategory,
-  YBlockExplorerApiKey,
   DeployOutput,
   DeployResponse,
   ResourceType,
@@ -55,8 +48,25 @@ import {
   PlatformCategory,
   PlatformFortaMonitorResponse,
   PlatformBlockMonitorResponse,
+  Resources,
 } from '../types';
 import keccak256 from 'keccak256';
+import {
+  Action,
+  Actions,
+  BlockExplorerApiKey,
+  BlockExplorerApiKeys,
+  Categories,
+  Category,
+  Contract,
+  Contracts,
+  Monitor,
+  Monitors,
+  Notification,
+  Notifications,
+  Relayer,
+  Relayers,
+} from '../types/types/resources.schema';
 
 export default class PlatformDeploy {
   serverless: Serverless;
@@ -66,11 +76,14 @@ export default class PlatformDeploy {
   hooks: any;
   teamKey?: TeamKey;
   ssotDifference?: ListPlatformResources;
+  resources: Resources;
 
   constructor(serverless: Serverless, options: Serverless.Options, logging: Logging) {
     this.serverless = serverless;
     this.options = options;
     this.logging = logging;
+
+    this.resources = this.serverless.service.resources as Resources;
 
     this.log = Logger.getInstance();
 
@@ -96,29 +109,28 @@ export default class PlatformDeploy {
       blockExplorerApiKeys: [],
     };
     // Contracts
-    const contracts: YContract[] = this.serverless.service.resources?.Resources?.contracts ?? [];
+    const contracts: Contracts = this.resources?.contracts ?? {};
     const adminClient = getProposalClient(this.teamKey!);
     const dContracts = await adminClient.listContracts();
     const contractDifference = _.differenceWith(
       dContracts,
-      Object.entries(contracts ?? []),
-      (a: PlatformContract, b: [string, YContract]) =>
-        `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
+      Object.entries(contracts),
+      (a: PlatformContract, b: [string, Contract]) => `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
     );
 
     // Monitors
-    const monitors: YMonitor[] = this.serverless.service.resources?.Resources?.monitors ?? [];
+    const monitors: Monitors = this.resources?.monitors ?? {};
     const monitorClient = getMonitorClient(this.teamKey!);
     const monitorItems = (await monitorClient.list()).items;
     const monitorDifference = _.differenceWith(
       monitorItems,
-      Object.entries(monitors ?? []),
-      (a: PlatformMonitor, b: [string, YMonitor]) =>
+      Object.entries(monitors),
+      (a: PlatformMonitor, b: [string, Monitor]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
     // Relayers
-    const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
+    const relayers: Relayers = this.resources?.relayers ?? {};
     const relayerClient = getRelayClient(this.teamKey!);
     const dRelayers = (await relayerClient.list()).items;
 
@@ -131,7 +143,7 @@ export default class PlatformDeploy {
         );
         if (dRelayer) {
           const dRelayerApiKeys = await relayerClient.listKeys({ relayerId: dRelayer.relayerId });
-          const configuredKeys = relayer['api-keys'];
+          const configuredKeys = relayer['api-keys'] ?? [];
           const relayerApiKeyDifference = _.differenceWith(
             dRelayerApiKeys,
             configuredKeys,
@@ -143,38 +155,38 @@ export default class PlatformDeploy {
     );
 
     // Notifications
-    const notifications: YNotification[] = this.serverless.service.resources?.Resources?.notifications ?? [];
+    const notifications: Notifications = this.resources?.notifications ?? {};
     const dNotifications = await monitorClient.listNotificationChannels();
     const notificationDifference = _.differenceWith(
       dNotifications,
-      Object.entries(notifications ?? []),
-      (a: PlatformNotification, b: [string, YNotification]) =>
+      Object.entries(notifications),
+      (a: PlatformNotification, b: [string, Notification]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
     // Notification Categories
-    const categories: YCategory[] = this.serverless.service.resources?.Resources?.categories ?? [];
+    const categories: Categories = this.resources?.categories ?? {};
     const dCategories = await monitorClient.listNotificationCategories();
     const categoryDifference = _.differenceWith(
       dCategories,
-      Object.entries(categories ?? []),
-      (a: PlatformCategory, b: [string, YCategory]) =>
+      Object.entries(categories),
+      (a: PlatformCategory, b: [string, Category]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
     // Actions
-    const actions: YAction[] = this.serverless.service.functions as any;
+    const actions: Actions = this.resources.actions ?? {};
     const actionClient = getActionClient(this.teamKey!);
     const dActions = (await actionClient.list()).items;
     const actionDifference = _.differenceWith(
       dActions,
-      Object.entries(actions ?? []),
-      (a: PlatformAction, b: [string, YAction]) =>
+      Object.entries(actions),
+      (a: PlatformAction, b: [string, Action]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
     // Secrets
-    const allSecrets = getConsolidatedSecrets(this.serverless);
+    const allSecrets = getConsolidatedSecrets(this.serverless, this.resources);
     const dSecrets = (await actionClient.listSecrets()).secretNames ?? [];
     const secretsDifference = _.differenceWith(
       dSecrets,
@@ -183,14 +195,13 @@ export default class PlatformDeploy {
     );
 
     // Block Explorer Api Keys
-    const blockExplorerApiKeys: YBlockExplorerApiKey[] =
-      this.serverless.service.resources?.Resources?.['block-explorer-api-keys'] ?? [];
+    const blockExplorerApiKeys: BlockExplorerApiKeys = this.resources?.['block-explorer-api-keys'] ?? {};
     const deployClient = getDeployClient(this.teamKey!);
     const dBlockExplorerApiKeys = await deployClient.listBlockExplorerApiKeys();
     const blockExplorerApiKeyDifference = _.differenceWith(
       dBlockExplorerApiKeys,
       Object.entries(blockExplorerApiKeys ?? []),
-      (a: PlatformBlockExplorerApiKey, b: [string, YBlockExplorerApiKey]) =>
+      (a: PlatformBlockExplorerApiKey, b: [string, BlockExplorerApiKey]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
@@ -269,7 +280,7 @@ export default class PlatformDeploy {
   }
 
   private async deploySecrets(output: DeployOutput<string>) {
-    const allSecrets = getConsolidatedSecrets(this.serverless);
+    const allSecrets = getConsolidatedSecrets(this.serverless, this.resources);
     const client = getActionClient(this.teamKey!);
     const retrieveExisting = () => client.listSecrets().then((r) => r.secretNames ?? []);
     await this.wrapper<YSecret, string>(
@@ -318,17 +329,17 @@ export default class PlatformDeploy {
   }
 
   private async deployContracts(output: DeployOutput<PlatformContract>) {
-    const contracts: YContract[] = this.serverless.service.resources?.Resources?.contracts ?? [];
+    const contracts: Contracts = this.resources?.contracts ?? {};
     const client = getProposalClient(this.teamKey!);
     const retrieveExisting = () => client.listContracts();
 
-    await this.wrapper<YContract, PlatformContract>(
+    await this.wrapper<Contract, PlatformContract>(
       this.serverless,
       'Contracts',
       contracts,
       retrieveExisting,
       // on update
-      async (contract: YContract, match: PlatformContract) => {
+      async (contract: Contract, match: PlatformContract) => {
         const mappedMatch = {
           'name': match.name,
           'network': match.network,
@@ -368,7 +379,7 @@ export default class PlatformDeploy {
         };
       },
       // on create
-      async (contract: YContract, _: string) => {
+      async (contract: Contract, _: string) => {
         const importedContract = await client.addContract({
           name: contract.name,
           network: contract.network,
@@ -388,7 +399,7 @@ export default class PlatformDeploy {
         await Promise.all(contracts.map(async (c) => await client.deleteContract(`${c.network}-${c.address}`)));
       },
       // overrideMatchDefinition
-      (a: PlatformContract, b: YContract) => {
+      (a: PlatformContract, b: Contract) => {
         return a.address === b.address && a.network === b.network;
       },
       output,
@@ -401,16 +412,16 @@ export default class PlatformDeploy {
       relayerKeys: DeployOutput<PlatformRelayerApiKey>;
     },
   ) {
-    const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
+    const relayers: Relayers = this.resources?.relayers ?? {};
     const client = getRelayClient(this.teamKey!);
     const retrieveExisting = () => client.list().then((r) => r.items);
-    await this.wrapper<YRelayer, PlatformRelayer>(
+    await this.wrapper<Relayer, PlatformRelayer>(
       this.serverless,
       'Relayers',
       relayers,
       retrieveExisting,
       // on update
-      async (relayer: YRelayer, match: PlatformRelayer) => {
+      async (relayer: Relayer, match: PlatformRelayer) => {
         // Warn users when they try to change the relayer network
         if (match.network !== relayer.network) {
           this.log.warn(
@@ -456,7 +467,7 @@ export default class PlatformDeploy {
 
         // check existing keys and remove / create accordingly
         const existingRelayerKeys = await client.listKeys({ relayerId: match.relayerId });
-        const configuredKeys = relayer['api-keys'];
+        const configuredKeys = relayer['api-keys'] ?? [];
         const inPlatform = _.differenceWith(
           existingRelayerKeys,
           configuredKeys,
@@ -508,12 +519,12 @@ export default class PlatformDeploy {
         };
       },
       // on create
-      async (relayer: YRelayer, stackResourceId: string) => {
-        const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
+      async (relayer: Relayer, stackResourceId: string) => {
+        const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<YRelayer | undefined, PlatformRelayer>(
+        const maybeRelayer = getEquivalentResource<Relayer | undefined, PlatformRelayer>(
           this.serverless,
-          relayer['address-from-relayer'],
+          relayer['address-from-relayer'] as Relayer | undefined, // typing address-from-relayer causes issues with schema generation due to circular dependancies so we cast it
           relayers,
           existingRelayers,
         );
@@ -567,17 +578,17 @@ export default class PlatformDeploy {
   }
 
   private async deployNotifications(output: DeployOutput<PlatformNotification>) {
-    const notifications: YNotification[] = this.serverless.service.resources?.Resources?.notifications ?? [];
+    const notifications: Notifications = this.resources?.notifications ?? {};
     const client = getMonitorClient(this.teamKey!);
     const retrieveExisting = () => client.listNotificationChannels();
 
-    await this.wrapper<YNotification, PlatformNotification>(
+    await this.wrapper<Notification, PlatformNotification>(
       this.serverless,
       'Notifications',
       notifications,
       retrieveExisting,
       // on update
-      async (notification: YNotification, match: PlatformNotification) => {
+      async (notification: Notification, match: PlatformNotification) => {
         const mappedMatch = {
           type: match.type,
           name: match.name,
@@ -606,7 +617,7 @@ export default class PlatformDeploy {
         };
       },
       // on create
-      async (notification: YNotification, stackResourceId: string) => {
+      async (notification: Notification, stackResourceId: string) => {
         const createdNotification = await client.createNotificationChannel(
           constructNotification(notification, stackResourceId),
         );
@@ -628,20 +639,21 @@ export default class PlatformDeploy {
   }
 
   private async deployCategories(output: DeployOutput<PlatformCategory>) {
-    const categories: YCategory[] = this.serverless.service.resources?.Resources?.categories ?? [];
+    const categories: Categories = this.resources?.categories ?? {};
     const client = getMonitorClient(this.teamKey!);
     const notifications = await client.listNotificationChannels();
     const retrieveExisting = () => client.listNotificationCategories();
 
-    await this.wrapper<YCategory, PlatformCategory>(
+    await this.wrapper<Category, PlatformCategory>(
       this.serverless,
       'Categories',
       categories,
       retrieveExisting,
       // on update
-      async (category: YCategory, match: PlatformCategory) => {
+      async (category: Category, match: PlatformCategory) => {
         const newCategory = constructNotificationCategory(
           this.serverless,
+          this.resources,
           category,
           match.stackResourceId!,
           notifications,
@@ -674,7 +686,7 @@ export default class PlatformDeploy {
         };
       },
       // on create
-      async (category: YCategory, stackResourceId: string) => {
+      async (category: Category, stackResourceId: string) => {
         return {
           name: stackResourceId,
           id: '',
@@ -698,7 +710,7 @@ export default class PlatformDeploy {
       },
       // overrideMatchDefinition
       // TODO: remove this when we allow creating new categories
-      (a: PlatformCategory, b: YCategory) => {
+      (a: PlatformCategory, b: Category) => {
         return a.name === b.name;
       },
       output,
@@ -708,20 +720,20 @@ export default class PlatformDeploy {
 
   private async deployMonitors(output: DeployOutput<PlatformMonitor>) {
     try {
-      const monitors: YMonitor[] = this.serverless.service.resources?.Resources?.monitors ?? [];
+      const monitors: Monitors = this.resources?.monitors ?? {};
       const client = getMonitorClient(this.teamKey!);
       const actions = await getActionClient(this.teamKey!).list();
       const notifications = await client.listNotificationChannels();
       const categories = await client.listNotificationCategories();
       const retrieveExisting = () => client.list().then((r) => r.items);
 
-      await this.wrapper<YMonitor, PlatformMonitor>(
+      await this.wrapper<Monitor, PlatformMonitor>(
         this.serverless,
         'Monitors',
         monitors,
         retrieveExisting,
         // on update
-        async (monitor: YMonitor, match: PlatformMonitor) => {
+        async (monitor: Monitor, match: PlatformMonitor) => {
           const isForta = (o: PlatformMonitor): o is PlatformFortaMonitorResponse => o.type === 'FORTA';
           const isBlock = (o: PlatformMonitor): o is PlatformBlockMonitorResponse => o.type === 'BLOCK';
 
@@ -747,6 +759,7 @@ export default class PlatformDeploy {
 
           const newMonitor = constructMonitor(
             this.serverless,
+            this.resources,
             match.stackResourceId!,
             monitor,
             notifications,
@@ -824,13 +837,14 @@ export default class PlatformDeploy {
           };
         },
         // on create
-        async (monitor: YMonitor, stackResourceId: string) => {
+        async (monitor: Monitor, stackResourceId: string) => {
           const blockwatchersForNetwork = (await client.listBlockwatchers()).filter(
             (b) => b.network === monitor.network,
           );
           const createdMonitor = await client.create(
             constructMonitor(
               this.serverless,
+              this.resources,
               stackResourceId,
               monitor,
               notifications,
@@ -860,20 +874,20 @@ export default class PlatformDeploy {
   }
 
   private async deployActions(output: DeployOutput<PlatformAction>) {
-    const actions: YAction[] = this.serverless.service.functions as any;
+    const actions: Actions = this.resources.actions ?? {};
     const client = getActionClient(this.teamKey!);
     const retrieveExisting = () => client.list().then((r) => r.items);
 
-    await this.wrapper<YAction, PlatformAction>(
+    await this.wrapper<Action, PlatformAction>(
       this.serverless,
       'Actions',
       actions,
       retrieveExisting,
       // on update
-      async (action: YAction, match: PlatformAction) => {
-        const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
+      async (action: Action, match: PlatformAction) => {
+        const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<YRelayer | undefined, PlatformRelayer>(
+        const maybeRelayer = getEquivalentResource<Relayer | undefined, PlatformRelayer>(
           this.serverless,
           action.relayer,
           relayers,
@@ -959,11 +973,11 @@ export default class PlatformDeploy {
         }
       },
       // on create
-      async (action: YAction, stackResourceId: string) => {
+      async (action: Action, stackResourceId: string) => {
         const actionRelayer = action.relayer;
-        const relayers: YRelayer[] = this.serverless.service.resources?.Resources?.relayers ?? [];
+        const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<YRelayer | undefined, PlatformRelayer>(
+        const maybeRelayer = getEquivalentResource<Relayer | undefined, PlatformRelayer>(
           this.serverless,
           actionRelayer,
           relayers,
@@ -1002,18 +1016,17 @@ export default class PlatformDeploy {
   }
 
   private async deployBlockExplorerApiKey(output: DeployOutput<PlatformBlockExplorerApiKey>) {
-    const blockExplorerApiKeys: YBlockExplorerApiKey[] =
-      this.serverless.service.resources?.Resources?.['block-explorer-api-keys'] ?? [];
+    const blockExplorerApiKeys: BlockExplorerApiKeys = this.resources?.['block-explorer-api-keys'] ?? {};
     const client = getDeployClient(this.teamKey!);
     const retrieveExisting = () => client.listBlockExplorerApiKeys();
 
-    await this.wrapper<YBlockExplorerApiKey, PlatformBlockExplorerApiKey>(
+    await this.wrapper<BlockExplorerApiKey, PlatformBlockExplorerApiKey>(
       this.serverless,
       'Block Explorer Api Keys',
       blockExplorerApiKeys,
       retrieveExisting,
       // on update
-      async (blockExplorerApiKey: YBlockExplorerApiKey, match: PlatformBlockExplorerApiKey) => {
+      async (blockExplorerApiKey: BlockExplorerApiKey, match: PlatformBlockExplorerApiKey) => {
         if (_.isEqual(keccak256(blockExplorerApiKey.key).toString('hex'), match.keyHash)) {
           return {
             name: match.stackResourceId!,
@@ -1036,7 +1049,7 @@ export default class PlatformDeploy {
         };
       },
       // on create
-      async (blockExplorerApiKey: YBlockExplorerApiKey, stackResourceId: string) => {
+      async (blockExplorerApiKey: BlockExplorerApiKey, stackResourceId: string) => {
         const importedBlockExplorerApiKey = await client.createBlockExplorerApiKey({
           ...blockExplorerApiKey,
           stackResourceId,
@@ -1063,7 +1076,7 @@ export default class PlatformDeploy {
   private async wrapper<Y, D>(
     context: Serverless,
     resourceType: ResourceType,
-    resources: Y[] | undefined,
+    resources: { [k: string]: Y } | Y[] | undefined,
     retrieveExistingResources: () => Promise<D[]>,
     onUpdate: (resource: Y, match: D) => Promise<DeployResponse>,
     onCreate: (resource: Y, stackResourceId: string) => Promise<DeployResponse>,

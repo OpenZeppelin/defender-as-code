@@ -6,11 +6,7 @@ one (and only one) of
 
 *   [BlockMonitor](definitions-definitions-blockmonitor.md "check type definition")
 
-*   any of
-
-    *   [Untitled  type in Definitions](definitions-definitions-fortamonitor-anyof-0.md "check type definition")
-
-    *   [Untitled  type in Definitions](definitions-definitions-fortamonitor-anyof-1.md "check type definition")
+*   [FortaMonitor](definitions-definitions-fortamonitor.md "check type definition")
 
 ## additionalProperties Constraints
 

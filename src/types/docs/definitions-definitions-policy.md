@@ -8,12 +8,12 @@
 
 # additionalProperties Properties
 
-| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                       |
-| :-------------------------------------------- | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [gas-price-cap](#gas-price-cap)               | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-gas-price-cap.md "#/definitions/policy/properties/gas-price-cap")               |
-| [whitelist-receivers](#whitelist-receivers)   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-whitelistreceivers.md "#/definitions/policy/properties/whitelist-receivers")    |
-| [eip1559-pricing](#eip1559-pricing)           | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-eip1559-pricing.md "#/definitions/policy/properties/eip1559-pricing")           |
-| [private-transactions](#private-transactions) | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-private-transactions.md "#/definitions/policy/properties/private-transactions") |
+| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                                     |
+| :-------------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [gas-price-cap](#gas-price-cap)               | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-gas-price-cap.md "definitions.schema.json#/definitions/policy/properties/gas-price-cap")               |
+| [whitelist-receivers](#whitelist-receivers)   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-whitelistreceivers.md "definitions.schema.json#/definitions/policy/properties/whitelist-receivers")    |
+| [eip1559-pricing](#eip1559-pricing)           | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-eip1559-pricing.md "definitions.schema.json#/definitions/policy/properties/eip1559-pricing")           |
+| [private-transactions](#private-transactions) | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-private-transactions.md "definitions.schema.json#/definitions/policy/properties/private-transactions") |
 
 ## gas-price-cap
 
@@ -27,7 +27,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-policy-properties-gas-price-cap.md "#/definitions/policy/properties/gas-price-cap")
+*   defined in: [Definitions](definitions-definitions-policy-properties-gas-price-cap.md "definitions.schema.json#/definitions/policy/properties/gas-price-cap")
 
 ### gas-price-cap Type
 
@@ -45,7 +45,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-policy-properties-whitelistreceivers.md "#/definitions/policy/properties/whitelist-receivers")
+*   defined in: [Definitions](definitions-definitions-policy-properties-whitelistreceivers.md "definitions.schema.json#/definitions/policy/properties/whitelist-receivers")
 
 ### whitelist-receivers Type
 
@@ -63,7 +63,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-policy-properties-eip1559-pricing.md "#/definitions/policy/properties/eip1559-pricing")
+*   defined in: [Definitions](definitions-definitions-policy-properties-eip1559-pricing.md "definitions.schema.json#/definitions/policy/properties/eip1559-pricing")
 
 ### eip1559-pricing Type
 
@@ -81,7 +81,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-policy-properties-private-transactions.md "#/definitions/policy/properties/private-transactions")
+*   defined in: [Definitions](definitions-definitions-policy-properties-private-transactions.md "definitions.schema.json#/definitions/policy/properties/private-transactions")
 
 ### private-transactions Type
 

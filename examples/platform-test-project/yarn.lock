@@ -424,9 +424,9 @@
     fastq "^1.6.0"
 
 "@openzeppelin/platform-as-code@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/platform-as-code/-/platform-as-code-1.3.1.tgz#3dce386bcebc26f6f8d169f4239a7e6fbdf98028"
-  integrity sha512-AzaQLHq7hytpgOwGhntavbCYpCAf4OfWa4LQT/lEYdTuMzrW7cIU+tk8dbUDcPdSZdEa5R+v0443246kd2f+UQ==
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/platform-as-code/-/platform-as-code-1.3.2.tgz#07af8b45e4940b92131fe2b1821de1c6ed4278f9"
+  integrity sha512-Vol7euTKqQGKzMAnhnLF9xPVnTNRrowVeIz1C1g1jUWFWmrbw5eWNN+gOKWnutxKofDXb8GmEXgARsNu6mu78Q==
   dependencies:
     "@openzeppelin/platform-sdk" "^0.1.0"
     keccak256 "^1.0.6"
