@@ -781,6 +781,7 @@ export default class PlatformDeploy {
             name: match.name,
             abi: addressRule && addressRule.abi,
             paused: match.paused,
+            skipABIValidation: match.skipABIValidation,
             alertThreshold: match.alertThreshold,
             autotaskTrigger: match.notifyConfig?.autotaskId,
             alertTimeoutMs: match.notifyConfig?.timeoutMs,

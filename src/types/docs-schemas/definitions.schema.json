@@ -368,6 +368,10 @@
           "required": ["amount", "window-seconds"]
         },
         "paused": { "type": "boolean" },
+        "skip-abi-validation": {
+          "type": "boolean",
+          "description": "A boolean value that indicates whether the UI should skip ABI validation checks. Enable this if you wish to use custom or partial ABIs for your monitors."
+        },
         "action-condition": { "$ref": "definitions.schema.json#/definitions/action", "format": "uri-reference" },
         "action-trigger": { "$ref": "definitions.schema.json#/definitions/action", "format": "uri-reference" },
         "confirm-level": {

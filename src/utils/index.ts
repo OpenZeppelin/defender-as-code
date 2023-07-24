@@ -330,6 +330,7 @@ export const constructMonitor = (
       network: monitor.network,
       addresses: monitor.addresses,
       confirmLevel: compatibleBlockWatcher!.confirmLevel,
+      skipABIValidation: monitor['skip-abi-validation'],
       eventConditions:
         monitor.conditions &&
         monitor.conditions.event &&

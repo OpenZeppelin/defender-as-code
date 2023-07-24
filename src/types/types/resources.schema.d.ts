@@ -428,6 +428,10 @@ export interface BlockMonitor {
   abi?: AbiType;
   'alert-threshold'?: AlertThreshold;
   paused?: boolean;
+  /**
+   * A boolean value that indicates whether the UI should skip ABI validation checks. Enable this if you wish to use custom or partial ABIs for your monitors.
+   */
+  'skip-abi-validation'?: boolean;
   'action-condition'?: Action1;
   'action-trigger'?: Action2;
   'confirm-level'?: ('safe' | 'finalized') | number;
