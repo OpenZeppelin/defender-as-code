@@ -40,6 +40,7 @@ export type Network =
   | 'x-dfk-avax-chain-test'
   | 'zksync'
   | 'zksync-goerli'
+  | 'base'
   | 'base-goerli'
   | 'linea-goerli';
 export type WhitelistReceivers = string[];
@@ -133,6 +134,7 @@ export type Network1 =
   | 'x-dfk-avax-chain-test'
   | 'zksync'
   | 'zksync-goerli'
+  | 'base'
   | 'base-goerli'
   | 'linea-goerli';
 export type AbiType = StringABI | ArrayABI;
@@ -174,6 +176,7 @@ export type Network2 =
   | 'x-dfk-avax-chain-test'
   | 'zksync'
   | 'zksync-goerli'
+  | 'base'
   | 'base-goerli'
   | 'linea-goerli';
 export type Address1 = string;
@@ -217,6 +220,7 @@ export type Network3 =
   | 'x-dfk-avax-chain-test'
   | 'zksync'
   | 'zksync-goerli'
+  | 'base'
   | 'base-goerli'
   | 'linea-goerli';
 export type Address2 = string;
@@ -259,6 +263,7 @@ export type Network4 =
   | 'x-dfk-avax-chain-test'
   | 'zksync'
   | 'zksync-goerli'
+  | 'base'
   | 'base-goerli'
   | 'linea-goerli';
 
