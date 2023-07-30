@@ -286,8 +286,8 @@ export const constructMonitor = (
     addresses: monitor.addresses,
     abi: monitor.abi && JSON.stringify(typeof monitor.abi === 'string' ? JSON.parse(monitor.abi) : monitor.abi),
     paused: monitor.paused,
-    autotaskCondition: actionCondition && actionCondition.actionkId,
-    autotaskTrigger: actionTrigger && actionTrigger.actionkId,
+    autotaskCondition: actionCondition && actionCondition.actionId,
+    autotaskTrigger: actionTrigger && actionTrigger.actionId,
     alertThreshold: threshold && {
       amount: threshold.amount,
       windowSeconds: threshold['window-seconds'],

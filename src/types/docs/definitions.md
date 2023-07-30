@@ -217,6 +217,7 @@ Reference this group by using
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
 | `"zksync-goerli"`         |             |
+| `"base"`                  |             |
 | `"base-goerli"`           |             |
 | `"linea-goerli"`          |             |
 
@@ -420,6 +421,7 @@ Reference this group by using
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
 | `"zksync-goerli"`         |             |
+| `"base"`                  |             |
 | `"base-goerli"`           |             |
 | `"linea-goerli"`          |             |
 
@@ -1639,6 +1641,7 @@ Reference this group by using
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
 | `"zksync-goerli"`         |             |
+| `"base"`                  |             |
 | `"base-goerli"`           |             |
 | `"linea-goerli"`          |             |
 
@@ -2003,6 +2006,7 @@ Reference this group by using
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
 | `"zksync-goerli"`         |             |
+| `"base"`                  |             |
 | `"base-goerli"`           |             |
 | `"linea-goerli"`          |             |
 
@@ -2461,6 +2465,7 @@ Reference this group by using
 | `"x-dfk-avax-chain-test"` |             |
 | `"zksync"`                |             |
 | `"zksync-goerli"`         |             |
+| `"base"`                  |             |
 | `"base-goerli"`           |             |
 | `"linea-goerli"`          |             |
 
