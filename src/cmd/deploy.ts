@@ -222,7 +222,7 @@ export default class PlatformDeploy {
     const formattedResources = {
       actions:
         withResources.actions.length > 0
-          ? withResources.actions.map((a) => `${a.stackResourceId ?? a.name} (${a.actionkId})`)
+          ? withResources.actions.map((a) => `${a.stackResourceId ?? a.name} (${a.actionId})`)
           : undefined,
       monitors:
         withResources.monitors.length > 0
@@ -781,6 +781,7 @@ export default class PlatformDeploy {
             name: match.name,
             abi: addressRule && addressRule.abi,
             paused: match.paused,
+            skipABIValidation: match.skipABIValidation,
             alertThreshold: match.alertThreshold,
             autotaskTrigger: match.notifyConfig?.autotaskId,
             alertTimeoutMs: match.notifyConfig?.timeoutMs,
@@ -901,7 +902,7 @@ export default class PlatformDeploy {
           encodedZippedCode: code,
         });
         const { codeDigest } = await client.get({
-          actionId: match.actionkId,
+          actionId: match.actionId,
         });
 
         const isSchedule = (
@@ -932,7 +933,7 @@ export default class PlatformDeploy {
         ) {
           return {
             name: match.stackResourceId!,
-            id: match.actionkId,
+            id: match.actionId,
             success: false,
             response: match,
             notice: `Skipped ${match.stackResourceId} - no changes detected`,
@@ -940,7 +941,7 @@ export default class PlatformDeploy {
         }
 
         const updatesAction = await client.update({
-          actionId: match.actionkId,
+          actionId: match.actionId,
           name: action.name,
           paused: action.paused,
           trigger: {
@@ -954,19 +955,19 @@ export default class PlatformDeploy {
         if (newDigest === codeDigest) {
           return {
             name: match.stackResourceId!,
-            id: match.actionkId,
+            id: match.actionId,
             success: true,
             notice: `Skipped code upload - no changes detected for ${match.stackResourceId}`,
             response: updatesAction,
           };
         } else {
           await client.updateCodeFromFolder({
-            actionId: match.actionkId,
+            actionId: match.actionId,
             path: action.path,
           });
           return {
             name: match.stackResourceId!,
-            id: match.actionkId,
+            id: match.actionId,
             success: true,
             response: updatesAction,
           };
@@ -1000,14 +1001,14 @@ export default class PlatformDeploy {
         });
         return {
           name: stackResourceId,
-          id: createdAction.actionkId,
+          id: createdAction.actionId,
           success: true,
           response: createdAction,
         };
       },
       // on remove
       async (actions: PlatformAction[]) => {
-        await Promise.all(actions.map(async (a) => await client.delete({ actionId: a.actionkId })));
+        await Promise.all(actions.map(async (a) => await client.delete({ actionId: a.actionId })));
       },
       undefined,
       output,

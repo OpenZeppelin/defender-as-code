@@ -135,7 +135,7 @@ export default class PlatformInfo {
       'Actions',
       this.resources.actions,
       listActions,
-      (resource: PlatformAction) => `${resource.stackResourceId}: ${resource.actionkId}`,
+      (resource: PlatformAction) => `${resource.stackResourceId}: ${resource.actionId}`,
       stdOut.actions,
     );
 

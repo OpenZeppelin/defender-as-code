@@ -165,9 +165,9 @@ export default class PlatformRemove {
       async (actions: PlatformAction[]) => {
         await Promise.all(
           actions.map(async (e) => {
-            this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.actionkId}) from Platform`);
-            await actionClient.delete({ actionId: e.actionkId });
-            this.log.success(`Removed ${e.stackResourceId} (${e.actionkId})`);
+            this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.actionId}) from Platform`);
+            await actionClient.delete({ actionId: e.actionId });
+            this.log.success(`Removed ${e.stackResourceId} (${e.actionId})`);
           }),
         );
       },

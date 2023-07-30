@@ -42,7 +42,7 @@ export default class PlatformInvoke {
       const platformAction = getEquivalentResourceByKey<PlatformAction>(this.options.function!, list);
       if (platformAction) {
         const response = await client.runAction({
-          actionId: platformAction.actionkId,
+          actionId: platformAction.actionId,
           data: payload,
         });
         this.log.notice(JSON.stringify(response, null, 2));
