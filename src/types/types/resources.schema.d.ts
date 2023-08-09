@@ -42,6 +42,7 @@ export type Network =
   | 'zksync-goerli'
   | 'base'
   | 'base-goerli'
+  | 'linea'
   | 'linea-goerli';
 export type WhitelistReceivers = string[];
 export type RelayerAPIKeys = string[];
@@ -136,6 +137,7 @@ export type Network1 =
   | 'zksync-goerli'
   | 'base'
   | 'base-goerli'
+  | 'linea'
   | 'linea-goerli';
 export type AbiType = StringABI | ArrayABI;
 export type StringABI = string;
@@ -178,6 +180,7 @@ export type Network2 =
   | 'zksync-goerli'
   | 'base'
   | 'base-goerli'
+  | 'linea'
   | 'linea-goerli';
 export type Address1 = string;
 export type Addresses = Address1[];
@@ -222,6 +225,7 @@ export type Network3 =
   | 'zksync-goerli'
   | 'base'
   | 'base-goerli'
+  | 'linea'
   | 'linea-goerli';
 export type Address2 = string;
 export type Addresses1 = Address2[];
@@ -265,6 +269,7 @@ export type Network4 =
   | 'zksync-goerli'
   | 'base'
   | 'base-goerli'
+  | 'linea'
   | 'linea-goerli';
 
 export interface Resources {
