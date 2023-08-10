@@ -27,27 +27,27 @@ import {
   constructMonitor,
 } from '../utils';
 import {
-  PlatformAction,
-  PlatformContract,
-  PlatformNotification,
-  PlatformRelayer,
-  PlatformMonitor,
-  PlatformRelayerApiKey,
+  DefenderAction,
+  DefenderContract,
+  DefenderNotification,
+  DefenderRelayer,
+  DefenderMonitor,
+  DefenderRelayerApiKey,
   TeamKey,
   YSecret,
   DeployOutput,
   DeployResponse,
   ResourceType,
-  ListPlatformResources,
-  PlatformNotificationReference,
-  PlatformWebhookTrigger,
-  PlatformScheduleTrigger,
-  PlatformMonitorTrigger,
-  PlatformMonitorFilterTrigger,
-  PlatformBlockExplorerApiKey,
-  PlatformCategory,
-  PlatformFortaMonitorResponse,
-  PlatformBlockMonitorResponse,
+  ListDefenderResources,
+  DefenderNotificationReference,
+  DefenderWebhookTrigger,
+  DefenderScheduleTrigger,
+  DefenderMonitorTrigger,
+  DefenderMonitorFilterTrigger,
+  DefenderBlockExplorerApiKey,
+  DefenderCategory,
+  DefenderFortaMonitorResponse,
+  DefenderBlockMonitorResponse,
   Resources,
 } from '../types';
 import keccak256 from 'keccak256';
@@ -68,14 +68,14 @@ import {
   Relayers,
 } from '../types/types/resources.schema';
 
-export default class PlatformDeploy {
+export default class DefenderDeploy {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
   log: Logger;
   hooks: any;
   teamKey?: TeamKey;
-  ssotDifference?: ListPlatformResources;
+  ssotDifference?: ListDefenderResources;
   resources: Resources;
 
   constructor(serverless: Serverless, options: Serverless.Options, logging: Logging) {
@@ -97,8 +97,8 @@ export default class PlatformDeploy {
     this.teamKey = getTeamAPIkeysOrThrow(this.serverless);
   }
 
-  private async getSSOTDifference(): Promise<ListPlatformResources> {
-    const difference: ListPlatformResources = {
+  private async getSSOTDifference(): Promise<ListDefenderResources> {
+    const difference: ListDefenderResources = {
       monitors: [],
       actions: [],
       notifications: [],
@@ -115,7 +115,7 @@ export default class PlatformDeploy {
     const contractDifference = _.differenceWith(
       dContracts,
       Object.entries(contracts),
-      (a: PlatformContract, b: [string, Contract]) => `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
+      (a: DefenderContract, b: [string, Contract]) => `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
     );
 
     // Monitors
@@ -125,7 +125,7 @@ export default class PlatformDeploy {
     const monitorDifference = _.differenceWith(
       monitorItems,
       Object.entries(monitors),
-      (a: PlatformMonitor, b: [string, Monitor]) =>
+      (a: DefenderMonitor, b: [string, Monitor]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
@@ -137,7 +137,7 @@ export default class PlatformDeploy {
     // Relayers API keys
     await Promise.all(
       Object.entries(relayers).map(async ([id, relayer]) => {
-        const dRelayer = getEquivalentResourceByKey<PlatformRelayer>(
+        const dRelayer = getEquivalentResourceByKey<DefenderRelayer>(
           getResourceID(getStackName(this.serverless), id),
           dRelayers,
         );
@@ -147,7 +147,7 @@ export default class PlatformDeploy {
           const relayerApiKeyDifference = _.differenceWith(
             dRelayerApiKeys,
             configuredKeys,
-            (a: PlatformRelayerApiKey, b: string) => a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
+            (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
           );
           difference.relayerApiKeys.push(...relayerApiKeyDifference);
         }
@@ -160,7 +160,7 @@ export default class PlatformDeploy {
     const notificationDifference = _.differenceWith(
       dNotifications,
       Object.entries(notifications),
-      (a: PlatformNotification, b: [string, Notification]) =>
+      (a: DefenderNotification, b: [string, Notification]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
@@ -170,7 +170,7 @@ export default class PlatformDeploy {
     const categoryDifference = _.differenceWith(
       dCategories,
       Object.entries(categories),
-      (a: PlatformCategory, b: [string, Category]) =>
+      (a: DefenderCategory, b: [string, Category]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
@@ -181,7 +181,7 @@ export default class PlatformDeploy {
     const actionDifference = _.differenceWith(
       dActions,
       Object.entries(actions),
-      (a: PlatformAction, b: [string, Action]) =>
+      (a: DefenderAction, b: [string, Action]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
@@ -201,7 +201,7 @@ export default class PlatformDeploy {
     const blockExplorerApiKeyDifference = _.differenceWith(
       dBlockExplorerApiKeys,
       Object.entries(blockExplorerApiKeys ?? []),
-      (a: PlatformBlockExplorerApiKey, b: [string, BlockExplorerApiKey]) =>
+      (a: DefenderBlockExplorerApiKey, b: [string, BlockExplorerApiKey]) =>
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
@@ -215,8 +215,8 @@ export default class PlatformDeploy {
 
     return difference;
   }
-  private async constructConfirmationMessage(withResources: ListPlatformResources): Promise<string> {
-    const start = `You have SSOT enabled. This might remove resources from Platform permanently.\nHaving SSOT enabled will interpret the resources defined in the serverless.yml file as the Single Source Of Truth, and will remove any existing Platform resource which is not defined in the YAML file (with the exception of Relayers).\nIf you continue, the following resources will be removed from Platform:`;
+  private async constructConfirmationMessage(withResources: ListDefenderResources): Promise<string> {
+    const start = `You have SSOT enabled. This might remove resources from Defender permanently.\nHaving SSOT enabled will interpret the resources defined in the serverless.yml file as the Single Source Of Truth, and will remove any existing Defender resource which is not defined in the YAML file (with the exception of Relayers).\nIf you continue, the following resources will be removed from Defender:`;
     const end = `Are you sure you wish to continue [y/n]?`;
 
     const formattedResources = {
@@ -328,18 +328,18 @@ export default class PlatformDeploy {
     );
   }
 
-  private async deployContracts(output: DeployOutput<PlatformContract>) {
+  private async deployContracts(output: DeployOutput<DefenderContract>) {
     const contracts: Contracts = this.resources?.contracts ?? {};
     const client = getProposalClient(this.teamKey!);
     const retrieveExisting = () => client.listContracts();
 
-    await this.wrapper<Contract, PlatformContract>(
+    await this.wrapper<Contract, DefenderContract>(
       this.serverless,
       'Contracts',
       contracts,
       retrieveExisting,
       // on update
-      async (contract: Contract, match: PlatformContract) => {
+      async (contract: Contract, match: DefenderContract) => {
         const mappedMatch = {
           'name': match.name,
           'network': match.network,
@@ -360,7 +360,7 @@ export default class PlatformDeploy {
         }
 
         this.log.notice(
-          `Contracts will always update regardless of changes due to certain limitations in Platform SDK.`,
+          `Contracts will always update regardless of changes due to certain limitations in Defender SDK.`,
         );
 
         const updatedContract = await client.addContract({
@@ -395,11 +395,11 @@ export default class PlatformDeploy {
         };
       },
       // on remove
-      async (contracts: PlatformContract[]) => {
+      async (contracts: DefenderContract[]) => {
         await Promise.all(contracts.map(async (c) => await client.deleteContract(`${c.network}-${c.address}`)));
       },
       // overrideMatchDefinition
-      (a: PlatformContract, b: Contract) => {
+      (a: DefenderContract, b: Contract) => {
         return a.address === b.address && a.network === b.network;
       },
       output,
@@ -408,24 +408,24 @@ export default class PlatformDeploy {
   }
 
   private async deployRelayers(
-    output: DeployOutput<PlatformRelayer> & {
-      relayerKeys: DeployOutput<PlatformRelayerApiKey>;
+    output: DeployOutput<DefenderRelayer> & {
+      relayerKeys: DeployOutput<DefenderRelayerApiKey>;
     },
   ) {
     const relayers: Relayers = this.resources?.relayers ?? {};
     const client = getRelayClient(this.teamKey!);
     const retrieveExisting = () => client.list().then((r) => r.items);
-    await this.wrapper<Relayer, PlatformRelayer>(
+    await this.wrapper<Relayer, DefenderRelayer>(
       this.serverless,
       'Relayers',
       relayers,
       retrieveExisting,
       // on update
-      async (relayer: Relayer, match: PlatformRelayer) => {
+      async (relayer: Relayer, match: DefenderRelayer) => {
         // Warn users when they try to change the relayer network
         if (match.network !== relayer.network) {
           this.log.warn(
-            `Detected a network change from ${match.network} to ${relayer.network} for Relayer: ${match.stackResourceId}. Platform does not currently allow updates to the network once a Relayer is created. This change will be ignored. To enforce this change, remove this relayer and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the relayer. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this relayer.`,
+            `Detected a network change from ${match.network} to ${relayer.network} for Relayer: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Relayer is created. This change will be ignored. To enforce this change, remove this relayer and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the relayer. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this relayer.`,
           );
           relayer.network = match.network!;
         }
@@ -468,31 +468,31 @@ export default class PlatformDeploy {
         // check existing keys and remove / create accordingly
         const existingRelayerKeys = await client.listKeys({ relayerId: match.relayerId });
         const configuredKeys = relayer['api-keys'] ?? [];
-        const inPlatform = _.differenceWith(
+        const inDefender = _.differenceWith(
           existingRelayerKeys,
           configuredKeys,
-          (a: PlatformRelayerApiKey, b: string) => a.stackResourceId === getResourceID(match.stackResourceId!, b),
+          (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(match.stackResourceId!, b),
         );
 
-        // delete key in Platform thats not defined in template
-        if (isSSOT(this.serverless) && inPlatform.length > 0) {
-          this.log.info(`Unused resources found on Platform:`);
-          this.log.info(JSON.stringify(inPlatform, null, 2));
-          this.log.progress('component-deploy-extra', `Removing resources from Platform`);
+        // delete key in Defender thats not defined in template
+        if (isSSOT(this.serverless) && inDefender.length > 0) {
+          this.log.info(`Unused resources found on Defender:`);
+          this.log.info(JSON.stringify(inDefender, null, 2));
+          this.log.progress('component-deploy-extra', `Removing resources from Defender`);
           await Promise.all(
-            inPlatform.map(async (key) => await client.deleteKey({ relayerId: match.relayerId, keyId: key.keyId })),
+            inDefender.map(async (key) => await client.deleteKey({ relayerId: match.relayerId, keyId: key.keyId })),
           );
-          this.log.success(`Removed resources from Platform`);
-          output.relayerKeys.removed.push(...inPlatform);
+          this.log.success(`Removed resources from Defender`);
+          output.relayerKeys.removed.push(...inDefender);
         }
 
         const inTemplate = _.differenceWith(
           configuredKeys,
           existingRelayerKeys,
-          (a: string, b: PlatformRelayerApiKey) => getResourceID(match.stackResourceId!, a) === b.stackResourceId,
+          (a: string, b: DefenderRelayerApiKey) => getResourceID(match.stackResourceId!, a) === b.stackResourceId,
         );
 
-        // create key in Platform thats defined in template
+        // create key in Defender thats defined in template
         if (inTemplate) {
           await Promise.all(
             inTemplate.map(async (key) => {
@@ -502,7 +502,7 @@ export default class PlatformDeploy {
                 stackResourceId: keyStackResource,
               });
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${match.relayerId})`);
-              const keyPath = `${process.cwd()}/.platform/relayer-keys/${keyStackResource}.json`;
+              const keyPath = `${process.cwd()}/.defender/relayer-keys/${keyStackResource}.json`;
               await this.serverless.utils.writeFile(keyPath, JSON.stringify({ ...createdKey }, null, 2));
               this.log.info(`API Key details stored in ${keyPath}`, 1);
               output.relayerKeys.created.push(createdKey);
@@ -522,7 +522,7 @@ export default class PlatformDeploy {
       async (relayer: Relayer, stackResourceId: string) => {
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | undefined, PlatformRelayer>(
+        const maybeRelayer = getEquivalentResource<Relayer | undefined, DefenderRelayer>(
           this.serverless,
           relayer['address-from-relayer'] as Relayer | undefined, // typing address-from-relayer causes issues with schema generation due to circular dependancies so we cast it
           relayers,
@@ -555,7 +555,7 @@ export default class PlatformDeploy {
                 stackResourceId: keyStackResource,
               });
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${createdRelayer.relayerId})`);
-              const keyPath = `${process.cwd()}/.platform/relayer-keys/${keyStackResource}.json`;
+              const keyPath = `${process.cwd()}/.defender/relayer-keys/${keyStackResource}.json`;
               await this.serverless.utils.writeFile(keyPath, JSON.stringify({ ...createdKey }, null, 2));
               this.log.info(`API Key details stored in ${keyPath}`, 1);
               output.relayerKeys.created.push(createdKey);
@@ -577,18 +577,18 @@ export default class PlatformDeploy {
     );
   }
 
-  private async deployNotifications(output: DeployOutput<PlatformNotification>) {
+  private async deployNotifications(output: DeployOutput<DefenderNotification>) {
     const notifications: Notifications = this.resources?.notifications ?? {};
     const client = getMonitorClient(this.teamKey!);
     const retrieveExisting = () => client.listNotificationChannels();
 
-    await this.wrapper<Notification, PlatformNotification>(
+    await this.wrapper<Notification, DefenderNotification>(
       this.serverless,
       'Notifications',
       notifications,
       retrieveExisting,
       // on update
-      async (notification: Notification, match: PlatformNotification) => {
+      async (notification: Notification, match: DefenderNotification) => {
         const mappedMatch = {
           type: match.type,
           name: match.name,
@@ -629,7 +629,7 @@ export default class PlatformDeploy {
         };
       },
       // on remove
-      async (notifications: PlatformNotification[]) => {
+      async (notifications: DefenderNotification[]) => {
         await Promise.all(notifications.map(async (n) => await client.deleteNotificationChannel(n)));
       },
       undefined,
@@ -638,19 +638,19 @@ export default class PlatformDeploy {
     );
   }
 
-  private async deployCategories(output: DeployOutput<PlatformCategory>) {
+  private async deployCategories(output: DeployOutput<DefenderCategory>) {
     const categories: Categories = this.resources?.categories ?? {};
     const client = getMonitorClient(this.teamKey!);
     const notifications = await client.listNotificationChannels();
     const retrieveExisting = () => client.listNotificationCategories();
 
-    await this.wrapper<Category, PlatformCategory>(
+    await this.wrapper<Category, DefenderCategory>(
       this.serverless,
       'Categories',
       categories,
       retrieveExisting,
       // on update
-      async (category: Category, match: PlatformCategory) => {
+      async (category: Category, match: DefenderCategory) => {
         const newCategory = constructNotificationCategory(
           this.serverless,
           this.resources,
@@ -704,13 +704,13 @@ export default class PlatformDeploy {
         // };
       },
       // on remove
-      async (categories: PlatformCategory[]) => {
+      async (categories: DefenderCategory[]) => {
         this.log.warn(`Deleting notification categories is not yet supported.`);
         // await Promise.all(categories.map(async (n) => await client.deleteNotificationCategory(n.categoryId)));
       },
       // overrideMatchDefinition
       // TODO: remove this when we allow creating new categories
-      (a: PlatformCategory, b: Category) => {
+      (a: DefenderCategory, b: Category) => {
         return a.name === b.name;
       },
       output,
@@ -718,7 +718,7 @@ export default class PlatformDeploy {
     );
   }
 
-  private async deployMonitors(output: DeployOutput<PlatformMonitor>) {
+  private async deployMonitors(output: DeployOutput<DefenderMonitor>) {
     try {
       const monitors: Monitors = this.resources?.monitors ?? {};
       const client = getMonitorClient(this.teamKey!);
@@ -727,20 +727,20 @@ export default class PlatformDeploy {
       const categories = await client.listNotificationCategories();
       const retrieveExisting = () => client.list().then((r) => r.items);
 
-      await this.wrapper<Monitor, PlatformMonitor>(
+      await this.wrapper<Monitor, DefenderMonitor>(
         this.serverless,
         'Monitors',
         monitors,
         retrieveExisting,
         // on update
-        async (monitor: Monitor, match: PlatformMonitor) => {
-          const isForta = (o: PlatformMonitor): o is PlatformFortaMonitorResponse => o.type === 'FORTA';
-          const isBlock = (o: PlatformMonitor): o is PlatformBlockMonitorResponse => o.type === 'BLOCK';
+        async (monitor: Monitor, match: DefenderMonitor) => {
+          const isForta = (o: DefenderMonitor): o is DefenderFortaMonitorResponse => o.type === 'FORTA';
+          const isBlock = (o: DefenderMonitor): o is DefenderBlockMonitorResponse => o.type === 'BLOCK';
 
           // Warn users when they try to change the monitor network
           if (match.network !== monitor.network) {
             this.log.warn(
-              `Detected a network change from ${match.network} to ${monitor.network} for Monitor: ${match.stackResourceId}. Platform does not currently allow updates to the network once a Monitor is created. This change will be ignored. To enforce this change, remove this monitor and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the monitor. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this monitor.`,
+              `Detected a network change from ${match.network} to ${monitor.network} for Monitor: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Monitor is created. This change will be ignored. To enforce this change, remove this monitor and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the monitor. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this monitor.`,
             );
             monitor.network = match.network!;
           }
@@ -748,7 +748,7 @@ export default class PlatformDeploy {
           // Warn users when they try to change the monitor type
           if (monitor.type !== match.type) {
             this.log.warn(
-              `Detected a type change from ${match.type} to ${monitor.type} for Monitor: ${match.stackResourceId}. Platform does not currently allow updates to the type once a Monitor is created. This change will be ignored. To enforce this change, remove this monitor and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the monitor. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this monitor.`,
+              `Detected a type change from ${match.type} to ${monitor.type} for Monitor: ${match.stackResourceId}. Defender does not currently allow updates to the type once a Monitor is created. This change will be ignored. To enforce this change, remove this monitor and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the monitor. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this monitor.`,
             );
             monitor.type = match.type;
           }
@@ -788,7 +788,7 @@ export default class PlatformDeploy {
             alertMessageBody: match.notifyConfig?.messageBody,
             alertMessageSubject: match.notifyConfig?.messageSubject,
             notificationChannels: match.notifyConfig?.notifications.map(
-              (n: PlatformNotificationReference) => n.notificationId,
+              (n: DefenderNotificationReference) => n.notificationId,
             ),
             notificationCategoryId: _.isEmpty(match.notifyConfig?.notifications)
               ? match.notifyConfig?.notificationCategoryId
@@ -862,7 +862,7 @@ export default class PlatformDeploy {
           };
         },
         // on remove
-        async (monitors: PlatformMonitor[]) => {
+        async (monitors: DefenderMonitor[]) => {
           await Promise.all(monitors.map(async (s) => await client.delete({ monitorId: s.subscriberId })));
         },
         undefined,
@@ -870,25 +870,25 @@ export default class PlatformDeploy {
         this.ssotDifference?.monitors,
       );
     } catch (e) {
-      this.log.tryLogPlatformError(e);
+      this.log.tryLogDefenderError(e);
     }
   }
 
-  private async deployActions(output: DeployOutput<PlatformAction>) {
+  private async deployActions(output: DeployOutput<DefenderAction>) {
     const actions: Actions = this.resources.actions ?? {};
     const client = getActionClient(this.teamKey!);
     const retrieveExisting = () => client.list().then((r) => r.items);
 
-    await this.wrapper<Action, PlatformAction>(
+    await this.wrapper<Action, DefenderAction>(
       this.serverless,
       'Actions',
       actions,
       retrieveExisting,
       // on update
-      async (action: Action, match: PlatformAction) => {
+      async (action: Action, match: DefenderAction) => {
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | undefined, PlatformRelayer>(
+        const maybeRelayer = getEquivalentResource<Relayer | undefined, DefenderRelayer>(
           this.serverless,
           action.relayer,
           relayers,
@@ -906,8 +906,8 @@ export default class PlatformDeploy {
         });
 
         const isSchedule = (
-          o: PlatformWebhookTrigger | PlatformScheduleTrigger | PlatformMonitorTrigger | PlatformMonitorFilterTrigger,
-        ): o is PlatformScheduleTrigger => o.type === 'schedule';
+          o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderMonitorTrigger | DefenderMonitorFilterTrigger,
+        ): o is DefenderScheduleTrigger => o.type === 'schedule';
 
         const mappedMatch = {
           name: match.name,
@@ -978,7 +978,7 @@ export default class PlatformDeploy {
         const actionRelayer = action.relayer;
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | undefined, PlatformRelayer>(
+        const maybeRelayer = getEquivalentResource<Relayer | undefined, DefenderRelayer>(
           this.serverless,
           actionRelayer,
           relayers,
@@ -1007,7 +1007,7 @@ export default class PlatformDeploy {
         };
       },
       // on remove
-      async (actions: PlatformAction[]) => {
+      async (actions: DefenderAction[]) => {
         await Promise.all(actions.map(async (a) => await client.delete({ actionId: a.actionId })));
       },
       undefined,
@@ -1016,18 +1016,18 @@ export default class PlatformDeploy {
     );
   }
 
-  private async deployBlockExplorerApiKey(output: DeployOutput<PlatformBlockExplorerApiKey>) {
+  private async deployBlockExplorerApiKey(output: DeployOutput<DefenderBlockExplorerApiKey>) {
     const blockExplorerApiKeys: BlockExplorerApiKeys = this.resources?.['block-explorer-api-keys'] ?? {};
     const client = getDeployClient(this.teamKey!);
     const retrieveExisting = () => client.listBlockExplorerApiKeys();
 
-    await this.wrapper<BlockExplorerApiKey, PlatformBlockExplorerApiKey>(
+    await this.wrapper<BlockExplorerApiKey, DefenderBlockExplorerApiKey>(
       this.serverless,
       'Block Explorer Api Keys',
       blockExplorerApiKeys,
       retrieveExisting,
       // on update
-      async (blockExplorerApiKey: BlockExplorerApiKey, match: PlatformBlockExplorerApiKey) => {
+      async (blockExplorerApiKey: BlockExplorerApiKey, match: DefenderBlockExplorerApiKey) => {
         if (_.isEqual(keccak256(blockExplorerApiKey.key).toString('hex'), match.keyHash)) {
           return {
             name: match.stackResourceId!,
@@ -1063,7 +1063,7 @@ export default class PlatformDeploy {
         };
       },
       // on remove
-      async (blockExplorerApiKeys: PlatformBlockExplorerApiKey[]) => {
+      async (blockExplorerApiKeys: DefenderBlockExplorerApiKey[]) => {
         await Promise.all(
           blockExplorerApiKeys.map(async (c) => await client.removeBlockExplorerApiKey(c.blockExplorerApiKeyId)),
         );
@@ -1096,11 +1096,11 @@ export default class PlatformDeploy {
       // only remove if template is considered single source of truth
       if (isSSOT(context) && onRemove) {
         if (ssotDifference.length > 0) {
-          this.log.info(`Unused resources found on Platform:`);
+          this.log.info(`Unused resources found on Defender:`);
           this.log.info(JSON.stringify(ssotDifference, null, 2));
-          this.log.progress('component-deploy-extra', `Removing resources from Platform`);
+          this.log.progress('component-deploy-extra', `Removing resources from Defender`);
           await onRemove(ssotDifference);
-          this.log.success(`Removed resources from Platform`);
+          this.log.success(`Removed resources from Defender`);
           output.removed.push(...ssotDifference);
         }
       }
@@ -1121,7 +1121,7 @@ export default class PlatformDeploy {
             'component-deploy-extra',
             `Updating ${
               resourceType === 'Contracts'
-                ? (match as unknown as PlatformContract).name
+                ? (match as unknown as DefenderContract).name
                 : resourceType === 'Secrets'
                 ? match
                 : (match as D & { stackResourceId: string }).stackResourceId
@@ -1137,7 +1137,7 @@ export default class PlatformDeploy {
             if (result.notice) this.log.info(`${result.notice}`, 1);
             if (result.error) this.log.error(`${result.error}`);
           } catch (e) {
-            this.log.tryLogPlatformError(e);
+            this.log.tryLogDefenderError(e);
           }
         } else {
           this.log.progress(
@@ -1155,41 +1155,41 @@ export default class PlatformDeploy {
             if (result.notice) this.log.info(`${result.notice}`, 1);
             if (result.error) this.log.error(`${result.error}`);
           } catch (e) {
-            this.log.tryLogPlatformError(e);
+            this.log.tryLogDefenderError(e);
           }
         }
       }
     } catch (e) {
-      this.log.tryLogPlatformError(e);
+      this.log.tryLogDefenderError(e);
     }
   }
 
   public async deploy() {
     this.log.notice('========================================================');
     const stackName = getStackName(this.serverless);
-    this.log.progress('deploy', `Running Platform Deploy on stack: ${stackName}`);
+    this.log.progress('deploy', `Running Defender Deploy on stack: ${stackName}`);
 
-    const monitors: DeployOutput<PlatformMonitor> = {
+    const monitors: DeployOutput<DefenderMonitor> = {
       removed: [],
       created: [],
       updated: [],
     };
-    const actions: DeployOutput<PlatformAction> = {
+    const actions: DeployOutput<DefenderAction> = {
       removed: [],
       created: [],
       updated: [],
     };
-    const contracts: DeployOutput<PlatformContract> = {
+    const contracts: DeployOutput<DefenderContract> = {
       removed: [],
       created: [],
       updated: [],
     };
-    const notifications: DeployOutput<PlatformNotification> = {
+    const notifications: DeployOutput<DefenderNotification> = {
       removed: [],
       created: [],
       updated: [],
     };
-    const categories: DeployOutput<PlatformCategory> = {
+    const categories: DeployOutput<DefenderCategory> = {
       removed: [],
       created: [],
       updated: [],
@@ -1199,8 +1199,8 @@ export default class PlatformDeploy {
       created: [],
       updated: [],
     };
-    const relayers: DeployOutput<PlatformRelayer> & {
-      relayerKeys: DeployOutput<PlatformRelayerApiKey>;
+    const relayers: DeployOutput<DefenderRelayer> & {
+      relayerKeys: DeployOutput<DefenderRelayerApiKey>;
     } = {
       removed: [],
       created: [],
@@ -1212,7 +1212,7 @@ export default class PlatformDeploy {
       },
     };
 
-    const blockExplorerApiKeys: DeployOutput<PlatformBlockExplorerApiKey> = {
+    const blockExplorerApiKeys: DeployOutput<DefenderBlockExplorerApiKey> = {
       removed: [],
       created: [],
       updated: [],
@@ -1245,7 +1245,7 @@ export default class PlatformDeploy {
 
     if (!process.stdout.isTTY) this.log.stdOut(JSON.stringify(stdOut, null, 2));
 
-    const keyDir = `${process.cwd()}/.platform`;
+    const keyDir = `${process.cwd()}/.defender`;
     if (!this.serverless.utils.dirExistsSync(keyDir)) {
       await this.serverless.utils.writeFile(
         `${keyDir}/deployment-log.${stackName}.json`,

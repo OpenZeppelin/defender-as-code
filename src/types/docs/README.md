@@ -2,9 +2,9 @@
 
 ## Top-level Schemas
 
-*   [Definitions](./definitions.md) – `definitions.schema.json`
+*   [Defender](./defender.md) – `defender.schema.json`
 
-*   [Platform](./platform.md) – `platform.schema.json`
+*   [Definitions](./definitions.md) – `definitions.schema.json`
 
 *   [Provider](./provider.md) – `provider.schema.json`
 

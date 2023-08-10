@@ -1,7 +1,8 @@
+import { JsonFragment } from '@ethersproject/abi';
+
 import { Network } from '@openzeppelin/platform-sdk-base-client';
 import { Contract } from '@openzeppelin/platform-sdk-proposal-client/lib/models/contract';
 import { RelayerGetResponse, RelayerApiKey } from '@openzeppelin/platform-sdk-relay-client/lib/models';
-import { JsonFragment } from '@ethersproject/abi';
 import { PlatformApiResponseError } from '@openzeppelin/platform-sdk-base-client/lib/api/api-error';
 
 import {
@@ -38,45 +39,45 @@ import { BlockExplorerApiKeyResponse } from '@openzeppelin/platform-sdk-deploy-c
 import { OpsgenieConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/opsgenie';
 import { PagerDutyConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/pager-duty';
 
-export type PlatformAPIError = PlatformApiResponseError;
-export type PlatformRelayerApiKey = RelayerApiKey;
-export type PlatformSecretsMap = SecretsMap;
-export type PlatformContract = Contract;
-export type PlatformRelayer = RelayerGetResponse;
-export type PlatformAction = Action;
-export type PlatformBlockWatcher = BlockWatcher;
-export type PlatformNotification = NotificationSummary;
-export type PlatformCategory = NotificationCategory;
-export type PlatformNotificationReference = NotificationReference;
-export type PlatformMonitor = CreateMonitorResponse;
-export type PlatformBlockMonitorResponse = CreateBlockSubscriberResponse;
-export type PlatformFortaMonitorResponse = CreateFortaSubscriberResponse;
-export type PlatformBlockMonitor = ExternalCreateBlockSubscriberRequest;
-export type PlatformFortaMonitor = ExternalCreateFortaSubscriberRequest;
-export type PlatformSlackConfig = SlackConfig;
-export type PlatformDatadogConfig = DatadogConfig;
-export type PlatformDiscordConfig = DiscordConfig;
-export type PlatformTelegramConfig = TelegramBotConfig;
-export type PlatformEmailConfig = EmailConfig;
-export type PlatformNetwork = Network;
-export type PlatformBlockExplorerApiKey = BlockExplorerApiKeyResponse;
-export type PlatformWebhookTrigger = WebhookTrigger;
-export type PlatformScheduleTrigger = ScheduleTrigger;
-export type PlatformMonitorTrigger = SentinelTrigger;
-export type PlatformMonitorFilterTrigger = MonitorFilterTrigger;
-export type PlatformMonitorRiskCategory = SubscriberRiskCategory;
+export type DefenderAPIError = PlatformApiResponseError;
+export type DefenderRelayerApiKey = RelayerApiKey;
+export type DefenderSecretsMap = SecretsMap;
+export type DefenderContract = Contract;
+export type DefenderRelayer = RelayerGetResponse;
+export type DefenderAction = Action;
+export type DefenderBlockWatcher = BlockWatcher;
+export type DefenderNotification = NotificationSummary;
+export type DefenderCategory = NotificationCategory;
+export type DefenderNotificationReference = NotificationReference;
+export type DefenderMonitor = CreateMonitorResponse;
+export type DefenderBlockMonitorResponse = CreateBlockSubscriberResponse;
+export type DefenderFortaMonitorResponse = CreateFortaSubscriberResponse;
+export type DefenderBlockMonitor = ExternalCreateBlockSubscriberRequest;
+export type DefenderFortaMonitor = ExternalCreateFortaSubscriberRequest;
+export type DefenderSlackConfig = SlackConfig;
+export type DefenderDatadogConfig = DatadogConfig;
+export type DefenderDiscordConfig = DiscordConfig;
+export type DefenderTelegramConfig = TelegramBotConfig;
+export type DefenderEmailConfig = EmailConfig;
+export type DefenderNetwork = Network;
+export type DefenderBlockExplorerApiKey = BlockExplorerApiKeyResponse;
+export type DefenderWebhookTrigger = WebhookTrigger;
+export type DefenderScheduleTrigger = ScheduleTrigger;
+export type DefenderMonitorTrigger = SentinelTrigger;
+export type DefenderMonitorFilterTrigger = MonitorFilterTrigger;
+export type DefenderMonitorRiskCategory = SubscriberRiskCategory;
 
 // Generated Interfaces from Schemas
-import * as SchemaPlatform from '../types/types/platform.schema';
+import * as SchemaDefender from '../types/types/defender.schema';
 import * as SchemaResources from '../types/types/resources.schema';
 import * as SchemaProvider from '../types/types/provider.schema';
 
 export type Resources = SchemaResources.Resources;
 export type Provider = SchemaProvider.Provider;
-export type Platform = SchemaPlatform.Platform;
-export interface IPlatformServerless {
-  provider: { name: 'platform' } & Provider;
-  platform: Platform;
+export type Defender = SchemaDefender.Defender;
+export interface IDefenderServerless {
+  provider: { name: 'defender' } & Provider;
+  defender: Defender;
   resources: Resources;
 }
 
@@ -186,7 +187,7 @@ export type YBlockMonitor = {
     function: { signature: string; expression?: string }[];
     transaction?: string;
   };
-  'risk-category': PlatformMonitorRiskCategory;
+  'risk-category': DefenderMonitorRiskCategory;
 };
 
 export type YFortaMonitor = {
@@ -214,7 +215,7 @@ export type YFortaMonitor = {
   'forta-node-id'?: string;
   'agent-ids'?: string[];
   'forta-last-processed-time'?: string;
-  'risk-category': PlatformMonitorRiskCategory;
+  'risk-category': DefenderMonitorRiskCategory;
 };
 
 export type YMonitor = YBlockMonitor | YFortaMonitor;
@@ -247,15 +248,15 @@ export type DeployResponse = {
 
 export type DeployOutput<T> = { removed: T[]; created: T[]; updated: T[] };
 
-export type ListPlatformResources = {
-  monitors: PlatformMonitor[];
-  actions: PlatformAction[];
-  notifications: PlatformNotification[];
-  categories: PlatformCategory[];
-  contracts: PlatformContract[];
-  relayerApiKeys: PlatformRelayerApiKey[];
+export type ListDefenderResources = {
+  monitors: DefenderMonitor[];
+  actions: DefenderAction[];
+  notifications: DefenderNotification[];
+  categories: DefenderCategory[];
+  contracts: DefenderContract[];
+  relayerApiKeys: DefenderRelayerApiKey[];
   secrets: string[];
-  blockExplorerApiKeys: PlatformBlockExplorerApiKey[];
+  blockExplorerApiKeys: DefenderBlockExplorerApiKey[];
 };
 
 export type YBlockExplorerApiKey = {

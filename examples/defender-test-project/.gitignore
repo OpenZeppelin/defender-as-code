@@ -10,7 +10,7 @@ jspm_packages
 *.log
 .DS_Store
 
-# Platform
+# Defender
 secrets*.yml
 .platform
 .defender

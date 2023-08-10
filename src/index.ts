@@ -2,16 +2,16 @@ import Serverless from 'serverless';
 
 import { Logging } from 'serverless/classes/Plugin';
 
-import PlatformProvider from './provider';
-import PlatformDeploy from './cmd/deploy';
-import PlatformInfo from './cmd/info';
-import PlatformRemove from './cmd/remove';
-import PlatformLogs from './cmd/logs';
-import PlatformInvoke from './cmd/invoke';
+import DefenderProvider from './provider';
+import DefenderDeploy from './cmd/deploy';
+import DefenderInfo from './cmd/info';
+import DefenderRemove from './cmd/remove';
+import DefenderLogs from './cmd/logs';
+import DefenderInvoke from './cmd/invoke';
 
 import Logger from './utils/logger';
 
-class PlatformPlugin {
+class DefenderPlugin {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
@@ -22,13 +22,13 @@ class PlatformPlugin {
 
     Logger.getInstance(logging);
 
-    this.serverless.setProvider('platform', new PlatformProvider(this.serverless) as any);
-    this.serverless.pluginManager.addPlugin(PlatformDeploy);
-    this.serverless.pluginManager.addPlugin(PlatformInfo);
-    this.serverless.pluginManager.addPlugin(PlatformRemove);
-    this.serverless.pluginManager.addPlugin(PlatformLogs);
-    this.serverless.pluginManager.addPlugin(PlatformInvoke);
+    this.serverless.setProvider('defender', new DefenderProvider(this.serverless) as any);
+    this.serverless.pluginManager.addPlugin(DefenderDeploy);
+    this.serverless.pluginManager.addPlugin(DefenderInfo);
+    this.serverless.pluginManager.addPlugin(DefenderRemove);
+    this.serverless.pluginManager.addPlugin(DefenderLogs);
+    this.serverless.pluginManager.addPlugin(DefenderInvoke);
   }
 }
 
-module.exports = PlatformPlugin;
+module.exports = DefenderPlugin;

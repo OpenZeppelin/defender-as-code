@@ -1,5 +1,5 @@
 import { Logging } from 'serverless/classes/Plugin';
-import { PlatformAPIError } from '../types';
+import { DefenderAPIError } from '../types';
 
 export default class Logger {
   private static instance: Logger;
@@ -50,10 +50,10 @@ export default class Logger {
   public stdOut(message: string | string[]) {
     this.logger?.writeText(message);
   }
-  public tryLogPlatformError(e: any) {
+  public tryLogDefenderError(e: any) {
     try {
-      const platformAPIError = (e as PlatformAPIError).response.data as any;
-      this.error(platformAPIError.message ?? platformAPIError.Message);
+      const error = (e as DefenderAPIError).response.data as any;
+      this.error(error.message ?? error.Message);
     } catch {
       if (e.message) this.error(e.message);
       else this.error(e);

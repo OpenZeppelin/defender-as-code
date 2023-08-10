@@ -17,13 +17,13 @@ import {
   isTemplateResource,
 } from '../utils';
 import {
-  PlatformAction,
-  PlatformCategory,
-  PlatformContract,
-  PlatformNotification,
-  PlatformRelayer,
-  PlatformRelayerApiKey,
-  PlatformMonitor,
+  DefenderAction,
+  DefenderCategory,
+  DefenderContract,
+  DefenderNotification,
+  DefenderRelayer,
+  DefenderRelayerApiKey,
+  DefenderMonitor,
   ResourceType,
   TeamKey,
   YSecret,
@@ -31,7 +31,7 @@ import {
 } from '../types';
 import { Action, Contract, Monitor, Relayer, Notification } from '../types/types/resources.schema';
 
-export default class PlatformRemove {
+export default class DefenderRemove {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
@@ -72,11 +72,11 @@ export default class PlatformRemove {
       const existing = (await retrieveExistingResources()).filter((e) =>
         isTemplateResource<Y, D>(context, e, resourceType, resources ?? []),
       );
-      this.log.progress('component-remove', `Removing ${resourceType} from Platform`);
+      this.log.progress('component-remove', `Removing ${resourceType} from Defender`);
       await onRemove(existing);
       output.push(...existing);
     } catch (e) {
-      this.log.tryLogPlatformError(e);
+      this.log.tryLogDefenderError(e);
     }
   }
 
@@ -91,7 +91,7 @@ export default class PlatformRemove {
       ];
       prompt.start({
         message:
-          'This action will remove your resources from Platform permanently. Are you sure you wish to continue [y/n]?',
+          'This action will remove your resources from Defender permanently. Are you sure you wish to continue [y/n]?',
       });
       const { confirm } = await prompt.get(properties);
 
@@ -108,18 +108,18 @@ export default class PlatformRemove {
   private async remove() {
     this.log.notice('========================================================');
     const stackName = getStackName(this.serverless);
-    this.log.progress('remove', `Running Platform Remove on stack: ${stackName}`);
+    this.log.progress('remove', `Running Defender Remove on stack: ${stackName}`);
     const stdOut: {
       stack: string;
-      monitors: PlatformMonitor[];
-      actions: PlatformAction[];
-      contracts: PlatformContract[];
+      monitors: DefenderMonitor[];
+      actions: DefenderAction[];
+      contracts: DefenderContract[];
       relayers: {
         relayerId: string;
-        relayerApiKeys: PlatformRelayerApiKey[];
+        relayerApiKeys: DefenderRelayerApiKey[];
       }[];
-      notifications: PlatformNotification[];
-      categories: PlatformCategory[];
+      notifications: DefenderNotification[];
+      categories: DefenderCategory[];
       secrets: string[];
     } = {
       stack: stackName,
@@ -134,17 +134,17 @@ export default class PlatformRemove {
     // Monitors
     const monitorClient = getMonitorClient(this.teamKey!);
     const listMonitors = () => monitorClient.list().then((i) => i.items);
-    await this.wrapper<Monitor, PlatformMonitor>(
+    await this.wrapper<Monitor, DefenderMonitor>(
       this.serverless,
       'Monitors',
       this.resources?.monitors,
       listMonitors,
-      async (monitors: PlatformMonitor[]) => {
+      async (monitors: DefenderMonitor[]) => {
         await Promise.all(
           monitors.map(async (e) => {
             this.log.progress(
               'component-remove-extra',
-              `Removing ${e.stackResourceId} (${e.subscriberId}) from Platform`,
+              `Removing ${e.stackResourceId} (${e.subscriberId}) from Defender`,
             );
             await monitorClient.delete({ monitorId: e.subscriberId });
             this.log.success(`Removed ${e.stackResourceId} (${e.subscriberId})`);
@@ -157,15 +157,15 @@ export default class PlatformRemove {
     // Actions
     const actionClient = getActionClient(this.teamKey!);
     const listActions = () => actionClient.list().then((i) => i.items);
-    await this.wrapper<Action, PlatformAction>(
+    await this.wrapper<Action, DefenderAction>(
       this.serverless,
       'Actions',
       this.resources.actions,
       listActions,
-      async (actions: PlatformAction[]) => {
+      async (actions: DefenderAction[]) => {
         await Promise.all(
           actions.map(async (e) => {
-            this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.actionId}) from Platform`);
+            this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.actionId}) from Defender`);
             await actionClient.delete({ actionId: e.actionId });
             this.log.success(`Removed ${e.stackResourceId} (${e.actionId})`);
           }),
@@ -177,16 +177,16 @@ export default class PlatformRemove {
     // Contracts
     const adminClient = getProposalClient(this.teamKey!);
     const listContracts = () => adminClient.listContracts();
-    await this.wrapper<Contract, PlatformContract>(
+    await this.wrapper<Contract, DefenderContract>(
       this.serverless,
       'Contracts',
       this.resources?.contracts,
       listContracts,
-      async (contracts: PlatformContract[]) => {
+      async (contracts: DefenderContract[]) => {
         await Promise.all(
           contracts.map(async (e) => {
             const id = `${e.network}-${e.address}`;
-            this.log.progress('component-remove-extra', `Removing ${id} (${e.name}) from Platform`);
+            this.log.progress('component-remove-extra', `Removing ${id} (${e.name}) from Defender`);
             await adminClient.deleteContract(id);
             this.log.success(`Removed ${id} (${e.name})`);
           }),
@@ -200,9 +200,9 @@ export default class PlatformRemove {
       const relayClient = getRelayClient(this.teamKey!);
       const listRelayers = (await relayClient.list()).items;
       const existingRelayers = listRelayers.filter((e) =>
-        isTemplateResource<Relayer, PlatformRelayer>(this.serverless, e, 'Relayers', this.resources?.relayers ?? {}),
+        isTemplateResource<Relayer, DefenderRelayer>(this.serverless, e, 'Relayers', this.resources?.relayers ?? {}),
       );
-      this.log.error('Deleting Relayers is currently only possible via the Platform UI.');
+      this.log.error('Deleting Relayers is currently only possible via the Defender UI.');
       this.log.progress('component-info', `Retrieving Relayer API Keys`);
       await Promise.all(
         existingRelayers.map(async (relayer) => {
@@ -210,7 +210,7 @@ export default class PlatformRemove {
           const relayerApiKeys = await relayClient.listKeys({ relayerId: relayer.relayerId });
           await Promise.all(
             relayerApiKeys.map(async (e) => {
-              this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.keyId}) from Platform`);
+              this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.keyId}) from Defender`);
               await relayClient.deleteKey({ relayerId: e.relayerId, keyId: e.keyId });
               this.log.success(`Removed ${e.stackResourceId} (${e.keyId})`);
             }),
@@ -222,22 +222,22 @@ export default class PlatformRemove {
         }),
       );
     } catch (e) {
-      this.log.tryLogPlatformError(e);
+      this.log.tryLogDefenderError(e);
     }
 
     // Notifications
     const listNotifications = () => monitorClient.listNotificationChannels();
-    await this.wrapper<Notification, PlatformNotification>(
+    await this.wrapper<Notification, DefenderNotification>(
       this.serverless,
       'Notifications',
       this.resources?.notifications,
       listNotifications,
-      async (notifications: PlatformNotification[]) => {
+      async (notifications: DefenderNotification[]) => {
         await Promise.all(
           notifications.map(async (e) => {
             this.log.progress(
               'component-remove-extra',
-              `Removing ${e.stackResourceId} (${e.notificationId}) from Platform`,
+              `Removing ${e.stackResourceId} (${e.notificationId}) from Defender`,
             );
             await monitorClient.deleteNotificationChannel(e);
             this.log.success(`Removed ${e.stackResourceId} (${e.notificationId})`);
@@ -251,17 +251,17 @@ export default class PlatformRemove {
 
     // Temporarily Disabled
     // const listNotificationCategories = () => monitorClient.listNotificationCategories();
-    // await this.wrapper<Category, PlatformCategory>(
+    // await this.wrapper<Category, DefenderCategory>(
     //   this.serverless,
     //   'Categories',
     //   this.resources??.categories,
     //   listNotificationCategories,
-    //   async (categories: PlatformCategory[]) => {
+    //   async (categories: DefenderCategory[]) => {
     //     await Promise.all(
     //       categories.map(async (e) => {
     //         this.log.progress(
     //           'component-remove-extra',
-    //           `Removing ${e.stackResourceId} (${e.categoryId}) from Platform`,
+    //           `Removing ${e.stackResourceId} (${e.categoryId}) from Defender`,
     //         );
     //         await monitorClient.deleteNotificationCategory(e.categoryId);
     //         this.log.success(`Removed ${e.stackResourceId} (${e.categoryId})`);
@@ -282,7 +282,7 @@ export default class PlatformRemove {
       allSecrets,
       listSecrets,
       async (secrets: string[]) => {
-        this.log.progress('component-remove-extra', `Removing (${secrets.join(', ')}) from Platform`);
+        this.log.progress('component-remove-extra', `Removing (${secrets.join(', ')}) from Defender`);
         await actionClient.createSecrets({
           deletes: secrets,
           secrets: {},

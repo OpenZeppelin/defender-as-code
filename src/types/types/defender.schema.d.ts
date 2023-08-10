@@ -5,7 +5,7 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export interface Platform {
+export interface Defender {
   key: string;
   secret: string;
 }

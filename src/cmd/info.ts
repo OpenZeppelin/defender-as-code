@@ -16,13 +16,13 @@ import {
   isTemplateResource,
 } from '../utils';
 import {
-  PlatformAction,
-  PlatformCategory,
-  PlatformContract,
-  PlatformNotification,
-  PlatformRelayer,
-  PlatformRelayerApiKey,
-  PlatformMonitor,
+  DefenderAction,
+  DefenderCategory,
+  DefenderContract,
+  DefenderNotification,
+  DefenderRelayer,
+  DefenderRelayerApiKey,
+  DefenderMonitor,
   ResourceType,
   TeamKey,
   YSecret,
@@ -30,7 +30,7 @@ import {
 } from '../types';
 import { Action, Contract, Monitor, Relayer, Notification, Category } from '../types/types/resources.schema';
 
-export default class PlatformInfo {
+export default class DefenderInfo {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
@@ -76,11 +76,11 @@ export default class PlatformInfo {
       await Promise.all(
         existing.map(async (e) => {
           this.log.notice(`${format(e)}`, 1);
-          let keys: PlatformRelayerApiKey[] = [];
+          let keys: DefenderRelayerApiKey[] = [];
           // Also print relayer API keys
           if (resourceType === 'Relayers') {
             const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys({
-              relayerId: (e as unknown as PlatformRelayer).relayerId,
+              relayerId: (e as unknown as DefenderRelayer).relayerId,
             });
             listRelayerAPIKeys.map((k) => {
               this.log.notice(`${k.stackResourceId}: ${k.keyId}`, 2);
@@ -92,14 +92,14 @@ export default class PlatformInfo {
         }),
       );
     } catch (e) {
-      this.log.tryLogPlatformError(e);
+      this.log.tryLogDefenderError(e);
     }
   }
 
   async info() {
     this.log.notice('========================================================');
     const stackName = getStackName(this.serverless);
-    this.log.progress('info', `Running Platform Info on stack: ${stackName}`);
+    this.log.progress('info', `Running Defender Info on stack: ${stackName}`);
     const stdOut = {
       stack: stackName,
       monitors: [],
@@ -116,12 +116,12 @@ export default class PlatformInfo {
         .list()
         .then((i) => i.items);
 
-    await this.wrapper<Monitor, PlatformMonitor>(
+    await this.wrapper<Monitor, DefenderMonitor>(
       this.serverless,
       'Monitors',
       this.resources?.monitors,
       listMonitors,
-      (resource: PlatformMonitor) => `${resource.stackResourceId}: ${resource.subscriberId}`,
+      (resource: DefenderMonitor) => `${resource.stackResourceId}: ${resource.subscriberId}`,
       stdOut.monitors,
     );
 
@@ -130,23 +130,23 @@ export default class PlatformInfo {
       getActionClient(this.teamKey!)
         .list()
         .then((r) => r.items);
-    await this.wrapper<Action, PlatformAction>(
+    await this.wrapper<Action, DefenderAction>(
       this.serverless,
       'Actions',
       this.resources.actions,
       listActions,
-      (resource: PlatformAction) => `${resource.stackResourceId}: ${resource.actionId}`,
+      (resource: DefenderAction) => `${resource.stackResourceId}: ${resource.actionId}`,
       stdOut.actions,
     );
 
     // Contracts
     const listContracts = () => getProposalClient(this.teamKey!).listContracts();
-    await this.wrapper<Contract, PlatformContract>(
+    await this.wrapper<Contract, DefenderContract>(
       this.serverless,
       'Contracts',
       this.resources?.contracts,
       listContracts,
-      (resource: PlatformContract) => `${resource.network}-${resource.address}: ${resource.name}`,
+      (resource: DefenderContract) => `${resource.network}-${resource.address}: ${resource.name}`,
       stdOut.contracts,
     );
 
@@ -155,34 +155,34 @@ export default class PlatformInfo {
       getRelayClient(this.teamKey!)
         .list()
         .then((r) => r.items);
-    await this.wrapper<Relayer, PlatformRelayer>(
+    await this.wrapper<Relayer, DefenderRelayer>(
       this.serverless,
       'Relayers',
       this.resources?.relayers,
       listRelayers,
-      (resource: PlatformRelayer) => `${resource.stackResourceId}: ${resource.relayerId}`,
+      (resource: DefenderRelayer) => `${resource.stackResourceId}: ${resource.relayerId}`,
       stdOut.relayers,
     );
 
     // Notifications
     const listNotifications = () => getMonitorClient(this.teamKey!).listNotificationChannels();
-    await this.wrapper<Notification, PlatformNotification>(
+    await this.wrapper<Notification, DefenderNotification>(
       this.serverless,
       'Notifications',
       this.resources?.notifications,
       listNotifications,
-      (resource: PlatformNotification) => `${resource.stackResourceId}: ${resource.notificationId}`,
+      (resource: DefenderNotification) => `${resource.stackResourceId}: ${resource.notificationId}`,
       stdOut.notifications,
     );
 
     // Categories
     const listNotificationCategories = () => getMonitorClient(this.teamKey!).listNotificationCategories();
-    await this.wrapper<Category, PlatformCategory>(
+    await this.wrapper<Category, DefenderCategory>(
       this.serverless,
       'Categories',
       this.resources?.categories,
       listNotificationCategories,
-      (resource: PlatformCategory) => `${resource.stackResourceId}: ${resource.categoryId}`,
+      (resource: DefenderCategory) => `${resource.stackResourceId}: ${resource.categoryId}`,
       stdOut.categories,
     );
 

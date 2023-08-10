@@ -1,11 +1,11 @@
 import Serverless from 'serverless';
 
-import { PlatformSchema, DefinitionsSchema, ResourcesSchema, ProviderSchema } from './types/schemas';
+import { DefenderSchema, DefinitionsSchema, ResourcesSchema, ProviderSchema } from './types/schemas';
 
-export default class PlatformProvider {
+export default class DefenderProvider {
   constructor(serverless: Serverless) {
-    serverless.configSchemaHandler.defineTopLevelProperty('platform', PlatformSchema);
-    serverless.configSchemaHandler.defineProvider('platform', {
+    serverless.configSchemaHandler.defineTopLevelProperty('defender', DefenderSchema);
+    serverless.configSchemaHandler.defineProvider('defender', {
       definitions: DefinitionsSchema.definitions,
       provider: ProviderSchema,
       resources: ResourcesSchema,
