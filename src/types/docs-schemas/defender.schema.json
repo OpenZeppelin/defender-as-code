@@ -1,7 +1,7 @@
 {
-  "$id": "platform.schema.json",
+  "$id": "defender.schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Platform",
+  "title": "Defender",
   "type": "object",
   "properties": {
     "key": { "type": "string" },

@@ -1,7 +1,7 @@
 {
-  "name": "@openzeppelin/platform-as-code",
-  "version": "1.3.4",
-  "description": "Configure your Platform environment via code",
+  "name": "@openzeppelin/defender-as-code",
+  "version": "2.0.0",
+  "description": "Configure your Defender 2.0 environment via code",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
@@ -22,6 +22,8 @@
   },
   "keywords": [
     "Defender",
+    "Defender2",
+    "Defender2.0",
     "Platform",
     "Serverless",
     "OpenZeppelin",
@@ -31,7 +33,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OpenZeppelin/platform-as-code.git"
+    "url": "git+https://github.com/OpenZeppelin/defender-as-code.git"
   },
   "contributors": [
     {
@@ -45,9 +47,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/OpenZeppelin/platform-as-code/issues"
+    "url": "https://github.com/OpenZeppelin/defender-as-code/issues"
   },
-  "homepage": "https://github.com/OpenZeppelin/platform-as-code#readme",
+  "homepage": "https://github.com/OpenZeppelin/defender-as-code#readme",
   "devDependencies": {
     "@adobe/jsonschema2md": "^7.1.1",
     "@types/eslint": "^8.4.6",

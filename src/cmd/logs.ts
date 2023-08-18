@@ -7,9 +7,9 @@ import Logger from '../utils/logger';
 // import { tailLogsFor } from '@openzeppelin/defender-autotask-client/lib/utils';
 
 import { getActionClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
-import { PlatformAction, TeamKey } from '../types';
+import { DefenderAction, TeamKey } from '../types';
 
-export default class PlatformLogs {
+export default class DefenderLogs {
   serverless: Serverless;
   options: Serverless.Options;
   logging: Logging;
@@ -37,18 +37,18 @@ export default class PlatformLogs {
   async logs() {
     try {
       this.log.notice('========================================================');
-      this.log.progress('logs', `Running Platform Logs on stack function: ${this.options.function}`);
-      const client = getActionClient(this.teamKey!);
-      const list = (await client.list()).items;
+      this.log.progress('logs', `Running Defender Logs on stack function: ${this.options.function}`);
+      // const client = getActionClient(this.teamKey!);
+      // const list = (await client.list()).items;
 
-      const platformAction = getEquivalentResourceByKey<PlatformAction>(this.options.function!, list);
+      // const defenderAction = getEquivalentResourceByKey<DefenderAction>(this.options.function!, list);
 
-      // TODO: Update with Platform equivalent once I find it
-      // if (platformAction) await tailLogsFor(client, platformAction!.actionId);
+      // TODO: Update with Defender equivalent once I find it
+      // if (defenderAction) await tailLogsFor(client, defenderAction!.actionId);
       // else this.log.error(`No action with stackResourceId: ${this.options.function} found.`);
       this.log.notice('========================================================');
     } catch (e) {
-      this.log.tryLogPlatformError(e);
+      this.log.tryLogDefenderError(e);
     }
   }
 }

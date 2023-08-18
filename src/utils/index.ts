@@ -17,17 +17,17 @@ import {
   YDatadogConfig,
   YOpsgenieConfig,
   YPagerdutyConfig,
-  PlatformAction,
-  PlatformNotification,
+  DefenderAction,
+  DefenderNotification,
   TeamKey,
-  PlatformContract,
+  DefenderContract,
   ResourceType,
-  PlatformBlockWatcher,
-  PlatformCategory,
-  PlatformAPIError,
-  PlatformNotificationReference,
-  PlatformFortaMonitor,
-  PlatformBlockMonitor,
+  DefenderBlockWatcher,
+  DefenderCategory,
+  DefenderNotificationReference,
+  DefenderFortaMonitor,
+  DefenderBlockMonitor,
+  DefenderAPIError,
   Resources,
 } from '../types';
 import { sanitise } from './sanitise';
@@ -43,7 +43,7 @@ import {
 } from '../types/types/resources.schema';
 
 /**
- * @dev this function retrieves the Platform equivalent object of the provided template resource
+ * @dev this function retrieves the Defender equivalent object of the provided template resource
  * This will not work for resources that do not have the stackResourceId property, ie. secrets and contracts
  */
 export const getEquivalentResource = <Y, D>(
@@ -96,8 +96,8 @@ export const isTemplateResource = <Y, D>(
         Object.keys(a[1] as unknown as YSecret)[0] === (resource as unknown as string)
       : resourceType === 'Contracts'
       ? // if contracts, compare network and address
-        (a[1] as unknown as Contract).network === (resource as unknown as PlatformContract).network &&
-        (a[1] as unknown as Contract).address === (resource as unknown as PlatformContract).address
+        (a[1] as unknown as Contract).network === (resource as unknown as DefenderContract).network &&
+        (a[1] as unknown as Contract).address === (resource as unknown as DefenderContract).address
       : // anything else, compare stackResourceId
         getResourceID(getStackName(context), a[0]) === (resource as D & { stackResourceId: string }).stackResourceId,
   );
@@ -122,16 +122,16 @@ export const isSSOT = (context: Serverless): boolean => {
 };
 
 export const getTeamAPIkeysOrThrow = (context: Serverless): TeamKey => {
-  const platformConfig: { key: string; secret: string } = context.service.initialServerlessConfig.platform;
-  if (!platformConfig)
+  const defenderConfig: { key: string; secret: string } = context.service.initialServerlessConfig.defender;
+  if (!defenderConfig)
     throw new Error(
-      `Missing "platform" top-level property in configuration. Please define "platform" with the "key" and "secret" properties in your serverless.yaml file.`,
+      `Missing "defender" top-level property in configuration. Please define "defender" with the "key" and "secret" properties in your serverless.yaml file.`,
     );
-  if (!platformConfig.key || !platformConfig.secret)
+  if (!defenderConfig.key || !defenderConfig.secret)
     throw new Error(
-      `Missing "platform" key or secret properties in configuration. Please define a "key" and "secret" property under "platform" in your serverless.yaml file.`,
+      `Missing "defender" key or secret properties in configuration. Please define a "key" and "secret" property under "defender" in your serverless.yaml file.`,
     );
-  return { apiKey: platformConfig.key, apiSecret: platformConfig.secret };
+  return { apiKey: defenderConfig.key, apiSecret: defenderConfig.secret };
 };
 
 export const getMonitorClient = (key: TeamKey): MonitorClient => {
@@ -216,7 +216,7 @@ export const constructNotificationCategory = (
   resources: Resources,
   category: Category,
   stackResourceId: string,
-  notifications: PlatformNotification[],
+  notifications: DefenderNotification[],
 ) => {
   return {
     name: category.name,
@@ -224,7 +224,7 @@ export const constructNotificationCategory = (
     notificationIds: (category['notification-ids']
       ? category['notification-ids']
           .map((notification) => {
-            const maybeNotification = getEquivalentResource<Notification, PlatformNotification>(
+            const maybeNotification = getEquivalentResource<Notification, DefenderNotification>(
               context,
               notification,
               resources?.notifications,
@@ -234,10 +234,10 @@ export const constructNotificationCategory = (
               return {
                 notificationId: maybeNotification.notificationId,
                 type: maybeNotification.type,
-              } as PlatformNotificationReference;
+              } as DefenderNotificationReference;
           })
           .filter(isResource)
-      : []) as [] | [PlatformNotificationReference] | [PlatformNotificationReference, PlatformNotificationReference],
+      : []) as [] | [DefenderNotificationReference] | [DefenderNotificationReference, DefenderNotificationReference],
     stackResourceId,
   };
 };
@@ -250,15 +250,15 @@ export const constructMonitor = (
   resources: Resources,
   stackResourceId: string,
   monitor: Monitor,
-  notifications: PlatformNotification[],
-  actions: PlatformAction[],
-  blockwatchers: PlatformBlockWatcher[],
-  categories: PlatformCategory[],
-): PlatformBlockMonitor | PlatformFortaMonitor => {
-  const actionCondition: PlatformAction | undefined =
+  notifications: DefenderNotification[],
+  actions: DefenderAction[],
+  blockwatchers: DefenderBlockWatcher[],
+  categories: DefenderCategory[],
+): DefenderBlockMonitor | DefenderFortaMonitor => {
+  const actionCondition: DefenderAction | undefined =
     (monitor['action-condition'] as Action) &&
     actions.find((a) => a.name === (monitor['action-condition'] as Action)!.name);
-  const actionTrigger: PlatformAction | undefined =
+  const actionTrigger: DefenderAction | undefined =
     (monitor['action-trigger'] as Action) &&
     actions.find((a) => a.name === (monitor['action-trigger'] as Action)!.name);
 
@@ -266,7 +266,7 @@ export const constructMonitor = (
   const threshold = monitor['alert-threshold'] as AlertThreshold;
   const notificationChannels = notifyConfig.channels
     .map((notification) => {
-      const maybeNotification = getEquivalentResource<Notification, PlatformNotification>(
+      const maybeNotification = getEquivalentResource<Notification, DefenderNotification>(
         context,
         notification,
         resources?.notifications,
@@ -302,7 +302,7 @@ export const constructMonitor = (
   };
 
   if (monitor.type === 'FORTA') {
-    const fortaMonitor: PlatformFortaMonitor = {
+    const fortaMonitor: DefenderFortaMonitor = {
       ...commonMonitor,
       type: 'FORTA',
       privateFortaNodeId: monitor['forta-node-id'],
@@ -324,7 +324,7 @@ export const constructMonitor = (
         `A blockwatcher with confirmation level (${monitor['confirm-level']}) does not exist on ${monitor.network}. Choose another confirmation level.`,
       );
     }
-    const blockMonitor: PlatformBlockMonitor = {
+    const blockMonitor: DefenderBlockMonitor = {
       ...commonMonitor,
       type: 'BLOCK',
       network: monitor.network,
@@ -417,10 +417,10 @@ export const validateAdditionalPermissionsOrThrow = async <T>(
 
 export const isUnauthorisedError = (e: any): boolean => {
   try {
-    const platformErrorStatus = (e as PlatformAPIError).response.status as number;
-    return platformErrorStatus === 403;
+    const error = (e as DefenderAPIError).response.status as number;
+    return error === 403;
   } catch {
-    // if it is not a PlatformApiError,
+    // if it is not a DefenderAPIError,
     // the error is most likely caused due to something else
     return false;
   }
