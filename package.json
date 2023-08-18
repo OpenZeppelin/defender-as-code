@@ -1,7 +1,7 @@
 {
   "name": "@openzeppelin/defender-as-code",
   "version": "2.0.0",
-  "description": "Configure your Defender 2.0 environment via code",
+  "description": "Configure your Defender environment via code",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
