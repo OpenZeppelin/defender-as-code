@@ -1,9 +1,9 @@
 import { JsonFragment } from '@ethersproject/abi';
 
-import { Network } from '@openzeppelin/platform-sdk-base-client';
-import { Contract } from '@openzeppelin/platform-sdk-proposal-client/lib/models/contract';
-import { RelayerGetResponse, RelayerApiKey } from '@openzeppelin/platform-sdk-relay-client/lib/models';
-import { PlatformApiResponseError } from '@openzeppelin/platform-sdk-base-client/lib/api/api-error';
+import { Network } from '@openzeppelin/defender-sdk-base-client';
+import { Contract } from '@openzeppelin/defender-sdk-proposal-client/lib/models/contract';
+import { RelayerGetResponse, RelayerApiKey } from '@openzeppelin/defender-sdk-relay-client/lib/models';
+import { DefenderApiResponseError } from '@openzeppelin/defender-sdk-base-client/lib/api/api-error';
 
 import {
   SaveNotificationRequest,
@@ -14,19 +14,19 @@ import {
   EmailConfig,
   DiscordConfig,
   NotificationType,
-} from '@openzeppelin/platform-sdk-monitor-client/lib/models/notification';
+} from '@openzeppelin/defender-sdk-monitor-client/lib/models/notification';
 
-import { NotificationCategory } from '@openzeppelin/platform-sdk-monitor-client/lib/models/category';
-import { CreateMonitorResponse, BlockWatcher } from '@openzeppelin/platform-sdk-monitor-client';
+import { NotificationCategory } from '@openzeppelin/defender-sdk-monitor-client/lib/models/category';
+import { CreateMonitorResponse, BlockWatcher } from '@openzeppelin/defender-sdk-monitor-client';
 
 import {
-  CreateBlockSubscriberResponse,
-  CreateFortaSubscriberResponse,
-  ExternalCreateBlockSubscriberRequest,
-  ExternalCreateFortaSubscriberRequest,
+  CreateBlockMonitorResponse,
+  CreateFortaMonitorResponse,
+  ExternalCreateBlockMonitorRequest,
+  ExternalCreateFortaMonitorRequest,
   NotificationReference,
-  SubscriberRiskCategory,
-} from '@openzeppelin/platform-sdk-monitor-client/lib/models/subscriber';
+  MonitorRiskCategory,
+} from '@openzeppelin/defender-sdk-monitor-client/lib/models/monitor';
 import {
   Action,
   SecretsMap,
@@ -34,12 +34,12 @@ import {
   WebhookTrigger,
   SentinelTrigger,
   MonitorFilterTrigger,
-} from '@openzeppelin/platform-sdk-action-client/lib/models/action';
-import { BlockExplorerApiKeyResponse } from '@openzeppelin/platform-sdk-deploy-client';
-import { OpsgenieConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/opsgenie';
-import { PagerDutyConfig } from '@openzeppelin/platform-sdk-monitor-client/lib/models/pager-duty';
+} from '@openzeppelin/defender-sdk-action-client/lib/models/action';
+import { BlockExplorerApiKeyResponse } from '@openzeppelin/defender-sdk-deploy-client';
+import { OpsgenieConfig } from '@openzeppelin/defender-sdk-monitor-client/lib/models/opsgenie';
+import { PagerDutyConfig } from '@openzeppelin/defender-sdk-monitor-client/lib/models/pager-duty';
 
-export type DefenderAPIError = PlatformApiResponseError;
+export type DefenderAPIError = DefenderApiResponseError;
 export type DefenderRelayerApiKey = RelayerApiKey;
 export type DefenderSecretsMap = SecretsMap;
 export type DefenderContract = Contract;
@@ -50,10 +50,10 @@ export type DefenderNotification = NotificationSummary;
 export type DefenderCategory = NotificationCategory;
 export type DefenderNotificationReference = NotificationReference;
 export type DefenderMonitor = CreateMonitorResponse;
-export type DefenderBlockMonitorResponse = CreateBlockSubscriberResponse;
-export type DefenderFortaMonitorResponse = CreateFortaSubscriberResponse;
-export type DefenderBlockMonitor = ExternalCreateBlockSubscriberRequest;
-export type DefenderFortaMonitor = ExternalCreateFortaSubscriberRequest;
+export type DefenderBlockMonitorResponse = CreateBlockMonitorResponse;
+export type DefenderFortaMonitorResponse = CreateFortaMonitorResponse;
+export type DefenderBlockMonitor = ExternalCreateBlockMonitorRequest;
+export type DefenderFortaMonitor = ExternalCreateFortaMonitorRequest;
 export type DefenderSlackConfig = SlackConfig;
 export type DefenderDatadogConfig = DatadogConfig;
 export type DefenderDiscordConfig = DiscordConfig;
@@ -65,7 +65,7 @@ export type DefenderWebhookTrigger = WebhookTrigger;
 export type DefenderScheduleTrigger = ScheduleTrigger;
 export type DefenderMonitorTrigger = SentinelTrigger;
 export type DefenderMonitorFilterTrigger = MonitorFilterTrigger;
-export type DefenderMonitorRiskCategory = SubscriberRiskCategory;
+export type DefenderMonitorRiskCategory = MonitorRiskCategory;
 
 // Generated Interfaces from Schemas
 import * as SchemaDefender from '../types/types/defender.schema';

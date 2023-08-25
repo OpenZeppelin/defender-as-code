@@ -41,7 +41,7 @@ export default class DefenderInvoke {
       const list = (await client.list()).items;
       const defenderAction = getEquivalentResourceByKey<DefenderAction>(this.options.function!, list);
       if (defenderAction) {
-        const response = await client.runAction({
+        const response = await client.runAction(defenderAction.actionId, {
           actionId: defenderAction.actionId,
           data: payload,
         });

@@ -79,9 +79,9 @@ export default class DefenderInfo {
           let keys: DefenderRelayerApiKey[] = [];
           // Also print relayer API keys
           if (resourceType === 'Relayers') {
-            const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys({
-              relayerId: (e as unknown as DefenderRelayer).relayerId,
-            });
+            const listRelayerAPIKeys = await getRelayClient(getTeamAPIkeysOrThrow(context)).listKeys(
+              (e as unknown as DefenderRelayer).relayerId,
+            );
             listRelayerAPIKeys.map((k) => {
               this.log.notice(`${k.stackResourceId}: ${k.keyId}`, 2);
             });
@@ -121,7 +121,7 @@ export default class DefenderInfo {
       'Monitors',
       this.resources?.monitors,
       listMonitors,
-      (resource: DefenderMonitor) => `${resource.stackResourceId}: ${resource.subscriberId}`,
+      (resource: DefenderMonitor) => `${resource.stackResourceId}: ${resource.monitorId}`,
       stdOut.monitors,
     );
 

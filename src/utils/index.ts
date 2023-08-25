@@ -2,11 +2,11 @@ import Serverless from 'serverless';
 
 import _ from 'lodash';
 
-import { ActionClient } from '@openzeppelin/platform-sdk-action-client';
-import { MonitorClient } from '@openzeppelin/platform-sdk-monitor-client';
-import { RelayClient } from '@openzeppelin/platform-sdk-relay-client';
-import { ProposalClient } from '@openzeppelin/platform-sdk-proposal-client';
-import { DeployClient } from '@openzeppelin/platform-sdk-deploy-client';
+import { ActionClient } from '@openzeppelin/defender-sdk-action-client';
+import { MonitorClient } from '@openzeppelin/defender-sdk-monitor-client';
+import { RelayClient } from '@openzeppelin/defender-sdk-relay-client';
+import { ProposalClient } from '@openzeppelin/defender-sdk-proposal-client';
+import { DeployClient } from '@openzeppelin/defender-sdk-deploy-client';
 
 import {
   YSecret,
