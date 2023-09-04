@@ -142,7 +142,7 @@ export default class DefenderDeploy {
           dRelayers,
         );
         if (dRelayer) {
-          const dRelayerApiKeys = await relayerClient.listKeys({ relayerId: dRelayer.relayerId });
+          const dRelayerApiKeys = await relayerClient.listKeys(dRelayer.relayerId);
           const configuredKeys = relayer['api-keys'] ?? [];
           const relayerApiKeyDifference = _.differenceWith(
             dRelayerApiKeys,
@@ -226,7 +226,7 @@ export default class DefenderDeploy {
           : undefined,
       monitors:
         withResources.monitors.length > 0
-          ? withResources.monitors.map((a) => `${a.stackResourceId ?? a.name} (${a.subscriberId})`)
+          ? withResources.monitors.map((a) => `${a.stackResourceId ?? a.name} (${a.monitorId})`)
           : undefined,
       notifications:
         withResources.notifications.length > 0
@@ -450,23 +450,20 @@ export default class DefenderDeploy {
             validateTypesAndSanitise(mappedMatch),
           )
         ) {
-          updatedRelayer = await client.update({
-            relayerId: match.relayerId,
-            relayerUpdateParams: {
-              name: relayer.name,
-              minBalance: relayer['min-balance'],
-              policies: relayer.policy && {
-                whitelistReceivers: relayer.policy['whitelist-receivers'],
-                gasPriceCap: relayer.policy['gas-price-cap'],
-                EIP1559Pricing: relayer.policy['eip1559-pricing'],
-                privateTransactions: relayer.policy['private-transactions'],
-              },
+          updatedRelayer = await client.update(match.relayerId, {
+            name: relayer.name,
+            minBalance: relayer['min-balance'],
+            policies: relayer.policy && {
+              whitelistReceivers: relayer.policy['whitelist-receivers'],
+              gasPriceCap: relayer.policy['gas-price-cap'],
+              EIP1559Pricing: relayer.policy['eip1559-pricing'],
+              privateTransactions: relayer.policy['private-transactions'],
             },
           });
         }
 
         // check existing keys and remove / create accordingly
-        const existingRelayerKeys = await client.listKeys({ relayerId: match.relayerId });
+        const existingRelayerKeys = await client.listKeys(match.relayerId);
         const configuredKeys = relayer['api-keys'] ?? [];
         const inDefender = _.differenceWith(
           existingRelayerKeys,
@@ -479,9 +476,7 @@ export default class DefenderDeploy {
           this.log.info(`Unused resources found on Defender:`);
           this.log.info(JSON.stringify(inDefender, null, 2));
           this.log.progress('component-deploy-extra', `Removing resources from Defender`);
-          await Promise.all(
-            inDefender.map(async (key) => await client.deleteKey({ relayerId: match.relayerId, keyId: key.keyId })),
-          );
+          await Promise.all(inDefender.map(async (key) => await client.deleteKey(match.relayerId, key.keyId)));
           this.log.success(`Removed resources from Defender`);
           output.relayerKeys.removed.push(...inDefender);
         }
@@ -497,8 +492,7 @@ export default class DefenderDeploy {
           await Promise.all(
             inTemplate.map(async (key) => {
               const keyStackResource = getResourceID(match.stackResourceId!, key);
-              const createdKey = await client.createKey({
-                relayerId: match.relayerId,
+              const createdKey = await client.createKey(match.relayerId, {
                 stackResourceId: keyStackResource,
               });
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${match.relayerId})`);
@@ -530,19 +524,17 @@ export default class DefenderDeploy {
         );
 
         const createdRelayer = await client.create({
-          relayer: {
-            name: relayer.name,
-            network: relayer.network,
-            minBalance: relayer['min-balance'],
-            useAddressFromRelayerId: maybeRelayer?.relayerId,
-            policies: relayer.policy && {
-              whitelistReceivers: relayer.policy['whitelist-receivers'],
-              gasPriceCap: relayer.policy['gas-price-cap'],
-              EIP1559Pricing: relayer.policy['eip1559-pricing'],
-              privateTransactions: relayer.policy['private-transactions'],
-            },
-            stackResourceId,
+          name: relayer.name,
+          network: relayer.network,
+          minBalance: relayer['min-balance'],
+          useAddressFromRelayerId: maybeRelayer?.relayerId,
+          policies: relayer.policy && {
+            whitelistReceivers: relayer.policy['whitelist-receivers'],
+            gasPriceCap: relayer.policy['gas-price-cap'],
+            EIP1559Pricing: relayer.policy['eip1559-pricing'],
+            privateTransactions: relayer.policy['private-transactions'],
           },
+          stackResourceId,
         });
 
         const relayerKeys = relayer['api-keys'];
@@ -550,8 +542,7 @@ export default class DefenderDeploy {
           await Promise.all(
             relayerKeys.map(async (key) => {
               const keyStackResource = getResourceID(stackResourceId, key);
-              const createdKey = await client.createKey({
-                relayerId: createdRelayer.relayerId,
+              const createdKey = await client.createKey(createdRelayer.relayerId, {
                 stackResourceId: keyStackResource,
               });
               this.log.success(`Created API Key (${keyStackResource}) for Relayer (${createdRelayer.relayerId})`);
@@ -605,7 +596,7 @@ export default class DefenderDeploy {
           };
         }
 
-        const updatedNotification = await client.updateNotificationChannel({
+        const updatedNotification = await client.updateNotificationChannel(match.notificationId, {
           ...constructNotification(notification, match.stackResourceId!),
           notificationId: match.notificationId,
         });
@@ -630,7 +621,9 @@ export default class DefenderDeploy {
       },
       // on remove
       async (notifications: DefenderNotification[]) => {
-        await Promise.all(notifications.map(async (n) => await client.deleteNotificationChannel(n)));
+        await Promise.all(
+          notifications.map(async (n) => await client.deleteNotificationChannel(n.notificationId, n.type)),
+        );
       },
       undefined,
       output,
@@ -674,9 +667,9 @@ export default class DefenderDeploy {
           };
         }
 
-        const updatedCategory = await client.updateNotificationCategory({
-          ...newCategory,
+        const updatedCategory = await client.updateNotificationCategory(match.categoryId, {
           categoryId: match.categoryId,
+          ...newCategory,
         });
         return {
           name: updatedCategory.stackResourceId!,
@@ -817,22 +810,22 @@ export default class DefenderDeploy {
           if (_.isEqual(validateTypesAndSanitise(newMonitor), validateTypesAndSanitise(mappedMatch))) {
             return {
               name: match.stackResourceId!,
-              id: match.subscriberId,
+              id: match.monitorId,
               success: false,
               response: match,
               notice: `Skipped ${match.stackResourceId} - no changes detected`,
             };
           }
 
-          const updatedMonitor = await client.update({
-            monitorId: match.subscriberId,
+          const updatedMonitor = await client.update(match.monitorId, {
             // Do not allow to update network of (existing) monitors
             ..._.omit(newMonitor, ['network']),
+            monitorId: match.monitorId,
           });
 
           return {
             name: updatedMonitor.stackResourceId!,
-            id: updatedMonitor.subscriberId,
+            id: updatedMonitor.monitorId,
             success: true,
             response: updatedMonitor,
           };
@@ -856,14 +849,14 @@ export default class DefenderDeploy {
           );
           return {
             name: stackResourceId,
-            id: createdMonitor.subscriberId,
+            id: createdMonitor.monitorId,
             success: true,
             response: createdMonitor,
           };
         },
         // on remove
         async (monitors: DefenderMonitor[]) => {
-          await Promise.all(monitors.map(async (s) => await client.delete({ monitorId: s.subscriberId })));
+          await Promise.all(monitors.map(async (s) => await client.delete(s.monitorId)));
         },
         undefined,
         output,
@@ -895,15 +888,11 @@ export default class DefenderDeploy {
           existingRelayers,
         );
         // Get new code digest
-        const code = await client.getEncodedZippedCodeFromFolder({
-          path: action.path,
-        });
+        const code = await client.getEncodedZippedCodeFromFolder(action.path);
         const newDigest = client.getCodeDigest({
           encodedZippedCode: code,
         });
-        const { codeDigest } = await client.get({
-          actionId: match.actionId,
-        });
+        const { codeDigest } = await client.get(match.actionId);
 
         const isSchedule = (
           o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderMonitorTrigger | DefenderMonitorFilterTrigger,
@@ -961,8 +950,7 @@ export default class DefenderDeploy {
             response: updatesAction,
           };
         } else {
-          await client.updateCodeFromFolder({
-            actionId: match.actionId,
+          await client.updateCodeFromFolder(match.actionId, {
             path: action.path,
           });
           return {
@@ -992,9 +980,7 @@ export default class DefenderDeploy {
             frequencyMinutes: action.trigger.frequency ?? undefined,
             cron: action.trigger.cron ?? undefined,
           },
-          encodedZippedCode: await client.getEncodedZippedCodeFromFolder({
-            path: action.path,
-          }),
+          encodedZippedCode: await client.getEncodedZippedCodeFromFolder(action.path),
           paused: action.paused,
           relayerId: maybeRelayer?.relayerId,
           stackResourceId: stackResourceId,
@@ -1008,7 +994,7 @@ export default class DefenderDeploy {
       },
       // on remove
       async (actions: DefenderAction[]) => {
-        await Promise.all(actions.map(async (a) => await client.delete({ actionId: a.actionId })));
+        await Promise.all(actions.map(async (a) => await client.delete(a.actionId)));
       },
       undefined,
       output,

@@ -142,12 +142,9 @@ export default class DefenderRemove {
       async (monitors: DefenderMonitor[]) => {
         await Promise.all(
           monitors.map(async (e) => {
-            this.log.progress(
-              'component-remove-extra',
-              `Removing ${e.stackResourceId} (${e.subscriberId}) from Defender`,
-            );
-            await monitorClient.delete({ monitorId: e.subscriberId });
-            this.log.success(`Removed ${e.stackResourceId} (${e.subscriberId})`);
+            this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.monitorId}) from Defender`);
+            await monitorClient.delete(e.monitorId);
+            this.log.success(`Removed ${e.stackResourceId} (${e.monitorId})`);
           }),
         );
       },
@@ -166,7 +163,7 @@ export default class DefenderRemove {
         await Promise.all(
           actions.map(async (e) => {
             this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.actionId}) from Defender`);
-            await actionClient.delete({ actionId: e.actionId });
+            await actionClient.delete(e.actionId);
             this.log.success(`Removed ${e.stackResourceId} (${e.actionId})`);
           }),
         );
@@ -207,11 +204,11 @@ export default class DefenderRemove {
       await Promise.all(
         existingRelayers.map(async (relayer) => {
           this.log.progress('component-info', `Retrieving API Keys for relayer ${relayer.stackResourceId}`);
-          const relayerApiKeys = await relayClient.listKeys({ relayerId: relayer.relayerId });
+          const relayerApiKeys = await relayClient.listKeys(relayer.relayerId);
           await Promise.all(
             relayerApiKeys.map(async (e) => {
               this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.keyId}) from Defender`);
-              await relayClient.deleteKey({ relayerId: e.relayerId, keyId: e.keyId });
+              await relayClient.deleteKey(e.relayerId, e.keyId);
               this.log.success(`Removed ${e.stackResourceId} (${e.keyId})`);
             }),
           );
@@ -239,7 +236,7 @@ export default class DefenderRemove {
               'component-remove-extra',
               `Removing ${e.stackResourceId} (${e.notificationId}) from Defender`,
             );
-            await monitorClient.deleteNotificationChannel(e);
+            await monitorClient.deleteNotificationChannel(e.notificationId, e.type);
             this.log.success(`Removed ${e.stackResourceId} (${e.notificationId})`);
           }),
         );
