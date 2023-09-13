@@ -7,6 +7,7 @@ import { MonitorClient } from '@openzeppelin/defender-sdk-monitor-client';
 import { RelayClient } from '@openzeppelin/defender-sdk-relay-client';
 import { ProposalClient } from '@openzeppelin/defender-sdk-proposal-client';
 import { DeployClient } from '@openzeppelin/defender-sdk-deploy-client';
+import { NetworkClient } from '@openzeppelin/defender-sdk-network-client';
 
 import {
   YSecret,
@@ -152,6 +153,10 @@ export const getProposalClient = (key: TeamKey): ProposalClient => {
 
 export const getDeployClient = (key: TeamKey): DeployClient => {
   return new DeployClient(key);
+};
+
+export const getNetworkClient = (key: TeamKey): NetworkClient => {
+  return new NetworkClient(key);
 };
 
 export const constructNotification = (notification: Notification, stackResourceId: string) => {

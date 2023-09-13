@@ -25,6 +25,7 @@ import {
   getDeployClient,
   formatABI,
   constructMonitor,
+  getNetworkClient,
 } from '../utils';
 import {
   DefenderAction,
@@ -49,6 +50,7 @@ import {
   DefenderFortaMonitorResponse,
   DefenderBlockMonitorResponse,
   Resources,
+  DefenderForkedNetwork,
 } from '../types';
 import keccak256 from 'keccak256';
 import {
@@ -60,6 +62,8 @@ import {
   Category,
   Contract,
   Contracts,
+  ForkedNetworkRequest,
+  ForkedNetworks,
   Monitor,
   Monitors,
   Notification,
@@ -1060,6 +1064,76 @@ export default class DefenderDeploy {
     );
   }
 
+  private async deployForkedNetworks(output: DeployOutput<DefenderForkedNetwork>) {
+    const forkedNetworks: ForkedNetworks = this.resources?.['forked-networks'] ?? {};
+    const client = getNetworkClient(this.teamKey!);
+    const retrieveExisting = () => client.listForkedNetworks();
+
+    await this.wrapper<ForkedNetworkRequest, DefenderForkedNetwork>(
+      this.serverless,
+      'Forked Networks',
+      forkedNetworks,
+      retrieveExisting,
+      // on update
+      async (forkedNetwork: ForkedNetworkRequest, match: DefenderForkedNetwork) => {
+        const mappedMatch = {
+          'name': match.name,
+          'forked-network': match.forkedNetwork,
+          'rpc-url': match.rpcUrl,
+          'api-key': match.apiKey ? match.apiKey : undefined,
+          'block-explorer-url': match.blockExplorerUrl ? match.blockExplorerUrl : undefined,
+        };
+
+        if (!_.isEqual(validateTypesAndSanitise(forkedNetwork), validateTypesAndSanitise(mappedMatch))) {
+          return {
+            name: match.stackResourceId!,
+            id: match.forkedNetworkId,
+            success: false,
+            response: match,
+            notice: `Skipped ${match.stackResourceId} - no changes detected`,
+          };
+        }
+
+        const updatedForkedNetwork = await client.updateForkedNetwork(match.forkedNetworkId, {
+          apiKey: forkedNetwork['api-key'],
+          blockExplorerUrl: forkedNetwork['block-explorer-url'],
+          stackResourceId: match.stackResourceId!,
+        });
+
+        return {
+          name: updatedForkedNetwork.stackResourceId!,
+          id: updatedForkedNetwork.forkedNetworkId,
+          success: true,
+          response: updatedForkedNetwork,
+        };
+      },
+      // on create
+      async (forkedNetwork: ForkedNetworkRequest, stackResourceId: string) => {
+        const createdForkedNetwork = await client.createForkedNetwork({
+          name: forkedNetwork.name,
+          forkedNetwork: forkedNetwork['forked-network'],
+          rpcUrl: forkedNetwork['rpc-url'],
+          blockExplorerUrl: forkedNetwork['block-explorer-url'],
+          apiKey: forkedNetwork['api-key'],
+          stackResourceId,
+        });
+        return {
+          name: stackResourceId,
+          id: createdForkedNetwork.forkedNetworkId,
+          success: true,
+          response: createdForkedNetwork,
+        };
+      },
+      // on remove
+      async (forkedNetworks: DefenderForkedNetwork[]) => {
+        await Promise.all(forkedNetworks.map(async (c) => await client.deleteForkedNetwork(c.forkedNetworkId)));
+      },
+      undefined,
+      output,
+      this.ssotDifference?.forkedNetworks,
+    );
+  }
+
   private async wrapper<Y, D>(
     context: Serverless,
     resourceType: ResourceType,
@@ -1197,8 +1271,12 @@ export default class DefenderDeploy {
         updated: [],
       },
     };
-
     const blockExplorerApiKeys: DeployOutput<DefenderBlockExplorerApiKey> = {
+      removed: [],
+      created: [],
+      updated: [],
+    };
+    const forkedNetworks: DeployOutput<DefenderBlockExplorerApiKey> = {
       removed: [],
       created: [],
       updated: [],
@@ -1215,7 +1293,10 @@ export default class DefenderDeploy {
       categories,
       secrets,
       blockExplorerApiKeys,
+      forkedNetworks,
     };
+
+    await this.deployForkedNetworks(stdOut.forkedNetworks);
     await this.deploySecrets(stdOut.secrets);
     await this.deployContracts(stdOut.contracts);
     // Always deploy relayers before actions

@@ -12,7 +12,7 @@
 | :-------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
 | [name](#name)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "definitions.schema.json#/definitions/contract/properties/name")         |
 | [address](#address)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-address.md "definitions.schema.json#/definitions/contract/properties/address")                       |
-| [network](#network)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/contract/properties/network")                       |
+| [network](#network)   | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/contract/properties/network")                       |
 | [abi](#abi)           | Merged   | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/contract/properties/abi")                           |
 | [nat-spec](#nat-spec) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-nat-spec.md "definitions.schema.json#/definitions/contract/properties/nat-spec") |
 
@@ -72,7 +72,7 @@
 
 *   is required
 
-*   Type: `string` ([Network](definitions-definitions-network.md))
+*   Type: merged type ([Network](definitions-definitions-network.md))
 
 *   cannot be null
 
@@ -80,52 +80,19 @@
 
 ### network Type
 
-`string` ([Network](definitions-definitions-network.md))
+merged type ([Network](definitions-definitions-network.md))
+
+any of
+
+*   one (and only one) of
+
+    *   [PublicNetwork](definitions-definitions-publicnetwork.md "check type definition")
+
+    *   [CustomNetwork](definitions-definitions-customnetwork.md "check type definition")
+
+*   [ForkedNetwork](definitions-definitions-forkednetwork.md "check type definition")
 
 ### network Constraints
-
-**enum**: the value of this property must be equal to one of the following values:
-
-| Value                     | Explanation |
-| :------------------------ | :---------- |
-| `"mainnet"`               |             |
-| `"sepolia"`               |             |
-| `"goerli"`                |             |
-| `"xdai"`                  |             |
-| `"sokol"`                 |             |
-| `"fuse"`                  |             |
-| `"bsc"`                   |             |
-| `"bsctest"`               |             |
-| `"fantom"`                |             |
-| `"fantomtest"`            |             |
-| `"moonbase"`              |             |
-| `"moonriver"`             |             |
-| `"moonbeam"`              |             |
-| `"matic"`                 |             |
-| `"mumbai"`                |             |
-| `"avalanche"`             |             |
-| `"fuji"`                  |             |
-| `"optimism"`              |             |
-| `"optimism-goerli"`       |             |
-| `"arbitrum"`              |             |
-| `"arbitrum-nova"`         |             |
-| `"arbitrum-goerli"`       |             |
-| `"celo"`                  |             |
-| `"alfajores"`             |             |
-| `"harmony-s0"`            |             |
-| `"harmony-test-s0"`       |             |
-| `"aurora"`                |             |
-| `"auroratest"`            |             |
-| `"hedera"`                |             |
-| `"hederatest"`            |             |
-| `"x-dfk-avax-chain"`      |             |
-| `"x-dfk-avax-chain-test"` |             |
-| `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
-| `"base"`                  |             |
-| `"base-goerli"`           |             |
-| `"linea"`                 |             |
-| `"linea-goerli"`          |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
