@@ -12,6 +12,7 @@ import {
   getConsolidatedSecrets,
   getRelayClient,
   getMonitorClient,
+  getNetworkClient,
   getStackName,
   getTeamAPIkeysOrThrow,
   isTemplateResource,
@@ -28,8 +29,9 @@ import {
   TeamKey,
   YSecret,
   Resources,
+  DefenderForkedNetwork,
 } from '../types';
-import { Action, Contract, Monitor, Relayer, Notification } from '../types/types/resources.schema';
+import { Action, Contract, Monitor, Relayer, Notification, ForkedNetwork } from '../types/types/resources.schema';
 
 export default class DefenderRemove {
   serverless: Serverless;
@@ -121,6 +123,7 @@ export default class DefenderRemove {
       notifications: DefenderNotification[];
       categories: DefenderCategory[];
       secrets: string[];
+      forkedNetworks: DefenderForkedNetwork[];
     } = {
       stack: stackName,
       monitors: [],
@@ -130,7 +133,32 @@ export default class DefenderRemove {
       notifications: [],
       categories: [],
       secrets: [],
+      forkedNetworks: [],
     };
+
+    // Forked Networks
+    const forkedNetworkClient = getNetworkClient(this.teamKey!);
+    const listForkedNetworks = () => forkedNetworkClient.list();
+    await this.wrapper<ForkedNetwork, DefenderForkedNetwork>(
+      this.serverless,
+      'Monitors',
+      this.resources?.['forked-networks'],
+      listForkedNetworks,
+      async (forkedNetworks: DefenderForkedNetwork[]) => {
+        await Promise.all(
+          forkedNetworks.map(async (e) => {
+            this.log.progress(
+              'component-remove-extra',
+              `Removing ${e.stackResourceId} (${e.forkedNetworkId}) from Defender`,
+            );
+            await forkedNetworkClient.deleteForkedNetwork(e.forkedNetworkId);
+            this.log.success(`Removed ${e.stackResourceId} (${e.forkedNetworkId})`);
+          }),
+        );
+      },
+      stdOut.forkedNetworks,
+    );
+
     // Monitors
     const monitorClient = getMonitorClient(this.teamKey!);
     const listMonitors = () => monitorClient.list().then((i) => i.items);
