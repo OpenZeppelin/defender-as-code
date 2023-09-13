@@ -123,14 +123,14 @@ export type AgentIDs = string[];
 export type Network4 = SupportedNetwork | ForkedNetwork;
 
 export interface Resources {
-  actions?: Actions;
-  notifications?: Notifications;
-  categories?: Categories;
-  relayers?: Relayers;
-  policies?: Policies;
-  contracts?: Contracts;
-  secrets?: ActionSecrets;
-  monitors?: Monitors;
+  'actions'?: Actions;
+  'notifications'?: Notifications;
+  'categories'?: Categories;
+  'relayers'?: Relayers;
+  'policies'?: Policies;
+  'contracts'?: Contracts;
+  'secrets'?: ActionSecrets;
+  'monitors'?: Monitors;
   'block-explorer-api-keys'?: BlockExplorerApiKeys;
   'forked-networks'?: ForkedNetworks;
 }
@@ -145,11 +145,11 @@ export interface Action {
   paused: boolean;
 }
 export interface Relayer {
-  name: string;
-  network: Network;
+  'name': string;
+  'network': Network;
   'min-balance': number;
   'address-from-relayer'?: AddressFromRelayer;
-  policy?: Policy;
+  'policy'?: Policy;
   'api-keys'?: RelayerAPIKeys;
 }
 export interface AddressFromRelayer {}
@@ -228,8 +228,8 @@ export interface Categories {
   [k: string]: Category;
 }
 export interface Category {
-  name: string;
-  description?: string;
+  'name': string;
+  'description'?: string;
   'notification-ids'?: CategoryNotificationIds;
 }
 export interface Notification1 {
@@ -242,11 +242,11 @@ export interface Relayers {
   [k: string]: Relayer1;
 }
 export interface Relayer1 {
-  name: string;
-  network: Network;
+  'name': string;
+  'network': Network;
   'min-balance': number;
   'address-from-relayer'?: AddressFromRelayer;
-  policy?: Policy;
+  'policy'?: Policy;
   'api-keys'?: RelayerAPIKeys;
 }
 export interface Policies {
@@ -262,10 +262,10 @@ export interface Contracts {
   [k: string]: Contract;
 }
 export interface Contract {
-  name: string;
-  address: Address;
-  network: Network1;
-  abi?: AbiType;
+  'name': string;
+  'address': Address;
+  'network': Network1;
+  'abi'?: AbiType;
   'nat-spec'?: string;
 }
 export interface ActionSecrets {
@@ -282,13 +282,13 @@ export interface Monitors {
   [k: string]: Monitor;
 }
 export interface BlockMonitor {
-  name: string;
-  type: 'BLOCK';
-  network: Network2;
-  addresses: Addresses;
-  abi?: AbiType;
+  'name': string;
+  'type': 'BLOCK';
+  'network': Network2;
+  'addresses': Addresses;
+  'abi'?: AbiType;
   'alert-threshold'?: AlertThreshold;
-  paused?: boolean;
+  'paused'?: boolean;
   /**
    * A boolean value that indicates whether the UI should skip ABI validation checks. Enable this if you wish to use custom or partial ABIs for your monitors.
    */
@@ -297,11 +297,11 @@ export interface BlockMonitor {
   'action-trigger'?: Action2;
   'confirm-level'?: ('safe' | 'finalized') | number;
   'notify-config': NotifyConfig;
-  conditions?: Conditions;
+  'conditions'?: Conditions;
   'risk-category'?: RiskCategory;
 }
 export interface AlertThreshold {
-  amount: number;
+  'amount': number;
   'window-seconds': number;
 }
 export interface Action1 {
@@ -319,15 +319,15 @@ export interface Action2 {
   paused: boolean;
 }
 export interface NotifyConfig {
-  timeout?: number;
-  message?: string;
+  'timeout'?: number;
+  'message'?: string;
   'message-subject'?: string;
-  category?: Category1;
-  channels: Channels;
+  'category'?: Category1;
+  'channels': Channels;
 }
 export interface Category1 {
-  name: string;
-  description?: string;
+  'name': string;
+  'description'?: string;
   'notification-ids'?: CategoryNotificationIds;
 }
 export interface Notification2 {
@@ -350,24 +350,24 @@ export interface FunctionItems {
   expression?: string;
 }
 export interface FortaMonitor {
-  name: string;
-  type: 'FORTA';
-  network: Network3;
-  addresses?: Addresses1;
-  abi?: AbiType;
+  'name': string;
+  'type': 'FORTA';
+  'network': Network3;
+  'addresses'?: Addresses1;
+  'abi'?: AbiType;
   'alert-threshold'?: AlertThreshold1;
-  paused?: boolean;
+  'paused'?: boolean;
   'action-condition'?: Action3;
   'action-trigger'?: Action4;
   'notify-config': NotifyConfig1;
-  conditions?: Conditions1;
+  'conditions'?: Conditions1;
   'forta-node-id'?: string;
   'forta-last-processed-time'?: string;
   'agent-ids'?: AgentIDs;
   'risk-category'?: RiskCategory;
 }
 export interface AlertThreshold1 {
-  amount?: number;
+  'amount'?: number;
   'window-seconds'?: number;
 }
 export interface Action3 {
@@ -385,15 +385,15 @@ export interface Action4 {
   paused: boolean;
 }
 export interface NotifyConfig1 {
-  timeout?: number;
-  message?: string;
+  'timeout'?: number;
+  'message'?: string;
   'message-subject'?: string;
-  category?: Category2;
-  channels: Channels1;
+  'category'?: Category2;
+  'channels': Channels1;
 }
 export interface Category2 {
-  name: string;
-  description?: string;
+  'name': string;
+  'description'?: string;
   'notification-ids'?: CategoryNotificationIds;
 }
 export interface Notification3 {
@@ -404,7 +404,7 @@ export interface Notification3 {
 }
 export interface Conditions1 {
   'min-scanner-count': number;
-  severity?: 0 | 1 | 2 | 3 | 4 | 5;
+  'severity'?: 0 | 1 | 2 | 3 | 4 | 5;
   'alert-ids'?: AlertIDs;
 }
 export interface BlockExplorerApiKeys {
@@ -418,9 +418,9 @@ export interface ForkedNetworks {
   [k: string]: ForkedNetworkRequest;
 }
 export interface ForkedNetworkRequest {
-  name: ForkedNetwork;
-  forkedNetwork: SupportedNetwork;
-  rpcUrl: string;
-  apiKey?: string;
-  blockExplorerUrl?: string;
+  'name': ForkedNetwork;
+  'forked-network': SupportedNetwork;
+  'rpc-url': string;
+  'api-key'?: string;
+  'block-explorer-url'?: string;
 }

@@ -138,7 +138,7 @@ export default class DefenderRemove {
 
     // Forked Networks
     const forkedNetworkClient = getNetworkClient(this.teamKey!);
-    const listForkedNetworks = () => forkedNetworkClient.list();
+    const listForkedNetworks = () => forkedNetworkClient.listForkedNetworks();
     await this.wrapper<ForkedNetwork, DefenderForkedNetwork>(
       this.serverless,
       'Monitors',
