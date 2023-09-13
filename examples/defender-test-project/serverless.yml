@@ -201,5 +201,15 @@ resources:
       # optional
       forta-last-processed-time: null
 
+  forked-networks:
+    mainnet-fork:
+      name: mainnet-fork # restricted to alphanumeric characters and dashes (no whitespaces)
+      forked-network: mainnet # must be of type SupportedNetwork
+      rpc-url: https://rpc.my-fork-provider.com/123
+      # optional
+      block-explorer-url: https://explorer.my-fork-provider.com/123
+      # optional
+      api-key: null
+
 plugins:
   - '@openzeppelin/defender-as-code'

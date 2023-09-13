@@ -111,6 +111,7 @@ export default class DefenderDeploy {
       relayerApiKeys: [],
       secrets: [],
       blockExplorerApiKeys: [],
+      forkedNetworks: [],
     };
     // Contracts
     const contracts: Contracts = this.resources?.contracts ?? {};
@@ -120,6 +121,17 @@ export default class DefenderDeploy {
       dContracts,
       Object.entries(contracts),
       (a: DefenderContract, b: [string, Contract]) => `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
+    );
+
+    // Forked Networks
+    const forkedNetworks: ForkedNetworks = this.resources?.['forked-networks'] ?? {};
+    const networkClient = getNetworkClient(this.teamKey!);
+    const forkedNetworkItems = await networkClient.listForkedNetworks();
+    const forkedNetworkDifference = _.differenceWith(
+      forkedNetworkItems,
+      Object.entries(forkedNetworks),
+      (a: DefenderForkedNetwork, b: [string, ForkedNetworkRequest]) =>
+        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
     // Monitors
@@ -209,6 +221,7 @@ export default class DefenderDeploy {
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
+    difference.forkedNetworks = forkedNetworkDifference;
     difference.contracts = contractDifference;
     difference.monitors = monitorDifference;
     difference.notifications = notificationDifference;
