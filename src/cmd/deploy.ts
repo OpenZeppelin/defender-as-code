@@ -70,6 +70,7 @@ import {
   Notifications,
   Relayer,
   Relayers,
+  SupportedNetwork,
 } from '../types/types/resources.schema';
 
 export default class DefenderDeploy {
@@ -1089,15 +1090,38 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (forkedNetwork: ForkedNetworkRequest, match: DefenderForkedNetwork) => {
+        // Warn users when they try to change fields that are not allowed to be updated
+        if (match.name !== forkedNetwork.name) {
+          this.log.warn(
+            `Detected a name change from ${match.name} to ${forkedNetwork.name} for Forked Network: ${match.stackResourceId}. Defender does not currently allow updates to the name once a Forked Network is created. This change will be ignored. To enforce this change, remove this Forked Network and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the Forked Network. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this network.`,
+          );
+          forkedNetwork.name = match.name;
+        }
+
+        if (match.forkedNetwork !== forkedNetwork['forked-network']) {
+          this.log.warn(
+            `Detected a change from ${match.forkedNetwork} to ${forkedNetwork['forked-network']} for Forked Network: ${match.stackResourceId}. Defender does not currently allow updates to the fork source once a Forked Network is created. This change will be ignored. To enforce this change, remove this Forked Network and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the Forked Network. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this network.`,
+          );
+          forkedNetwork['forked-network'] = match.forkedNetwork as SupportedNetwork;
+        }
+
+        if (match.rpcUrl !== forkedNetwork['rpc-url']) {
+          this.log.warn(
+            `Detected a change from ${match.rpcUrl} to ${forkedNetwork['rpc-url']} for Forked Network: ${match.stackResourceId}. Defender does not currently allow updates to the RPC URL once a Forked Network is created. This change will be ignored. To enforce this change, remove this Forked Network and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the Forked Network. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this network.`,
+          );
+          forkedNetwork['rpc-url'] = match.rpcUrl;
+        }
+
         const mappedMatch = {
           'name': match.name,
           'forked-network': match.forkedNetwork,
           'rpc-url': match.rpcUrl,
-          'api-key': match.apiKey ? match.apiKey : undefined,
-          'block-explorer-url': match.blockExplorerUrl ? match.blockExplorerUrl : undefined,
+          'api-key': match.apiKey === null || !!match.apiKey ? match.apiKey : undefined,
+          'block-explorer-url':
+            match.blockExplorerUrl === null || !!match.blockExplorerUrl ? match.blockExplorerUrl : undefined,
         };
 
-        if (!_.isEqual(validateTypesAndSanitise(forkedNetwork), validateTypesAndSanitise(mappedMatch))) {
+        if (_.isEqual(validateTypesAndSanitise(forkedNetwork), validateTypesAndSanitise(mappedMatch))) {
           return {
             name: match.stackResourceId!,
             id: match.forkedNetworkId,
@@ -1108,7 +1132,7 @@ export default class DefenderDeploy {
         }
 
         const updatedForkedNetwork = await client.updateForkedNetwork(match.forkedNetworkId, {
-          apiKey: forkedNetwork['api-key'],
+          apiKey: forkedNetwork['api-key'] ?? undefined,
           blockExplorerUrl: forkedNetwork['block-explorer-url'],
           stackResourceId: match.stackResourceId!,
         });
@@ -1126,8 +1150,8 @@ export default class DefenderDeploy {
           name: forkedNetwork.name,
           forkedNetwork: forkedNetwork['forked-network'],
           rpcUrl: forkedNetwork['rpc-url'],
-          blockExplorerUrl: forkedNetwork['block-explorer-url'],
-          apiKey: forkedNetwork['api-key'],
+          blockExplorerUrl: forkedNetwork['block-explorer-url'] ?? undefined,
+          apiKey: forkedNetwork['api-key'] ?? undefined,
           stackResourceId,
         });
         return {

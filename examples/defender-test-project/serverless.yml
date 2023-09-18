@@ -205,9 +205,9 @@ resources:
     mainnet-fork:
       name: mainnet-fork # restricted to alphanumeric characters and dashes (no whitespaces)
       forked-network: mainnet # must be of type SupportedNetwork
-      rpc-url: https://rpc.my-fork-provider.com/123
+      rpc-url: https://rpc.phalcon.xyz/rpc_123
       # optional
-      block-explorer-url: https://explorer.my-fork-provider.com/123
+      block-explorer-url: https://scan.phalcon.xyz/fork_123
       # optional
       api-key: null
 
