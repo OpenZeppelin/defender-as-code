@@ -1,8 +1,8 @@
-## blockExplorerUrl Type
+## block-explorer-url Type
 
 `string`
 
-## blockExplorerUrl Constraints
+## block-explorer-url Constraints
 
 **pattern**: the string must match the following regular expression:&#x20;
 

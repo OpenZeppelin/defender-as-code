@@ -1289,7 +1289,7 @@ export default class DefenderDeploy {
       created: [],
       updated: [],
     };
-    const forkedNetworks: DeployOutput<DefenderBlockExplorerApiKey> = {
+    const forkedNetworks: DeployOutput<DefenderForkedNetwork> = {
       removed: [],
       created: [],
       updated: [],

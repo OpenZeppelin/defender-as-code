@@ -31,7 +31,14 @@ import {
   Resources,
   DefenderForkedNetwork,
 } from '../types';
-import { Action, Contract, Monitor, Relayer, Notification, ForkedNetwork } from '../types/types/resources.schema';
+import {
+  Action,
+  Contract,
+  Monitor,
+  Relayer,
+  Notification,
+  ForkedNetworkRequest,
+} from '../types/types/resources.schema';
 
 export default class DefenderRemove {
   serverless: Serverless;
@@ -139,9 +146,9 @@ export default class DefenderRemove {
     // Forked Networks
     const forkedNetworkClient = getNetworkClient(this.teamKey!);
     const listForkedNetworks = () => forkedNetworkClient.listForkedNetworks();
-    await this.wrapper<ForkedNetwork, DefenderForkedNetwork>(
+    await this.wrapper<ForkedNetworkRequest, DefenderForkedNetwork>(
       this.serverless,
-      'Monitors',
+      'Forked Networks',
       this.resources?.['forked-networks'],
       listForkedNetworks,
       async (forkedNetworks: DefenderForkedNetwork[]) => {

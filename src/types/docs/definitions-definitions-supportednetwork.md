@@ -1,4 +1,4 @@
-## forkedNetwork Type
+## forked-network Type
 
 merged type ([SupportedNetwork](definitions-definitions-supportednetwork.md))
 

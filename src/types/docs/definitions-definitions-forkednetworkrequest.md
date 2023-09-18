@@ -8,13 +8,13 @@
 
 # additionalProperties Properties
 
-| Property                              | Type     | Required | Nullable       | Defined by                                                                                                                                                                         |
-| :------------------------------------ | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                         | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/name")                                                |
-| [forkedNetwork](#forkednetwork)       | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/forkedNetwork")                                    |
-| [rpcUrl](#rpcurl)                     | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-rpcurl.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/rpcUrl")                     |
-| [apiKey](#apikey)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-apikey.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/apiKey")                     |
-| [blockExplorerUrl](#blockexplorerurl) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-blockexplorerurl.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/blockExplorerUrl") |
+| Property                                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                             |
+| :---------------------------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                             | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/name")                                                    |
+| [forked-network](#forked-network)         | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/forked-network")                                       |
+| [rpc-url](#rpc-url)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/rpc-url")                       |
+| [api-key](#api-key)                       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/api-key")                       |
+| [block-explorer-url](#block-explorer-url) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/block-explorer-url") |
 
 ## name
 
@@ -34,11 +34,11 @@
 
 `string` ([ForkedNetwork](definitions-definitions-forkednetwork.md))
 
-## forkedNetwork
+## forked-network
 
 
 
-`forkedNetwork`
+`forked-network`
 
 *   is required
 
@@ -46,9 +46,9 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/forkedNetwork")
+*   defined in: [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/forked-network")
 
-### forkedNetwork Type
+### forked-network Type
 
 merged type ([SupportedNetwork](definitions-definitions-supportednetwork.md))
 
@@ -58,11 +58,11 @@ one (and only one) of
 
 *   [CustomNetwork](definitions-definitions-customnetwork.md "check type definition")
 
-## rpcUrl
+## rpc-url
 
 
 
-`rpcUrl`
+`rpc-url`
 
 *   is required
 
@@ -70,13 +70,13 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-rpcurl.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/rpcUrl")
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/rpc-url")
 
-### rpcUrl Type
+### rpc-url Type
 
 `string`
 
-### rpcUrl Constraints
+### rpc-url Constraints
 
 **pattern**: the string must match the following regular expression:&#x20;
 
@@ -86,29 +86,11 @@ one (and only one) of
 
 [try pattern](https://regexr.com/?expression=%5E\(http\(s\)%3F%3A%2F%2F\)%5B%5Cw.-%5D%2B\(%3F%3A%5C.%5B%5Cw%5C.-%5D%2B\)%2B%5B%5Cw%5C-%5C._~%3A%2F%3F%23%5B%5C%5D%40!%5C%24%26'%5C\(%5C\)%5C*%5C%2B%2C%3B%3D.%5D%2B%24 "try regular expression with regexr.com")
 
-## apiKey
+## api-key
 
 
 
-`apiKey`
-
-*   is optional
-
-*   Type: `string`
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-apikey.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/apiKey")
-
-### apiKey Type
-
-`string`
-
-## blockExplorerUrl
-
-
-
-`blockExplorerUrl`
+`api-key`
 
 *   is optional
 
@@ -116,13 +98,31 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-blockexplorerurl.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/blockExplorerUrl")
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/api-key")
 
-### blockExplorerUrl Type
+### api-key Type
 
 `string`
 
-### blockExplorerUrl Constraints
+## block-explorer-url
+
+
+
+`block-explorer-url`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/block-explorer-url")
+
+### block-explorer-url Type
+
+`string`
+
+### block-explorer-url Constraints
 
 **pattern**: the string must match the following regular expression:&#x20;
 

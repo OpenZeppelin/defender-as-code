@@ -1,8 +1,8 @@
-## rpcUrl Type
+## rpc-url Type
 
 `string`
 
-## rpcUrl Constraints
+## rpc-url Constraints
 
 **pattern**: the string must match the following regular expression:&#x20;
 

@@ -37,7 +37,7 @@ import {
   Relayer,
   Notification,
   Category,
-  ForkedNetwork,
+  ForkedNetworkRequest,
 } from '../types/types/resources.schema';
 
 export default class DefenderInfo {
@@ -125,7 +125,7 @@ export default class DefenderInfo {
     // Forked Networks
     const listForkedNetworks = () => getNetworkClient(this.teamKey!).listForkedNetworks();
 
-    await this.wrapper<ForkedNetwork, DefenderForkedNetwork>(
+    await this.wrapper<ForkedNetworkRequest, DefenderForkedNetwork>(
       this.serverless,
       'Forked Networks',
       this.resources?.['forked-networks'],
