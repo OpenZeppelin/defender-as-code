@@ -1838,7 +1838,7 @@ Reference this group by using
 | :------------------------------------------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [name](#name-5)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/fortaMonitor/properties/name")                                           |
 | [type](#type-3)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/fortaMonitor/properties/type")                                           |
-| [network](#network-3)                                   | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/fortaMonitor/properties/network")                                                             |
+| [network](#network-3)                                   | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/fortaMonitor/properties/network")                                                             |
 | [addresses](#addresses-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/fortaMonitor/properties/addresses")                                 |
 | [abi](#abi-2)                                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/fortaMonitor/properties/abi")                                                                 |
 | [alert-threshold](#alert-threshold-1)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/fortaMonitor/properties/alert-threshold")                      |
@@ -1902,7 +1902,7 @@ Reference this group by using
 
 `network`
 
-*   is required
+*   is optional
 
 *   Type: merged type ([Network](definitions-definitions-network.md))
 
