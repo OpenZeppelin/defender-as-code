@@ -1,6 +1,6 @@
 import { JsonFragment } from '@ethersproject/abi';
 
-import { Network } from '@openzeppelin/defender-sdk-base-client';
+import { Network, SupportedNetwork } from '@openzeppelin/defender-sdk-base-client';
 import { Contract } from '@openzeppelin/defender-sdk-proposal-client/lib/models/contract';
 import { RelayerGetResponse, RelayerApiKey } from '@openzeppelin/defender-sdk-relay-client/lib/models';
 import { DefenderApiResponseError } from '@openzeppelin/defender-sdk-base-client/lib/api/api-error';
@@ -18,6 +18,7 @@ import {
 
 import { NotificationCategory } from '@openzeppelin/defender-sdk-monitor-client/lib/models/category';
 import { CreateMonitorResponse, BlockWatcher } from '@openzeppelin/defender-sdk-monitor-client';
+import { ForkedNetworkResponse } from '@openzeppelin/defender-sdk-network-client';
 
 import {
   CreateBlockMonitorResponse,
@@ -66,6 +67,7 @@ export type DefenderScheduleTrigger = ScheduleTrigger;
 export type DefenderMonitorTrigger = SentinelTrigger;
 export type DefenderMonitorFilterTrigger = MonitorFilterTrigger;
 export type DefenderMonitorRiskCategory = MonitorRiskCategory;
+export type DefenderForkedNetwork = ForkedNetworkResponse;
 
 // Generated Interfaces from Schemas
 import * as SchemaDefender from '../types/types/defender.schema';
@@ -89,7 +91,8 @@ export type ResourceType =
   | 'Actions'
   | 'Contracts'
   | 'Secrets'
-  | 'Block Explorer Api Keys';
+  | 'Block Explorer Api Keys'
+  | 'Forked Networks';
 
 export type YPolicy = {
   'gas-price-cap'?: number;
@@ -232,6 +235,14 @@ export type YSecret = {
   [k: string]: string;
 };
 
+export type YForkedNetwork = {
+  'name': string;
+  'forked-network': SupportedNetwork;
+  'rpc-url': string;
+  'api-key': string;
+  'block-explorer-url': string;
+};
+
 export type TeamKey = {
   apiKey: string;
   apiSecret: string;
@@ -257,6 +268,7 @@ export type ListDefenderResources = {
   relayerApiKeys: DefenderRelayerApiKey[];
   secrets: string[];
   blockExplorerApiKeys: DefenderBlockExplorerApiKey[];
+  forkedNetworks: DefenderForkedNetwork[];
 };
 
 export type YBlockExplorerApiKey = {

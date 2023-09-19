@@ -52,6 +52,10 @@
 
 *   [EventItems](./definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/event/items`
 
+*   [Forked Networks](./resources-properties-forked-networks.md) – `resources.schema.json#/properties/forked-networks`
+
+*   [ForkedNetworkRequest](./definitions-definitions-forkednetworkrequest.md) – `definitions.schema.json#/definitions/forkedNetworkRequest`
+
 *   [FortaMonitor](./definitions-definitions-fortamonitor.md) – `definitions.schema.json#/definitions/fortaMonitor`
 
 *   [FunctionItems](./definitions-definitions-blockmonitor-properties-conditions-properties-function-functionitems.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/function/items`

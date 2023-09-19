@@ -25,6 +25,7 @@ import {
   getDeployClient,
   formatABI,
   constructMonitor,
+  getNetworkClient,
 } from '../utils';
 import {
   DefenderAction,
@@ -49,6 +50,7 @@ import {
   DefenderFortaMonitorResponse,
   DefenderBlockMonitorResponse,
   Resources,
+  DefenderForkedNetwork,
 } from '../types';
 import keccak256 from 'keccak256';
 import {
@@ -60,12 +62,15 @@ import {
   Category,
   Contract,
   Contracts,
+  ForkedNetworkRequest,
+  ForkedNetworks,
   Monitor,
   Monitors,
   Notification,
   Notifications,
   Relayer,
   Relayers,
+  SupportedNetwork,
 } from '../types/types/resources.schema';
 
 export default class DefenderDeploy {
@@ -107,6 +112,7 @@ export default class DefenderDeploy {
       relayerApiKeys: [],
       secrets: [],
       blockExplorerApiKeys: [],
+      forkedNetworks: [],
     };
     // Contracts
     const contracts: Contracts = this.resources?.contracts ?? {};
@@ -116,6 +122,17 @@ export default class DefenderDeploy {
       dContracts,
       Object.entries(contracts),
       (a: DefenderContract, b: [string, Contract]) => `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
+    );
+
+    // Forked Networks
+    const forkedNetworks: ForkedNetworks = this.resources?.['forked-networks'] ?? {};
+    const networkClient = getNetworkClient(this.teamKey!);
+    const forkedNetworkItems = await networkClient.listForkedNetworks();
+    const forkedNetworkDifference = _.differenceWith(
+      forkedNetworkItems,
+      Object.entries(forkedNetworks),
+      (a: DefenderForkedNetwork, b: [string, ForkedNetworkRequest]) =>
+        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
     // Monitors
@@ -205,6 +222,7 @@ export default class DefenderDeploy {
         a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
     );
 
+    difference.forkedNetworks = forkedNetworkDifference;
     difference.contracts = contractDifference;
     difference.monitors = monitorDifference;
     difference.notifications = notificationDifference;
@@ -1060,6 +1078,99 @@ export default class DefenderDeploy {
     );
   }
 
+  private async deployForkedNetworks(output: DeployOutput<DefenderForkedNetwork>) {
+    const forkedNetworks: ForkedNetworks = this.resources?.['forked-networks'] ?? {};
+    const client = getNetworkClient(this.teamKey!);
+    const retrieveExisting = () => client.listForkedNetworks();
+
+    await this.wrapper<ForkedNetworkRequest, DefenderForkedNetwork>(
+      this.serverless,
+      'Forked Networks',
+      forkedNetworks,
+      retrieveExisting,
+      // on update
+      async (forkedNetwork: ForkedNetworkRequest, match: DefenderForkedNetwork) => {
+        // Warn users when they try to change fields that are not allowed to be updated
+        if (match.name !== forkedNetwork.name) {
+          this.log.warn(
+            `Detected a name change from ${match.name} to ${forkedNetwork.name} for Forked Network: ${match.stackResourceId}. Defender does not currently allow updates to the name once a Forked Network is created. This change will be ignored. To enforce this change, remove this Forked Network and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the Forked Network. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this network.`,
+          );
+          forkedNetwork.name = match.name;
+        }
+
+        if (match.forkedNetwork !== forkedNetwork['forked-network']) {
+          this.log.warn(
+            `Detected a change from ${match.forkedNetwork} to ${forkedNetwork['forked-network']} for Forked Network: ${match.stackResourceId}. Defender does not currently allow updates to the fork source once a Forked Network is created. This change will be ignored. To enforce this change, remove this Forked Network and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the Forked Network. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this network.`,
+          );
+          forkedNetwork['forked-network'] = match.forkedNetwork as SupportedNetwork;
+        }
+
+        if (match.rpcUrl !== forkedNetwork['rpc-url']) {
+          this.log.warn(
+            `Detected a change from ${match.rpcUrl} to ${forkedNetwork['rpc-url']} for Forked Network: ${match.stackResourceId}. Defender does not currently allow updates to the RPC URL once a Forked Network is created. This change will be ignored. To enforce this change, remove this Forked Network and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the Forked Network. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this network.`,
+          );
+          forkedNetwork['rpc-url'] = match.rpcUrl;
+        }
+
+        const mappedMatch = {
+          'name': match.name,
+          'forked-network': match.forkedNetwork,
+          'rpc-url': match.rpcUrl,
+          'api-key': match.apiKey === null || !!match.apiKey ? match.apiKey : undefined,
+          'block-explorer-url':
+            match.blockExplorerUrl === null || !!match.blockExplorerUrl ? match.blockExplorerUrl : undefined,
+        };
+
+        if (_.isEqual(validateTypesAndSanitise(forkedNetwork), validateTypesAndSanitise(mappedMatch))) {
+          return {
+            name: match.stackResourceId!,
+            id: match.forkedNetworkId,
+            success: false,
+            response: match,
+            notice: `Skipped ${match.stackResourceId} - no changes detected`,
+          };
+        }
+
+        const updatedForkedNetwork = await client.updateForkedNetwork(match.forkedNetworkId, {
+          apiKey: forkedNetwork['api-key'] ?? undefined,
+          blockExplorerUrl: forkedNetwork['block-explorer-url'],
+          stackResourceId: match.stackResourceId!,
+        });
+
+        return {
+          name: updatedForkedNetwork.stackResourceId!,
+          id: updatedForkedNetwork.forkedNetworkId,
+          success: true,
+          response: updatedForkedNetwork,
+        };
+      },
+      // on create
+      async (forkedNetwork: ForkedNetworkRequest, stackResourceId: string) => {
+        const createdForkedNetwork = await client.createForkedNetwork({
+          name: forkedNetwork.name,
+          forkedNetwork: forkedNetwork['forked-network'],
+          rpcUrl: forkedNetwork['rpc-url'],
+          blockExplorerUrl: forkedNetwork['block-explorer-url'] ?? undefined,
+          apiKey: forkedNetwork['api-key'] ?? undefined,
+          stackResourceId,
+        });
+        return {
+          name: stackResourceId,
+          id: createdForkedNetwork.forkedNetworkId,
+          success: true,
+          response: createdForkedNetwork,
+        };
+      },
+      // on remove
+      async (forkedNetworks: DefenderForkedNetwork[]) => {
+        await Promise.all(forkedNetworks.map(async (c) => await client.deleteForkedNetwork(c.forkedNetworkId)));
+      },
+      undefined,
+      output,
+      this.ssotDifference?.forkedNetworks,
+    );
+  }
+
   private async wrapper<Y, D>(
     context: Serverless,
     resourceType: ResourceType,
@@ -1197,8 +1308,12 @@ export default class DefenderDeploy {
         updated: [],
       },
     };
-
     const blockExplorerApiKeys: DeployOutput<DefenderBlockExplorerApiKey> = {
+      removed: [],
+      created: [],
+      updated: [],
+    };
+    const forkedNetworks: DeployOutput<DefenderForkedNetwork> = {
       removed: [],
       created: [],
       updated: [],
@@ -1215,7 +1330,10 @@ export default class DefenderDeploy {
       categories,
       secrets,
       blockExplorerApiKeys,
+      forkedNetworks,
     };
+
+    await this.deployForkedNetworks(stdOut.forkedNetworks);
     await this.deploySecrets(stdOut.secrets);
     await this.deployContracts(stdOut.contracts);
     // Always deploy relayers before actions

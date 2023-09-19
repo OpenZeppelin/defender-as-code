@@ -77,6 +77,14 @@
         "$ref": "definitions.schema.json#/definitions/blockExplorerApiKey",
         "format": "uri-reference"
       }
+    },
+    "forked-networks": {
+      "title": "Forked Networks",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "definitions.schema.json#/definitions/forkedNetworkRequest",
+        "format": "uri-reference"
+      }
     }
   }
 }

@@ -9,8 +9,8 @@
       "type": "string",
       "enum": ["NONE", "GOVERNANCE", "ACCESS-CONTROL", "SUSPICIOUS", "FINANCIAL", "TECHNICAL"]
     },
-    "network": {
-      "title": "Network",
+    "publicNetwork": {
+      "title": "PublicNetwork",
       "type": "string",
       "enum": [
         "mainnet",
@@ -30,11 +30,11 @@
         "mumbai",
         "avalanche",
         "fuji",
-        "optimism",
-        "optimism-goerli",
         "arbitrum",
         "arbitrum-nova",
         "arbitrum-goerli",
+        "optimism",
+        "optimism-goerli",
         "celo",
         "alfajores",
         "harmony-s0",
@@ -43,14 +43,43 @@
         "auroratest",
         "hedera",
         "hederatest",
-        "x-dfk-avax-chain",
-        "x-dfk-avax-chain-test",
         "zksync",
         "zksync-goerli",
         "base",
         "base-goerli",
-        "linea",
-        "linea-goerli"
+        "linea-goerli",
+        "linea"
+      ]
+    },
+    "customNetwork": {
+      "title": "CustomNetwork",
+      "type": "string",
+      "enum": ["x-dfk-avax-chain", "x-dfk-avax-chain-test", "x-security-alliance"]
+    },
+    "forkedNetwork": {
+      "title": "ForkedNetwork",
+      "type": "string"
+    },
+    "network": {
+      "title": "Network",
+      "anyOf": [
+        {
+          "$ref": "definitions.schema.json#/definitions/supportedNetwork"
+        },
+        {
+          "$ref": "definitions.schema.json#/definitions/forkedNetwork"
+        }
+      ]
+    },
+    "supportedNetwork": {
+      "title": "SupportedNetwork",
+      "oneOf": [
+        {
+          "$ref": "definitions.schema.json#/definitions/publicNetwork"
+        },
+        {
+          "$ref": "definitions.schema.json#/definitions/customNetwork"
+        }
       ]
     },
     "policy": {
@@ -550,6 +579,25 @@
         { "title": "StringABI", "type": "string" },
         { "title": "ArrayABI", "type": "array" }
       ]
+    },
+    "forkedNetworkRequest": {
+      "title": "ForkedNetworkRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "forked-network", "rpc-url"],
+      "properties": {
+        "name": { "$ref": "definitions.schema.json#/definitions/forkedNetwork" },
+        "forked-network": { "$ref": "definitions.schema.json#/definitions/supportedNetwork" },
+        "rpc-url": {
+          "type": "string",
+          "pattern": "^(http(s)?://)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        "api-key": { "type": "string" },
+        "block-explorer-url": {
+          "type": "string",
+          "pattern": "^(http(s)?://)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        }
+      }
     }
   }
 }

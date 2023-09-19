@@ -5,7 +5,9 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type Network =
+export type Network = SupportedNetwork | ForkedNetwork;
+export type SupportedNetwork = PublicNetwork | CustomNetwork;
+export type PublicNetwork =
   | 'mainnet'
   | 'sepolia'
   | 'goerli'
@@ -23,11 +25,11 @@ export type Network =
   | 'mumbai'
   | 'avalanche'
   | 'fuji'
-  | 'optimism'
-  | 'optimism-goerli'
   | 'arbitrum'
   | 'arbitrum-nova'
   | 'arbitrum-goerli'
+  | 'optimism'
+  | 'optimism-goerli'
   | 'celo'
   | 'alfajores'
   | 'harmony-s0'
@@ -36,14 +38,14 @@ export type Network =
   | 'auroratest'
   | 'hedera'
   | 'hederatest'
-  | 'x-dfk-avax-chain'
-  | 'x-dfk-avax-chain-test'
   | 'zksync'
   | 'zksync-goerli'
   | 'base'
   | 'base-goerli'
-  | 'linea'
-  | 'linea-goerli';
+  | 'linea-goerli'
+  | 'linea';
+export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-security-alliance';
+export type ForkedNetwork = string;
 export type WhitelistReceivers = string[];
 export type RelayerAPIKeys = string[];
 export type TriggerType = 'schedule' | 'webhook' | 'sentinel' | 'monitor-filter';
@@ -100,177 +102,25 @@ export type PagerDutyEventAction = 'trigger' | 'acknowledge' | 'resolve';
 export type PagerDutySeverity = 'critical' | 'error' | 'warning' | 'info';
 export type CategoryNotificationIds = Notification1[];
 export type Address = string;
-export type Network1 =
-  | 'mainnet'
-  | 'sepolia'
-  | 'goerli'
-  | 'xdai'
-  | 'sokol'
-  | 'fuse'
-  | 'bsc'
-  | 'bsctest'
-  | 'fantom'
-  | 'fantomtest'
-  | 'moonbase'
-  | 'moonriver'
-  | 'moonbeam'
-  | 'matic'
-  | 'mumbai'
-  | 'avalanche'
-  | 'fuji'
-  | 'optimism'
-  | 'optimism-goerli'
-  | 'arbitrum'
-  | 'arbitrum-nova'
-  | 'arbitrum-goerli'
-  | 'celo'
-  | 'alfajores'
-  | 'harmony-s0'
-  | 'harmony-test-s0'
-  | 'aurora'
-  | 'auroratest'
-  | 'hedera'
-  | 'hederatest'
-  | 'x-dfk-avax-chain'
-  | 'x-dfk-avax-chain-test'
-  | 'zksync'
-  | 'zksync-goerli'
-  | 'base'
-  | 'base-goerli'
-  | 'linea'
-  | 'linea-goerli';
+export type Network1 = SupportedNetwork | ForkedNetwork;
 export type AbiType = StringABI | ArrayABI;
 export type StringABI = string;
 export type ArrayABI = unknown[];
 export type Monitor = BlockMonitor | FortaMonitor;
-export type Network2 =
-  | 'mainnet'
-  | 'sepolia'
-  | 'goerli'
-  | 'xdai'
-  | 'sokol'
-  | 'fuse'
-  | 'bsc'
-  | 'bsctest'
-  | 'fantom'
-  | 'fantomtest'
-  | 'moonbase'
-  | 'moonriver'
-  | 'moonbeam'
-  | 'matic'
-  | 'mumbai'
-  | 'avalanche'
-  | 'fuji'
-  | 'optimism'
-  | 'optimism-goerli'
-  | 'arbitrum'
-  | 'arbitrum-nova'
-  | 'arbitrum-goerli'
-  | 'celo'
-  | 'alfajores'
-  | 'harmony-s0'
-  | 'harmony-test-s0'
-  | 'aurora'
-  | 'auroratest'
-  | 'hedera'
-  | 'hederatest'
-  | 'x-dfk-avax-chain'
-  | 'x-dfk-avax-chain-test'
-  | 'zksync'
-  | 'zksync-goerli'
-  | 'base'
-  | 'base-goerli'
-  | 'linea'
-  | 'linea-goerli';
+export type Network2 = SupportedNetwork | ForkedNetwork;
 export type Address1 = string;
 export type Addresses = Address1[];
 export type Channels = Notification2[];
 export type Event = EventItems[];
 export type Function = FunctionItems[];
 export type RiskCategory = 'NONE' | 'GOVERNANCE' | 'ACCESS-CONTROL' | 'SUSPICIOUS' | 'FINANCIAL' | 'TECHNICAL';
-export type Network3 =
-  | 'mainnet'
-  | 'sepolia'
-  | 'goerli'
-  | 'xdai'
-  | 'sokol'
-  | 'fuse'
-  | 'bsc'
-  | 'bsctest'
-  | 'fantom'
-  | 'fantomtest'
-  | 'moonbase'
-  | 'moonriver'
-  | 'moonbeam'
-  | 'matic'
-  | 'mumbai'
-  | 'avalanche'
-  | 'fuji'
-  | 'optimism'
-  | 'optimism-goerli'
-  | 'arbitrum'
-  | 'arbitrum-nova'
-  | 'arbitrum-goerli'
-  | 'celo'
-  | 'alfajores'
-  | 'harmony-s0'
-  | 'harmony-test-s0'
-  | 'aurora'
-  | 'auroratest'
-  | 'hedera'
-  | 'hederatest'
-  | 'x-dfk-avax-chain'
-  | 'x-dfk-avax-chain-test'
-  | 'zksync'
-  | 'zksync-goerli'
-  | 'base'
-  | 'base-goerli'
-  | 'linea'
-  | 'linea-goerli';
+export type Network3 = SupportedNetwork | ForkedNetwork;
 export type Address2 = string;
 export type Addresses1 = Address2[];
 export type Channels1 = Notification3[];
 export type AlertIDs = string[];
 export type AgentIDs = string[];
-export type Network4 =
-  | 'mainnet'
-  | 'sepolia'
-  | 'goerli'
-  | 'xdai'
-  | 'sokol'
-  | 'fuse'
-  | 'bsc'
-  | 'bsctest'
-  | 'fantom'
-  | 'fantomtest'
-  | 'moonbase'
-  | 'moonriver'
-  | 'moonbeam'
-  | 'matic'
-  | 'mumbai'
-  | 'avalanche'
-  | 'fuji'
-  | 'optimism'
-  | 'optimism-goerli'
-  | 'arbitrum'
-  | 'arbitrum-nova'
-  | 'arbitrum-goerli'
-  | 'celo'
-  | 'alfajores'
-  | 'harmony-s0'
-  | 'harmony-test-s0'
-  | 'aurora'
-  | 'auroratest'
-  | 'hedera'
-  | 'hederatest'
-  | 'x-dfk-avax-chain'
-  | 'x-dfk-avax-chain-test'
-  | 'zksync'
-  | 'zksync-goerli'
-  | 'base'
-  | 'base-goerli'
-  | 'linea'
-  | 'linea-goerli';
+export type Network4 = SupportedNetwork | ForkedNetwork;
 
 export interface Resources {
   actions?: Actions;
@@ -282,6 +132,7 @@ export interface Resources {
   secrets?: ActionSecrets;
   monitors?: Monitors;
   'block-explorer-api-keys'?: BlockExplorerApiKeys;
+  'forked-networks'?: ForkedNetworks;
 }
 export interface Actions {
   [k: string]: Action;
@@ -562,4 +413,14 @@ export interface BlockExplorerApiKeys {
 export interface BlockExplorerApiKey {
   key: string;
   network: Network4;
+}
+export interface ForkedNetworks {
+  [k: string]: ForkedNetworkRequest;
+}
+export interface ForkedNetworkRequest {
+  name: ForkedNetwork;
+  'forked-network': SupportedNetwork;
+  'rpc-url': string;
+  'api-key'?: string;
+  'block-explorer-url'?: string;
 }

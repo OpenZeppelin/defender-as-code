@@ -11,6 +11,7 @@ import {
   getConsolidatedSecrets,
   getRelayClient,
   getMonitorClient,
+  getNetworkClient,
   getStackName,
   getTeamAPIkeysOrThrow,
   isTemplateResource,
@@ -27,8 +28,17 @@ import {
   TeamKey,
   YSecret,
   Resources,
+  DefenderForkedNetwork,
 } from '../types';
-import { Action, Contract, Monitor, Relayer, Notification, Category } from '../types/types/resources.schema';
+import {
+  Action,
+  Contract,
+  Monitor,
+  Relayer,
+  Notification,
+  Category,
+  ForkedNetworkRequest,
+} from '../types/types/resources.schema';
 
 export default class DefenderInfo {
   serverless: Serverless;
@@ -109,7 +119,21 @@ export default class DefenderInfo {
       notifications: [],
       categories: [],
       secrets: [],
+      forkedNetworks: [],
     };
+
+    // Forked Networks
+    const listForkedNetworks = () => getNetworkClient(this.teamKey!).listForkedNetworks();
+
+    await this.wrapper<ForkedNetworkRequest, DefenderForkedNetwork>(
+      this.serverless,
+      'Forked Networks',
+      this.resources?.['forked-networks'],
+      listForkedNetworks,
+      (resource: DefenderForkedNetwork) => `${resource.stackResourceId}: ${resource.forkedNetworkId}`,
+      stdOut.forkedNetworks,
+    );
+
     // Monitors
     const listMonitors = () =>
       getMonitorClient(this.teamKey!)

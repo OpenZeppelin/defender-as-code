@@ -26,12 +26,56 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group publicNetwork
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/publicNetwork"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group customNetwork
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/customNetwork"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group forkedNetwork
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/forkedNetwork"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group network
 
 Reference this group by using
 
 ```json
 {"$ref":"definitions.schema.json#/definitions/network"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group supportedNetwork
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/supportedNetwork"}
 ```
 
 | Property | Type | Required | Nullable | Defined by |
@@ -135,7 +179,7 @@ Reference this group by using
 | Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                                     |
 | :-------------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "definitions.schema.json#/definitions/relayer/properties/name")                               |
-| [network](#network)                           | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-network.md "definitions.schema.json#/definitions/relayer/properties/network")                         |
+| [network](#network)                           | Merged    | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-network.md "definitions.schema.json#/definitions/relayer/properties/network")                         |
 | [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "definitions.schema.json#/definitions/relayer/properties/min-balance")                 |
 | [address-from-relayer](#address-from-relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
 | [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer/properties/policy")                                              |
@@ -167,7 +211,7 @@ Reference this group by using
 
 *   is required
 
-*   Type: `string` ([Network](definitions-definitions-relayer-properties-network.md))
+*   Type: merged type ([Network](definitions-definitions-relayer-properties-network.md))
 
 *   cannot be null
 
@@ -175,52 +219,19 @@ Reference this group by using
 
 #### network Type
 
-`string` ([Network](definitions-definitions-relayer-properties-network.md))
+merged type ([Network](definitions-definitions-relayer-properties-network.md))
+
+any of
+
+*   one (and only one) of
+
+    *   [PublicNetwork](definitions-definitions-supportednetwork-oneof-publicnetwork.md "check type definition")
+
+    *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
+
+*   [ForkedNetwork](definitions-definitions-network-anyof-forkednetwork.md "check type definition")
 
 #### network Constraints
-
-**enum**: the value of this property must be equal to one of the following values:
-
-| Value                     | Explanation |
-| :------------------------ | :---------- |
-| `"mainnet"`               |             |
-| `"sepolia"`               |             |
-| `"goerli"`                |             |
-| `"xdai"`                  |             |
-| `"sokol"`                 |             |
-| `"fuse"`                  |             |
-| `"bsc"`                   |             |
-| `"bsctest"`               |             |
-| `"fantom"`                |             |
-| `"fantomtest"`            |             |
-| `"moonbase"`              |             |
-| `"moonriver"`             |             |
-| `"moonbeam"`              |             |
-| `"matic"`                 |             |
-| `"mumbai"`                |             |
-| `"avalanche"`             |             |
-| `"fuji"`                  |             |
-| `"optimism"`              |             |
-| `"optimism-goerli"`       |             |
-| `"arbitrum"`              |             |
-| `"arbitrum-nova"`         |             |
-| `"arbitrum-goerli"`       |             |
-| `"celo"`                  |             |
-| `"alfajores"`             |             |
-| `"harmony-s0"`            |             |
-| `"harmony-test-s0"`       |             |
-| `"aurora"`                |             |
-| `"auroratest"`            |             |
-| `"hedera"`                |             |
-| `"hederatest"`            |             |
-| `"x-dfk-avax-chain"`      |             |
-| `"x-dfk-avax-chain-test"` |             |
-| `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
-| `"base"`                  |             |
-| `"base-goerli"`           |             |
-| `"linea"`                 |             |
-| `"linea-goerli"`          |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
@@ -312,7 +323,7 @@ Reference this group by using
 | :-------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
 | [name](#name-1)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "definitions.schema.json#/definitions/contract/properties/name")         |
 | [address](#address)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-address.md "definitions.schema.json#/definitions/contract/properties/address")   |
-| [network](#network-1) | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-network.md "definitions.schema.json#/definitions/contract/properties/network")   |
+| [network](#network-1) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/contract/properties/network")                       |
 | [abi](#abi)           | Merged   | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/contract/properties/abi")                           |
 | [nat-spec](#nat-spec) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-nat-spec.md "definitions.schema.json#/definitions/contract/properties/nat-spec") |
 
@@ -372,60 +383,27 @@ Reference this group by using
 
 *   is required
 
-*   Type: `string` ([Network](definitions-definitions-contract-properties-network.md))
+*   Type: merged type ([Network](definitions-definitions-network.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-contract-properties-network.md "definitions.schema.json#/definitions/contract/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/contract/properties/network")
 
 #### network Type
 
-`string` ([Network](definitions-definitions-contract-properties-network.md))
+merged type ([Network](definitions-definitions-network.md))
+
+any of
+
+*   one (and only one) of
+
+    *   [PublicNetwork](definitions-definitions-supportednetwork-oneof-publicnetwork.md "check type definition")
+
+    *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
+
+*   [ForkedNetwork](definitions-definitions-network-anyof-forkednetwork.md "check type definition")
 
 #### network Constraints
-
-**enum**: the value of this property must be equal to one of the following values:
-
-| Value                     | Explanation |
-| :------------------------ | :---------- |
-| `"mainnet"`               |             |
-| `"sepolia"`               |             |
-| `"goerli"`                |             |
-| `"xdai"`                  |             |
-| `"sokol"`                 |             |
-| `"fuse"`                  |             |
-| `"bsc"`                   |             |
-| `"bsctest"`               |             |
-| `"fantom"`                |             |
-| `"fantomtest"`            |             |
-| `"moonbase"`              |             |
-| `"moonriver"`             |             |
-| `"moonbeam"`              |             |
-| `"matic"`                 |             |
-| `"mumbai"`                |             |
-| `"avalanche"`             |             |
-| `"fuji"`                  |             |
-| `"optimism"`              |             |
-| `"optimism-goerli"`       |             |
-| `"arbitrum"`              |             |
-| `"arbitrum-nova"`         |             |
-| `"arbitrum-goerli"`       |             |
-| `"celo"`                  |             |
-| `"alfajores"`             |             |
-| `"harmony-s0"`            |             |
-| `"harmony-test-s0"`       |             |
-| `"aurora"`                |             |
-| `"auroratest"`            |             |
-| `"hedera"`                |             |
-| `"hederatest"`            |             |
-| `"x-dfk-avax-chain"`      |             |
-| `"x-dfk-avax-chain-test"` |             |
-| `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
-| `"base"`                  |             |
-| `"base-goerli"`           |             |
-| `"linea"`                 |             |
-| `"linea-goerli"`          |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
@@ -1528,7 +1506,7 @@ Reference this group by using
 | :------------------------------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [name](#name-4)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/blockMonitor/properties/name")                               |
 | [type](#type-2)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/blockMonitor/properties/type")                               |
-| [network](#network-2)                       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-network.md "definitions.schema.json#/definitions/blockMonitor/properties/network")                         |
+| [network](#network-2)                       | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockMonitor/properties/network")                                                 |
 | [addresses](#addresses)                     | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/blockMonitor/properties/addresses")                     |
 | [abi](#abi-1)                               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/blockMonitor/properties/abi")                                                     |
 | [alert-threshold](#alert-threshold)         | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold")          |
@@ -1593,60 +1571,27 @@ Reference this group by using
 
 *   is required
 
-*   Type: `string` ([Network](definitions-definitions-blockmonitor-properties-network.md))
+*   Type: merged type ([Network](definitions-definitions-network.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-network.md "definitions.schema.json#/definitions/blockMonitor/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockMonitor/properties/network")
 
 #### network Type
 
-`string` ([Network](definitions-definitions-blockmonitor-properties-network.md))
+merged type ([Network](definitions-definitions-network.md))
+
+any of
+
+*   one (and only one) of
+
+    *   [PublicNetwork](definitions-definitions-supportednetwork-oneof-publicnetwork.md "check type definition")
+
+    *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
+
+*   [ForkedNetwork](definitions-definitions-network-anyof-forkednetwork.md "check type definition")
 
 #### network Constraints
-
-**enum**: the value of this property must be equal to one of the following values:
-
-| Value                     | Explanation |
-| :------------------------ | :---------- |
-| `"mainnet"`               |             |
-| `"sepolia"`               |             |
-| `"goerli"`                |             |
-| `"xdai"`                  |             |
-| `"sokol"`                 |             |
-| `"fuse"`                  |             |
-| `"bsc"`                   |             |
-| `"bsctest"`               |             |
-| `"fantom"`                |             |
-| `"fantomtest"`            |             |
-| `"moonbase"`              |             |
-| `"moonriver"`             |             |
-| `"moonbeam"`              |             |
-| `"matic"`                 |             |
-| `"mumbai"`                |             |
-| `"avalanche"`             |             |
-| `"fuji"`                  |             |
-| `"optimism"`              |             |
-| `"optimism-goerli"`       |             |
-| `"arbitrum"`              |             |
-| `"arbitrum-nova"`         |             |
-| `"arbitrum-goerli"`       |             |
-| `"celo"`                  |             |
-| `"alfajores"`             |             |
-| `"harmony-s0"`            |             |
-| `"harmony-test-s0"`       |             |
-| `"aurora"`                |             |
-| `"auroratest"`            |             |
-| `"hedera"`                |             |
-| `"hederatest"`            |             |
-| `"x-dfk-avax-chain"`      |             |
-| `"x-dfk-avax-chain-test"` |             |
-| `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
-| `"base"`                  |             |
-| `"base-goerli"`           |             |
-| `"linea"`                 |             |
-| `"linea-goerli"`          |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
@@ -1893,7 +1838,7 @@ Reference this group by using
 | :------------------------------------------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [name](#name-5)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/fortaMonitor/properties/name")                                           |
 | [type](#type-3)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/fortaMonitor/properties/type")                                           |
-| [network](#network-3)                                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-network.md "definitions.schema.json#/definitions/fortaMonitor/properties/network")                                     |
+| [network](#network-3)                                   | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/fortaMonitor/properties/network")                                                             |
 | [addresses](#addresses-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/fortaMonitor/properties/addresses")                                 |
 | [abi](#abi-2)                                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/fortaMonitor/properties/abi")                                                                 |
 | [alert-threshold](#alert-threshold-1)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/fortaMonitor/properties/alert-threshold")                      |
@@ -1959,60 +1904,27 @@ Reference this group by using
 
 *   is required
 
-*   Type: `string` ([Network](definitions-definitions-fortamonitor-properties-network.md))
+*   Type: merged type ([Network](definitions-definitions-network.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-network.md "definitions.schema.json#/definitions/fortaMonitor/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/fortaMonitor/properties/network")
 
 #### network Type
 
-`string` ([Network](definitions-definitions-fortamonitor-properties-network.md))
+merged type ([Network](definitions-definitions-network.md))
+
+any of
+
+*   one (and only one) of
+
+    *   [PublicNetwork](definitions-definitions-supportednetwork-oneof-publicnetwork.md "check type definition")
+
+    *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
+
+*   [ForkedNetwork](definitions-definitions-network-anyof-forkednetwork.md "check type definition")
 
 #### network Constraints
-
-**enum**: the value of this property must be equal to one of the following values:
-
-| Value                     | Explanation |
-| :------------------------ | :---------- |
-| `"mainnet"`               |             |
-| `"sepolia"`               |             |
-| `"goerli"`                |             |
-| `"xdai"`                  |             |
-| `"sokol"`                 |             |
-| `"fuse"`                  |             |
-| `"bsc"`                   |             |
-| `"bsctest"`               |             |
-| `"fantom"`                |             |
-| `"fantomtest"`            |             |
-| `"moonbase"`              |             |
-| `"moonriver"`             |             |
-| `"moonbeam"`              |             |
-| `"matic"`                 |             |
-| `"mumbai"`                |             |
-| `"avalanche"`             |             |
-| `"fuji"`                  |             |
-| `"optimism"`              |             |
-| `"optimism-goerli"`       |             |
-| `"arbitrum"`              |             |
-| `"arbitrum-nova"`         |             |
-| `"arbitrum-goerli"`       |             |
-| `"celo"`                  |             |
-| `"alfajores"`             |             |
-| `"harmony-s0"`            |             |
-| `"harmony-test-s0"`       |             |
-| `"aurora"`                |             |
-| `"auroratest"`            |             |
-| `"hedera"`                |             |
-| `"hederatest"`            |             |
-| `"x-dfk-avax-chain"`      |             |
-| `"x-dfk-avax-chain-test"` |             |
-| `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
-| `"base"`                  |             |
-| `"base-goerli"`           |             |
-| `"linea"`                 |             |
-| `"linea-goerli"`          |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
@@ -2388,10 +2300,10 @@ Reference this group by using
 {"$ref":"definitions.schema.json#/definitions/blockExplorerApiKey"}
 ```
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                                     |
-| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [key](#key)           | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/key")         |
-| [network](#network-4) | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockexplorerapikey-properties-network.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/network") |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                             |
+| :-------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [key](#key)           | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/key") |
+| [network](#network-4) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/network")                        |
 
 ### key
 
@@ -2419,60 +2331,27 @@ Reference this group by using
 
 *   is required
 
-*   Type: `string` ([Network](definitions-definitions-blockexplorerapikey-properties-network.md))
+*   Type: merged type ([Network](definitions-definitions-network.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockexplorerapikey-properties-network.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/network")
 
 #### network Type
 
-`string` ([Network](definitions-definitions-blockexplorerapikey-properties-network.md))
+merged type ([Network](definitions-definitions-network.md))
+
+any of
+
+*   one (and only one) of
+
+    *   [PublicNetwork](definitions-definitions-supportednetwork-oneof-publicnetwork.md "check type definition")
+
+    *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
+
+*   [ForkedNetwork](definitions-definitions-network-anyof-forkednetwork.md "check type definition")
 
 #### network Constraints
-
-**enum**: the value of this property must be equal to one of the following values:
-
-| Value                     | Explanation |
-| :------------------------ | :---------- |
-| `"mainnet"`               |             |
-| `"sepolia"`               |             |
-| `"goerli"`                |             |
-| `"xdai"`                  |             |
-| `"sokol"`                 |             |
-| `"fuse"`                  |             |
-| `"bsc"`                   |             |
-| `"bsctest"`               |             |
-| `"fantom"`                |             |
-| `"fantomtest"`            |             |
-| `"moonbase"`              |             |
-| `"moonriver"`             |             |
-| `"moonbeam"`              |             |
-| `"matic"`                 |             |
-| `"mumbai"`                |             |
-| `"avalanche"`             |             |
-| `"fuji"`                  |             |
-| `"optimism"`              |             |
-| `"optimism-goerli"`       |             |
-| `"arbitrum"`              |             |
-| `"arbitrum-nova"`         |             |
-| `"arbitrum-goerli"`       |             |
-| `"celo"`                  |             |
-| `"alfajores"`             |             |
-| `"harmony-s0"`            |             |
-| `"harmony-test-s0"`       |             |
-| `"aurora"`                |             |
-| `"auroratest"`            |             |
-| `"hedera"`                |             |
-| `"hederatest"`            |             |
-| `"x-dfk-avax-chain"`      |             |
-| `"x-dfk-avax-chain-test"` |             |
-| `"zksync"`                |             |
-| `"zksync-goerli"`         |             |
-| `"base"`                  |             |
-| `"base-goerli"`           |             |
-| `"linea"`                 |             |
-| `"linea-goerli"`          |             |
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
@@ -2486,3 +2365,135 @@ Reference this group by using
 
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group forkedNetworkRequest
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/forkedNetworkRequest"}
+```
+
+| Property                                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                             |
+| :---------------------------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name-7)                           | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/name")                    |
+| [forked-network](#forked-network)         | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/forked-network")                                       |
+| [rpc-url](#rpc-url)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/rpc-url")                       |
+| [api-key](#api-key-1)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/api-key")                       |
+| [block-explorer-url](#block-explorer-url) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/block-explorer-url") |
+
+### name
+
+
+
+`name`
+
+*   is required
+
+*   Type: `string` ([ForkedNetwork](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/name")
+
+#### name Type
+
+`string` ([ForkedNetwork](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md))
+
+### forked-network
+
+
+
+`forked-network`
+
+*   is required
+
+*   Type: merged type ([SupportedNetwork](definitions-definitions-supportednetwork.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/forked-network")
+
+#### forked-network Type
+
+merged type ([SupportedNetwork](definitions-definitions-supportednetwork.md))
+
+one (and only one) of
+
+*   [PublicNetwork](definitions-definitions-supportednetwork-oneof-publicnetwork.md "check type definition")
+
+*   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
+
+### rpc-url
+
+
+
+`rpc-url`
+
+*   is required
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/rpc-url")
+
+#### rpc-url Type
+
+`string`
+
+#### rpc-url Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^(http(s)?://)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$
+```
+
+[try pattern](https://regexr.com/?expression=%5E\(http\(s\)%3F%3A%2F%2F\)%5B%5Cw.-%5D%2B\(%3F%3A%5C.%5B%5Cw%5C.-%5D%2B\)%2B%5B%5Cw%5C-%5C._~%3A%2F%3F%23%5B%5C%5D%40!%5C%24%26'%5C\(%5C\)%5C*%5C%2B%2C%3B%3D.%5D%2B%24 "try regular expression with regexr.com")
+
+### api-key
+
+
+
+`api-key`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/api-key")
+
+#### api-key Type
+
+`string`
+
+### block-explorer-url
+
+
+
+`block-explorer-url`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/block-explorer-url")
+
+#### block-explorer-url Type
+
+`string`
+
+#### block-explorer-url Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^(http(s)?://)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$
+```
+
+[try pattern](https://regexr.com/?expression=%5E\(http\(s\)%3F%3A%2F%2F\)%5B%5Cw.-%5D%2B\(%3F%3A%5C.%5B%5Cw%5C.-%5D%2B\)%2B%5B%5Cw%5C-%5C._~%3A%2F%3F%23%5B%5C%5D%40!%5C%24%26'%5C\(%5C\)%5C*%5C%2B%2C%3B%3D.%5D%2B%24 "try regular expression with regexr.com")

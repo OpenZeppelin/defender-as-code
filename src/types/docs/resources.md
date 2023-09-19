@@ -15,6 +15,7 @@
 | [secrets](#secrets)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-actionsecrets.md "resources.schema.json#/properties/secrets")                           |
 | [monitors](#monitors)                               | `object` | Optional | cannot be null | [Resources](resources-properties-monitors.md "resources.schema.json#/properties/monitors")                               |
 | [block-explorer-api-keys](#block-explorer-api-keys) | `object` | Optional | cannot be null | [Resources](resources-properties-block-explorer-api-keys.md "resources.schema.json#/properties/block-explorer-api-keys") |
+| [forked-networks](#forked-networks)                 | `object` | Optional | cannot be null | [Resources](resources-properties-forked-networks.md "resources.schema.json#/properties/forked-networks")                 |
 
 ## actions
 
@@ -177,3 +178,21 @@
 ### block-explorer-api-keys Type
 
 `object` ([Block Explorer Api Keys](resources-properties-block-explorer-api-keys.md))
+
+## forked-networks
+
+
+
+`forked-networks`
+
+*   is optional
+
+*   Type: `object` ([Forked Networks](resources-properties-forked-networks.md))
+
+*   cannot be null
+
+*   defined in: [Resources](resources-properties-forked-networks.md "resources.schema.json#/properties/forked-networks")
+
+### forked-networks Type
+
+`object` ([Forked Networks](resources-properties-forked-networks.md))
