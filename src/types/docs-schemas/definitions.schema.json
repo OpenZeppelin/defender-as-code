@@ -515,7 +515,11 @@
         },
         "risk-category": { "$ref": "definitions.schema.json#/definitions/risk-category" }
       },
-      "required": ["name", "type", "network", "notify-config"]
+      "required": ["name", "type", "notify-config"],
+      "dependencies": {
+        "addresses": ["network"],
+        "network": ["addresses"]
+      }
     },
     "monitor": {
       "title": "Monitor",

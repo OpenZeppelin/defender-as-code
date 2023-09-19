@@ -352,7 +352,7 @@ export interface FunctionItems {
 export interface FortaMonitor {
   name: string;
   type: 'FORTA';
-  network: Network3;
+  network?: Network3;
   addresses?: Addresses1;
   abi?: AbiType;
   'alert-threshold'?: AlertThreshold1;
