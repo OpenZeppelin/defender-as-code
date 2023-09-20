@@ -5,6 +5,13 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export type Actions =
+  | {
+      [k: string]: Action;
+    }
+  | {
+      [k: string]: DefenderID;
+    };
 export type Network = SupportedNetwork | ForkedNetwork;
 export type SupportedNetwork = PublicNetwork | CustomNetwork;
 export type PublicNetwork =
@@ -51,6 +58,14 @@ export type RelayerAPIKeys = string[];
 export type TriggerType = 'schedule' | 'webhook' | 'sentinel' | 'monitor-filter';
 export type TriggerCron = string;
 export type TriggerFrequency = number;
+export type DefenderID = string;
+export type Notifications =
+  | {
+      [k: string]: Notification;
+    }
+  | {
+      [k: string]: DefenderID1;
+    };
 export type NotificationType =
   | 'slack'
   | 'email'
@@ -100,12 +115,52 @@ export type OpsgeniePriorityLevel = 'P1' | 'P2' | 'P3' | 'P4' | 'P5';
 export type PagerDutyEventType = 'change' | 'alert';
 export type PagerDutyEventAction = 'trigger' | 'acknowledge' | 'resolve';
 export type PagerDutySeverity = 'critical' | 'error' | 'warning' | 'info';
+export type DefenderID1 = string;
+export type Categories =
+  | {
+      [k: string]: Category;
+    }
+  | {
+      [k: string]: DefenderID2;
+    };
 export type CategoryNotificationIds = Notification1[];
+export type DefenderID2 = string;
+export type Relayers =
+  | {
+      [k: string]: Relayer1;
+    }
+  | {
+      [k: string]: DefenderID3;
+    };
+export type DefenderID3 = string;
+export type Policies =
+  | {
+      [k: string]: Policy1;
+    }
+  | {
+      [k: string]: DefenderID4;
+    };
+export type DefenderID4 = string;
+export type Contracts =
+  | {
+      [k: string]: Contract;
+    }
+  | {
+      [k: string]: DefenderID5;
+    };
 export type Address = string;
 export type Network1 = SupportedNetwork | ForkedNetwork;
 export type AbiType = StringABI | ArrayABI;
 export type StringABI = string;
 export type ArrayABI = unknown[];
+export type DefenderID5 = string;
+export type Monitors =
+  | {
+      [k: string]: Monitor;
+    }
+  | {
+      [k: string]: DefenderID6;
+    };
 export type Monitor = BlockMonitor | FortaMonitor;
 export type Network2 = SupportedNetwork | ForkedNetwork;
 export type Address1 = string;
@@ -120,7 +175,24 @@ export type Addresses1 = Address2[];
 export type Channels1 = Notification3[];
 export type AlertIDs = string[];
 export type AgentIDs = string[];
+export type DefenderID6 = string;
+export type BlockExplorerApiKeys =
+  | {
+      [k: string]: BlockExplorerApiKey;
+    }
+  | {
+      [k: string]: DefenderID7;
+    };
 export type Network4 = SupportedNetwork | ForkedNetwork;
+export type DefenderID7 = string;
+export type ForkedNetworks =
+  | {
+      [k: string]: ForkedNetworkRequest;
+    }
+  | {
+      [k: string]: DefenderID8;
+    };
+export type DefenderID8 = string;
 
 export interface Resources {
   actions?: Actions;
@@ -133,9 +205,6 @@ export interface Resources {
   monitors?: Monitors;
   'block-explorer-api-keys'?: BlockExplorerApiKeys;
   'forked-networks'?: ForkedNetworks;
-}
-export interface Actions {
-  [k: string]: Action;
 }
 export interface Action {
   name: string;
@@ -163,9 +232,6 @@ export interface Trigger {
   type: TriggerType;
   cron?: TriggerCron;
   frequency?: TriggerFrequency;
-}
-export interface Notifications {
-  [k: string]: Notification;
 }
 export interface Notification {
   type: NotificationType;
@@ -224,9 +290,6 @@ export interface PagerDutyConfig {
 export interface PagerDutyConfigCustomDetails {
   [k: string]: string;
 }
-export interface Categories {
-  [k: string]: Category;
-}
 export interface Category {
   name: string;
   description?: string;
@@ -238,9 +301,6 @@ export interface Notification1 {
   paused: boolean;
   config: Config;
 }
-export interface Relayers {
-  [k: string]: Relayer1;
-}
 export interface Relayer1 {
   name: string;
   network: Network;
@@ -249,17 +309,11 @@ export interface Relayer1 {
   policy?: Policy;
   'api-keys'?: RelayerAPIKeys;
 }
-export interface Policies {
-  [k: string]: Policy1;
-}
 export interface Policy1 {
   'gas-price-cap'?: number;
   'whitelist-receivers'?: WhitelistReceivers;
   'eip1559-pricing'?: boolean;
   'private-transactions'?: boolean;
-}
-export interface Contracts {
-  [k: string]: Contract;
 }
 export interface Contract {
   name: string;
@@ -277,9 +331,6 @@ export interface GlobalSecrets {
 }
 export interface StackSecrets {
   [k: string]: string;
-}
-export interface Monitors {
-  [k: string]: Monitor;
 }
 export interface BlockMonitor {
   name: string;
@@ -407,15 +458,9 @@ export interface Conditions1 {
   severity?: 0 | 1 | 2 | 3 | 4 | 5;
   'alert-ids'?: AlertIDs;
 }
-export interface BlockExplorerApiKeys {
-  [k: string]: BlockExplorerApiKey;
-}
 export interface BlockExplorerApiKey {
   key: string;
   network: Network4;
-}
-export interface ForkedNetworks {
-  [k: string]: ForkedNetworkRequest;
 }
 export interface ForkedNetworkRequest {
   name: ForkedNetwork;

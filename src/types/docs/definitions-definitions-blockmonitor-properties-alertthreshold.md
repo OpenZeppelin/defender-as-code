@@ -4,10 +4,10 @@
 
 # alert-threshold Properties
 
-| Property                          | Type      | Required | Nullable       | Defined by                                                                                                                                                                                                          |
-| :-------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [amount](#amount)                 | `integer` | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold-properties-amount.md "definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold/properties/amount")                 |
-| [window-seconds](#window-seconds) | `integer` | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold-properties-window-seconds.md "definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold/properties/window-seconds") |
+| Property                          | Type      | Required | Nullable       | Defined by                                                                                                                                                                                                           |
+| :-------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [amount](#amount)                 | `integer` | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold-properties-amount.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold/properties/amount")                 |
+| [window-seconds](#window-seconds) | `integer` | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold-properties-window-seconds.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold/properties/window-seconds") |
 
 ## amount
 
@@ -21,7 +21,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold-properties-amount.md "definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold/properties/amount")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold-properties-amount.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold/properties/amount")
 
 ### amount Type
 
@@ -39,7 +39,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold-properties-window-seconds.md "definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold/properties/window-seconds")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold-properties-window-seconds.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold/properties/window-seconds")
 
 ### window-seconds Type
 

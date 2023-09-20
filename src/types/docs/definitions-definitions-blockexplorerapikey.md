@@ -8,10 +8,10 @@
 
 # additionalProperties Properties
 
-| Property            | Type     | Required | Nullable       | Defined by                                                                                                                                             |
-| :------------------ | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [key](#key)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/key") |
-| [network](#network) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/network")                        |
+| Property            | Type     | Required | Nullable       | Defined by                                                                                                                                                |
+| :------------------ | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [key](#key)         | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/key") |
+| [network](#network) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/network")                        |
 
 ## key
 
@@ -25,7 +25,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/key")
+*   defined in: [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/key")
 
 ### key Type
 
@@ -43,7 +43,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/network")
 
 ### network Type
 

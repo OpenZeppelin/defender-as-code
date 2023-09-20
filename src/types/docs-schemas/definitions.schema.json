@@ -3,13 +3,18 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Definitions",
   "definitions": {
+    "defender-id": {
+      "title": "DefenderID",
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-(8|9|a|b)[0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+    },
     "address": { "title": "Address", "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
     "risk-category": {
       "title": "RiskCategory",
       "type": "string",
       "enum": ["NONE", "GOVERNANCE", "ACCESS-CONTROL", "SUSPICIOUS", "FINANCIAL", "TECHNICAL"]
     },
-    "publicNetwork": {
+    "public-network": {
       "title": "PublicNetwork",
       "type": "string",
       "enum": [
@@ -51,12 +56,12 @@
         "linea"
       ]
     },
-    "customNetwork": {
+    "custom-network": {
       "title": "CustomNetwork",
       "type": "string",
       "enum": ["x-dfk-avax-chain", "x-dfk-avax-chain-test", "x-security-alliance"]
     },
-    "forkedNetwork": {
+    "forked-network": {
       "title": "ForkedNetwork",
       "type": "string"
     },
@@ -64,21 +69,21 @@
       "title": "Network",
       "anyOf": [
         {
-          "$ref": "definitions.schema.json#/definitions/supportedNetwork"
+          "$ref": "definitions.schema.json#/definitions/supported-network"
         },
         {
-          "$ref": "definitions.schema.json#/definitions/forkedNetwork"
+          "$ref": "definitions.schema.json#/definitions/forked-network"
         }
       ]
     },
-    "supportedNetwork": {
+    "supported-network": {
       "title": "SupportedNetwork",
       "oneOf": [
         {
-          "$ref": "definitions.schema.json#/definitions/publicNetwork"
+          "$ref": "definitions.schema.json#/definitions/public-network"
         },
         {
-          "$ref": "definitions.schema.json#/definitions/customNetwork"
+          "$ref": "definitions.schema.json#/definitions/custom-network"
         }
       ]
     },
@@ -379,7 +384,7 @@
       },
       "required": ["name"]
     },
-    "blockMonitor": {
+    "block-monitor": {
       "title": "BlockMonitor",
       "type": "object",
       "properties": {
@@ -455,7 +460,7 @@
       },
       "required": ["name", "type", "network", "addresses", "notify-config"]
     },
-    "fortaMonitor": {
+    "forta-monitor": {
       "title": "FortaMonitor",
       "type": "object",
       "properties": {
@@ -525,8 +530,8 @@
       "title": "Monitor",
       "type": "object",
       "oneOf": [
-        { "$ref": "definitions.schema.json#/definitions/blockMonitor", "format": "uri-reference" },
-        { "$ref": "definitions.schema.json#/definitions/fortaMonitor", "format": "uri-reference" }
+        { "$ref": "definitions.schema.json#/definitions/block-monitor", "format": "uri-reference" },
+        { "$ref": "definitions.schema.json#/definitions/forta-monitor", "format": "uri-reference" }
       ]
     },
     "action": {
@@ -568,7 +573,7 @@
       },
       "required": ["name", "path", "trigger", "paused"]
     },
-    "blockExplorerApiKey": {
+    "block-explorer-api-key": {
       "title": "BlockExplorerApiKey",
       "type": "object",
       "properties": {
@@ -584,14 +589,14 @@
         { "title": "ArrayABI", "type": "array" }
       ]
     },
-    "forkedNetworkRequest": {
+    "forked-network-request": {
       "title": "ForkedNetworkRequest",
       "type": "object",
       "additionalProperties": false,
       "required": ["name", "forked-network", "rpc-url"],
       "properties": {
-        "name": { "$ref": "definitions.schema.json#/definitions/forkedNetwork" },
-        "forked-network": { "$ref": "definitions.schema.json#/definitions/supportedNetwork" },
+        "name": { "$ref": "definitions.schema.json#/definitions/forked-network" },
+        "forked-network": { "$ref": "definitions.schema.json#/definitions/supported-network" },
         "rpc-url": {
           "type": "string",
           "pattern": "^(http(s)?://)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"

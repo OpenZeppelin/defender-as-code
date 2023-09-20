@@ -30,6 +30,10 @@ import {
   DefenderBlockMonitor,
   DefenderAPIError,
   Resources,
+  DefenderMonitor,
+  DefenderRelayer,
+  DefenderBlockExplorerApiKey,
+  DefenderForkedNetwork,
 } from '../types';
 import { sanitise } from './sanitise';
 import {
@@ -38,10 +42,35 @@ import {
   AlertThreshold,
   Category,
   Contract,
+  DefenderID,
   Monitor,
   Notification,
   NotifyConfig,
 } from '../types/types/resources.schema';
+
+const getDefenderIdFromResource = <Y>(resource: Y, resourceType: ResourceType): DefenderID => {
+  switch (resourceType) {
+    case 'Actions':
+      return (resource as DefenderAction).actionId;
+    case 'Monitors':
+      return (resource as DefenderMonitor).monitorId;
+    case 'Relayers':
+      return (resource as DefenderRelayer).relayerId;
+    case 'Notifications':
+      return (resource as DefenderNotification).notificationId;
+    case 'Categories':
+      return (resource as DefenderCategory).categoryId;
+    case 'Block Explorer Api Keys':
+      return (resource as DefenderBlockExplorerApiKey).blockExplorerApiKeyId;
+    case 'Forked Networks':
+      return (resource as DefenderForkedNetwork).forkedNetworkId;
+    case 'Contracts':
+      const contract = resource as DefenderContract;
+      return `${contract.network}-${contract.address}`;
+    default:
+      throw new Error(`Incompatible resource type ${resourceType}`);
+  }
+};
 
 /**
  * @dev this function retrieves the Defender equivalent object of the provided template resource
@@ -52,10 +81,14 @@ export const getEquivalentResource = <Y, D>(
   resource: Y,
   resources: { [k: string]: Y } | undefined,
   currentResources: D[],
+  type: ResourceType,
 ) => {
   if (resource) {
+    if (isDefenderId(resource)) {
+      return currentResources.find((e) => getDefenderIdFromResource(e, type) === resource);
+    }
     const [key, value] = Object.entries(resources ?? {}).find((a) => _.isEqual(a[1], resource))!;
-    return currentResources.find((e: D) => (e as any).stackResourceId === getResourceID(getStackName(context), key));
+    return currentResources.find((e) => (e as any).stackResourceId === getResourceID(getStackName(context), key));
   }
 };
 
@@ -229,11 +262,12 @@ export const constructNotificationCategory = (
     notificationIds: (category['notification-ids']
       ? category['notification-ids']
           .map((notification) => {
-            const maybeNotification = getEquivalentResource<Notification, DefenderNotification>(
+            const maybeNotification = getEquivalentResource<Notification | DefenderID, DefenderNotification>(
               context,
               notification,
               resources?.notifications,
               notifications,
+              'Notifications',
             );
             if (maybeNotification)
               return {
@@ -271,11 +305,12 @@ export const constructMonitor = (
   const threshold = monitor['alert-threshold'] as AlertThreshold;
   const notificationChannels = notifyConfig.channels
     .map((notification) => {
-      const maybeNotification = getEquivalentResource<Notification, DefenderNotification>(
+      const maybeNotification = getEquivalentResource<Notification | DefenderID, DefenderNotification>(
         context,
         notification,
         resources?.notifications,
         notifications,
+        'Notifications',
       );
       return maybeNotification?.notificationId;
     })
@@ -433,4 +468,21 @@ export const isUnauthorisedError = (e: any): boolean => {
 
 export const formatABI = (abi: Contract['abi']) => {
   return abi && JSON.stringify(typeof abi === 'string' ? JSON.parse(abi) : abi);
+};
+
+export const isDefenderId = (resource: any): resource is DefenderID => {
+  return resource && typeof resource === 'string';
+};
+
+export const removeDefenderIdReferences = <Y>(
+  resources: { [k: string]: Y } | { [k: string]: DefenderID } | undefined,
+) => {
+  if (resources) {
+    for (const [id, resource] of Object.entries(resources)) {
+      if (isDefenderId(resource)) {
+        delete resources[id];
+      }
+    }
+  }
+  return resources as { [k: string]: Y } | undefined;
 };

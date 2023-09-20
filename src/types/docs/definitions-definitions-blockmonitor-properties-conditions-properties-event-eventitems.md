@@ -4,10 +4,10 @@
 
 # items Properties
 
-| Property                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                            |
-| :------------------------ | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [signature](#signature)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems-properties-signature.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/event/items/properties/signature")   |
-| [expression](#expression) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems-properties-expression.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/event/items/properties/expression") |
+| Property                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                             |
+| :------------------------ | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [signature](#signature)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems-properties-signature.md "definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/event/items/properties/signature")   |
+| [expression](#expression) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems-properties-expression.md "definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/event/items/properties/expression") |
 
 ## signature
 
@@ -21,7 +21,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems-properties-signature.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/event/items/properties/signature")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems-properties-signature.md "definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/event/items/properties/signature")
 
 ### signature Type
 
@@ -39,7 +39,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems-properties-expression.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/event/items/properties/expression")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems-properties-expression.md "definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/event/items/properties/expression")
 
 ### expression Type
 

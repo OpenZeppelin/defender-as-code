@@ -16,6 +16,7 @@ import {
   getStackName,
   getTeamAPIkeysOrThrow,
   isTemplateResource,
+  removeDefenderIdReferences,
 } from '../utils';
 import {
   DefenderAction,
@@ -149,7 +150,7 @@ export default class DefenderRemove {
     await this.wrapper<ForkedNetworkRequest, DefenderForkedNetwork>(
       this.serverless,
       'Forked Networks',
-      this.resources?.['forked-networks'],
+      removeDefenderIdReferences(this.resources?.['forked-networks']),
       listForkedNetworks,
       async (forkedNetworks: DefenderForkedNetwork[]) => {
         await Promise.all(
@@ -172,7 +173,7 @@ export default class DefenderRemove {
     await this.wrapper<Monitor, DefenderMonitor>(
       this.serverless,
       'Monitors',
-      this.resources?.monitors,
+      removeDefenderIdReferences(this.resources?.monitors),
       listMonitors,
       async (monitors: DefenderMonitor[]) => {
         await Promise.all(
@@ -192,7 +193,7 @@ export default class DefenderRemove {
     await this.wrapper<Action, DefenderAction>(
       this.serverless,
       'Actions',
-      this.resources.actions,
+      removeDefenderIdReferences(this.resources.actions),
       listActions,
       async (actions: DefenderAction[]) => {
         await Promise.all(
@@ -212,7 +213,7 @@ export default class DefenderRemove {
     await this.wrapper<Contract, DefenderContract>(
       this.serverless,
       'Contracts',
-      this.resources?.contracts,
+      removeDefenderIdReferences(this.resources?.contracts),
       listContracts,
       async (contracts: DefenderContract[]) => {
         await Promise.all(
@@ -232,7 +233,12 @@ export default class DefenderRemove {
       const relayClient = getRelayClient(this.teamKey!);
       const listRelayers = (await relayClient.list()).items;
       const existingRelayers = listRelayers.filter((e) =>
-        isTemplateResource<Relayer, DefenderRelayer>(this.serverless, e, 'Relayers', this.resources?.relayers ?? {}),
+        isTemplateResource<Relayer, DefenderRelayer>(
+          this.serverless,
+          e,
+          'Relayers',
+          removeDefenderIdReferences(this.resources?.relayers) ?? {},
+        ),
       );
       this.log.error('Deleting Relayers is currently only possible via the Defender UI.');
       this.log.progress('component-info', `Retrieving Relayer API Keys`);
@@ -262,7 +268,7 @@ export default class DefenderRemove {
     await this.wrapper<Notification, DefenderNotification>(
       this.serverless,
       'Notifications',
-      this.resources?.notifications,
+      removeDefenderIdReferences(this.resources?.notifications),
       listNotifications,
       async (notifications: DefenderNotification[]) => {
         await Promise.all(

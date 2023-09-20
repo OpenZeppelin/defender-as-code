@@ -8,13 +8,13 @@
 
 # additionalProperties Properties
 
-| Property                                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                             |
-| :---------------------------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                             | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/name")                                                    |
-| [forked-network](#forked-network)         | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/forked-network")                                       |
-| [rpc-url](#rpc-url)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/rpc-url")                       |
-| [api-key](#api-key)                       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/api-key")                       |
-| [block-explorer-url](#block-explorer-url) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/block-explorer-url") |
+| Property                                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                               |
+| :---------------------------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                             | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")                                                    |
+| [forked-network](#forked-network)         | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/forked-network")                                       |
+| [rpc-url](#rpc-url)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forked-network-request/properties/rpc-url")                       |
+| [api-key](#api-key)                       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forked-network-request/properties/api-key")                       |
+| [block-explorer-url](#block-explorer-url) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forked-network-request/properties/block-explorer-url") |
 
 ## name
 
@@ -28,7 +28,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-forkednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/name")
+*   defined in: [Definitions](definitions-definitions-forkednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")
 
 ### name Type
 
@@ -46,7 +46,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/forked-network")
+*   defined in: [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/forked-network")
 
 ### forked-network Type
 
@@ -70,7 +70,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/rpc-url")
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forked-network-request/properties/rpc-url")
 
 ### rpc-url Type
 
@@ -98,7 +98,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/api-key")
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forked-network-request/properties/api-key")
 
 ### api-key Type
 
@@ -116,7 +116,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/block-explorer-url")
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forked-network-request/properties/block-explorer-url")
 
 ### block-explorer-url Type
 

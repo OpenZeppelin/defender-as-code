@@ -2,30 +2,8 @@
 
 `object` ([Notifications](resources-properties-notifications.md))
 
-# notifications Properties
+one (and only one) of
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                                  |
-| :-------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-notification.md "resources.schema.json#/properties/notifications/additionalProperties") |
+*   [Untitled  type in Resources](resources-properties-notifications-oneof-0.md "check type definition")
 
-## Additional Properties
-
-Additional properties are allowed, as long as they follow this schema:
-
-
-
-*   is optional
-
-*   Type: `object` ([Notification](definitions-definitions-notification.md))
-
-*   cannot be null
-
-*   defined in: [Resources](definitions-definitions-notification.md "resources.schema.json#/properties/notifications/additionalProperties")
-
-### additionalProperties Type
-
-`object` ([Notification](definitions-definitions-notification.md))
-
-### additionalProperties Constraints
-
-**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+*   [Untitled  type in Resources](resources-properties-notifications-oneof-1.md "check type definition")

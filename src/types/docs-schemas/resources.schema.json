@@ -8,50 +8,110 @@
     "actions": {
       "title": "Actions",
       "type": "object",
-      "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/action",
-        "format": "uri-reference"
-      }
+      "oneOf": [
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/action",
+            "format": "uri-reference"
+          }
+        },
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/defender-id",
+            "format": "uri-reference"
+          }
+        }
+      ]
     },
     "notifications": {
       "title": "Notifications",
       "type": "object",
-      "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/notification",
-        "format": "uri-reference"
-      }
+      "oneOf": [
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/notification",
+            "format": "uri-reference"
+          }
+        },
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/defender-id",
+            "format": "uri-reference"
+          }
+        }
+      ]
     },
     "categories": {
       "title": "Categories",
       "type": "object",
-      "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/category",
-        "format": "uri-reference"
-      }
+      "oneOf": [
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/category",
+            "format": "uri-reference"
+          }
+        },
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/defender-id",
+            "format": "uri-reference"
+          }
+        }
+      ]
     },
     "relayers": {
       "title": "Relayers",
       "type": "object",
-      "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/relayer",
-        "format": "uri-reference"
-      }
+      "oneOf": [
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/relayer",
+            "format": "uri-reference"
+          }
+        },
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/defender-id",
+            "format": "uri-reference"
+          }
+        }
+      ]
     },
     "policies": {
       "title": "Policies",
       "type": "object",
-      "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/policy",
-        "format": "uri-reference"
-      }
+      "oneOf": [
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/policy",
+            "format": "uri-reference"
+          }
+        },
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/defender-id",
+            "format": "uri-reference"
+          }
+        }
+      ]
     },
     "contracts": {
       "title": "Contracts",
       "type": "object",
-      "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/contract",
-        "format": "uri-reference"
-      }
+      "oneOf": [
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/contract",
+            "format": "uri-reference"
+          }
+        },
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/defender-id",
+            "format": "uri-reference"
+          }
+        }
+      ]
     },
     "secrets": {
       "title": "ActionSecrets",
@@ -65,26 +125,56 @@
     "monitors": {
       "title": "Monitors",
       "type": "object",
-      "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/monitor",
-        "format": "uri-reference"
-      }
+      "oneOf": [
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/monitor",
+            "format": "uri-reference"
+          }
+        },
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/defender-id",
+            "format": "uri-reference"
+          }
+        }
+      ]
     },
     "block-explorer-api-keys": {
       "title": "Block Explorer Api Keys",
       "type": "object",
-      "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/blockExplorerApiKey",
-        "format": "uri-reference"
-      }
+      "oneOf": [
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/block-explorer-api-key",
+            "format": "uri-reference"
+          }
+        },
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/defender-id",
+            "format": "uri-reference"
+          }
+        }
+      ]
     },
     "forked-networks": {
       "title": "Forked Networks",
       "type": "object",
-      "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/forkedNetworkRequest",
-        "format": "uri-reference"
-      }
+      "oneOf": [
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/forked-network-request",
+            "format": "uri-reference"
+          }
+        },
+        {
+          "additionalProperties": {
+            "$ref": "definitions.schema.json#/definitions/defender-id",
+            "format": "uri-reference"
+          }
+        }
+      ]
     }
   }
 }
