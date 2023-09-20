@@ -167,10 +167,6 @@ resources:
     forta-example:
       name: 'Forta Example'
       type: 'FORTA'
-      network: 'mainnet'
-      # optional if agent-ids is defined
-      addresses:
-        - '0x318958A61A3dFa42fBdAA6A28A4F481678D943cC'
       # optional
       alert-threshold:
         amount: 2
