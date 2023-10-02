@@ -1,8 +1,8 @@
-## additionalProperties Type
+## 1 Type
 
 `string` ([DefenderID](definitions-definitions-defenderid.md))
 
-## additionalProperties Constraints
+## 1 Constraints
 
 **pattern**: the string must match the following regular expression:&#x20;
 

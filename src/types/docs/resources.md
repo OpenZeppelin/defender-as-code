@@ -6,16 +6,16 @@
 
 | Property                                            | Type     | Required | Nullable       | Defined by                                                                                                               |
 | :-------------------------------------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------- |
-| [actions](#actions)                                 | Merged   | Optional | cannot be null | [Resources](resources-properties-actions.md "resources.schema.json#/properties/actions")                                 |
-| [notifications](#notifications)                     | Merged   | Optional | cannot be null | [Resources](resources-properties-notifications.md "resources.schema.json#/properties/notifications")                     |
-| [categories](#categories)                           | Merged   | Optional | cannot be null | [Resources](resources-properties-categories.md "resources.schema.json#/properties/categories")                           |
-| [relayers](#relayers)                               | Merged   | Optional | cannot be null | [Resources](resources-properties-relayers.md "resources.schema.json#/properties/relayers")                               |
-| [policies](#policies)                               | Merged   | Optional | cannot be null | [Resources](resources-properties-policies.md "resources.schema.json#/properties/policies")                               |
-| [contracts](#contracts)                             | Merged   | Optional | cannot be null | [Resources](resources-properties-contracts.md "resources.schema.json#/properties/contracts")                             |
+| [actions](#actions)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-actions.md "resources.schema.json#/properties/actions")                                 |
+| [notifications](#notifications)                     | `object` | Optional | cannot be null | [Resources](resources-properties-notifications.md "resources.schema.json#/properties/notifications")                     |
+| [categories](#categories)                           | `object` | Optional | cannot be null | [Resources](resources-properties-categories.md "resources.schema.json#/properties/categories")                           |
+| [relayers](#relayers)                               | `object` | Optional | cannot be null | [Resources](resources-properties-relayers.md "resources.schema.json#/properties/relayers")                               |
+| [policies](#policies)                               | `object` | Optional | cannot be null | [Resources](resources-properties-policies.md "resources.schema.json#/properties/policies")                               |
+| [contracts](#contracts)                             | `object` | Optional | cannot be null | [Resources](resources-properties-contracts.md "resources.schema.json#/properties/contracts")                             |
 | [secrets](#secrets)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-actionsecrets.md "resources.schema.json#/properties/secrets")                           |
-| [monitors](#monitors)                               | Merged   | Optional | cannot be null | [Resources](resources-properties-monitors.md "resources.schema.json#/properties/monitors")                               |
-| [block-explorer-api-keys](#block-explorer-api-keys) | Merged   | Optional | cannot be null | [Resources](resources-properties-block-explorer-api-keys.md "resources.schema.json#/properties/block-explorer-api-keys") |
-| [forked-networks](#forked-networks)                 | Merged   | Optional | cannot be null | [Resources](resources-properties-forked-networks.md "resources.schema.json#/properties/forked-networks")                 |
+| [monitors](#monitors)                               | `object` | Optional | cannot be null | [Resources](resources-properties-monitors.md "resources.schema.json#/properties/monitors")                               |
+| [block-explorer-api-keys](#block-explorer-api-keys) | `object` | Optional | cannot be null | [Resources](resources-properties-block-explorer-api-keys.md "resources.schema.json#/properties/block-explorer-api-keys") |
+| [forked-networks](#forked-networks)                 | `object` | Optional | cannot be null | [Resources](resources-properties-forked-networks.md "resources.schema.json#/properties/forked-networks")                 |
 
 ## actions
 
@@ -35,12 +35,6 @@
 
 `object` ([Actions](resources-properties-actions.md))
 
-one (and only one) of
-
-*   [Untitled  type in Resources](resources-properties-actions-oneof-0.md "check type definition")
-
-*   [Untitled  type in Resources](resources-properties-actions-oneof-1.md "check type definition")
-
 ## notifications
 
 
@@ -58,12 +52,6 @@ one (and only one) of
 ### notifications Type
 
 `object` ([Notifications](resources-properties-notifications.md))
-
-one (and only one) of
-
-*   [Untitled  type in Resources](resources-properties-notifications-oneof-0.md "check type definition")
-
-*   [Untitled  type in Resources](resources-properties-notifications-oneof-1.md "check type definition")
 
 ## categories
 
@@ -83,12 +71,6 @@ one (and only one) of
 
 `object` ([Categories](resources-properties-categories.md))
 
-one (and only one) of
-
-*   [Untitled  type in Resources](resources-properties-categories-oneof-0.md "check type definition")
-
-*   [Untitled  type in Resources](resources-properties-categories-oneof-1.md "check type definition")
-
 ## relayers
 
 
@@ -106,12 +88,6 @@ one (and only one) of
 ### relayers Type
 
 `object` ([Relayers](resources-properties-relayers.md))
-
-one (and only one) of
-
-*   [Untitled  type in Resources](resources-properties-relayers-oneof-0.md "check type definition")
-
-*   [Untitled  type in Resources](resources-properties-relayers-oneof-1.md "check type definition")
 
 ## policies
 
@@ -131,12 +107,6 @@ one (and only one) of
 
 `object` ([Policies](resources-properties-policies.md))
 
-one (and only one) of
-
-*   [Untitled  type in Resources](resources-properties-policies-oneof-0.md "check type definition")
-
-*   [Untitled  type in Resources](resources-properties-policies-oneof-1.md "check type definition")
-
 ## contracts
 
 
@@ -154,12 +124,6 @@ one (and only one) of
 ### contracts Type
 
 `object` ([Contracts](resources-properties-contracts.md))
-
-one (and only one) of
-
-*   [Untitled  type in Resources](resources-properties-contracts-oneof-0.md "check type definition")
-
-*   [Untitled  type in Resources](resources-properties-contracts-oneof-1.md "check type definition")
 
 ## secrets
 
@@ -197,12 +161,6 @@ one (and only one) of
 
 `object` ([Monitors](resources-properties-monitors.md))
 
-one (and only one) of
-
-*   [Untitled  type in Resources](resources-properties-monitors-oneof-0.md "check type definition")
-
-*   [Untitled  type in Resources](resources-properties-monitors-oneof-1.md "check type definition")
-
 ## block-explorer-api-keys
 
 
@@ -221,12 +179,6 @@ one (and only one) of
 
 `object` ([Block Explorer Api Keys](resources-properties-block-explorer-api-keys.md))
 
-one (and only one) of
-
-*   [Untitled  type in Resources](resources-properties-block-explorer-api-keys-oneof-0.md "check type definition")
-
-*   [Untitled  type in Resources](resources-properties-block-explorer-api-keys-oneof-1.md "check type definition")
-
 ## forked-networks
 
 
@@ -244,9 +196,3 @@ one (and only one) of
 ### forked-networks Type
 
 `object` ([Forked Networks](resources-properties-forked-networks.md))
-
-one (and only one) of
-
-*   [Untitled  type in Resources](resources-properties-forked-networks-oneof-0.md "check type definition")
-
-*   [Untitled  type in Resources](resources-properties-forked-networks-oneof-1.md "check type definition")

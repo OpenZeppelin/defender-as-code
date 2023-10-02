@@ -474,9 +474,7 @@ export const isDefenderId = (resource: any): resource is DefenderID => {
   return resource && typeof resource === 'string';
 };
 
-export const removeDefenderIdReferences = <Y>(
-  resources: { [k: string]: Y } | { [k: string]: DefenderID } | undefined,
-) => {
+export const removeDefenderIdReferences = <Y>(resources: { [k: string]: Y | DefenderID } | undefined) => {
   if (resources) {
     for (const [id, resource] of Object.entries(resources)) {
       if (isDefenderId(resource)) {
