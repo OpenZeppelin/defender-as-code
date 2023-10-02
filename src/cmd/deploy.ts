@@ -696,26 +696,28 @@ export default class DefenderDeploy {
       retrieveExisting,
       // on update
       async (category: Category, match: DefenderCategory) => {
+        const matchStackResourceId =
+          match.stackResourceId ?? getResourceID(getStackName(this.serverless), _.kebabCase(match.name));
         const newCategory = constructNotificationCategory(
           this.serverless,
           this.resources,
           category,
-          match.stackResourceId!,
+          matchStackResourceId,
           notifications,
         );
         const mappedMatch = {
           name: match.name,
           description: match.description,
           notificationIds: match.notificationIds,
-          stackResourceId: match.stackResourceId,
+          stackResourceId: matchStackResourceId,
         };
         if (_.isEqual(validateTypesAndSanitise(newCategory), validateTypesAndSanitise(mappedMatch))) {
           return {
-            name: match.stackResourceId!,
+            name: matchStackResourceId,
             id: match.categoryId,
             success: false,
             response: match,
-            notice: `Skipped ${match.stackResourceId} - no changes detected`,
+            notice: `Skipped ${matchStackResourceId} - no changes detected`,
           };
         }
 
@@ -1220,19 +1222,14 @@ export default class DefenderDeploy {
     ssotDifference: D[] = [],
   ) {
     try {
-      console.log('wrapper-1');
       const stackName = getStackName(context);
       this.log.notice(`${resourceType}`);
       this.log.progress('component-deploy', `Validating permissions for ${resourceType}`);
       await validateAdditionalPermissionsOrThrow<Y>(context, resources, resourceType);
       this.log.progress('component-deploy', `Initialising deployment of ${resourceType}`);
 
-      console.log('wrapper-2');
-
       // only remove if template is considered single source of truth
       if (isSSOT(context) && onRemove) {
-        console.log('wrapper-3');
-
         if (ssotDifference.length > 0) {
           this.log.info(`Unused resources found on Defender:`);
           this.log.info(JSON.stringify(ssotDifference, null, 2));
@@ -1242,25 +1239,16 @@ export default class DefenderDeploy {
           output.removed.push(...ssotDifference);
         }
       }
-      console.log('wrapper-4');
-
       for (const [id, resource] of Object.entries(resources ?? [])) {
-        console.log('wrapper-5', id);
         if (isDefenderId(resource)) {
           this.log.info(`Skipped resource with a direct reference to Defender: ${resource}`);
           return;
         }
 
-        console.log('wrapper-5.5');
-
         // always refresh list after each addition as some resources rely on the previous one
         const existing = await retrieveExistingResources();
 
-        console.log('wrapper-6', existing.length);
-
         const entryStackResourceId = getResourceID(stackName, id);
-
-        console.log('wrapper-7', entryStackResourceId);
 
         let match;
         if (overrideMatchDefinition) {
@@ -1268,8 +1256,6 @@ export default class DefenderDeploy {
         } else {
           match = existing.find((e: any) => e.stackResourceId === entryStackResourceId);
         }
-
-        console.log('wrapper-8', id);
 
         if (match) {
           this.log.progress(
