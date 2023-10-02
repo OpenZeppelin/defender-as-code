@@ -534,13 +534,21 @@
         { "$ref": "definitions.schema.json#/definitions/forta-monitor", "format": "uri-reference" }
       ]
     },
+    "relayer-or-defender-id": {
+      "title": "RelayerOrDefenderID",
+      "type": "object",
+      "oneOf": [
+        { "$ref": "definitions.schema.json#/definitions/relayer", "format": "uri-reference" },
+        { "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+      ]
+    },
     "action": {
       "title": "Action",
       "type": "object",
       "properties": {
         "name": { "type": "string" },
         "path": { "type": "string" },
-        "relayer": { "$ref": "definitions.schema.json#/definitions/relayer", "format": "uri-reference" },
+        "relayer": { "$ref": "definitions.schema.json#/definitions/relayer-or-defender-id", "format": "uri-reference" },
         "trigger": {
           "title": "Trigger",
           "type": "object",

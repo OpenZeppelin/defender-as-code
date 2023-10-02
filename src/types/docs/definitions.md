@@ -2193,6 +2193,17 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group relayer-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/relayer-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group action
 
 Reference this group by using
@@ -2205,7 +2216,7 @@ Reference this group by using
 | :------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
 | [name](#name-6)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")       |
 | [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")       |
-| [relayer](#relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer.md "definitions.schema.json#/definitions/action/properties/relayer")                   |
+| [relayer](#relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")       |
 | [trigger](#trigger) | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger") |
 | [paused](#paused-3) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-action-properties-paused.md "definitions.schema.json#/definitions/action/properties/paused")   |
 
@@ -2253,15 +2264,21 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object` ([Relayer](definitions-definitions-relayer.md))
+*   Type: `object` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer.md "definitions.schema.json#/definitions/action/properties/relayer")
+*   defined in: [Definitions](definitions-definitions-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")
 
 #### relayer Type
 
-`object` ([Relayer](definitions-definitions-relayer.md))
+`object` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
+
+one (and only one) of
+
+*   [Relayer](definitions-definitions-relayer.md "check type definition")
+
+*   [DefenderID](definitions-definitions-relayerordefenderid-oneof-defenderid.md "check type definition")
 
 #### relayer Constraints
 

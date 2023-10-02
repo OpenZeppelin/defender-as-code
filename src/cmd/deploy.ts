@@ -567,10 +567,10 @@ export default class DefenderDeploy {
       async (relayer: Relayer, stackResourceId: string) => {
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<Relayer | DefenderID | undefined, DefenderRelayer>(
           this.serverless,
-          relayer['address-from-relayer'] as Relayer | undefined, // typing address-from-relayer causes issues with schema generation due to circular dependancies so we cast it
-          removeDefenderIdReferences(relayers),
+          relayer['address-from-relayer'] as Relayer | DefenderID | undefined, // typing address-from-relayer causes issues with schema generation due to circular dependancies so we cast it
+          relayers,
           existingRelayers,
           'Relayers',
         );
@@ -935,10 +935,10 @@ export default class DefenderDeploy {
       async (action: Action, match: DefenderAction) => {
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<Relayer | DefenderID | undefined, DefenderRelayer>(
           this.serverless,
           action.relayer,
-          removeDefenderIdReferences(relayers),
+          relayers,
           existingRelayers,
           'Relayers',
         );
@@ -1021,10 +1021,10 @@ export default class DefenderDeploy {
         const actionRelayer = action.relayer;
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<Relayer | DefenderID | undefined, DefenderRelayer>(
           this.serverless,
           actionRelayer,
-          removeDefenderIdReferences(relayers),
+          relayers,
           existingRelayers,
           'Relayers',
         );
@@ -1240,11 +1240,6 @@ export default class DefenderDeploy {
         }
       }
       for (const [id, resource] of Object.entries(resources ?? [])) {
-        if (isDefenderId(resource)) {
-          this.log.info(`Skipped resource with a direct reference to Defender: ${resource}`);
-          return;
-        }
-
         // always refresh list after each addition as some resources rely on the previous one
         const existing = await retrieveExistingResources();
 

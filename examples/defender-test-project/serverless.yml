@@ -23,7 +23,7 @@ resources:
       name: 'Hello world from serverless'
       path: './actions/hello-world'
       # optional
-      relayer: ${self:resources.relayers.relayer-1}
+      relayer: ${self:resources.relayers.relayer-3}
       trigger:
         type: 'schedule' # or webhook
         # optional if not cron

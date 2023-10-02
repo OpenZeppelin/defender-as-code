@@ -86,6 +86,8 @@
 
 *   [Relayer](./definitions-definitions-relayer.md) – `definitions.schema.json#/definitions/relayer`
 
+*   [RelayerOrDefenderID](./definitions-definitions-relayerordefenderid.md) – `definitions.schema.json#/definitions/relayer-or-defender-id`
+
 *   [Relayers](./resources-properties-relayers.md) – `resources.schema.json#/properties/relayers`
 
 *   [StackSecrets](./resources-properties-actionsecrets-properties-stacksecrets.md) – `resources.schema.json#/properties/secrets/properties/stack`
