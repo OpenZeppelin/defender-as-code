@@ -1501,7 +1501,7 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object[]` ([Notification](definitions-definitions-notification.md))
+*   Type: an array of merged types ([NotificationOrDefenderID](definitions-definitions-category-properties-categorynotificationids-notificationordefenderid.md))
 
 *   cannot be null
 
@@ -1509,7 +1509,7 @@ Reference this group by using
 
 #### notification-ids Type
 
-`object[]` ([Notification](definitions-definitions-notification.md))
+an array of merged types ([NotificationOrDefenderID](definitions-definitions-category-properties-categorynotificationids-notificationordefenderid.md))
 
 ## Definitions group block-monitor
 

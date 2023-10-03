@@ -108,7 +108,8 @@ export type PagerDutyEventAction = 'trigger' | 'acknowledge' | 'resolve';
 export type PagerDutySeverity = 'critical' | 'error' | 'warning' | 'info';
 export type DefenderID2 = string;
 export type CategoryOrDefenderID = Category | DefenderID3;
-export type CategoryNotificationIds = Notification1[];
+export type NotificationOrDefenderID1 = Notification | DefenderID2;
+export type CategoryNotificationIds = NotificationOrDefenderID1[];
 export type DefenderID3 = string;
 export type RelayerOrDefenderID1 = Relayer | DefenderID;
 export type PolicyOrDefenderID = Policy1 | DefenderID4;
@@ -127,7 +128,7 @@ export type Address1 = string;
 export type Addresses = Address1[];
 export type ActionOrDefenderID1 = Action | DefenderID1;
 export type ActionOrDefenderID2 = Action | DefenderID1;
-export type Channels = Notification2[];
+export type Channels = Notification1[];
 export type Event = EventItems[];
 export type Function = FunctionItems[];
 export type RiskCategory = 'NONE' | 'GOVERNANCE' | 'ACCESS-CONTROL' | 'SUSPICIOUS' | 'FINANCIAL' | 'TECHNICAL';
@@ -136,7 +137,7 @@ export type Address2 = string;
 export type Addresses1 = Address2[];
 export type ActionOrDefenderID3 = Action | DefenderID1;
 export type ActionOrDefenderID4 = Action | DefenderID1;
-export type Channels1 = Notification3[];
+export type Channels1 = Notification2[];
 export type AlertIDs = string[];
 export type AgentIDs = string[];
 export type DefenderID6 = string;
@@ -255,12 +256,6 @@ export interface Category {
   description?: string;
   'notification-ids'?: CategoryNotificationIds;
 }
-export interface Notification1 {
-  type: NotificationType;
-  name: string;
-  paused: boolean;
-  config: Config;
-}
 export interface Relayers {
   [k: string]: RelayerOrDefenderID1;
 }
@@ -331,7 +326,7 @@ export interface Category1 {
   description?: string;
   'notification-ids'?: CategoryNotificationIds;
 }
-export interface Notification2 {
+export interface Notification1 {
   type: NotificationType;
   name: string;
   paused: boolean;
@@ -383,7 +378,7 @@ export interface Category2 {
   description?: string;
   'notification-ids'?: CategoryNotificationIds;
 }
-export interface Notification3 {
+export interface Notification2 {
   type: NotificationType;
   name: string;
   paused: boolean;

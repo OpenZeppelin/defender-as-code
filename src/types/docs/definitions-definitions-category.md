@@ -58,7 +58,7 @@
 
 *   is optional
 
-*   Type: `object[]` ([Notification](definitions-definitions-notification.md))
+*   Type: an array of merged types ([NotificationOrDefenderID](definitions-definitions-category-properties-categorynotificationids-notificationordefenderid.md))
 
 *   cannot be null
 
@@ -66,4 +66,4 @@
 
 ### notification-ids Type
 
-`object[]` ([Notification](definitions-definitions-notification.md))
+an array of merged types ([NotificationOrDefenderID](definitions-definitions-category-properties-categorynotificationids-notificationordefenderid.md))

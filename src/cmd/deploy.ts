@@ -707,6 +707,7 @@ export default class DefenderDeploy {
           matchStackResourceId,
           notifications,
         );
+
         const mappedMatch = {
           name: match.name,
           description: match.description,
@@ -727,8 +728,9 @@ export default class DefenderDeploy {
           categoryId: match.categoryId,
           ...newCategory,
         });
+
         return {
-          name: updatedCategory.stackResourceId!,
+          name: matchStackResourceId,
           id: updatedCategory.categoryId,
           success: true,
           response: updatedCategory,
