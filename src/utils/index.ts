@@ -38,6 +38,7 @@ import {
 import { sanitise } from './sanitise';
 import {
   Action,
+  ActionOrDefenderID,
   ActionSecrets,
   AlertThreshold,
   Category,
@@ -284,6 +285,15 @@ const isResource = <T>(item: T | undefined): item is T => {
   return !!item;
 };
 
+const getDefenderAction = (
+  resource: ActionOrDefenderID | undefined,
+  actions: DefenderAction[],
+): DefenderAction | undefined => {
+  if (!resource) return undefined;
+  if (isDefenderId(resource)) return actions.find((a) => a.actionId === resource);
+  return actions.find((a) => a.name === resource.name);
+};
+
 export const constructMonitor = (
   context: Serverless,
   resources: Resources,
@@ -294,12 +304,8 @@ export const constructMonitor = (
   blockwatchers: DefenderBlockWatcher[],
   categories: DefenderCategory[],
 ): DefenderBlockMonitor | DefenderFortaMonitor => {
-  const actionCondition: DefenderAction | undefined =
-    (monitor['action-condition'] as Action) &&
-    actions.find((a) => a.name === (monitor['action-condition'] as Action)!.name);
-  const actionTrigger: DefenderAction | undefined =
-    (monitor['action-trigger'] as Action) &&
-    actions.find((a) => a.name === (monitor['action-trigger'] as Action)!.name);
+  const actionCondition = getDefenderAction(monitor['action-condition'], actions);
+  const actionTrigger = getDefenderAction(monitor['action-trigger'], actions);
 
   const notifyConfig = monitor['notify-config'] as NotifyConfig;
   const threshold = monitor['alert-threshold'] as AlertThreshold;

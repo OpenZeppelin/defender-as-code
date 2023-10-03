@@ -18,8 +18,8 @@
 | [alert-threshold](#alert-threshold)         | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold")          |
 | [paused](#paused)                           | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/block-monitor/properties/paused")                           |
 | [skip-abi-validation](#skip-abi-validation) | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-skip-abi-validation.md "definitions.schema.json#/definitions/block-monitor/properties/skip-abi-validation") |
-| [action-condition](#action-condition)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")                                         |
-| [action-trigger](#action-trigger)           | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")                                           |
+| [action-condition](#action-condition)       | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")                             |
+| [action-trigger](#action-trigger)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")                               |
 | [confirm-level](#confirm-level)             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/block-monitor/properties/confirm-level")             |
 | [notify-config](#notify-config)             | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/block-monitor/properties/notify-config")              |
 | [conditions](#conditions)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/block-monitor/properties/conditions")                   |
@@ -205,15 +205,21 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")
+*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")
 
 ### action-condition Type
 
-`object` ([Action](definitions-definitions-action.md))
+any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+
+one (and only one) of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### action-condition Constraints
 
@@ -227,15 +233,21 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")
+*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")
 
 ### action-trigger Type
 
-`object` ([Action](definitions-definitions-action.md))
+any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+
+one (and only one) of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### action-trigger Constraints
 

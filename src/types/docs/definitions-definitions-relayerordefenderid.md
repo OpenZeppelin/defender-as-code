@@ -1,6 +1,6 @@
 ## relayer-or-defender-id Type
 
-`object` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
+any of the following: `object` or `string` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
 
 one (and only one) of
 

@@ -5,7 +5,8 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type RelayerOrDefenderID = Relayer | DefenderID;
+export type RelayerOrDefenderID = RelayerOrDefenderID1 & RelayerOrDefenderID2;
+export type RelayerOrDefenderID1 = Relayer | DefenderID;
 export type Network = SupportedNetwork | ForkedNetwork;
 export type SupportedNetwork = PublicNetwork | CustomNetwork;
 export type PublicNetwork =
@@ -50,6 +51,7 @@ export type ForkedNetwork = string;
 export type WhitelistReceivers = string[];
 export type RelayerAPIKeys = string[];
 export type DefenderID = string;
+export type RelayerOrDefenderID2 = (Relayer | DefenderID) | ((Relayer | DefenderID) & string);
 export type TriggerType = 'schedule' | 'webhook' | 'sentinel' | 'monitor-filter';
 export type TriggerCron = string;
 export type TriggerFrequency = number;
@@ -118,6 +120,14 @@ export type Monitor = BlockMonitor | FortaMonitor;
 export type Network2 = SupportedNetwork | ForkedNetwork;
 export type Address1 = string;
 export type Addresses = Address1[];
+export type ActionOrDefenderID = ActionOrDefenderID1 & ActionOrDefenderID2;
+export type ActionOrDefenderID1 = Action1 | DefenderID7;
+export type RelayerOrDefenderID3 = RelayerOrDefenderID1 & RelayerOrDefenderID2;
+export type DefenderID7 = string;
+export type ActionOrDefenderID2 = (Action1 | DefenderID7) | ((Action1 | DefenderID7) & string);
+export type ActionOrDefenderID3 = ActionOrDefenderID4 & ActionOrDefenderID5;
+export type ActionOrDefenderID4 = Action1 | DefenderID7;
+export type ActionOrDefenderID5 = (Action1 | DefenderID7) | ((Action1 | DefenderID7) & string);
 export type Channels = Notification2[];
 export type Event = EventItems[];
 export type Function = FunctionItems[];
@@ -125,13 +135,19 @@ export type RiskCategory = 'NONE' | 'GOVERNANCE' | 'ACCESS-CONTROL' | 'SUSPICIOU
 export type Network3 = SupportedNetwork | ForkedNetwork;
 export type Address2 = string;
 export type Addresses1 = Address2[];
+export type ActionOrDefenderID6 = ActionOrDefenderID7 & ActionOrDefenderID8;
+export type ActionOrDefenderID7 = Action1 | DefenderID7;
+export type ActionOrDefenderID8 = (Action1 | DefenderID7) | ((Action1 | DefenderID7) & string);
+export type ActionOrDefenderID9 = ActionOrDefenderID10 & ActionOrDefenderID11;
+export type ActionOrDefenderID10 = Action1 | DefenderID7;
+export type ActionOrDefenderID11 = (Action1 | DefenderID7) | ((Action1 | DefenderID7) & string);
 export type Channels1 = Notification3[];
 export type AlertIDs = string[];
 export type AgentIDs = string[];
-export type DefenderID7 = string;
-export type Network4 = SupportedNetwork | ForkedNetwork;
 export type DefenderID8 = string;
+export type Network4 = SupportedNetwork | ForkedNetwork;
 export type DefenderID9 = string;
+export type DefenderID10 = string;
 
 export interface Resources {
   actions?: Actions;
@@ -290,7 +306,7 @@ export interface StackSecrets {
   [k: string]: string;
 }
 export interface Monitors {
-  [k: string]: Monitor | DefenderID7;
+  [k: string]: Monitor | DefenderID8;
 }
 export interface BlockMonitor {
   name: string;
@@ -304,8 +320,8 @@ export interface BlockMonitor {
    * A boolean value that indicates whether the UI should skip ABI validation checks. Enable this if you wish to use custom or partial ABIs for your monitors.
    */
   'skip-abi-validation'?: boolean;
-  'action-condition'?: Action1;
-  'action-trigger'?: Action2;
+  'action-condition'?: ActionOrDefenderID;
+  'action-trigger'?: ActionOrDefenderID3;
   'confirm-level'?: ('safe' | 'finalized') | number;
   'notify-config': NotifyConfig;
   conditions?: Conditions;
@@ -318,14 +334,7 @@ export interface AlertThreshold {
 export interface Action1 {
   name: string;
   path: string;
-  relayer?: RelayerOrDefenderID;
-  trigger: Trigger;
-  paused: boolean;
-}
-export interface Action2 {
-  name: string;
-  path: string;
-  relayer?: RelayerOrDefenderID;
+  relayer?: RelayerOrDefenderID3;
   trigger: Trigger;
   paused: boolean;
 }
@@ -368,8 +377,8 @@ export interface FortaMonitor {
   abi?: AbiType;
   'alert-threshold'?: AlertThreshold1;
   paused?: boolean;
-  'action-condition'?: Action3;
-  'action-trigger'?: Action4;
+  'action-condition'?: ActionOrDefenderID6;
+  'action-trigger'?: ActionOrDefenderID9;
   'notify-config': NotifyConfig1;
   conditions?: Conditions1;
   'forta-node-id'?: string;
@@ -380,20 +389,6 @@ export interface FortaMonitor {
 export interface AlertThreshold1 {
   amount?: number;
   'window-seconds'?: number;
-}
-export interface Action3 {
-  name: string;
-  path: string;
-  relayer?: RelayerOrDefenderID;
-  trigger: Trigger;
-  paused: boolean;
-}
-export interface Action4 {
-  name: string;
-  path: string;
-  relayer?: RelayerOrDefenderID;
-  trigger: Trigger;
-  paused: boolean;
 }
 export interface NotifyConfig1 {
   timeout?: number;
@@ -419,14 +414,14 @@ export interface Conditions1 {
   'alert-ids'?: AlertIDs;
 }
 export interface BlockExplorerApiKeys {
-  [k: string]: BlockExplorerApiKey | DefenderID8;
+  [k: string]: BlockExplorerApiKey | DefenderID9;
 }
 export interface BlockExplorerApiKey {
   key: string;
   network: Network4;
 }
 export interface ForkedNetworks {
-  [k: string]: ForkedNetworkRequest | DefenderID9;
+  [k: string]: ForkedNetworkRequest | DefenderID10;
 }
 export interface ForkedNetworkRequest {
   name: ForkedNetwork;

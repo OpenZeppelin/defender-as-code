@@ -60,7 +60,7 @@
 
 *   is optional
 
-*   Type: `object` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
+*   Type: any of the following: `object` or `string` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
 
 *   cannot be null
 
@@ -68,7 +68,7 @@
 
 ### relayer Type
 
-`object` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
+any of the following: `object` or `string` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
 
 one (and only one) of
 

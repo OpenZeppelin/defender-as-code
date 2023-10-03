@@ -44,6 +44,7 @@ resources:
       trigger:
         type: 'webhook'
       paused: false
+    action-example-4: 516dfd2f-9715-47d4-bcdf-d1f9a7b4d80d
 
   policies:
     policy-1:
@@ -146,7 +147,7 @@ resources:
       # optional
       paused: false
       # optional
-      action-condition: ${self:resources.actions.action-example-1}
+      action-condition: ${self:resources.actions.action-example-4}
       # optional
       action-trigger: null
       # optional

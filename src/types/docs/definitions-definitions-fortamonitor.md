@@ -17,8 +17,8 @@
 | [abi](#abi)                                             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/forta-monitor/properties/abi")                                                                 |
 | [alert-threshold](#alert-threshold)                     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/forta-monitor/properties/alert-threshold")                      |
 | [paused](#paused)                                       | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-paused.md "definitions.schema.json#/definitions/forta-monitor/properties/paused")                                       |
-| [action-condition](#action-condition)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")                                                     |
-| [action-trigger](#action-trigger)                       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")                                                       |
+| [action-condition](#action-condition)                   | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")                                         |
+| [action-trigger](#action-trigger)                       | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")                                           |
 | [notify-config](#notify-config)                         | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config")                          |
 | [conditions](#conditions)                               | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "definitions.schema.json#/definitions/forta-monitor/properties/conditions")                               |
 | [forta-node-id](#forta-node-id)                         | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "definitions.schema.json#/definitions/forta-monitor/properties/forta-node-id")                         |
@@ -188,15 +188,21 @@ any of
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")
+*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")
 
 ### action-condition Type
 
-`object` ([Action](definitions-definitions-action.md))
+any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+
+one (and only one) of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### action-condition Constraints
 
@@ -210,15 +216,21 @@ any of
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")
+*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")
 
 ### action-trigger Type
 
-`object` ([Action](definitions-definitions-action.md))
+any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+
+one (and only one) of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### action-trigger Constraints
 

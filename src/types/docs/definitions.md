@@ -1523,8 +1523,8 @@ Reference this group by using
 | [alert-threshold](#alert-threshold)         | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold")          |
 | [paused](#paused-1)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/block-monitor/properties/paused")                           |
 | [skip-abi-validation](#skip-abi-validation) | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-skip-abi-validation.md "definitions.schema.json#/definitions/block-monitor/properties/skip-abi-validation") |
-| [action-condition](#action-condition)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")                                         |
-| [action-trigger](#action-trigger)           | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")                                           |
+| [action-condition](#action-condition)       | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")     |
+| [action-trigger](#action-trigger)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")     |
 | [confirm-level](#confirm-level)             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/block-monitor/properties/confirm-level")             |
 | [notify-config](#notify-config)             | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/block-monitor/properties/notify-config")              |
 | [conditions](#conditions)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/block-monitor/properties/conditions")                   |
@@ -1710,15 +1710,21 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")
 
 #### action-condition Type
 
-`object` ([Action](definitions-definitions-action.md))
+any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid.md))
+
+one (and only one) of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-actionordefenderid-oneof-defenderid.md "check type definition")
 
 #### action-condition Constraints
 
@@ -1732,15 +1738,21 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")
 
 #### action-trigger Type
 
-`object` ([Action](definitions-definitions-action.md))
+any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md))
+
+one (and only one) of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-actionordefenderid-oneof-defenderid.md "check type definition")
 
 #### action-trigger Constraints
 
@@ -1854,8 +1866,8 @@ Reference this group by using
 | [abi](#abi-2)                                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/forta-monitor/properties/abi")                                                                 |
 | [alert-threshold](#alert-threshold-1)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/forta-monitor/properties/alert-threshold")                      |
 | [paused](#paused-2)                                     | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-paused.md "definitions.schema.json#/definitions/forta-monitor/properties/paused")                                       |
-| [action-condition](#action-condition-1)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")                                                     |
-| [action-trigger](#action-trigger-1)                     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")                                                       |
+| [action-condition](#action-condition-1)                 | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")                                         |
+| [action-trigger](#action-trigger-1)                     | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")                                           |
 | [notify-config](#notify-config-1)                       | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config")                          |
 | [conditions](#conditions-1)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "definitions.schema.json#/definitions/forta-monitor/properties/conditions")                               |
 | [forta-node-id](#forta-node-id)                         | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "definitions.schema.json#/definitions/forta-monitor/properties/forta-node-id")                         |
@@ -2025,15 +2037,21 @@ any of
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")
+*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")
 
 #### action-condition Type
 
-`object` ([Action](definitions-definitions-action.md))
+any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+
+one (and only one) of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-actionordefenderid-oneof-defenderid.md "check type definition")
 
 #### action-condition Constraints
 
@@ -2047,15 +2065,21 @@ any of
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")
+*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")
 
 #### action-trigger Type
 
-`object` ([Action](definitions-definitions-action.md))
+any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+
+one (and only one) of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-actionordefenderid-oneof-defenderid.md "check type definition")
 
 #### action-trigger Constraints
 
@@ -2204,6 +2228,17 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group action-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/action-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group action
 
 Reference this group by using
@@ -2212,13 +2247,13 @@ Reference this group by using
 {"$ref":"definitions.schema.json#/definitions/action"}
 ```
 
-| Property            | Type      | Required | Nullable       | Defined by                                                                                                                           |
-| :------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-6)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")       |
-| [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")       |
-| [relayer](#relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")       |
-| [trigger](#trigger) | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger") |
-| [paused](#paused-3) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-action-properties-paused.md "definitions.schema.json#/definitions/action/properties/paused")   |
+| Property            | Type      | Required | Nullable       | Defined by                                                                                                                                       |
+| :------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name-6)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")                   |
+| [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")                   |
+| [relayer](#relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer") |
+| [trigger](#trigger) | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger")             |
+| [paused](#paused-3) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-action-properties-paused.md "definitions.schema.json#/definitions/action/properties/paused")               |
 
 ### name
 
@@ -2264,15 +2299,15 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
+*   Type: any of the following: `object` or `string` ([RelayerOrDefenderID](definitions-definitions-action-properties-relayerordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")
+*   defined in: [Definitions](definitions-definitions-action-properties-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")
 
 #### relayer Type
 
-`object` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
+any of the following: `object` or `string` ([RelayerOrDefenderID](definitions-definitions-action-properties-relayerordefenderid.md))
 
 one (and only one) of
 
