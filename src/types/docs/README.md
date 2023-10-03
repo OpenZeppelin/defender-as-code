@@ -92,6 +92,8 @@
 
 *   [Trigger](./definitions-definitions-action-properties-trigger.md) – `definitions.schema.json#/definitions/action/properties/trigger`
 
+*   [Untitled object in Definitions](./definitions-definitions-relayer-properties-addressfromrelayer-anyof-0.md) – `definitions.schema.json#/definitions/relayer/properties/address-from-relayer/anyOf/0`
+
 *   [UrlConfig](./definitions-definitions-urlconfig.md) – `definitions.schema.json#/definitions/urlConfig`
 
 ### Arrays

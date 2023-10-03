@@ -46,6 +46,7 @@ import {
   DefenderID,
   Monitor,
   Notification,
+  NotificationOrDefenderID,
   NotifyConfig,
 } from '../types/types/resources.schema';
 
@@ -263,7 +264,7 @@ export const constructNotificationCategory = (
     notificationIds: (category['notification-ids']
       ? category['notification-ids']
           .map((notification) => {
-            const maybeNotification = getEquivalentResource<Notification | DefenderID, DefenderNotification>(
+            const maybeNotification = getEquivalentResource<NotificationOrDefenderID | undefined, DefenderNotification>(
               context,
               notification,
               resources?.notifications,
@@ -311,7 +312,7 @@ export const constructMonitor = (
   const threshold = monitor['alert-threshold'] as AlertThreshold;
   const notificationChannels = notifyConfig.channels
     .map((notification) => {
-      const maybeNotification = getEquivalentResource<Notification | DefenderID, DefenderNotification>(
+      const maybeNotification = getEquivalentResource<NotificationOrDefenderID | undefined, DefenderNotification>(
         context,
         notification,
         resources?.notifications,

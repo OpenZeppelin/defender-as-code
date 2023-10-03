@@ -106,8 +106,7 @@
         "min-balance": { "type": "integer" },
         "address-from-relayer": {
           "title": "AddressFromRelayer",
-          "$ref": "definitions.schema.json#/definitions/relayer-or-defender-id",
-          "format": "uri-reference"
+          "anyOf": [{ "type": "object" }, { "type": "string" }]
         },
         "policy": { "$ref": "definitions.schema.json#/definitions/policy", "format": "uri-reference" },
         "api-keys": {
@@ -565,6 +564,72 @@
       "title": "MonitorOrDefenderID",
       "anyOf": [
         { "type": "object", "$ref": "definitions.schema.json#/definitions/monitor", "format": "uri-reference" },
+        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+      ]
+    },
+    "forked-network-or-defender-id": {
+      "title": "ForkedNetworkOrDefenderID",
+      "anyOf": [
+        {
+          "type": "object",
+          "$ref": "definitions.schema.json#/definitions/forked-network-request",
+          "format": "uri-reference"
+        },
+        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+      ]
+    },
+    "block-explorer-api-key-or-defender-id": {
+      "title": "BlockExplorerApiKeyOrDefenderID",
+      "anyOf": [
+        {
+          "type": "object",
+          "$ref": "definitions.schema.json#/definitions/block-explorer-api-key",
+          "format": "uri-reference"
+        },
+        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+      ]
+    },
+    "category-or-defender-id": {
+      "title": "CategoryOrDefenderID",
+      "anyOf": [
+        {
+          "type": "object",
+          "$ref": "definitions.schema.json#/definitions/category",
+          "format": "uri-reference"
+        },
+        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+      ]
+    },
+    "notification-or-defender-id": {
+      "title": "NotificationOrDefenderID",
+      "anyOf": [
+        {
+          "type": "object",
+          "$ref": "definitions.schema.json#/definitions/notification",
+          "format": "uri-reference"
+        },
+        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+      ]
+    },
+    "contract-or-defender-id": {
+      "title": "ContractOrDefenderID",
+      "anyOf": [
+        {
+          "type": "object",
+          "$ref": "definitions.schema.json#/definitions/contract",
+          "format": "uri-reference"
+        },
+        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+      ]
+    },
+    "policy-or-defender-id": {
+      "title": "PolicyOrDefenderID",
+      "anyOf": [
+        {
+          "type": "object",
+          "$ref": "definitions.schema.json#/definitions/policy",
+          "format": "uri-reference"
+        },
         { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
       ]
     },

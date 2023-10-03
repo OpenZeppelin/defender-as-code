@@ -17,32 +17,16 @@
       "title": "Notifications",
       "type": "object",
       "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "definitions.schema.json#/definitions/notification",
-            "format": "uri-reference"
-          },
-          {
-            "$ref": "definitions.schema.json#/definitions/defender-id",
-            "format": "uri-reference"
-          }
-        ]
+        "$ref": "definitions.schema.json#/definitions/notification-or-defender-id",
+        "format": "uri-reference"
       }
     },
     "categories": {
       "title": "Categories",
       "type": "object",
       "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "definitions.schema.json#/definitions/category",
-            "format": "uri-reference"
-          },
-          {
-            "$ref": "definitions.schema.json#/definitions/defender-id",
-            "format": "uri-reference"
-          }
-        ]
+        "$ref": "definitions.schema.json#/definitions/category-or-defender-id",
+        "format": "uri-reference"
       }
     },
     "relayers": {
@@ -57,32 +41,16 @@
       "title": "Policies",
       "type": "object",
       "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "definitions.schema.json#/definitions/policy",
-            "format": "uri-reference"
-          },
-          {
-            "$ref": "definitions.schema.json#/definitions/defender-id",
-            "format": "uri-reference"
-          }
-        ]
+        "$ref": "definitions.schema.json#/definitions/policy-or-defender-id",
+        "format": "uri-reference"
       }
     },
     "contracts": {
       "title": "Contracts",
       "type": "object",
       "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "definitions.schema.json#/definitions/contract",
-            "format": "uri-reference"
-          },
-          {
-            "$ref": "definitions.schema.json#/definitions/defender-id",
-            "format": "uri-reference"
-          }
-        ]
+        "$ref": "definitions.schema.json#/definitions/contract-or-defender-id",
+        "format": "uri-reference"
       }
     },
     "secrets": {
@@ -106,32 +74,16 @@
       "title": "Block Explorer Api Keys",
       "type": "object",
       "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "definitions.schema.json#/definitions/block-explorer-api-key",
-            "format": "uri-reference"
-          },
-          {
-            "$ref": "definitions.schema.json#/definitions/defender-id",
-            "format": "uri-reference"
-          }
-        ]
+        "$ref": "definitions.schema.json#/definitions/block-explorer-api-key-or-defender-id",
+        "format": "uri-reference"
       }
     },
     "forked-networks": {
       "title": "Forked Networks",
       "type": "object",
       "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "definitions.schema.json#/definitions/forked-network-request",
-            "format": "uri-reference"
-          },
-          {
-            "$ref": "definitions.schema.json#/definitions/defender-id",
-            "format": "uri-reference"
-          }
-        ]
+        "$ref": "definitions.schema.json#/definitions/forked-network-or-defender-id",
+        "format": "uri-reference"
       }
     }
   }

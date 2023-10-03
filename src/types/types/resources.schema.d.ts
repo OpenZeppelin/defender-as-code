@@ -48,14 +48,15 @@ export type PublicNetwork =
   | 'linea';
 export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-security-alliance';
 export type ForkedNetwork = string;
-export type AddressFromRelayer = Relayer | DefenderID;
-export type DefenderID = string;
+export type AddressFromRelayer = {} | string;
 export type WhitelistReceivers = string[];
 export type RelayerAPIKeys = string[];
+export type DefenderID = string;
 export type TriggerType = 'schedule' | 'webhook' | 'sentinel' | 'monitor-filter';
 export type TriggerCron = string;
 export type TriggerFrequency = number;
 export type DefenderID1 = string;
+export type NotificationOrDefenderID = Notification | DefenderID2;
 export type NotificationType =
   | 'slack'
   | 'email'
@@ -106,10 +107,13 @@ export type PagerDutyEventType = 'change' | 'alert';
 export type PagerDutyEventAction = 'trigger' | 'acknowledge' | 'resolve';
 export type PagerDutySeverity = 'critical' | 'error' | 'warning' | 'info';
 export type DefenderID2 = string;
+export type CategoryOrDefenderID = Category | DefenderID3;
 export type CategoryNotificationIds = Notification1[];
 export type DefenderID3 = string;
 export type RelayerOrDefenderID1 = Relayer | DefenderID;
+export type PolicyOrDefenderID = Policy1 | DefenderID4;
 export type DefenderID4 = string;
+export type ContractOrDefenderID = Contract | DefenderID5;
 export type Address = string;
 export type Network1 = SupportedNetwork | ForkedNetwork;
 export type AbiType = StringABI | ArrayABI;
@@ -136,8 +140,10 @@ export type Channels1 = Notification3[];
 export type AlertIDs = string[];
 export type AgentIDs = string[];
 export type DefenderID6 = string;
+export type BlockExplorerApiKeyOrDefenderID = BlockExplorerApiKey | DefenderID7;
 export type Network4 = SupportedNetwork | ForkedNetwork;
 export type DefenderID7 = string;
+export type ForkedNetworkOrDefenderID = ForkedNetworkRequest | DefenderID8;
 export type DefenderID8 = string;
 
 export interface Resources {
@@ -182,7 +188,7 @@ export interface Trigger {
   frequency?: TriggerFrequency;
 }
 export interface Notifications {
-  [k: string]: Notification | DefenderID2;
+  [k: string]: NotificationOrDefenderID;
 }
 export interface Notification {
   type: NotificationType;
@@ -242,7 +248,7 @@ export interface PagerDutyConfigCustomDetails {
   [k: string]: string;
 }
 export interface Categories {
-  [k: string]: Category | DefenderID3;
+  [k: string]: CategoryOrDefenderID;
 }
 export interface Category {
   name: string;
@@ -259,7 +265,7 @@ export interface Relayers {
   [k: string]: RelayerOrDefenderID1;
 }
 export interface Policies {
-  [k: string]: Policy1 | DefenderID4;
+  [k: string]: PolicyOrDefenderID;
 }
 export interface Policy1 {
   'gas-price-cap'?: number;
@@ -268,7 +274,7 @@ export interface Policy1 {
   'private-transactions'?: boolean;
 }
 export interface Contracts {
-  [k: string]: Contract | DefenderID5;
+  [k: string]: ContractOrDefenderID;
 }
 export interface Contract {
   name: string;
@@ -389,14 +395,14 @@ export interface Conditions1 {
   'alert-ids'?: AlertIDs;
 }
 export interface BlockExplorerApiKeys {
-  [k: string]: BlockExplorerApiKey | DefenderID7;
+  [k: string]: BlockExplorerApiKeyOrDefenderID;
 }
 export interface BlockExplorerApiKey {
   key: string;
   network: Network4;
 }
 export interface ForkedNetworks {
-  [k: string]: ForkedNetworkRequest | DefenderID8;
+  [k: string]: ForkedNetworkOrDefenderID;
 }
 export interface ForkedNetworkRequest {
   name: ForkedNetwork;
