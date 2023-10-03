@@ -44,6 +44,7 @@ import {
   Category,
   CategoryOrDefenderID,
   Contract,
+  ContractOrDefenderID,
   DefenderID,
   Monitor,
   Notification,
@@ -305,6 +306,15 @@ const getDefenderCategory = (
   return categories.find((a) => a.name === resource.name);
 };
 
+const getDefenderContract = (
+  resource: ContractOrDefenderID | undefined,
+  contracts: DefenderContract[],
+): DefenderContract | undefined => {
+  if (!resource) return undefined;
+  if (isDefenderId(resource)) return contracts.find((a) => `${a.network}-${a.address}` === resource);
+  return contracts.find((a) => `${a.network}-${a.address}` === `${resource.network}-${resource.address}`);
+};
+
 export const constructMonitor = (
   context: Serverless,
   resources: Resources,
@@ -314,6 +324,7 @@ export const constructMonitor = (
   actions: DefenderAction[],
   blockwatchers: DefenderBlockWatcher[],
   categories: DefenderCategory[],
+  contracts: DefenderContract[],
 ): DefenderBlockMonitor | DefenderFortaMonitor => {
   const actionCondition = getDefenderAction(monitor['action-condition'], actions);
   const actionTrigger = getDefenderAction(monitor['action-trigger'], actions);
@@ -336,12 +347,34 @@ export const constructMonitor = (
   const monitorCategory = notifyConfig.category;
   const notificationCategoryId = getDefenderCategory(monitorCategory, categories)?.categoryId;
 
+  // !NOTE: This depends on Contracts being deployed before Monitors
+  //        otherwise getDefenderContract will return old values
+  const monitorContracts = monitor.contracts?.map((contract) => getDefenderContract(contract, contracts));
+  // if monitor.abi is defined, we use that over the first entry from monitorContracts by default
+  const monitorABI =
+    (monitor.abi && JSON.stringify(typeof monitor.abi === 'string' ? JSON.parse(monitor.abi) : monitor.abi)) ||
+    monitorContracts?.[0]?.abi;
+  // Pull addresses from either monitor.addresses or monitor.contracts
+  const monitorAddresses =
+    (monitorContracts &&
+      monitorContracts.map((contract) => {
+        if (!contract) {
+          throw new Error('Contract not found in Defender');
+        }
+        return contract!.address;
+      })) ||
+    monitor.addresses;
+
+  if (!monitorAddresses && monitor.type === 'BLOCK') {
+    throw new Error('BLOCK monitor must have either addresses or contracts defined');
+  }
+
   const commonMonitor = {
     type: monitor.type,
     name: monitor.name,
     network: monitor.network,
-    addresses: monitor.addresses,
-    abi: monitor.abi && JSON.stringify(typeof monitor.abi === 'string' ? JSON.parse(monitor.abi) : monitor.abi),
+    addresses: monitorAddresses,
+    abi: monitorABI,
     paused: monitor.paused,
     autotaskCondition: actionCondition && actionCondition.actionId,
     autotaskTrigger: actionTrigger && actionTrigger.actionId,
@@ -385,7 +418,7 @@ export const constructMonitor = (
       ...commonMonitor,
       type: 'BLOCK',
       network: monitor.network,
-      addresses: monitor.addresses,
+      addresses: monitorAddresses!,
       confirmLevel: compatibleBlockWatcher!.confirmLevel,
       skipABIValidation: monitor['skip-abi-validation'],
       eventConditions:

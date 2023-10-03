@@ -30,7 +30,7 @@ any of
 
 *   [Contract](definitions-definitions-contract.md "check type definition")
 
-*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
+*   [DefenderID](definitions-definitions-contractordefenderid-anyof-defenderid.md "check type definition")
 
 ### additionalProperties Constraints
 

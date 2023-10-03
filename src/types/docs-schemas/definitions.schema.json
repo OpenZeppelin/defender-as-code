@@ -394,6 +394,11 @@
         "name": { "type": "string" },
         "type": { "type": "string", "enum": ["BLOCK"] },
         "network": { "$ref": "definitions.schema.json#/definitions/network", "format": "uri-reference" },
+        "contracts": {
+          "title": "Contracts",
+          "type": "array",
+          "items": { "$ref": "definitions.schema.json#/definitions/contract-or-defender-id", "format": "uri-reference" }
+        },
         "addresses": {
           "title": "Addresses",
           "type": "array",
@@ -473,7 +478,7 @@
         },
         "risk-category": { "$ref": "definitions.schema.json#/definitions/risk-category" }
       },
-      "required": ["name", "type", "network", "addresses", "notify-config"]
+      "required": ["name", "type", "network", "notify-config"]
     },
     "forta-monitor": {
       "title": "FortaMonitor",
@@ -482,6 +487,11 @@
         "name": { "type": "string" },
         "type": { "type": "string", "enum": ["FORTA"] },
         "network": { "$ref": "definitions.schema.json#/definitions/network", "format": "uri-reference" },
+        "contracts": {
+          "title": "Contracts",
+          "type": "array",
+          "items": { "$ref": "definitions.schema.json#/definitions/contract-or-defender-id", "format": "uri-reference" }
+        },
         "addresses": {
           "title": "Addresses",
           "type": "array",
@@ -634,7 +644,11 @@
           "$ref": "definitions.schema.json#/definitions/contract",
           "format": "uri-reference"
         },
-        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+        {
+          "title": "DefenderID",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]+[-]{1}0x[a-fA-F0-9]{40}$"
+        }
       ]
     },
     "policy-or-defender-id": {

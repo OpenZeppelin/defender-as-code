@@ -776,6 +776,10 @@ export default class DefenderDeploy {
       const actions = await getActionClient(this.teamKey!).list();
       const notifications = await client.listNotificationChannels();
       const categories = await client.listNotificationCategories();
+
+      // TODO: Add a new endpoint in defender-sdk which includes contract ABI and NatSpec
+      const contracts = await getProposalClient(this.teamKey!).listContracts();
+
       const retrieveExisting = () => client.list().then((r) => r.items);
 
       await this.wrapper<Monitor, DefenderMonitor>(
@@ -817,6 +821,7 @@ export default class DefenderDeploy {
             actions.items,
             blockwatchersForNetwork,
             categories,
+            contracts,
           );
 
           // Map match "response" object to that of a "create" object
@@ -903,6 +908,7 @@ export default class DefenderDeploy {
               actions.items,
               blockwatchersForNetwork,
               categories,
+              contracts,
             ),
           );
           return {

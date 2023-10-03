@@ -114,6 +114,10 @@
 
 *   [Channels](./definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md) – `definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/channels`
 
+*   [Contracts](./definitions-definitions-blockmonitor-properties-contracts.md) – `definitions.schema.json#/definitions/block-monitor/properties/contracts`
+
+*   [Contracts](./definitions-definitions-fortamonitor-properties-contracts.md) – `definitions.schema.json#/definitions/forta-monitor/properties/contracts`
+
 *   [Emails](./definitions-definitions-emailconfig-properties-emails.md) – `definitions.schema.json#/definitions/emailConfig/properties/emails`
 
 *   [Event](./definitions-definitions-blockmonitor-properties-conditions-properties-event.md) – `definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/event`

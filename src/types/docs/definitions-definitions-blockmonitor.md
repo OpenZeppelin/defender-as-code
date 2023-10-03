@@ -13,7 +13,8 @@
 | [name](#name)                               | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/block-monitor/properties/name")                               |
 | [type](#type)                               | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/block-monitor/properties/type")                               |
 | [network](#network)                         | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-monitor/properties/network")                                                 |
-| [addresses](#addresses)                     | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/block-monitor/properties/addresses")                     |
+| [contracts](#contracts)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-contracts.md "definitions.schema.json#/definitions/block-monitor/properties/contracts")                     |
+| [addresses](#addresses)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/block-monitor/properties/addresses")                     |
 | [abi](#abi)                                 | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/block-monitor/properties/abi")                                                     |
 | [alert-threshold](#alert-threshold)         | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold")          |
 | [paused](#paused)                           | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/block-monitor/properties/paused")                           |
@@ -101,13 +102,31 @@ any of
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
+## contracts
+
+
+
+`contracts`
+
+*   is optional
+
+*   Type: an array of merged types ([ContractOrDefenderID](definitions-definitions-contractordefenderid.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-contracts.md "definitions.schema.json#/definitions/block-monitor/properties/contracts")
+
+### contracts Type
+
+an array of merged types ([ContractOrDefenderID](definitions-definitions-contractordefenderid.md))
+
 ## addresses
 
 
 
 `addresses`
 
-*   is required
+*   is optional
 
 *   Type: `string[]` ([Address](definitions-definitions-address.md))
 

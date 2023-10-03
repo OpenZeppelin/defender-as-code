@@ -1524,7 +1524,8 @@ Reference this group by using
 | [name](#name-4)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/block-monitor/properties/name")                               |
 | [type](#type-2)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/block-monitor/properties/type")                               |
 | [network](#network-2)                       | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-monitor/properties/network")                                                 |
-| [addresses](#addresses)                     | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/block-monitor/properties/addresses")                     |
+| [contracts](#contracts)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-contracts.md "definitions.schema.json#/definitions/block-monitor/properties/contracts")                     |
+| [addresses](#addresses)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/block-monitor/properties/addresses")                     |
 | [abi](#abi-1)                               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/block-monitor/properties/abi")                                                     |
 | [alert-threshold](#alert-threshold)         | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold")          |
 | [paused](#paused-1)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/block-monitor/properties/paused")                           |
@@ -1612,13 +1613,31 @@ any of
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
+### contracts
+
+
+
+`contracts`
+
+*   is optional
+
+*   Type: an array of merged types ([ContractOrDefenderID](definitions-definitions-blockmonitor-properties-contracts-contractordefenderid.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-contracts.md "definitions.schema.json#/definitions/block-monitor/properties/contracts")
+
+#### contracts Type
+
+an array of merged types ([ContractOrDefenderID](definitions-definitions-blockmonitor-properties-contracts-contractordefenderid.md))
+
 ### addresses
 
 
 
 `addresses`
 
-*   is required
+*   is optional
 
 *   Type: `string[]` ([Address](definitions-definitions-blockmonitor-properties-addresses-address.md))
 
@@ -1868,6 +1887,7 @@ Reference this group by using
 | [name](#name-5)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/forta-monitor/properties/name")                                           |
 | [type](#type-3)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/forta-monitor/properties/type")                                           |
 | [network](#network-3)                                   | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/forta-monitor/properties/network")                                                             |
+| [contracts](#contracts-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-contracts.md "definitions.schema.json#/definitions/forta-monitor/properties/contracts")                                 |
 | [addresses](#addresses-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/forta-monitor/properties/addresses")                                 |
 | [abi](#abi-2)                                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/forta-monitor/properties/abi")                                                                 |
 | [alert-threshold](#alert-threshold-1)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/forta-monitor/properties/alert-threshold")                      |
@@ -1956,6 +1976,24 @@ any of
 #### network Constraints
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+### contracts
+
+
+
+`contracts`
+
+*   is optional
+
+*   Type: an array of merged types ([ContractOrDefenderID](definitions-definitions-fortamonitor-properties-contracts-contractordefenderid.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-contracts.md "definitions.schema.json#/definitions/forta-monitor/properties/contracts")
+
+#### contracts Type
+
+an array of merged types ([ContractOrDefenderID](definitions-definitions-fortamonitor-properties-contracts-contractordefenderid.md))
 
 ### addresses
 

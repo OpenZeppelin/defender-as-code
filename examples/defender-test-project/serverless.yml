@@ -76,6 +76,7 @@ resources:
       abi: ${file(./abis/demoflash.json.abi)}
       # optional
       nat-spec: null
+    contract-2: 'goerli-0xd70d6A0480420b4C788AF91d0E1b0ca6141A9De8'
 
   relayers:
     relayer-1:
@@ -143,9 +144,10 @@ resources:
       type: 'BLOCK'
       network: 'goerli'
       risk-category: 'TECHNICAL' # optional
-      addresses:
-        - '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
-      # optional
+      # optional - either contracts OR addresses should be defined
+      contracts: 
+        - ${self:resources.contracts.contract-2}
+      # optional - will default to first contract in contracts if not defined
       abi: ${file(./abis/erc721.json.abi)}
       # optional
       alert-threshold:
