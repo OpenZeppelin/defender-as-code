@@ -1,9 +1,13 @@
-## relayer-or-defender-id Type
+## additionalProperties Type
 
-any of the following: `object` or `string` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
+merged type ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
 
-one (and only one) of
+any of
 
 *   [Relayer](definitions-definitions-relayer.md "check type definition")
 
 *   [DefenderID](definitions-definitions-defenderid.md "check type definition")
+
+## additionalProperties Constraints
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")

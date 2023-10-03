@@ -1,12 +1,8 @@
-## 0 Type
+## action Type
 
 `object` ([Action](definitions-definitions-action.md))
 
-## 0 Constraints
-
-**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
-
-# 0 Properties
+# action Properties
 
 | Property            | Type      | Required | Nullable       | Defined by                                                                                                                           |
 | :------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
@@ -60,7 +56,7 @@
 
 *   is optional
 
-*   Type: any of the following: `object` or `string` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
+*   Type: merged type ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
 
 *   cannot be null
 
@@ -68,9 +64,9 @@
 
 ### relayer Type
 
-any of the following: `object` or `string` ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
+merged type ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
 
-one (and only one) of
+any of
 
 *   [Relayer](definitions-definitions-relayer.md "check type definition")
 

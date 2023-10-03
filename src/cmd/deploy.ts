@@ -57,6 +57,7 @@ import {
 import keccak256 from 'keccak256';
 import {
   Action,
+  ActionOrDefenderID,
   Actions,
   BlockExplorerApiKey,
   BlockExplorerApiKeys,
@@ -72,6 +73,7 @@ import {
   Notification,
   Notifications,
   Relayer,
+  RelayerOrDefenderID,
   Relayers,
   SupportedNetwork,
 } from '../types/types/resources.schema';
@@ -224,7 +226,7 @@ export default class DefenderDeploy {
     const actionDifference = _.differenceWith(
       dActions,
       Object.entries(actions),
-      (a: DefenderAction, b: [string, Action | DefenderID]) => {
+      (a: DefenderAction, b: [string, ActionOrDefenderID]) => {
         if (isDefenderId(b[1])) {
           return a.actionId === b[1];
         }
@@ -567,9 +569,9 @@ export default class DefenderDeploy {
       async (relayer: Relayer, stackResourceId: string) => {
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | DefenderID | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<RelayerOrDefenderID | undefined, DefenderRelayer>(
           this.serverless,
-          relayer['address-from-relayer'] as Relayer | DefenderID | undefined, // typing address-from-relayer causes issues with schema generation due to circular dependancies so we cast it
+          relayer['address-from-relayer'] as RelayerOrDefenderID | undefined, // typing address-from-relayer causes issues with schema generation due to circular dependancies so we cast it
           relayers,
           existingRelayers,
           'Relayers',
@@ -935,7 +937,7 @@ export default class DefenderDeploy {
       async (action: Action, match: DefenderAction) => {
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | DefenderID | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<RelayerOrDefenderID | undefined, DefenderRelayer>(
           this.serverless,
           action.relayer,
           relayers,
@@ -1021,7 +1023,7 @@ export default class DefenderDeploy {
         const actionRelayer = action.relayer;
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | DefenderID | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<RelayerOrDefenderID | undefined, DefenderRelayer>(
           this.serverless,
           actionRelayer,
           relayers,

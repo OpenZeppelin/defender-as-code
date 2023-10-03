@@ -5,8 +5,8 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type RelayerOrDefenderID = RelayerOrDefenderID1 & RelayerOrDefenderID2;
-export type RelayerOrDefenderID1 = Relayer | DefenderID;
+export type ActionOrDefenderID = Action | DefenderID1;
+export type RelayerOrDefenderID = Relayer | DefenderID;
 export type Network = SupportedNetwork | ForkedNetwork;
 export type SupportedNetwork = PublicNetwork | CustomNetwork;
 export type PublicNetwork =
@@ -48,10 +48,10 @@ export type PublicNetwork =
   | 'linea';
 export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-security-alliance';
 export type ForkedNetwork = string;
+export type AddressFromRelayer = Relayer | DefenderID;
+export type DefenderID = string;
 export type WhitelistReceivers = string[];
 export type RelayerAPIKeys = string[];
-export type DefenderID = string;
-export type RelayerOrDefenderID2 = (Relayer | DefenderID) | ((Relayer | DefenderID) & string);
 export type TriggerType = 'schedule' | 'webhook' | 'sentinel' | 'monitor-filter';
 export type TriggerCron = string;
 export type TriggerFrequency = number;
@@ -108,26 +108,21 @@ export type PagerDutySeverity = 'critical' | 'error' | 'warning' | 'info';
 export type DefenderID2 = string;
 export type CategoryNotificationIds = Notification1[];
 export type DefenderID3 = string;
+export type RelayerOrDefenderID1 = Relayer | DefenderID;
 export type DefenderID4 = string;
-export type DefenderID5 = string;
 export type Address = string;
 export type Network1 = SupportedNetwork | ForkedNetwork;
 export type AbiType = StringABI | ArrayABI;
 export type StringABI = string;
 export type ArrayABI = unknown[];
-export type DefenderID6 = string;
+export type DefenderID5 = string;
+export type MonitorOrDefenderID = Monitor | DefenderID6;
 export type Monitor = BlockMonitor | FortaMonitor;
 export type Network2 = SupportedNetwork | ForkedNetwork;
 export type Address1 = string;
 export type Addresses = Address1[];
-export type ActionOrDefenderID = ActionOrDefenderID1 & ActionOrDefenderID2;
-export type ActionOrDefenderID1 = Action1 | DefenderID7;
-export type RelayerOrDefenderID3 = RelayerOrDefenderID1 & RelayerOrDefenderID2;
-export type DefenderID7 = string;
-export type ActionOrDefenderID2 = (Action1 | DefenderID7) | ((Action1 | DefenderID7) & string);
-export type ActionOrDefenderID3 = ActionOrDefenderID4 & ActionOrDefenderID5;
-export type ActionOrDefenderID4 = Action1 | DefenderID7;
-export type ActionOrDefenderID5 = (Action1 | DefenderID7) | ((Action1 | DefenderID7) & string);
+export type ActionOrDefenderID1 = Action | DefenderID1;
+export type ActionOrDefenderID2 = Action | DefenderID1;
 export type Channels = Notification2[];
 export type Event = EventItems[];
 export type Function = FunctionItems[];
@@ -135,19 +130,15 @@ export type RiskCategory = 'NONE' | 'GOVERNANCE' | 'ACCESS-CONTROL' | 'SUSPICIOU
 export type Network3 = SupportedNetwork | ForkedNetwork;
 export type Address2 = string;
 export type Addresses1 = Address2[];
-export type ActionOrDefenderID6 = ActionOrDefenderID7 & ActionOrDefenderID8;
-export type ActionOrDefenderID7 = Action1 | DefenderID7;
-export type ActionOrDefenderID8 = (Action1 | DefenderID7) | ((Action1 | DefenderID7) & string);
-export type ActionOrDefenderID9 = ActionOrDefenderID10 & ActionOrDefenderID11;
-export type ActionOrDefenderID10 = Action1 | DefenderID7;
-export type ActionOrDefenderID11 = (Action1 | DefenderID7) | ((Action1 | DefenderID7) & string);
+export type ActionOrDefenderID3 = Action | DefenderID1;
+export type ActionOrDefenderID4 = Action | DefenderID1;
 export type Channels1 = Notification3[];
 export type AlertIDs = string[];
 export type AgentIDs = string[];
-export type DefenderID8 = string;
+export type DefenderID6 = string;
 export type Network4 = SupportedNetwork | ForkedNetwork;
-export type DefenderID9 = string;
-export type DefenderID10 = string;
+export type DefenderID7 = string;
+export type DefenderID8 = string;
 
 export interface Resources {
   actions?: Actions;
@@ -162,7 +153,7 @@ export interface Resources {
   'forked-networks'?: ForkedNetworks;
 }
 export interface Actions {
-  [k: string]: Action | DefenderID1;
+  [k: string]: ActionOrDefenderID;
 }
 export interface Action {
   name: string;
@@ -179,7 +170,6 @@ export interface Relayer {
   policy?: Policy;
   'api-keys'?: RelayerAPIKeys;
 }
-export interface AddressFromRelayer {}
 export interface Policy {
   'gas-price-cap'?: number;
   'whitelist-receivers'?: WhitelistReceivers;
@@ -266,18 +256,10 @@ export interface Notification1 {
   config: Config;
 }
 export interface Relayers {
-  [k: string]: Relayer1 | DefenderID4;
-}
-export interface Relayer1 {
-  name: string;
-  network: Network;
-  'min-balance': number;
-  'address-from-relayer'?: AddressFromRelayer;
-  policy?: Policy;
-  'api-keys'?: RelayerAPIKeys;
+  [k: string]: RelayerOrDefenderID1;
 }
 export interface Policies {
-  [k: string]: Policy1 | DefenderID5;
+  [k: string]: Policy1 | DefenderID4;
 }
 export interface Policy1 {
   'gas-price-cap'?: number;
@@ -286,7 +268,7 @@ export interface Policy1 {
   'private-transactions'?: boolean;
 }
 export interface Contracts {
-  [k: string]: Contract | DefenderID6;
+  [k: string]: Contract | DefenderID5;
 }
 export interface Contract {
   name: string;
@@ -306,7 +288,7 @@ export interface StackSecrets {
   [k: string]: string;
 }
 export interface Monitors {
-  [k: string]: Monitor | DefenderID8;
+  [k: string]: MonitorOrDefenderID;
 }
 export interface BlockMonitor {
   name: string;
@@ -320,8 +302,8 @@ export interface BlockMonitor {
    * A boolean value that indicates whether the UI should skip ABI validation checks. Enable this if you wish to use custom or partial ABIs for your monitors.
    */
   'skip-abi-validation'?: boolean;
-  'action-condition'?: ActionOrDefenderID;
-  'action-trigger'?: ActionOrDefenderID3;
+  'action-condition'?: ActionOrDefenderID1;
+  'action-trigger'?: ActionOrDefenderID2;
   'confirm-level'?: ('safe' | 'finalized') | number;
   'notify-config': NotifyConfig;
   conditions?: Conditions;
@@ -330,13 +312,6 @@ export interface BlockMonitor {
 export interface AlertThreshold {
   amount: number;
   'window-seconds': number;
-}
-export interface Action1 {
-  name: string;
-  path: string;
-  relayer?: RelayerOrDefenderID3;
-  trigger: Trigger;
-  paused: boolean;
 }
 export interface NotifyConfig {
   timeout?: number;
@@ -377,8 +352,8 @@ export interface FortaMonitor {
   abi?: AbiType;
   'alert-threshold'?: AlertThreshold1;
   paused?: boolean;
-  'action-condition'?: ActionOrDefenderID6;
-  'action-trigger'?: ActionOrDefenderID9;
+  'action-condition'?: ActionOrDefenderID3;
+  'action-trigger'?: ActionOrDefenderID4;
   'notify-config': NotifyConfig1;
   conditions?: Conditions1;
   'forta-node-id'?: string;
@@ -414,14 +389,14 @@ export interface Conditions1 {
   'alert-ids'?: AlertIDs;
 }
 export interface BlockExplorerApiKeys {
-  [k: string]: BlockExplorerApiKey | DefenderID9;
+  [k: string]: BlockExplorerApiKey | DefenderID7;
 }
 export interface BlockExplorerApiKey {
   key: string;
   network: Network4;
 }
 export interface ForkedNetworks {
-  [k: string]: ForkedNetworkRequest | DefenderID10;
+  [k: string]: ForkedNetworkRequest | DefenderID8;
 }
 export interface ForkedNetworkRequest {
   name: ForkedNetwork;

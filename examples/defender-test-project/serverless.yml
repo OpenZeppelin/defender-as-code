@@ -94,7 +94,14 @@ resources:
       address-from-relayer: ${self:resources.relayers.relayer-1}
       # optional
       policy: ${self:resources.policies.policy-1}
-    relayer-3: bcb659c6-7e11-4d37-a15b-0fa9f3d3442c
+    relayer-3: bcb659c6-7e11-4d37-a15b-0fa9f3d3442c # relayerId referenced from Defender
+    relayer-4:
+      name: 'Test Relayer 4'
+      network: 'mainnet'
+      min-balance: 1000
+      address-from-relayer: ${self:resources.relayers.relayer-3}
+      # optional
+      policy: ${self:resources.policies.policy-1}
 
   notifications:
     email-1:

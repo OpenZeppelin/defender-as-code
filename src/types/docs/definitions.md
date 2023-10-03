@@ -187,14 +187,14 @@ Reference this group by using
 {"$ref":"definitions.schema.json#/definitions/relayer"}
 ```
 
-| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                                     |
-| :-------------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "definitions.schema.json#/definitions/relayer/properties/name")                               |
-| [network](#network)                           | Merged    | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-network.md "definitions.schema.json#/definitions/relayer/properties/network")                         |
-| [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "definitions.schema.json#/definitions/relayer/properties/min-balance")                 |
-| [address-from-relayer](#address-from-relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
-| [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer/properties/policy")                                              |
-| [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "definitions.schema.json#/definitions/relayer/properties/api-keys")                 |
+| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                                      |
+| :-------------------------------------------- | :-------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "definitions.schema.json#/definitions/relayer/properties/name")                                |
+| [network](#network)                           | Merged    | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-network.md "definitions.schema.json#/definitions/relayer/properties/network")                          |
+| [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "definitions.schema.json#/definitions/relayer/properties/min-balance")                  |
+| [address-from-relayer](#address-from-relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerordefenderid.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
+| [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer/properties/policy")                                               |
+| [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "definitions.schema.json#/definitions/relayer/properties/api-keys")                  |
 
 ### name
 
@@ -272,15 +272,25 @@ any of
 
 *   is optional
 
-*   Type: `object` ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
+*   Type: merged type ([RelayerOrDefenderID](definitions-definitions-relayer-properties-relayerordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer")
+*   defined in: [Definitions](definitions-definitions-relayer-properties-relayerordefenderid.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer")
 
 #### address-from-relayer Type
 
-`object` ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
+merged type ([RelayerOrDefenderID](definitions-definitions-relayer-properties-relayerordefenderid.md))
+
+any of
+
+*   [Relayer](definitions-definitions-relayer.md "check type definition")
+
+*   [DefenderID](definitions-definitions-relayerordefenderid-anyof-defenderid.md "check type definition")
+
+#### address-from-relayer Constraints
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
 ### policy
 
@@ -1710,7 +1720,7 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   is optional
 
-*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid.md))
 
 *   cannot be null
 
@@ -1718,13 +1728,13 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 #### action-condition Type
 
-any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid.md))
+merged type ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid.md))
 
-one (and only one) of
+any of
 
 *   [Action](definitions-definitions-action.md "check type definition")
 
-*   [DefenderID](definitions-definitions-actionordefenderid-oneof-defenderid.md "check type definition")
+*   [DefenderID](definitions-definitions-actionordefenderid-anyof-defenderid.md "check type definition")
 
 #### action-condition Constraints
 
@@ -1738,7 +1748,7 @@ one (and only one) of
 
 *   is optional
 
-*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md))
 
 *   cannot be null
 
@@ -1746,13 +1756,13 @@ one (and only one) of
 
 #### action-trigger Type
 
-any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md))
+merged type ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md))
 
-one (and only one) of
+any of
 
 *   [Action](definitions-definitions-action.md "check type definition")
 
-*   [DefenderID](definitions-definitions-actionordefenderid-oneof-defenderid.md "check type definition")
+*   [DefenderID](definitions-definitions-actionordefenderid-anyof-defenderid.md "check type definition")
 
 #### action-trigger Constraints
 
@@ -2037,7 +2047,7 @@ any of
 
 *   is optional
 
-*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
@@ -2045,13 +2055,13 @@ any of
 
 #### action-condition Type
 
-any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
-one (and only one) of
+any of
 
 *   [Action](definitions-definitions-action.md "check type definition")
 
-*   [DefenderID](definitions-definitions-actionordefenderid-oneof-defenderid.md "check type definition")
+*   [DefenderID](definitions-definitions-actionordefenderid-anyof-defenderid.md "check type definition")
 
 #### action-condition Constraints
 
@@ -2065,7 +2075,7 @@ one (and only one) of
 
 *   is optional
 
-*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
@@ -2073,13 +2083,13 @@ one (and only one) of
 
 #### action-trigger Type
 
-any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
-one (and only one) of
+any of
 
 *   [Action](definitions-definitions-action.md "check type definition")
 
-*   [DefenderID](definitions-definitions-actionordefenderid-oneof-defenderid.md "check type definition")
+*   [DefenderID](definitions-definitions-actionordefenderid-anyof-defenderid.md "check type definition")
 
 #### action-trigger Constraints
 
@@ -2239,6 +2249,17 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group monitor-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/monitor-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group action
 
 Reference this group by using
@@ -2247,13 +2268,13 @@ Reference this group by using
 {"$ref":"definitions.schema.json#/definitions/action"}
 ```
 
-| Property            | Type      | Required | Nullable       | Defined by                                                                                                                                       |
-| :------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-6)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")                   |
-| [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")                   |
-| [relayer](#relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer") |
-| [trigger](#trigger) | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger")             |
-| [paused](#paused-3) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-action-properties-paused.md "definitions.schema.json#/definitions/action/properties/paused")               |
+| Property            | Type      | Required | Nullable       | Defined by                                                                                                                           |
+| :------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name-6)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")       |
+| [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")       |
+| [relayer](#relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")       |
+| [trigger](#trigger) | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger") |
+| [paused](#paused-3) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-action-properties-paused.md "definitions.schema.json#/definitions/action/properties/paused")   |
 
 ### name
 
@@ -2299,21 +2320,21 @@ Reference this group by using
 
 *   is optional
 
-*   Type: any of the following: `object` or `string` ([RelayerOrDefenderID](definitions-definitions-action-properties-relayerordefenderid.md))
+*   Type: merged type ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action-properties-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")
+*   defined in: [Definitions](definitions-definitions-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")
 
 #### relayer Type
 
-any of the following: `object` or `string` ([RelayerOrDefenderID](definitions-definitions-action-properties-relayerordefenderid.md))
+merged type ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
 
-one (and only one) of
+any of
 
 *   [Relayer](definitions-definitions-relayer.md "check type definition")
 
-*   [DefenderID](definitions-definitions-relayerordefenderid-oneof-defenderid.md "check type definition")
+*   [DefenderID](definitions-definitions-relayerordefenderid-anyof-defenderid.md "check type definition")
 
 #### relayer Constraints
 

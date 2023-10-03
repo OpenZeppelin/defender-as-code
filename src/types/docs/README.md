@@ -20,8 +20,6 @@
 
 *   [Actions](./resources-properties-actions.md) – `resources.schema.json#/properties/actions`
 
-*   [AddressFromRelayer](./definitions-definitions-relayer-properties-addressfromrelayer.md) – `definitions.schema.json#/definitions/relayer/properties/address-from-relayer`
-
 *   [AlertThreshold](./definitions-definitions-blockmonitor-properties-alertthreshold.md) – `definitions.schema.json#/definitions/block-monitor/properties/alert-threshold`
 
 *   [AlertThreshold](./definitions-definitions-fortamonitor-properties-alertthreshold.md) – `definitions.schema.json#/definitions/forta-monitor/properties/alert-threshold`

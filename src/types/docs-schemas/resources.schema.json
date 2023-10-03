@@ -9,16 +9,8 @@
       "title": "Actions",
       "type": "object",
       "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "definitions.schema.json#/definitions/action",
-            "format": "uri-reference"
-          },
-          {
-            "$ref": "definitions.schema.json#/definitions/defender-id",
-            "format": "uri-reference"
-          }
-        ]
+        "$ref": "definitions.schema.json#/definitions/action-or-defender-id",
+        "format": "uri-reference"
       }
     },
     "notifications": {
@@ -57,16 +49,8 @@
       "title": "Relayers",
       "type": "object",
       "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "definitions.schema.json#/definitions/relayer",
-            "format": "uri-reference"
-          },
-          {
-            "$ref": "definitions.schema.json#/definitions/defender-id",
-            "format": "uri-reference"
-          }
-        ]
+        "$ref": "definitions.schema.json#/definitions/relayer-or-defender-id",
+        "format": "uri-reference"
       }
     },
     "policies": {
@@ -114,16 +98,8 @@
       "title": "Monitors",
       "type": "object",
       "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "definitions.schema.json#/definitions/monitor",
-            "format": "uri-reference"
-          },
-          {
-            "$ref": "definitions.schema.json#/definitions/defender-id",
-            "format": "uri-reference"
-          }
-        ]
+        "$ref": "definitions.schema.json#/definitions/monitor-or-defender-id",
+        "format": "uri-reference"
       }
     },
     "block-explorer-api-keys": {

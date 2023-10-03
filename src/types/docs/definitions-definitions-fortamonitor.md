@@ -188,7 +188,7 @@ any of
 
 *   is optional
 
-*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
@@ -196,9 +196,9 @@ any of
 
 ### action-condition Type
 
-any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
-one (and only one) of
+any of
 
 *   [Action](definitions-definitions-action.md "check type definition")
 
@@ -216,7 +216,7 @@ one (and only one) of
 
 *   is optional
 
-*   Type: any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
@@ -224,9 +224,9 @@ one (and only one) of
 
 ### action-trigger Type
 
-any of the following: `object` or `string` ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
-one (and only one) of
+any of
 
 *   [Action](definitions-definitions-action.md "check type definition")
 

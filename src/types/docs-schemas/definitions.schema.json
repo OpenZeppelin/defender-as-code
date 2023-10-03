@@ -106,7 +106,8 @@
         "min-balance": { "type": "integer" },
         "address-from-relayer": {
           "title": "AddressFromRelayer",
-          "type": "object"
+          "$ref": "definitions.schema.json#/definitions/relayer-or-defender-id",
+          "format": "uri-reference"
         },
         "policy": { "$ref": "definitions.schema.json#/definitions/policy", "format": "uri-reference" },
         "api-keys": {
@@ -548,18 +549,23 @@
     },
     "relayer-or-defender-id": {
       "title": "RelayerOrDefenderID",
-      "type": ["object", "string"],
-      "oneOf": [
-        { "$ref": "definitions.schema.json#/definitions/relayer", "format": "uri-reference" },
-        { "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+      "anyOf": [
+        { "type": "object", "$ref": "definitions.schema.json#/definitions/relayer", "format": "uri-reference" },
+        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
       ]
     },
     "action-or-defender-id": {
       "title": "ActionOrDefenderID",
-      "type": ["object", "string"],
-      "oneOf": [
-        { "$ref": "definitions.schema.json#/definitions/action", "format": "uri-reference" },
-        { "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+      "anyOf": [
+        { "type": "object", "$ref": "definitions.schema.json#/definitions/action", "format": "uri-reference" },
+        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+      ]
+    },
+    "monitor-or-defender-id": {
+      "title": "MonitorOrDefenderID",
+      "anyOf": [
+        { "type": "object", "$ref": "definitions.schema.json#/definitions/monitor", "format": "uri-reference" },
+        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
       ]
     },
     "action": {
