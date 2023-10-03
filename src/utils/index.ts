@@ -42,6 +42,7 @@ import {
   ActionSecrets,
   AlertThreshold,
   Category,
+  CategoryOrDefenderID,
   Contract,
   DefenderID,
   Monitor,
@@ -295,6 +296,15 @@ const getDefenderAction = (
   return actions.find((a) => a.name === resource.name);
 };
 
+const getDefenderCategory = (
+  resource: CategoryOrDefenderID | undefined,
+  categories: DefenderCategory[],
+): DefenderCategory | undefined => {
+  if (!resource) return undefined;
+  if (isDefenderId(resource)) return categories.find((a) => a.categoryId === resource);
+  return categories.find((a) => a.name === resource.name);
+};
+
 export const constructMonitor = (
   context: Serverless,
   resources: Resources,
@@ -324,7 +334,7 @@ export const constructMonitor = (
     .filter(isResource);
 
   const monitorCategory = notifyConfig.category;
-  const notificationCategoryId = monitorCategory && categories.find((c) => c.name === monitorCategory.name)?.categoryId;
+  const notificationCategoryId = getDefenderCategory(monitorCategory, categories)?.categoryId;
 
   const commonMonitor = {
     type: monitor.type,

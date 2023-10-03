@@ -429,11 +429,17 @@
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
             "message-subject": { "type": "string" },
-            "category": { "$ref": "definitions.schema.json#/definitions/category", "format": "uri-reference" },
+            "category": {
+              "$ref": "definitions.schema.json#/definitions/category-or-defender-id",
+              "format": "uri-reference"
+            },
             "channels": {
               "title": "Channels",
               "type": "array",
-              "items": { "$ref": "definitions.schema.json#/definitions/notification", "format": "uri-reference" }
+              "items": {
+                "$ref": "definitions.schema.json#/definitions/notification-or-defender-id",
+                "format": "uri-reference"
+              }
             }
           },
           "required": ["channels"]
@@ -503,11 +509,17 @@
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
             "message-subject": { "type": "string" },
-            "category": { "$ref": "definitions.schema.json#/definitions/category", "format": "uri-reference" },
+            "category": {
+              "$ref": "definitions.schema.json#/definitions/category-or-defender-id",
+              "format": "uri-reference"
+            },
             "channels": {
               "title": "Channels",
               "type": "array",
-              "items": { "$ref": "definitions.schema.json#/definitions/notification", "format": "uri-reference" }
+              "items": {
+                "$ref": "definitions.schema.json#/definitions/notification-or-defender-id",
+                "format": "uri-reference"
+              }
             }
           },
           "required": ["channels"]

@@ -117,7 +117,6 @@ resources:
       config:
         url: ${self:custom.config.notifications.slack}
       paused: false
-    email-2: 5acd6cf1-728b-4c24-bcd2-0cfce0b9aa31
 
   categories:
     high-severity:

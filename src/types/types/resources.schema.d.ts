@@ -128,7 +128,9 @@ export type Address1 = string;
 export type Addresses = Address1[];
 export type ActionOrDefenderID1 = Action | DefenderID1;
 export type ActionOrDefenderID2 = Action | DefenderID1;
-export type Channels = Notification1[];
+export type CategoryOrDefenderID1 = Category | DefenderID3;
+export type NotificationOrDefenderID2 = Notification | DefenderID2;
+export type Channels = NotificationOrDefenderID2[];
 export type Event = EventItems[];
 export type Function = FunctionItems[];
 export type RiskCategory = 'NONE' | 'GOVERNANCE' | 'ACCESS-CONTROL' | 'SUSPICIOUS' | 'FINANCIAL' | 'TECHNICAL';
@@ -137,7 +139,9 @@ export type Address2 = string;
 export type Addresses1 = Address2[];
 export type ActionOrDefenderID3 = Action | DefenderID1;
 export type ActionOrDefenderID4 = Action | DefenderID1;
-export type Channels1 = Notification2[];
+export type CategoryOrDefenderID2 = Category | DefenderID3;
+export type NotificationOrDefenderID3 = Notification | DefenderID2;
+export type Channels1 = NotificationOrDefenderID3[];
 export type AlertIDs = string[];
 export type AgentIDs = string[];
 export type DefenderID6 = string;
@@ -318,19 +322,8 @@ export interface NotifyConfig {
   timeout?: number;
   message?: string;
   'message-subject'?: string;
-  category?: Category1;
+  category?: CategoryOrDefenderID1;
   channels: Channels;
-}
-export interface Category1 {
-  name: string;
-  description?: string;
-  'notification-ids'?: CategoryNotificationIds;
-}
-export interface Notification1 {
-  type: NotificationType;
-  name: string;
-  paused: boolean;
-  config: Config;
 }
 export interface Conditions {
   event?: Event;
@@ -370,19 +363,8 @@ export interface NotifyConfig1 {
   timeout?: number;
   message?: string;
   'message-subject'?: string;
-  category?: Category2;
+  category?: CategoryOrDefenderID2;
   channels: Channels1;
-}
-export interface Category2 {
-  name: string;
-  description?: string;
-  'notification-ids'?: CategoryNotificationIds;
-}
-export interface Notification2 {
-  type: NotificationType;
-  name: string;
-  paused: boolean;
-  config: Config;
 }
 export interface Conditions1 {
   'min-scanner-count': number;
