@@ -44,7 +44,7 @@ resources:
       trigger:
         type: 'webhook'
       paused: false
-    action-example-4: 516dfd2f-9715-47d4-bcdf-d1f9a7b4d80d
+    action-example-4: '516dfd2f-9715-47d4-bcdf-d1f9a7b4d80d'
 
   policies:
     policy-1:
@@ -95,7 +95,7 @@ resources:
       address-from-relayer: ${self:resources.relayers.relayer-1}
       # optional
       policy: ${self:resources.policies.policy-1}
-    relayer-3: bcb659c6-7e11-4d37-a15b-0fa9f3d3442c # relayerId referenced from Defender
+    relayer-3: 'bcb659c6-7e11-4d37-a15b-0fa9f3d3442c' # relayerId referenced from Defender
     relayer-4:
       name: 'Test Relayer 4'
       network: 'mainnet'
