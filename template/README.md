@@ -189,7 +189,7 @@ You can use `sls remove` to remove all Defender resources defined in the `server
 
 ### Logs
 
-You can use `sls logs --function <stack_resource_id> --data {...}` to retrieve the latest action logs for a given action identifier (e.g. mystack.action-example-1). This command will run continiously and retrieve logs every 2 seconds. The `--data` flag is optional.
+You can use `sls logs --function <stack_resource_id>` to retrieve the latest action logs for a given action identifier (e.g. mystack.action-example-1). This command will run continiously and retrieve logs every 2 seconds.
 
 ### Invoke
 

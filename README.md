@@ -78,6 +78,47 @@ Ensure the Defender Team API Keys are setup with all appropriate API capabilitie
 
 The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same Defender team.
 
+You may also reference existing Defender resources directly by their unique ID (e.g. `2cbc3f58-d962-4be8-a158-1035be4b661c`). These resources will not be managed by the plugin and will be ignored during the deploy process. However, you may reference them in other resources to update their configuration accordingly.
+A list of properties that support direct referencing:
+
+- `relayer` may reference a `relayerId` in Actions
+- `action-trigger` may reference an `actionid` in Monitor
+- `action-condition` may reference an `actionId` in Monitor
+- `address-from-relayer` may reference a `relayerId` in Relayer
+- `notification-ids` may reference multiple `notificationId` in Category
+- `notify-config.channels` may reference multiple `notificationId` in Monitor
+- `notify-config.category` may reference a `categoryId` in Monitor
+- `contracts` may be used over `addresses` and reference multiple `contractId` in Monitor
+  The following is an example of how a direct reference to a Defender contract and relayer can be used in monitor and action respectively:
+
+```yaml
+...
+contracts:
+  contract-1: 'goerli-0xd70d6A0480420b4C788AF91d0E1b0ca6141A9De8' # contractId of an existing resource in Defender
+relayers:
+  relayer-2: 'bcb659c6-7e11-4d37-a15b-0fa9f3d3442c' # relayerId of an existing relayer in Defender
+actions:
+  action-example-1:
+    name: 'Hello world from serverless'
+    path: './actions/hello-world'
+    relayer: ${self:resources.relayers.relayer-2}
+    trigger:
+      type: 'schedule'
+      frequency: 1500
+    paused: false
+monitors:
+  block-example:
+    name: 'Block Example'
+    type: 'BLOCK'
+    network: 'goerli'
+    risk-category: 'TECHNICAL'
+    # optional - either contracts OR addresses should be defined
+    contracts:
+      - ${self:resources.contracts.contract-1}
+    ...
+...
+```
+
 ### SSOT mode
 
 Under the `provider` property in the `serverless.yml` file, you can optionally add a `ssot` boolean. SSOT or Single Source of Truth, ensures that the state of your stack in Defender is perfectly in sync with the `serverless.yml` template.
