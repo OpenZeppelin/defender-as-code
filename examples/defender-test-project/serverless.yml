@@ -23,7 +23,7 @@ resources:
       name: 'Hello world from serverless'
       path: './actions/hello-world'
       # optional
-      relayer: ${self:resources.relayers.relayer-1}
+      relayer: ${self:resources.relayers.relayer-3}
       trigger:
         type: 'schedule' # or webhook
         # optional if not cron
@@ -44,6 +44,7 @@ resources:
       trigger:
         type: 'webhook'
       paused: false
+    action-example-4: '516dfd2f-9715-47d4-bcdf-d1f9a7b4d80d'
 
   policies:
     policy-1:
@@ -75,6 +76,7 @@ resources:
       abi: ${file(./abis/demoflash.json.abi)}
       # optional
       nat-spec: null
+    contract-2: 'goerli-0xd70d6A0480420b4C788AF91d0E1b0ca6141A9De8'
 
   relayers:
     relayer-1:
@@ -91,6 +93,14 @@ resources:
       min-balance: 1000
       # optional (make sure relayer-1 is above current relayer)
       address-from-relayer: ${self:resources.relayers.relayer-1}
+      # optional
+      policy: ${self:resources.policies.policy-1}
+    relayer-3: 'bcb659c6-7e11-4d37-a15b-0fa9f3d3442c' # relayerId referenced from Defender
+    relayer-4:
+      name: 'Test Relayer 4'
+      network: 'mainnet'
+      min-balance: 1000
+      address-from-relayer: ${self:resources.relayers.relayer-3}
       # optional
       policy: ${self:resources.policies.policy-1}
 
@@ -134,9 +144,10 @@ resources:
       type: 'BLOCK'
       network: 'goerli'
       risk-category: 'TECHNICAL' # optional
-      addresses:
-        - '0x0f06aB75c7DD497981b75CD82F6566e3a5CAd8f2'
-      # optional
+      # optional - either contracts OR addresses should be defined
+      contracts: 
+        - ${self:resources.contracts.contract-2}
+      # optional - will default to first contract in contracts if not defined
       abi: ${file(./abis/erc721.json.abi)}
       # optional
       alert-threshold:
@@ -145,7 +156,7 @@ resources:
       # optional
       paused: false
       # optional
-      action-condition: ${self:resources.actions.action-example-1}
+      action-condition: ${self:resources.actions.action-example-4}
       # optional
       action-trigger: null
       # optional
@@ -167,10 +178,6 @@ resources:
     forta-example:
       name: 'Forta Example'
       type: 'FORTA'
-      network: 'mainnet'
-      # optional if agent-ids is defined
-      addresses:
-        - '0x318958A61A3dFa42fBdAA6A28A4F481678D943cC'
       # optional
       alert-threshold:
         amount: 2

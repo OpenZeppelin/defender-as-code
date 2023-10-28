@@ -1,12 +1,12 @@
-## additionalProperties Type
+## 0 Type
 
 `object` ([Category](definitions-definitions-category.md))
 
-## additionalProperties Constraints
+## 0 Constraints
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
-# additionalProperties Properties
+# 0 Properties
 
 | Property                              | Type     | Required | Nullable       | Defined by                                                                                                                                                        |
 | :------------------------------------ | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -58,7 +58,7 @@
 
 *   is optional
 
-*   Type: `object[]` ([Notification](definitions-definitions-notification.md))
+*   Type: an array of merged types ([NotificationOrDefenderID](definitions-definitions-category-properties-categorynotificationids-notificationordefenderid.md))
 
 *   cannot be null
 
@@ -66,4 +66,4 @@
 
 ### notification-ids Type
 
-`object[]` ([Notification](definitions-definitions-notification.md))
+an array of merged types ([NotificationOrDefenderID](definitions-definitions-category-properties-categorynotificationids-notificationordefenderid.md))

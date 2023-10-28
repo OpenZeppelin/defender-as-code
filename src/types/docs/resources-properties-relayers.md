@@ -4,9 +4,9 @@
 
 # relayers Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                        |
-| :-------------------- | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-relayer.md "resources.schema.json#/properties/relayers/additionalProperties") |
+| Property              | Type   | Required | Nullable       | Defined by                                                                                                                    |
+| :-------------------- | :----- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-relayerordefenderid.md "resources.schema.json#/properties/relayers/additionalProperties") |
 
 ## Additional Properties
 
@@ -16,15 +16,21 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   is optional
 
-*   Type: `object` ([Relayer](definitions-definitions-relayer.md))
+*   Type: merged type ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-relayer.md "resources.schema.json#/properties/relayers/additionalProperties")
+*   defined in: [Resources](definitions-definitions-relayerordefenderid.md "resources.schema.json#/properties/relayers/additionalProperties")
 
 ### additionalProperties Type
 
-`object` ([Relayer](definitions-definitions-relayer.md))
+merged type ([RelayerOrDefenderID](definitions-definitions-relayerordefenderid.md))
+
+any of
+
+*   [Relayer](definitions-definitions-relayer.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### additionalProperties Constraints
 

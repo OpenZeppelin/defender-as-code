@@ -9,7 +9,7 @@
       "title": "Actions",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/action",
+        "$ref": "definitions.schema.json#/definitions/action-or-defender-id",
         "format": "uri-reference"
       }
     },
@@ -17,7 +17,7 @@
       "title": "Notifications",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/notification",
+        "$ref": "definitions.schema.json#/definitions/notification-or-defender-id",
         "format": "uri-reference"
       }
     },
@@ -25,7 +25,7 @@
       "title": "Categories",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/category",
+        "$ref": "definitions.schema.json#/definitions/category-or-defender-id",
         "format": "uri-reference"
       }
     },
@@ -33,7 +33,7 @@
       "title": "Relayers",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/relayer",
+        "$ref": "definitions.schema.json#/definitions/relayer-or-defender-id",
         "format": "uri-reference"
       }
     },
@@ -41,7 +41,7 @@
       "title": "Policies",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/policy",
+        "$ref": "definitions.schema.json#/definitions/policy-or-defender-id",
         "format": "uri-reference"
       }
     },
@@ -49,7 +49,7 @@
       "title": "Contracts",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/contract",
+        "$ref": "definitions.schema.json#/definitions/contract-or-defender-id",
         "format": "uri-reference"
       }
     },
@@ -66,7 +66,7 @@
       "title": "Monitors",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/monitor",
+        "$ref": "definitions.schema.json#/definitions/monitor-or-defender-id",
         "format": "uri-reference"
       }
     },
@@ -74,7 +74,7 @@
       "title": "Block Explorer Api Keys",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/blockExplorerApiKey",
+        "$ref": "definitions.schema.json#/definitions/block-explorer-api-key-or-defender-id",
         "format": "uri-reference"
       }
     },
@@ -82,7 +82,7 @@
       "title": "Forked Networks",
       "type": "object",
       "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/forkedNetworkRequest",
+        "$ref": "definitions.schema.json#/definitions/forked-network-or-defender-id",
         "format": "uri-reference"
       }
     }

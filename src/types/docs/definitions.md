@@ -4,6 +4,17 @@ unknown ([Definitions](definitions.md))
 
 # Definitions Definitions
 
+## Definitions group defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group address
 
 Reference this group by using
@@ -26,34 +37,34 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
-## Definitions group publicNetwork
+## Definitions group public-network
 
 Reference this group by using
 
 ```json
-{"$ref":"definitions.schema.json#/definitions/publicNetwork"}
+{"$ref":"definitions.schema.json#/definitions/public-network"}
 ```
 
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
-## Definitions group customNetwork
+## Definitions group custom-network
 
 Reference this group by using
 
 ```json
-{"$ref":"definitions.schema.json#/definitions/customNetwork"}
+{"$ref":"definitions.schema.json#/definitions/custom-network"}
 ```
 
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
-## Definitions group forkedNetwork
+## Definitions group forked-network
 
 Reference this group by using
 
 ```json
-{"$ref":"definitions.schema.json#/definitions/forkedNetwork"}
+{"$ref":"definitions.schema.json#/definitions/forked-network"}
 ```
 
 | Property | Type | Required | Nullable | Defined by |
@@ -70,12 +81,12 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
-## Definitions group supportedNetwork
+## Definitions group supported-network
 
 Reference this group by using
 
 ```json
-{"$ref":"definitions.schema.json#/definitions/supportedNetwork"}
+{"$ref":"definitions.schema.json#/definitions/supported-network"}
 ```
 
 | Property | Type | Required | Nullable | Defined by |
@@ -181,7 +192,7 @@ Reference this group by using
 | [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "definitions.schema.json#/definitions/relayer/properties/name")                               |
 | [network](#network)                           | Merged    | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-network.md "definitions.schema.json#/definitions/relayer/properties/network")                         |
 | [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "definitions.schema.json#/definitions/relayer/properties/min-balance")                 |
-| [address-from-relayer](#address-from-relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
+| [address-from-relayer](#address-from-relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
 | [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer/properties/policy")                                              |
 | [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "definitions.schema.json#/definitions/relayer/properties/api-keys")                 |
 
@@ -261,7 +272,7 @@ any of
 
 *   is optional
 
-*   Type: `object` ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
+*   Type: merged type ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
 
 *   cannot be null
 
@@ -269,7 +280,13 @@ any of
 
 #### address-from-relayer Type
 
-`object` ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
+merged type ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
+
+any of
+
+*   [Untitled object in Definitions](definitions-definitions-relayer-properties-addressfromrelayer-anyof-0.md "check type definition")
+
+*   [Untitled string in Definitions](definitions-definitions-relayer-properties-addressfromrelayer-anyof-1.md "check type definition")
 
 ### policy
 
@@ -1484,7 +1501,7 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object[]` ([Notification](definitions-definitions-notification.md))
+*   Type: an array of merged types ([NotificationOrDefenderID](definitions-definitions-category-properties-categorynotificationids-notificationordefenderid.md))
 
 *   cannot be null
 
@@ -1492,32 +1509,33 @@ Reference this group by using
 
 #### notification-ids Type
 
-`object[]` ([Notification](definitions-definitions-notification.md))
+an array of merged types ([NotificationOrDefenderID](definitions-definitions-category-properties-categorynotificationids-notificationordefenderid.md))
 
-## Definitions group blockMonitor
+## Definitions group block-monitor
 
 Reference this group by using
 
 ```json
-{"$ref":"definitions.schema.json#/definitions/blockMonitor"}
+{"$ref":"definitions.schema.json#/definitions/block-monitor"}
 ```
 
-| Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                                               |
-| :------------------------------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-4)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/blockMonitor/properties/name")                               |
-| [type](#type-2)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/blockMonitor/properties/type")                               |
-| [network](#network-2)                       | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockMonitor/properties/network")                                                 |
-| [addresses](#addresses)                     | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/blockMonitor/properties/addresses")                     |
-| [abi](#abi-1)                               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/blockMonitor/properties/abi")                                                     |
-| [alert-threshold](#alert-threshold)         | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold")          |
-| [paused](#paused-1)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/blockMonitor/properties/paused")                           |
-| [skip-abi-validation](#skip-abi-validation) | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-skip-abi-validation.md "definitions.schema.json#/definitions/blockMonitor/properties/skip-abi-validation") |
-| [action-condition](#action-condition)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-condition")                                         |
-| [action-trigger](#action-trigger)           | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-trigger")                                           |
-| [confirm-level](#confirm-level)             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/blockMonitor/properties/confirm-level")             |
-| [notify-config](#notify-config)             | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config")              |
-| [conditions](#conditions)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions")                   |
-| [risk-category](#risk-category)             | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-riskcategory.md "definitions.schema.json#/definitions/blockMonitor/properties/risk-category")              |
+| Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                                                |
+| :------------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [name](#name-4)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/block-monitor/properties/name")                               |
+| [type](#type-2)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/block-monitor/properties/type")                               |
+| [network](#network-2)                       | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-monitor/properties/network")                                                 |
+| [contracts](#contracts)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-contracts.md "definitions.schema.json#/definitions/block-monitor/properties/contracts")                     |
+| [addresses](#addresses)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/block-monitor/properties/addresses")                     |
+| [abi](#abi-1)                               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/block-monitor/properties/abi")                                                     |
+| [alert-threshold](#alert-threshold)         | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold")          |
+| [paused](#paused-1)                         | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/block-monitor/properties/paused")                           |
+| [skip-abi-validation](#skip-abi-validation) | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-skip-abi-validation.md "definitions.schema.json#/definitions/block-monitor/properties/skip-abi-validation") |
+| [action-condition](#action-condition)       | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")     |
+| [action-trigger](#action-trigger)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")     |
+| [confirm-level](#confirm-level)             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/block-monitor/properties/confirm-level")             |
+| [notify-config](#notify-config)             | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/block-monitor/properties/notify-config")              |
+| [conditions](#conditions)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/block-monitor/properties/conditions")                   |
+| [risk-category](#risk-category)             | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-riskcategory.md "definitions.schema.json#/definitions/block-monitor/properties/risk-category")              |
 
 ### name
 
@@ -1531,7 +1549,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/blockMonitor/properties/name")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/block-monitor/properties/name")
 
 #### name Type
 
@@ -1549,7 +1567,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/blockMonitor/properties/type")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/block-monitor/properties/type")
 
 #### type Type
 
@@ -1575,7 +1593,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockMonitor/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-monitor/properties/network")
 
 #### network Type
 
@@ -1595,19 +1613,37 @@ any of
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
+### contracts
+
+
+
+`contracts`
+
+*   is optional
+
+*   Type: an array of merged types ([ContractOrDefenderID](definitions-definitions-blockmonitor-properties-contracts-contractordefenderid.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-contracts.md "definitions.schema.json#/definitions/block-monitor/properties/contracts")
+
+#### contracts Type
+
+an array of merged types ([ContractOrDefenderID](definitions-definitions-blockmonitor-properties-contracts-contractordefenderid.md))
+
 ### addresses
 
 
 
 `addresses`
 
-*   is required
+*   is optional
 
 *   Type: `string[]` ([Address](definitions-definitions-blockmonitor-properties-addresses-address.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/blockMonitor/properties/addresses")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/block-monitor/properties/addresses")
 
 #### addresses Type
 
@@ -1625,7 +1661,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/blockMonitor/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/block-monitor/properties/abi")
 
 #### abi Type
 
@@ -1649,7 +1685,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold")
 
 #### alert-threshold Type
 
@@ -1667,7 +1703,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/blockMonitor/properties/paused")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/block-monitor/properties/paused")
 
 #### paused Type
 
@@ -1685,7 +1721,7 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-skip-abi-validation.md "definitions.schema.json#/definitions/blockMonitor/properties/skip-abi-validation")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-skip-abi-validation.md "definitions.schema.json#/definitions/block-monitor/properties/skip-abi-validation")
 
 #### skip-abi-validation Type
 
@@ -1699,15 +1735,21 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-condition")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")
 
 #### action-condition Type
 
-`object` ([Action](definitions-definitions-action.md))
+merged type ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid.md))
+
+any of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-actionordefenderid-anyof-defenderid.md "check type definition")
 
 #### action-condition Constraints
 
@@ -1721,15 +1763,21 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-trigger")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")
 
 #### action-trigger Type
 
-`object` ([Action](definitions-definitions-action.md))
+merged type ([ActionOrDefenderID](definitions-definitions-blockmonitor-properties-actionordefenderid-1.md))
+
+any of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-actionordefenderid-anyof-defenderid.md "check type definition")
 
 #### action-trigger Constraints
 
@@ -1747,7 +1795,7 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/blockMonitor/properties/confirm-level")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/block-monitor/properties/confirm-level")
 
 #### confirm-level Type
 
@@ -1771,7 +1819,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/block-monitor/properties/notify-config")
 
 #### notify-config Type
 
@@ -1789,7 +1837,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/block-monitor/properties/conditions")
 
 #### conditions Type
 
@@ -1807,7 +1855,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-riskcategory.md "definitions.schema.json#/definitions/blockMonitor/properties/risk-category")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-riskcategory.md "definitions.schema.json#/definitions/block-monitor/properties/risk-category")
 
 #### risk-category Type
 
@@ -1826,31 +1874,32 @@ one (and only one) of
 | `"FINANCIAL"`      |             |
 | `"TECHNICAL"`      |             |
 
-## Definitions group fortaMonitor
+## Definitions group forta-monitor
 
 Reference this group by using
 
 ```json
-{"$ref":"definitions.schema.json#/definitions/fortaMonitor"}
+{"$ref":"definitions.schema.json#/definitions/forta-monitor"}
 ```
 
-| Property                                                | Type      | Required | Nullable       | Defined by                                                                                                                                                                           |
-| :------------------------------------------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-5)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/fortaMonitor/properties/name")                                           |
-| [type](#type-3)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/fortaMonitor/properties/type")                                           |
-| [network](#network-3)                                   | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/fortaMonitor/properties/network")                                                             |
-| [addresses](#addresses-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/fortaMonitor/properties/addresses")                                 |
-| [abi](#abi-2)                                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/fortaMonitor/properties/abi")                                                                 |
-| [alert-threshold](#alert-threshold-1)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/fortaMonitor/properties/alert-threshold")                      |
-| [paused](#paused-2)                                     | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-paused.md "definitions.schema.json#/definitions/fortaMonitor/properties/paused")                                       |
-| [action-condition](#action-condition-1)                 | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/fortaMonitor/properties/action-condition")                                                     |
-| [action-trigger](#action-trigger-1)                     | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/fortaMonitor/properties/action-trigger")                                                       |
-| [notify-config](#notify-config-1)                       | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config")                          |
-| [conditions](#conditions-1)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "definitions.schema.json#/definitions/fortaMonitor/properties/conditions")                               |
-| [forta-node-id](#forta-node-id)                         | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "definitions.schema.json#/definitions/fortaMonitor/properties/forta-node-id")                         |
-| [forta-last-processed-time](#forta-last-processed-time) | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-last-processed-time.md "definitions.schema.json#/definitions/fortaMonitor/properties/forta-last-processed-time") |
-| [agent-ids](#agent-ids)                                 | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "definitions.schema.json#/definitions/fortaMonitor/properties/agent-ids")                                  |
-| [risk-category](#risk-category-1)                       | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-riskcategory.md "definitions.schema.json#/definitions/fortaMonitor/properties/risk-category")                          |
+| Property                                                | Type      | Required | Nullable       | Defined by                                                                                                                                                                            |
+| :------------------------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [name](#name-5)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/forta-monitor/properties/name")                                           |
+| [type](#type-3)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/forta-monitor/properties/type")                                           |
+| [network](#network-3)                                   | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/forta-monitor/properties/network")                                                             |
+| [contracts](#contracts-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-contracts.md "definitions.schema.json#/definitions/forta-monitor/properties/contracts")                                 |
+| [addresses](#addresses-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/forta-monitor/properties/addresses")                                 |
+| [abi](#abi-2)                                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/forta-monitor/properties/abi")                                                                 |
+| [alert-threshold](#alert-threshold-1)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/forta-monitor/properties/alert-threshold")                      |
+| [paused](#paused-2)                                     | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-paused.md "definitions.schema.json#/definitions/forta-monitor/properties/paused")                                       |
+| [action-condition](#action-condition-1)                 | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")                                         |
+| [action-trigger](#action-trigger-1)                     | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")                                           |
+| [notify-config](#notify-config-1)                       | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config")                          |
+| [conditions](#conditions-1)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "definitions.schema.json#/definitions/forta-monitor/properties/conditions")                               |
+| [forta-node-id](#forta-node-id)                         | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "definitions.schema.json#/definitions/forta-monitor/properties/forta-node-id")                         |
+| [forta-last-processed-time](#forta-last-processed-time) | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-last-processed-time.md "definitions.schema.json#/definitions/forta-monitor/properties/forta-last-processed-time") |
+| [agent-ids](#agent-ids)                                 | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "definitions.schema.json#/definitions/forta-monitor/properties/agent-ids")                                  |
+| [risk-category](#risk-category-1)                       | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-riskcategory.md "definitions.schema.json#/definitions/forta-monitor/properties/risk-category")                          |
 
 ### name
 
@@ -1864,7 +1913,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/fortaMonitor/properties/name")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/forta-monitor/properties/name")
 
 #### name Type
 
@@ -1882,7 +1931,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/fortaMonitor/properties/type")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/forta-monitor/properties/type")
 
 #### type Type
 
@@ -1908,7 +1957,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/fortaMonitor/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/forta-monitor/properties/network")
 
 #### network Type
 
@@ -1928,6 +1977,24 @@ any of
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
+### contracts
+
+
+
+`contracts`
+
+*   is optional
+
+*   Type: an array of merged types ([ContractOrDefenderID](definitions-definitions-fortamonitor-properties-contracts-contractordefenderid.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-contracts.md "definitions.schema.json#/definitions/forta-monitor/properties/contracts")
+
+#### contracts Type
+
+an array of merged types ([ContractOrDefenderID](definitions-definitions-fortamonitor-properties-contracts-contractordefenderid.md))
+
 ### addresses
 
 
@@ -1940,7 +2007,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/fortaMonitor/properties/addresses")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/forta-monitor/properties/addresses")
 
 #### addresses Type
 
@@ -1958,7 +2025,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/fortaMonitor/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/forta-monitor/properties/abi")
 
 #### abi Type
 
@@ -1982,7 +2049,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/fortaMonitor/properties/alert-threshold")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/forta-monitor/properties/alert-threshold")
 
 #### alert-threshold Type
 
@@ -2000,7 +2067,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-paused.md "definitions.schema.json#/definitions/fortaMonitor/properties/paused")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-paused.md "definitions.schema.json#/definitions/forta-monitor/properties/paused")
 
 #### paused Type
 
@@ -2014,15 +2081,21 @@ any of
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/fortaMonitor/properties/action-condition")
+*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")
 
 #### action-condition Type
 
-`object` ([Action](definitions-definitions-action.md))
+merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+
+any of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-actionordefenderid-anyof-defenderid.md "check type definition")
 
 #### action-condition Constraints
 
@@ -2036,15 +2109,21 @@ any of
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/fortaMonitor/properties/action-trigger")
+*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")
 
 #### action-trigger Type
 
-`object` ([Action](definitions-definitions-action.md))
+merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+
+any of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-actionordefenderid-anyof-defenderid.md "check type definition")
 
 #### action-trigger Constraints
 
@@ -2062,7 +2141,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config")
 
 #### notify-config Type
 
@@ -2080,7 +2159,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "definitions.schema.json#/definitions/fortaMonitor/properties/conditions")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "definitions.schema.json#/definitions/forta-monitor/properties/conditions")
 
 #### conditions Type
 
@@ -2098,7 +2177,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "definitions.schema.json#/definitions/fortaMonitor/properties/forta-node-id")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "definitions.schema.json#/definitions/forta-monitor/properties/forta-node-id")
 
 #### forta-node-id Type
 
@@ -2116,7 +2195,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-forta-last-processed-time.md "definitions.schema.json#/definitions/fortaMonitor/properties/forta-last-processed-time")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-forta-last-processed-time.md "definitions.schema.json#/definitions/forta-monitor/properties/forta-last-processed-time")
 
 #### forta-last-processed-time Type
 
@@ -2134,7 +2213,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "definitions.schema.json#/definitions/fortaMonitor/properties/agent-ids")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "definitions.schema.json#/definitions/forta-monitor/properties/agent-ids")
 
 #### agent-ids Type
 
@@ -2152,7 +2231,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-riskcategory.md "definitions.schema.json#/definitions/fortaMonitor/properties/risk-category")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-riskcategory.md "definitions.schema.json#/definitions/forta-monitor/properties/risk-category")
 
 #### risk-category Type
 
@@ -2182,6 +2261,105 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group relayer-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/relayer-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group action-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/action-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group monitor-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/monitor-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group forked-network-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/forked-network-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group block-explorer-api-key-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/block-explorer-api-key-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group category-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/category-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group notification-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/notification-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group contract-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/contract-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group policy-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/policy-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group action
 
 Reference this group by using
@@ -2190,13 +2368,13 @@ Reference this group by using
 {"$ref":"definitions.schema.json#/definitions/action"}
 ```
 
-| Property            | Type      | Required | Nullable       | Defined by                                                                                                                           |
-| :------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-6)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")       |
-| [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")       |
-| [relayer](#relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer.md "definitions.schema.json#/definitions/action/properties/relayer")                   |
-| [trigger](#trigger) | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger") |
-| [paused](#paused-3) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-action-properties-paused.md "definitions.schema.json#/definitions/action/properties/paused")   |
+| Property            | Type      | Required | Nullable       | Defined by                                                                                                                                       |
+| :------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name-6)     | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")                   |
+| [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")                   |
+| [relayer](#relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer") |
+| [trigger](#trigger) | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger")             |
+| [paused](#paused-3) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-action-properties-paused.md "definitions.schema.json#/definitions/action/properties/paused")               |
 
 ### name
 
@@ -2242,15 +2420,21 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `object` ([Relayer](definitions-definitions-relayer.md))
+*   Type: merged type ([RelayerOrDefenderID](definitions-definitions-action-properties-relayerordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-relayer.md "definitions.schema.json#/definitions/action/properties/relayer")
+*   defined in: [Definitions](definitions-definitions-action-properties-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")
 
 #### relayer Type
 
-`object` ([Relayer](definitions-definitions-relayer.md))
+merged type ([RelayerOrDefenderID](definitions-definitions-action-properties-relayerordefenderid.md))
+
+any of
+
+*   [Relayer](definitions-definitions-relayer.md "check type definition")
+
+*   [DefenderID](definitions-definitions-relayerordefenderid-anyof-defenderid.md "check type definition")
 
 #### relayer Constraints
 
@@ -2292,18 +2476,18 @@ Reference this group by using
 
 `boolean`
 
-## Definitions group blockExplorerApiKey
+## Definitions group block-explorer-api-key
 
 Reference this group by using
 
 ```json
-{"$ref":"definitions.schema.json#/definitions/blockExplorerApiKey"}
+{"$ref":"definitions.schema.json#/definitions/block-explorer-api-key"}
 ```
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                             |
-| :-------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [key](#key)           | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/key") |
-| [network](#network-4) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/network")                        |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                                |
+| :-------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [key](#key)           | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/key") |
+| [network](#network-4) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/network")                        |
 
 ### key
 
@@ -2317,7 +2501,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/key")
+*   defined in: [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/key")
 
 #### key Type
 
@@ -2335,7 +2519,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockExplorerApiKey/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/network")
 
 #### network Type
 
@@ -2366,21 +2550,21 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
-## Definitions group forkedNetworkRequest
+## Definitions group forked-network-request
 
 Reference this group by using
 
 ```json
-{"$ref":"definitions.schema.json#/definitions/forkedNetworkRequest"}
+{"$ref":"definitions.schema.json#/definitions/forked-network-request"}
 ```
 
-| Property                                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                             |
-| :---------------------------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-7)                           | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/name")                    |
-| [forked-network](#forked-network)         | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/forked-network")                                       |
-| [rpc-url](#rpc-url)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/rpc-url")                       |
-| [api-key](#api-key-1)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/api-key")                       |
-| [block-explorer-url](#block-explorer-url) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/block-explorer-url") |
+| Property                                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                               |
+| :---------------------------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name-7)                           | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")                    |
+| [forked-network](#forked-network)         | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/forked-network")                                       |
+| [rpc-url](#rpc-url)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forked-network-request/properties/rpc-url")                       |
+| [api-key](#api-key-1)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forked-network-request/properties/api-key")                       |
+| [block-explorer-url](#block-explorer-url) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forked-network-request/properties/block-explorer-url") |
 
 ### name
 
@@ -2394,7 +2578,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/name")
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")
 
 #### name Type
 
@@ -2412,7 +2596,7 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/forked-network")
+*   defined in: [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/forked-network")
 
 #### forked-network Type
 
@@ -2436,7 +2620,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/rpc-url")
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forked-network-request/properties/rpc-url")
 
 #### rpc-url Type
 
@@ -2464,7 +2648,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/api-key")
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forked-network-request/properties/api-key")
 
 #### api-key Type
 
@@ -2482,7 +2666,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forkedNetworkRequest/properties/block-explorer-url")
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forked-network-request/properties/block-explorer-url")
 
 #### block-explorer-url Type
 

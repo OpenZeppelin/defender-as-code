@@ -4,9 +4,9 @@
 
 # block-explorer-api-keys Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                                                   |
-| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-blockexplorerapikey.md "resources.schema.json#/properties/block-explorer-api-keys/additionalProperties") |
+| Property              | Type   | Required | Nullable       | Defined by                                                                                                                                               |
+| :-------------------- | :----- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-blockexplorerapikeyordefenderid.md "resources.schema.json#/properties/block-explorer-api-keys/additionalProperties") |
 
 ## Additional Properties
 
@@ -16,15 +16,21 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   is optional
 
-*   Type: `object` ([BlockExplorerApiKey](definitions-definitions-blockexplorerapikey.md))
+*   Type: merged type ([BlockExplorerApiKeyOrDefenderID](definitions-definitions-blockexplorerapikeyordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-blockexplorerapikey.md "resources.schema.json#/properties/block-explorer-api-keys/additionalProperties")
+*   defined in: [Resources](definitions-definitions-blockexplorerapikeyordefenderid.md "resources.schema.json#/properties/block-explorer-api-keys/additionalProperties")
 
 ### additionalProperties Type
 
-`object` ([BlockExplorerApiKey](definitions-definitions-blockexplorerapikey.md))
+merged type ([BlockExplorerApiKeyOrDefenderID](definitions-definitions-blockexplorerapikeyordefenderid.md))
+
+any of
+
+*   [BlockExplorerApiKey](definitions-definitions-blockexplorerapikey.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### additionalProperties Constraints
 

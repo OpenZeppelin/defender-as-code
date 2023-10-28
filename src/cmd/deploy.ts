@@ -26,6 +26,8 @@ import {
   formatABI,
   constructMonitor,
   getNetworkClient,
+  isDefenderId,
+  removeDefenderIdReferences,
 } from '../utils';
 import {
   DefenderAction,
@@ -55,6 +57,7 @@ import {
 import keccak256 from 'keccak256';
 import {
   Action,
+  ActionOrDefenderID,
   Actions,
   BlockExplorerApiKey,
   BlockExplorerApiKeys,
@@ -62,6 +65,7 @@ import {
   Category,
   Contract,
   Contracts,
+  DefenderID,
   ForkedNetworkRequest,
   ForkedNetworks,
   Monitor,
@@ -69,6 +73,7 @@ import {
   Notification,
   Notifications,
   Relayer,
+  RelayerOrDefenderID,
   Relayers,
   SupportedNetwork,
 } from '../types/types/resources.schema';
@@ -121,7 +126,13 @@ export default class DefenderDeploy {
     const contractDifference = _.differenceWith(
       dContracts,
       Object.entries(contracts),
-      (a: DefenderContract, b: [string, Contract]) => `${a.network}-${a.address}` === `${b[1].network}-${b[1].address}`,
+      (a: DefenderContract, b: [string, Contract | DefenderID]) => {
+        const contractId = `${a.network}-${a.address}`;
+        if (isDefenderId(b[1])) {
+          return contractId === b[1];
+        }
+        return contractId === `${b[1].network}-${b[1].address}`;
+      },
     );
 
     // Forked Networks
@@ -131,8 +142,12 @@ export default class DefenderDeploy {
     const forkedNetworkDifference = _.differenceWith(
       forkedNetworkItems,
       Object.entries(forkedNetworks),
-      (a: DefenderForkedNetwork, b: [string, ForkedNetworkRequest]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      (a: DefenderForkedNetwork, b: [string, ForkedNetworkRequest | DefenderID]) => {
+        if (isDefenderId(b[1])) {
+          return a.forkedNetworkId === b[1];
+        }
+        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+      },
     );
 
     // Monitors
@@ -142,8 +157,12 @@ export default class DefenderDeploy {
     const monitorDifference = _.differenceWith(
       monitorItems,
       Object.entries(monitors),
-      (a: DefenderMonitor, b: [string, Monitor]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      (a: DefenderMonitor, b: [string, Monitor | DefenderID]) => {
+        if (isDefenderId(b[1])) {
+          return a.monitorId === b[1];
+        }
+        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+      },
     );
 
     // Relayers
@@ -153,7 +172,8 @@ export default class DefenderDeploy {
 
     // Relayers API keys
     await Promise.all(
-      Object.entries(relayers).map(async ([id, relayer]) => {
+      Object.entries(relayers).map(async ([id, relayer]: [string, Relayer | DefenderID]) => {
+        if (isDefenderId(relayer)) return;
         const dRelayer = getEquivalentResourceByKey<DefenderRelayer>(
           getResourceID(getStackName(this.serverless), id),
           dRelayers,
@@ -177,8 +197,12 @@ export default class DefenderDeploy {
     const notificationDifference = _.differenceWith(
       dNotifications,
       Object.entries(notifications),
-      (a: DefenderNotification, b: [string, Notification]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      (a: DefenderNotification, b: [string, Notification | DefenderID]) => {
+        if (isDefenderId(b[1])) {
+          return a.notificationId === b[1];
+        }
+        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+      },
     );
 
     // Notification Categories
@@ -187,8 +211,12 @@ export default class DefenderDeploy {
     const categoryDifference = _.differenceWith(
       dCategories,
       Object.entries(categories),
-      (a: DefenderCategory, b: [string, Category]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      (a: DefenderCategory, b: [string, Category | DefenderID]) => {
+        if (isDefenderId(b[1])) {
+          return a.categoryId === b[1];
+        }
+        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+      },
     );
 
     // Actions
@@ -198,8 +226,12 @@ export default class DefenderDeploy {
     const actionDifference = _.differenceWith(
       dActions,
       Object.entries(actions),
-      (a: DefenderAction, b: [string, Action]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      (a: DefenderAction, b: [string, ActionOrDefenderID]) => {
+        if (isDefenderId(b[1])) {
+          return a.actionId === b[1];
+        }
+        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+      },
     );
 
     // Secrets
@@ -218,8 +250,12 @@ export default class DefenderDeploy {
     const blockExplorerApiKeyDifference = _.differenceWith(
       dBlockExplorerApiKeys,
       Object.entries(blockExplorerApiKeys ?? []),
-      (a: DefenderBlockExplorerApiKey, b: [string, BlockExplorerApiKey]) =>
-        a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]),
+      (a: DefenderBlockExplorerApiKey, b: [string, BlockExplorerApiKey | DefenderID]) => {
+        if (isDefenderId(b[1])) {
+          return a.blockExplorerApiKeyId === b[1];
+        }
+        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+      },
     );
 
     difference.forkedNetworks = forkedNetworkDifference;
@@ -354,7 +390,7 @@ export default class DefenderDeploy {
     await this.wrapper<Contract, DefenderContract>(
       this.serverless,
       'Contracts',
-      contracts,
+      removeDefenderIdReferences(contracts),
       retrieveExisting,
       // on update
       async (contract: Contract, match: DefenderContract) => {
@@ -397,7 +433,7 @@ export default class DefenderDeploy {
         };
       },
       // on create
-      async (contract: Contract, _: string) => {
+      async (contract: Contract, stackResourceId: string) => {
         const importedContract = await client.addContract({
           name: contract.name,
           network: contract.network,
@@ -436,7 +472,7 @@ export default class DefenderDeploy {
     await this.wrapper<Relayer, DefenderRelayer>(
       this.serverless,
       'Relayers',
-      relayers,
+      removeDefenderIdReferences(relayers),
       retrieveExisting,
       // on update
       async (relayer: Relayer, match: DefenderRelayer) => {
@@ -447,7 +483,6 @@ export default class DefenderDeploy {
           );
           relayer.network = match.network!;
         }
-
         const mappedMatch = {
           'name': match.name,
           'network': match.network,
@@ -458,7 +493,7 @@ export default class DefenderDeploy {
             'eip1559-pricing': match.policies.EIP1559Pricing,
             'private-transactions': match.policies.privateTransactions,
           },
-          // currently not supported by platform-sdk-client
+          // currently not supported by defender-sdk
           // paused: match.paused
         };
         let updatedRelayer = undefined;
@@ -534,11 +569,12 @@ export default class DefenderDeploy {
       async (relayer: Relayer, stackResourceId: string) => {
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<RelayerOrDefenderID | undefined, DefenderRelayer>(
           this.serverless,
-          relayer['address-from-relayer'] as Relayer | undefined, // typing address-from-relayer causes issues with schema generation due to circular dependancies so we cast it
+          relayer['address-from-relayer'] as RelayerOrDefenderID | undefined, // typing address-from-relayer causes issues with schema generation due to circular dependancies so we cast it
           relayers,
           existingRelayers,
+          'Relayers',
         );
 
         const createdRelayer = await client.create({
@@ -594,7 +630,7 @@ export default class DefenderDeploy {
     await this.wrapper<Notification, DefenderNotification>(
       this.serverless,
       'Notifications',
-      notifications,
+      removeDefenderIdReferences(notifications),
       retrieveExisting,
       // on update
       async (notification: Notification, match: DefenderNotification) => {
@@ -658,30 +694,33 @@ export default class DefenderDeploy {
     await this.wrapper<Category, DefenderCategory>(
       this.serverless,
       'Categories',
-      categories,
+      removeDefenderIdReferences(categories),
       retrieveExisting,
       // on update
       async (category: Category, match: DefenderCategory) => {
+        const matchStackResourceId =
+          match.stackResourceId ?? getResourceID(getStackName(this.serverless), _.kebabCase(match.name));
         const newCategory = constructNotificationCategory(
           this.serverless,
           this.resources,
           category,
-          match.stackResourceId!,
+          matchStackResourceId,
           notifications,
         );
+
         const mappedMatch = {
           name: match.name,
           description: match.description,
           notificationIds: match.notificationIds,
-          stackResourceId: match.stackResourceId,
+          stackResourceId: matchStackResourceId,
         };
         if (_.isEqual(validateTypesAndSanitise(newCategory), validateTypesAndSanitise(mappedMatch))) {
           return {
-            name: match.stackResourceId!,
+            name: matchStackResourceId,
             id: match.categoryId,
             success: false,
             response: match,
-            notice: `Skipped ${match.stackResourceId} - no changes detected`,
+            notice: `Skipped ${matchStackResourceId} - no changes detected`,
           };
         }
 
@@ -689,15 +728,16 @@ export default class DefenderDeploy {
           categoryId: match.categoryId,
           ...newCategory,
         });
+
         return {
-          name: updatedCategory.stackResourceId!,
+          name: matchStackResourceId,
           id: updatedCategory.categoryId,
           success: true,
           response: updatedCategory,
         };
       },
       // on create
-      async (category: Category, stackResourceId: string) => {
+      async (_: Category, stackResourceId: string) => {
         return {
           name: stackResourceId,
           id: '',
@@ -715,7 +755,7 @@ export default class DefenderDeploy {
         // };
       },
       // on remove
-      async (categories: DefenderCategory[]) => {
+      async (_: DefenderCategory[]) => {
         this.log.warn(`Deleting notification categories is not yet supported.`);
         // await Promise.all(categories.map(async (n) => await client.deleteNotificationCategory(n.categoryId)));
       },
@@ -736,12 +776,16 @@ export default class DefenderDeploy {
       const actions = await getActionClient(this.teamKey!).list();
       const notifications = await client.listNotificationChannels();
       const categories = await client.listNotificationCategories();
+
+      // TODO: Add a new endpoint in defender-sdk which includes contract ABI and NatSpec
+      const contracts = await getProposalClient(this.teamKey!).listContracts();
+
       const retrieveExisting = () => client.list().then((r) => r.items);
 
       await this.wrapper<Monitor, DefenderMonitor>(
         this.serverless,
         'Monitors',
-        monitors,
+        removeDefenderIdReferences(monitors),
         retrieveExisting,
         // on update
         async (monitor: Monitor, match: DefenderMonitor) => {
@@ -777,6 +821,7 @@ export default class DefenderDeploy {
             actions.items,
             blockwatchersForNetwork,
             categories,
+            contracts,
           );
 
           // Map match "response" object to that of a "create" object
@@ -863,6 +908,7 @@ export default class DefenderDeploy {
               actions.items,
               blockwatchersForNetwork,
               categories,
+              contracts,
             ),
           );
           return {
@@ -893,17 +939,18 @@ export default class DefenderDeploy {
     await this.wrapper<Action, DefenderAction>(
       this.serverless,
       'Actions',
-      actions,
+      removeDefenderIdReferences(actions),
       retrieveExisting,
       // on update
       async (action: Action, match: DefenderAction) => {
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<RelayerOrDefenderID | undefined, DefenderRelayer>(
           this.serverless,
           action.relayer,
           relayers,
           existingRelayers,
+          'Relayers',
         );
         // Get new code digest
         const code = await client.getEncodedZippedCodeFromFolder(action.path);
@@ -984,11 +1031,12 @@ export default class DefenderDeploy {
         const actionRelayer = action.relayer;
         const relayers: Relayers = this.resources?.relayers ?? {};
         const existingRelayers = (await getRelayClient(this.teamKey!).list()).items;
-        const maybeRelayer = getEquivalentResource<Relayer | undefined, DefenderRelayer>(
+        const maybeRelayer = getEquivalentResource<RelayerOrDefenderID | undefined, DefenderRelayer>(
           this.serverless,
           actionRelayer,
           relayers,
           existingRelayers,
+          'Relayers',
         );
 
         const createdAction = await client.create({
@@ -1028,7 +1076,7 @@ export default class DefenderDeploy {
     await this.wrapper<BlockExplorerApiKey, DefenderBlockExplorerApiKey>(
       this.serverless,
       'Block Explorer Api Keys',
-      blockExplorerApiKeys,
+      removeDefenderIdReferences(blockExplorerApiKeys),
       retrieveExisting,
       // on update
       async (blockExplorerApiKey: BlockExplorerApiKey, match: DefenderBlockExplorerApiKey) => {
@@ -1086,7 +1134,7 @@ export default class DefenderDeploy {
     await this.wrapper<ForkedNetworkRequest, DefenderForkedNetwork>(
       this.serverless,
       'Forked Networks',
-      forkedNetworks,
+      removeDefenderIdReferences(forkedNetworks),
       retrieveExisting,
       // on update
       async (forkedNetwork: ForkedNetworkRequest, match: DefenderForkedNetwork) => {
@@ -1201,11 +1249,12 @@ export default class DefenderDeploy {
           output.removed.push(...ssotDifference);
         }
       }
-
       for (const [id, resource] of Object.entries(resources ?? [])) {
         // always refresh list after each addition as some resources rely on the previous one
         const existing = await retrieveExistingResources();
+
         const entryStackResourceId = getResourceID(stackName, id);
+
         let match;
         if (overrideMatchDefinition) {
           match = existing.find((e: D) => overrideMatchDefinition(e, resource));

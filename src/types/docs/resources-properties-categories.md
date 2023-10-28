@@ -4,9 +4,9 @@
 
 # categories Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                           |
-| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-category.md "resources.schema.json#/properties/categories/additionalProperties") |
+| Property              | Type   | Required | Nullable       | Defined by                                                                                                                       |
+| :-------------------- | :----- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-categoryordefenderid.md "resources.schema.json#/properties/categories/additionalProperties") |
 
 ## Additional Properties
 
@@ -16,15 +16,21 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   is optional
 
-*   Type: `object` ([Category](definitions-definitions-category.md))
+*   Type: merged type ([CategoryOrDefenderID](definitions-definitions-categoryordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-category.md "resources.schema.json#/properties/categories/additionalProperties")
+*   defined in: [Resources](definitions-definitions-categoryordefenderid.md "resources.schema.json#/properties/categories/additionalProperties")
 
 ### additionalProperties Type
 
-`object` ([Category](definitions-definitions-category.md))
+merged type ([CategoryOrDefenderID](definitions-definitions-categoryordefenderid.md))
+
+any of
+
+*   [Category](definitions-definitions-category.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### additionalProperties Constraints
 

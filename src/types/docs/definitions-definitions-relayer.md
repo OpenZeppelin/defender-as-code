@@ -1,19 +1,19 @@
-## additionalProperties Type
+## 0 Type
 
 `object` ([Relayer](definitions-definitions-relayer.md))
 
-## additionalProperties Constraints
+## 0 Constraints
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
-# additionalProperties Properties
+# 0 Properties
 
 | Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                                     |
 | :-------------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "definitions.schema.json#/definitions/relayer/properties/name")                               |
 | [network](#network)                           | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/relayer/properties/network")                                            |
 | [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "definitions.schema.json#/definitions/relayer/properties/min-balance")                 |
-| [address-from-relayer](#address-from-relayer) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
+| [address-from-relayer](#address-from-relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
 | [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer/properties/policy")                                              |
 | [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "definitions.schema.json#/definitions/relayer/properties/api-keys")                 |
 
@@ -93,7 +93,7 @@ any of
 
 *   is optional
 
-*   Type: `object` ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
+*   Type: merged type ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
 
 *   cannot be null
 
@@ -101,7 +101,13 @@ any of
 
 ### address-from-relayer Type
 
-`object` ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
+merged type ([AddressFromRelayer](definitions-definitions-relayer-properties-addressfromrelayer.md))
+
+any of
+
+*   [Untitled object in Definitions](definitions-definitions-relayer-properties-addressfromrelayer-anyof-0.md "check type definition")
+
+*   [Untitled string in Definitions](definitions-definitions-relayer-properties-addressfromrelayer-anyof-1.md "check type definition")
 
 ## policy
 

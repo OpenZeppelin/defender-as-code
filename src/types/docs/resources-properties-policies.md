@@ -4,9 +4,9 @@
 
 # policies Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                       |
-| :-------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-policy.md "resources.schema.json#/properties/policies/additionalProperties") |
+| Property              | Type   | Required | Nullable       | Defined by                                                                                                                   |
+| :-------------------- | :----- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-policyordefenderid.md "resources.schema.json#/properties/policies/additionalProperties") |
 
 ## Additional Properties
 
@@ -16,15 +16,21 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   is optional
 
-*   Type: `object` ([Policy](definitions-definitions-policy.md))
+*   Type: merged type ([PolicyOrDefenderID](definitions-definitions-policyordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-policy.md "resources.schema.json#/properties/policies/additionalProperties")
+*   defined in: [Resources](definitions-definitions-policyordefenderid.md "resources.schema.json#/properties/policies/additionalProperties")
 
 ### additionalProperties Type
 
-`object` ([Policy](definitions-definitions-policy.md))
+merged type ([PolicyOrDefenderID](definitions-definitions-policyordefenderid.md))
+
+any of
+
+*   [Policy](definitions-definitions-policy.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### additionalProperties Constraints
 

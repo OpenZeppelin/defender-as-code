@@ -4,9 +4,9 @@
 
 # contracts Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                          |
-| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------ |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-contract.md "resources.schema.json#/properties/contracts/additionalProperties") |
+| Property              | Type   | Required | Nullable       | Defined by                                                                                                                      |
+| :-------------------- | :----- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------ |
+| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-contractordefenderid.md "resources.schema.json#/properties/contracts/additionalProperties") |
 
 ## Additional Properties
 
@@ -16,15 +16,21 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   is optional
 
-*   Type: `object` ([Contract](definitions-definitions-contract.md))
+*   Type: merged type ([ContractOrDefenderID](definitions-definitions-contractordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-contract.md "resources.schema.json#/properties/contracts/additionalProperties")
+*   defined in: [Resources](definitions-definitions-contractordefenderid.md "resources.schema.json#/properties/contracts/additionalProperties")
 
 ### additionalProperties Type
 
-`object` ([Contract](definitions-definitions-contract.md))
+merged type ([ContractOrDefenderID](definitions-definitions-contractordefenderid.md))
+
+any of
+
+*   [Contract](definitions-definitions-contract.md "check type definition")
+
+*   [DefenderID](definitions-definitions-contractordefenderid-anyof-defenderid.md "check type definition")
 
 ### additionalProperties Constraints
 

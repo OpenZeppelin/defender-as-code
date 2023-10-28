@@ -1,3 +1,3 @@
 ## notification-ids Type
 
-`object[]` ([Notification](definitions-definitions-notification.md))
+an array of merged types ([NotificationOrDefenderID](definitions-definitions-category-properties-categorynotificationids-notificationordefenderid.md))

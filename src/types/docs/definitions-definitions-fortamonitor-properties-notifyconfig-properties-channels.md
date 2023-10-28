@@ -1,3 +1,3 @@
 ## channels Type
 
-`object[]` ([Notification](definitions-definitions-notification.md))
+an array of merged types ([NotificationOrDefenderID](definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels-notificationordefenderid.md))

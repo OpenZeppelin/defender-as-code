@@ -8,22 +8,23 @@
 
 # 0 Properties
 
-| Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                                               |
-| :------------------------------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                               | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/blockMonitor/properties/name")                               |
-| [type](#type)                               | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/blockMonitor/properties/type")                               |
-| [network](#network)                         | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockMonitor/properties/network")                                                 |
-| [addresses](#addresses)                     | `array`   | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/blockMonitor/properties/addresses")                     |
-| [abi](#abi)                                 | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/blockMonitor/properties/abi")                                                     |
-| [alert-threshold](#alert-threshold)         | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold")          |
-| [paused](#paused)                           | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/blockMonitor/properties/paused")                           |
-| [skip-abi-validation](#skip-abi-validation) | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-skip-abi-validation.md "definitions.schema.json#/definitions/blockMonitor/properties/skip-abi-validation") |
-| [action-condition](#action-condition)       | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-condition")                                         |
-| [action-trigger](#action-trigger)           | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-trigger")                                           |
-| [confirm-level](#confirm-level)             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/blockMonitor/properties/confirm-level")             |
-| [notify-config](#notify-config)             | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config")              |
-| [conditions](#conditions)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions")                   |
-| [risk-category](#risk-category)             | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-riskcategory.md "definitions.schema.json#/definitions/blockMonitor/properties/risk-category")                                      |
+| Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                                                |
+| :------------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [name](#name)                               | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/block-monitor/properties/name")                               |
+| [type](#type)                               | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/block-monitor/properties/type")                               |
+| [network](#network)                         | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-monitor/properties/network")                                                 |
+| [contracts](#contracts)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-contracts.md "definitions.schema.json#/definitions/block-monitor/properties/contracts")                     |
+| [addresses](#addresses)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/block-monitor/properties/addresses")                     |
+| [abi](#abi)                                 | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/block-monitor/properties/abi")                                                     |
+| [alert-threshold](#alert-threshold)         | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold")          |
+| [paused](#paused)                           | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/block-monitor/properties/paused")                           |
+| [skip-abi-validation](#skip-abi-validation) | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-skip-abi-validation.md "definitions.schema.json#/definitions/block-monitor/properties/skip-abi-validation") |
+| [action-condition](#action-condition)       | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")                             |
+| [action-trigger](#action-trigger)           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")                               |
+| [confirm-level](#confirm-level)             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/block-monitor/properties/confirm-level")             |
+| [notify-config](#notify-config)             | `object`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/block-monitor/properties/notify-config")              |
+| [conditions](#conditions)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/block-monitor/properties/conditions")                   |
+| [risk-category](#risk-category)             | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-riskcategory.md "definitions.schema.json#/definitions/block-monitor/properties/risk-category")                                      |
 
 ## name
 
@@ -37,7 +38,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/blockMonitor/properties/name")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/block-monitor/properties/name")
 
 ### name Type
 
@@ -55,7 +56,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/blockMonitor/properties/type")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/block-monitor/properties/type")
 
 ### type Type
 
@@ -81,7 +82,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/blockMonitor/properties/network")
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-monitor/properties/network")
 
 ### network Type
 
@@ -101,19 +102,37 @@ any of
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
+## contracts
+
+
+
+`contracts`
+
+*   is optional
+
+*   Type: an array of merged types ([ContractOrDefenderID](definitions-definitions-contractordefenderid.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-contracts.md "definitions.schema.json#/definitions/block-monitor/properties/contracts")
+
+### contracts Type
+
+an array of merged types ([ContractOrDefenderID](definitions-definitions-contractordefenderid.md))
+
 ## addresses
 
 
 
 `addresses`
 
-*   is required
+*   is optional
 
 *   Type: `string[]` ([Address](definitions-definitions-address.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/blockMonitor/properties/addresses")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/block-monitor/properties/addresses")
 
 ### addresses Type
 
@@ -131,7 +150,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/blockMonitor/properties/abi")
+*   defined in: [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/block-monitor/properties/abi")
 
 ### abi Type
 
@@ -155,7 +174,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/block-monitor/properties/alert-threshold")
 
 ### alert-threshold Type
 
@@ -173,7 +192,7 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/blockMonitor/properties/paused")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-paused.md "definitions.schema.json#/definitions/block-monitor/properties/paused")
 
 ### paused Type
 
@@ -191,7 +210,7 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-skip-abi-validation.md "definitions.schema.json#/definitions/blockMonitor/properties/skip-abi-validation")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-skip-abi-validation.md "definitions.schema.json#/definitions/block-monitor/properties/skip-abi-validation")
 
 ### skip-abi-validation Type
 
@@ -205,15 +224,21 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-condition")
+*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-condition")
 
 ### action-condition Type
 
-`object` ([Action](definitions-definitions-action.md))
+merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+
+any of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### action-condition Constraints
 
@@ -227,15 +252,21 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   is optional
 
-*   Type: `object` ([Action](definitions-definitions-action.md))
+*   Type: merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-action.md "definitions.schema.json#/definitions/blockMonitor/properties/action-trigger")
+*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/block-monitor/properties/action-trigger")
 
 ### action-trigger Type
 
-`object` ([Action](definitions-definitions-action.md))
+merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
+
+any of
+
+*   [Action](definitions-definitions-action.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### action-trigger Constraints
 
@@ -253,7 +284,7 @@ A boolean value that indicates whether the UI should skip ABI validation checks.
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/blockMonitor/properties/confirm-level")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-confirm-level.md "definitions.schema.json#/definitions/block-monitor/properties/confirm-level")
 
 ### confirm-level Type
 
@@ -277,7 +308,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/blockMonitor/properties/notify-config")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/block-monitor/properties/notify-config")
 
 ### notify-config Type
 
@@ -295,7 +326,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions.md "definitions.schema.json#/definitions/block-monitor/properties/conditions")
 
 ### conditions Type
 
@@ -313,7 +344,7 @@ one (and only one) of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-riskcategory.md "definitions.schema.json#/definitions/blockMonitor/properties/risk-category")
+*   defined in: [Definitions](definitions-definitions-riskcategory.md "definitions.schema.json#/definitions/block-monitor/properties/risk-category")
 
 ### risk-category Type
 

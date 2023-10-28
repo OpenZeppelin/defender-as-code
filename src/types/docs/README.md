@@ -20,25 +20,23 @@
 
 *   [Actions](./resources-properties-actions.md) – `resources.schema.json#/properties/actions`
 
-*   [AddressFromRelayer](./definitions-definitions-relayer-properties-addressfromrelayer.md) – `definitions.schema.json#/definitions/relayer/properties/address-from-relayer`
+*   [AlertThreshold](./definitions-definitions-blockmonitor-properties-alertthreshold.md) – `definitions.schema.json#/definitions/block-monitor/properties/alert-threshold`
 
-*   [AlertThreshold](./definitions-definitions-blockmonitor-properties-alertthreshold.md) – `definitions.schema.json#/definitions/blockMonitor/properties/alert-threshold`
-
-*   [AlertThreshold](./definitions-definitions-fortamonitor-properties-alertthreshold.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/alert-threshold`
+*   [AlertThreshold](./definitions-definitions-fortamonitor-properties-alertthreshold.md) – `definitions.schema.json#/definitions/forta-monitor/properties/alert-threshold`
 
 *   [Block Explorer Api Keys](./resources-properties-block-explorer-api-keys.md) – `resources.schema.json#/properties/block-explorer-api-keys`
 
-*   [BlockExplorerApiKey](./definitions-definitions-blockexplorerapikey.md) – `definitions.schema.json#/definitions/blockExplorerApiKey`
+*   [BlockExplorerApiKey](./definitions-definitions-blockexplorerapikey.md) – `definitions.schema.json#/definitions/block-explorer-api-key`
 
-*   [BlockMonitor](./definitions-definitions-blockmonitor.md) – `definitions.schema.json#/definitions/blockMonitor`
+*   [BlockMonitor](./definitions-definitions-blockmonitor.md) – `definitions.schema.json#/definitions/block-monitor`
 
 *   [Categories](./resources-properties-categories.md) – `resources.schema.json#/properties/categories`
 
 *   [Category](./definitions-definitions-category.md) – `definitions.schema.json#/definitions/category`
 
-*   [Conditions](./definitions-definitions-blockmonitor-properties-conditions.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions`
+*   [Conditions](./definitions-definitions-blockmonitor-properties-conditions.md) – `definitions.schema.json#/definitions/block-monitor/properties/conditions`
 
-*   [Conditions](./definitions-definitions-fortamonitor-properties-conditions.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/conditions`
+*   [Conditions](./definitions-definitions-fortamonitor-properties-conditions.md) – `definitions.schema.json#/definitions/forta-monitor/properties/conditions`
 
 *   [Config](./definitions-definitions-notification-properties-config.md) – `definitions.schema.json#/definitions/notification/properties/config`
 
@@ -50,15 +48,15 @@
 
 *   [EmailConfig](./definitions-definitions-emailconfig.md) – `definitions.schema.json#/definitions/emailConfig`
 
-*   [EventItems](./definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/event/items`
+*   [EventItems](./definitions-definitions-blockmonitor-properties-conditions-properties-event-eventitems.md) – `definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/event/items`
 
 *   [Forked Networks](./resources-properties-forked-networks.md) – `resources.schema.json#/properties/forked-networks`
 
-*   [ForkedNetworkRequest](./definitions-definitions-forkednetworkrequest.md) – `definitions.schema.json#/definitions/forkedNetworkRequest`
+*   [ForkedNetworkRequest](./definitions-definitions-forkednetworkrequest.md) – `definitions.schema.json#/definitions/forked-network-request`
 
-*   [FortaMonitor](./definitions-definitions-fortamonitor.md) – `definitions.schema.json#/definitions/fortaMonitor`
+*   [FortaMonitor](./definitions-definitions-fortamonitor.md) – `definitions.schema.json#/definitions/forta-monitor`
 
-*   [FunctionItems](./definitions-definitions-blockmonitor-properties-conditions-properties-function-functionitems.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/function/items`
+*   [FunctionItems](./definitions-definitions-blockmonitor-properties-conditions-properties-function-functionitems.md) – `definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/function/items`
 
 *   [GlobalSecrets](./resources-properties-actionsecrets-properties-globalsecrets.md) – `resources.schema.json#/properties/secrets/properties/global`
 
@@ -70,9 +68,9 @@
 
 *   [Notifications](./resources-properties-notifications.md) – `resources.schema.json#/properties/notifications`
 
-*   [NotifyConfig](./definitions-definitions-blockmonitor-properties-notifyconfig.md) – `definitions.schema.json#/definitions/blockMonitor/properties/notify-config`
+*   [NotifyConfig](./definitions-definitions-blockmonitor-properties-notifyconfig.md) – `definitions.schema.json#/definitions/block-monitor/properties/notify-config`
 
-*   [NotifyConfig](./definitions-definitions-fortamonitor-properties-notifyconfig.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/notify-config`
+*   [NotifyConfig](./definitions-definitions-fortamonitor-properties-notifyconfig.md) – `definitions.schema.json#/definitions/forta-monitor/properties/notify-config`
 
 *   [OpsgenieConfigDetails](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md) – `definitions.schema.json#/definitions/opsgenieConfig/properties/details`
 
@@ -94,31 +92,37 @@
 
 *   [Trigger](./definitions-definitions-action-properties-trigger.md) – `definitions.schema.json#/definitions/action/properties/trigger`
 
+*   [Untitled object in Definitions](./definitions-definitions-relayer-properties-addressfromrelayer-anyof-0.md) – `definitions.schema.json#/definitions/relayer/properties/address-from-relayer/anyOf/0`
+
 *   [UrlConfig](./definitions-definitions-urlconfig.md) – `definitions.schema.json#/definitions/urlConfig`
 
 ### Arrays
 
-*   [Addresses](./definitions-definitions-blockmonitor-properties-addresses.md) – `definitions.schema.json#/definitions/blockMonitor/properties/addresses`
+*   [Addresses](./definitions-definitions-blockmonitor-properties-addresses.md) – `definitions.schema.json#/definitions/block-monitor/properties/addresses`
 
-*   [Addresses](./definitions-definitions-fortamonitor-properties-addresses.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/addresses`
+*   [Addresses](./definitions-definitions-fortamonitor-properties-addresses.md) – `definitions.schema.json#/definitions/forta-monitor/properties/addresses`
 
-*   [AgentIDs](./definitions-definitions-fortamonitor-properties-agentids.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/agent-ids`
+*   [AgentIDs](./definitions-definitions-fortamonitor-properties-agentids.md) – `definitions.schema.json#/definitions/forta-monitor/properties/agent-ids`
 
-*   [AlertIDs](./definitions-definitions-fortamonitor-properties-conditions-properties-alertids.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/conditions/properties/alert-ids`
+*   [AlertIDs](./definitions-definitions-fortamonitor-properties-conditions-properties-alertids.md) – `definitions.schema.json#/definitions/forta-monitor/properties/conditions/properties/alert-ids`
 
 *   [ArrayABI](./definitions-definitions-abitype-anyof-arrayabi.md) – `definitions.schema.json#/definitions/abi/anyOf/1`
 
 *   [CategoryNotificationIds](./definitions-definitions-category-properties-categorynotificationids.md) – `definitions.schema.json#/definitions/category/properties/notification-ids`
 
-*   [Channels](./definitions-definitions-blockmonitor-properties-notifyconfig-properties-channels.md) – `definitions.schema.json#/definitions/blockMonitor/properties/notify-config/properties/channels`
+*   [Channels](./definitions-definitions-blockmonitor-properties-notifyconfig-properties-channels.md) – `definitions.schema.json#/definitions/block-monitor/properties/notify-config/properties/channels`
 
-*   [Channels](./definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md) – `definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/channels`
+*   [Channels](./definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md) – `definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/channels`
+
+*   [Contracts](./definitions-definitions-blockmonitor-properties-contracts.md) – `definitions.schema.json#/definitions/block-monitor/properties/contracts`
+
+*   [Contracts](./definitions-definitions-fortamonitor-properties-contracts.md) – `definitions.schema.json#/definitions/forta-monitor/properties/contracts`
 
 *   [Emails](./definitions-definitions-emailconfig-properties-emails.md) – `definitions.schema.json#/definitions/emailConfig/properties/emails`
 
-*   [Event](./definitions-definitions-blockmonitor-properties-conditions-properties-event.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/event`
+*   [Event](./definitions-definitions-blockmonitor-properties-conditions-properties-event.md) – `definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/event`
 
-*   [Function](./definitions-definitions-blockmonitor-properties-conditions-properties-function.md) – `definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/function`
+*   [Function](./definitions-definitions-blockmonitor-properties-conditions-properties-function.md) – `definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/function`
 
 *   [OpsgenieConfigActions](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigactions.md) – `definitions.schema.json#/definitions/opsgenieConfig/properties/actions`
 

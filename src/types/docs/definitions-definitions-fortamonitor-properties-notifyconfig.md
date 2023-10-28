@@ -4,13 +4,13 @@
 
 # notify-config Properties
 
-| Property                            | Type      | Required | Nullable       | Defined by                                                                                                                                                                                                        |
-| :---------------------------------- | :-------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [timeout](#timeout)                 | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-timeout.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/timeout")                 |
-| [message](#message)                 | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/message")                 |
-| [message-subject](#message-subject) | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message-subject.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/message-subject") |
-| [category](#category)               | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-category.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/category")                                                               |
-| [channels](#channels)               | `array`   | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/channels")               |
+| Property                            | Type      | Required | Nullable       | Defined by                                                                                                                                                                                                         |
+| :---------------------------------- | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [timeout](#timeout)                 | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-timeout.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/timeout")                 |
+| [message](#message)                 | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/message")                 |
+| [message-subject](#message-subject) | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message-subject.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/message-subject") |
+| [category](#category)               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-categoryordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/category")   |
+| [channels](#channels)               | `array`   | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/channels")               |
 
 ## timeout
 
@@ -24,7 +24,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-timeout.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/timeout")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-timeout.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/timeout")
 
 ### timeout Type
 
@@ -42,7 +42,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/message")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/message")
 
 ### message Type
 
@@ -60,7 +60,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message-subject.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/message-subject")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message-subject.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/message-subject")
 
 ### message-subject Type
 
@@ -74,15 +74,21 @@
 
 *   is optional
 
-*   Type: `object` ([Category](definitions-definitions-category.md))
+*   Type: merged type ([CategoryOrDefenderID](definitions-definitions-fortamonitor-properties-notifyconfig-properties-categoryordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-category.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/category")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-categoryordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/category")
 
 ### category Type
 
-`object` ([Category](definitions-definitions-category.md))
+merged type ([CategoryOrDefenderID](definitions-definitions-fortamonitor-properties-notifyconfig-properties-categoryordefenderid.md))
+
+any of
+
+*   [Category](definitions-definitions-category.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### category Constraints
 
@@ -96,12 +102,12 @@
 
 *   is required
 
-*   Type: `object[]` ([Notification](definitions-definitions-notification.md))
+*   Type: an array of merged types ([NotificationOrDefenderID](definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels-notificationordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md "definitions.schema.json#/definitions/fortaMonitor/properties/notify-config/properties/channels")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/channels")
 
 ### channels Type
 
-`object[]` ([Notification](definitions-definitions-notification.md))
+an array of merged types ([NotificationOrDefenderID](definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels-notificationordefenderid.md))

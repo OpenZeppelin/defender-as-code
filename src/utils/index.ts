@@ -30,18 +30,51 @@ import {
   DefenderBlockMonitor,
   DefenderAPIError,
   Resources,
+  DefenderMonitor,
+  DefenderRelayer,
+  DefenderBlockExplorerApiKey,
+  DefenderForkedNetwork,
 } from '../types';
 import { sanitise } from './sanitise';
 import {
   Action,
+  ActionOrDefenderID,
   ActionSecrets,
   AlertThreshold,
   Category,
+  CategoryOrDefenderID,
   Contract,
+  ContractOrDefenderID,
+  DefenderID,
   Monitor,
   Notification,
+  NotificationOrDefenderID,
   NotifyConfig,
 } from '../types/types/resources.schema';
+
+const getDefenderIdFromResource = <Y>(resource: Y, resourceType: ResourceType): DefenderID => {
+  switch (resourceType) {
+    case 'Actions':
+      return (resource as DefenderAction).actionId;
+    case 'Monitors':
+      return (resource as DefenderMonitor).monitorId;
+    case 'Relayers':
+      return (resource as DefenderRelayer).relayerId;
+    case 'Notifications':
+      return (resource as DefenderNotification).notificationId;
+    case 'Categories':
+      return (resource as DefenderCategory).categoryId;
+    case 'Block Explorer Api Keys':
+      return (resource as DefenderBlockExplorerApiKey).blockExplorerApiKeyId;
+    case 'Forked Networks':
+      return (resource as DefenderForkedNetwork).forkedNetworkId;
+    case 'Contracts':
+      const contract = resource as DefenderContract;
+      return `${contract.network}-${contract.address}`;
+    default:
+      throw new Error(`Incompatible resource type ${resourceType}`);
+  }
+};
 
 /**
  * @dev this function retrieves the Defender equivalent object of the provided template resource
@@ -52,10 +85,14 @@ export const getEquivalentResource = <Y, D>(
   resource: Y,
   resources: { [k: string]: Y } | undefined,
   currentResources: D[],
+  type: ResourceType,
 ) => {
   if (resource) {
+    if (isDefenderId(resource)) {
+      return currentResources.find((e) => getDefenderIdFromResource(e, type) === resource);
+    }
     const [key, value] = Object.entries(resources ?? {}).find((a) => _.isEqual(a[1], resource))!;
-    return currentResources.find((e: D) => (e as any).stackResourceId === getResourceID(getStackName(context), key));
+    return currentResources.find((e) => (e as any).stackResourceId === getResourceID(getStackName(context), key));
   }
 };
 
@@ -229,11 +266,12 @@ export const constructNotificationCategory = (
     notificationIds: (category['notification-ids']
       ? category['notification-ids']
           .map((notification) => {
-            const maybeNotification = getEquivalentResource<Notification, DefenderNotification>(
+            const maybeNotification = getEquivalentResource<NotificationOrDefenderID | undefined, DefenderNotification>(
               context,
               notification,
               resources?.notifications,
               notifications,
+              'Notifications',
             );
             if (maybeNotification)
               return {
@@ -250,6 +288,33 @@ const isResource = <T>(item: T | undefined): item is T => {
   return !!item;
 };
 
+const getDefenderAction = (
+  resource: ActionOrDefenderID | undefined,
+  actions: DefenderAction[],
+): DefenderAction | undefined => {
+  if (!resource) return undefined;
+  if (isDefenderId(resource)) return actions.find((a) => a.actionId === resource);
+  return actions.find((a) => a.name === resource.name);
+};
+
+const getDefenderCategory = (
+  resource: CategoryOrDefenderID | undefined,
+  categories: DefenderCategory[],
+): DefenderCategory | undefined => {
+  if (!resource) return undefined;
+  if (isDefenderId(resource)) return categories.find((a) => a.categoryId === resource);
+  return categories.find((a) => a.name === resource.name);
+};
+
+const getDefenderContract = (
+  resource: ContractOrDefenderID | undefined,
+  contracts: DefenderContract[],
+): DefenderContract | undefined => {
+  if (!resource) return undefined;
+  if (isDefenderId(resource)) return contracts.find((a) => `${a.network}-${a.address}` === resource);
+  return contracts.find((a) => `${a.network}-${a.address}` === `${resource.network}-${resource.address}`);
+};
+
 export const constructMonitor = (
   context: Serverless,
   resources: Resources,
@@ -259,37 +324,57 @@ export const constructMonitor = (
   actions: DefenderAction[],
   blockwatchers: DefenderBlockWatcher[],
   categories: DefenderCategory[],
+  contracts: DefenderContract[],
 ): DefenderBlockMonitor | DefenderFortaMonitor => {
-  const actionCondition: DefenderAction | undefined =
-    (monitor['action-condition'] as Action) &&
-    actions.find((a) => a.name === (monitor['action-condition'] as Action)!.name);
-  const actionTrigger: DefenderAction | undefined =
-    (monitor['action-trigger'] as Action) &&
-    actions.find((a) => a.name === (monitor['action-trigger'] as Action)!.name);
+  const actionCondition = getDefenderAction(monitor['action-condition'], actions);
+  const actionTrigger = getDefenderAction(monitor['action-trigger'], actions);
 
   const notifyConfig = monitor['notify-config'] as NotifyConfig;
   const threshold = monitor['alert-threshold'] as AlertThreshold;
   const notificationChannels = notifyConfig.channels
     .map((notification) => {
-      const maybeNotification = getEquivalentResource<Notification, DefenderNotification>(
+      const maybeNotification = getEquivalentResource<NotificationOrDefenderID | undefined, DefenderNotification>(
         context,
         notification,
         resources?.notifications,
         notifications,
+        'Notifications',
       );
       return maybeNotification?.notificationId;
     })
     .filter(isResource);
 
   const monitorCategory = notifyConfig.category;
-  const notificationCategoryId = monitorCategory && categories.find((c) => c.name === monitorCategory.name)?.categoryId;
+  const notificationCategoryId = getDefenderCategory(monitorCategory, categories)?.categoryId;
+
+  // !NOTE: This depends on Contracts being deployed before Monitors
+  //        otherwise getDefenderContract will return old values
+  const monitorContracts = monitor.contracts?.map((contract) => getDefenderContract(contract, contracts));
+  // if monitor.abi is defined, we use that over the first entry from monitorContracts by default
+  const monitorABI =
+    (monitor.abi && JSON.stringify(typeof monitor.abi === 'string' ? JSON.parse(monitor.abi) : monitor.abi)) ||
+    monitorContracts?.[0]?.abi;
+  // Pull addresses from either monitor.addresses or monitor.contracts
+  const monitorAddresses =
+    (monitorContracts &&
+      monitorContracts.map((contract) => {
+        if (!contract) {
+          throw new Error('Contract not found in Defender');
+        }
+        return contract!.address;
+      })) ||
+    monitor.addresses;
+
+  if (!monitorAddresses && monitor.type === 'BLOCK') {
+    throw new Error('BLOCK monitor must have either addresses or contracts defined');
+  }
 
   const commonMonitor = {
     type: monitor.type,
     name: monitor.name,
     network: monitor.network,
-    addresses: monitor.addresses,
-    abi: monitor.abi && JSON.stringify(typeof monitor.abi === 'string' ? JSON.parse(monitor.abi) : monitor.abi),
+    addresses: monitorAddresses,
+    abi: monitorABI,
     paused: monitor.paused,
     autotaskCondition: actionCondition && actionCondition.actionId,
     autotaskTrigger: actionTrigger && actionTrigger.actionId,
@@ -333,7 +418,7 @@ export const constructMonitor = (
       ...commonMonitor,
       type: 'BLOCK',
       network: monitor.network,
-      addresses: monitor.addresses,
+      addresses: monitorAddresses!,
       confirmLevel: compatibleBlockWatcher!.confirmLevel,
       skipABIValidation: monitor['skip-abi-validation'],
       eventConditions:
@@ -433,4 +518,19 @@ export const isUnauthorisedError = (e: any): boolean => {
 
 export const formatABI = (abi: Contract['abi']) => {
   return abi && JSON.stringify(typeof abi === 'string' ? JSON.parse(abi) : abi);
+};
+
+export const isDefenderId = (resource: any): resource is DefenderID => {
+  return resource && typeof resource === 'string';
+};
+
+export const removeDefenderIdReferences = <Y>(resources: { [k: string]: Y | DefenderID } | undefined) => {
+  if (resources) {
+    for (const [id, resource] of Object.entries(resources)) {
+      if (isDefenderId(resource)) {
+        delete resources[id];
+      }
+    }
+  }
+  return resources as { [k: string]: Y } | undefined;
 };

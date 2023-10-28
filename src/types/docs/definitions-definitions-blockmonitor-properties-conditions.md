@@ -4,11 +4,11 @@
 
 # conditions Properties
 
-| Property                    | Type     | Required | Nullable       | Defined by                                                                                                                                                                                           |
-| :-------------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [event](#event)             | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/event")             |
-| [function](#function)       | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-function.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/function")       |
-| [transaction](#transaction) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-transaction.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/transaction") |
+| Property                    | Type     | Required | Nullable       | Defined by                                                                                                                                                                                            |
+| :-------------------------- | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [event](#event)             | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event.md "definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/event")             |
+| [function](#function)       | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-function.md "definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/function")       |
+| [transaction](#transaction) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-transaction.md "definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/transaction") |
 
 ## event
 
@@ -22,7 +22,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/event")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-event.md "definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/event")
 
 ### event Type
 
@@ -40,7 +40,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-function.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/function")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-function.md "definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/function")
 
 ### function Type
 
@@ -58,7 +58,7 @@
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-transaction.md "definitions.schema.json#/definitions/blockMonitor/properties/conditions/properties/transaction")
+*   defined in: [Definitions](definitions-definitions-blockmonitor-properties-conditions-properties-transaction.md "definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/transaction")
 
 ### transaction Type
 

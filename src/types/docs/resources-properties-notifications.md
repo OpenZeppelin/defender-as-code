@@ -4,9 +4,9 @@
 
 # notifications Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                                  |
-| :-------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-notification.md "resources.schema.json#/properties/notifications/additionalProperties") |
+| Property              | Type   | Required | Nullable       | Defined by                                                                                                                              |
+| :-------------------- | :----- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-notificationordefenderid.md "resources.schema.json#/properties/notifications/additionalProperties") |
 
 ## Additional Properties
 
@@ -16,15 +16,21 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   is optional
 
-*   Type: `object` ([Notification](definitions-definitions-notification.md))
+*   Type: merged type ([NotificationOrDefenderID](definitions-definitions-notificationordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-notification.md "resources.schema.json#/properties/notifications/additionalProperties")
+*   defined in: [Resources](definitions-definitions-notificationordefenderid.md "resources.schema.json#/properties/notifications/additionalProperties")
 
 ### additionalProperties Type
 
-`object` ([Notification](definitions-definitions-notification.md))
+merged type ([NotificationOrDefenderID](definitions-definitions-notificationordefenderid.md))
+
+any of
+
+*   [Notification](definitions-definitions-notification.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### additionalProperties Constraints
 

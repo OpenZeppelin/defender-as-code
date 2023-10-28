@@ -4,9 +4,9 @@
 
 # forked-networks Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                                            |
-| :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| Additional Properties | `object` | Optional | cannot be null | [Resources](definitions-definitions-forkednetworkrequest.md "resources.schema.json#/properties/forked-networks/additionalProperties") |
+| Property              | Type   | Required | Nullable       | Defined by                                                                                                                                 |
+| :-------------------- | :----- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-forkednetworkordefenderid.md "resources.schema.json#/properties/forked-networks/additionalProperties") |
 
 ## Additional Properties
 
@@ -16,15 +16,21 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   is optional
 
-*   Type: `object` ([ForkedNetworkRequest](definitions-definitions-forkednetworkrequest.md))
+*   Type: merged type ([ForkedNetworkOrDefenderID](definitions-definitions-forkednetworkordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-forkednetworkrequest.md "resources.schema.json#/properties/forked-networks/additionalProperties")
+*   defined in: [Resources](definitions-definitions-forkednetworkordefenderid.md "resources.schema.json#/properties/forked-networks/additionalProperties")
 
 ### additionalProperties Type
 
-`object` ([ForkedNetworkRequest](definitions-definitions-forkednetworkrequest.md))
+merged type ([ForkedNetworkOrDefenderID](definitions-definitions-forkednetworkordefenderid.md))
+
+any of
+
+*   [ForkedNetworkRequest](definitions-definitions-forkednetworkrequest.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### additionalProperties Constraints
 

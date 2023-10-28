@@ -4,9 +4,9 @@
 
 # monitors Properties
 
-| Property              | Type   | Required | Nullable       | Defined by                                                                                                        |
-| :-------------------- | :----- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------- |
-| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-monitor.md "resources.schema.json#/properties/monitors/additionalProperties") |
+| Property              | Type   | Required | Nullable       | Defined by                                                                                                                    |
+| :-------------------- | :----- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| Additional Properties | Merged | Optional | cannot be null | [Resources](definitions-definitions-monitorordefenderid.md "resources.schema.json#/properties/monitors/additionalProperties") |
 
 ## Additional Properties
 
@@ -16,21 +16,25 @@ Additional properties are allowed, as long as they follow this schema:
 
 *   is optional
 
-*   Type: `object` ([Monitor](definitions-definitions-monitor.md))
+*   Type: merged type ([MonitorOrDefenderID](definitions-definitions-monitorordefenderid.md))
 
 *   cannot be null
 
-*   defined in: [Resources](definitions-definitions-monitor.md "resources.schema.json#/properties/monitors/additionalProperties")
+*   defined in: [Resources](definitions-definitions-monitorordefenderid.md "resources.schema.json#/properties/monitors/additionalProperties")
 
 ### additionalProperties Type
 
-`object` ([Monitor](definitions-definitions-monitor.md))
+merged type ([MonitorOrDefenderID](definitions-definitions-monitorordefenderid.md))
 
-one (and only one) of
+any of
 
-*   [BlockMonitor](definitions-definitions-blockmonitor.md "check type definition")
+*   one (and only one) of
 
-*   [FortaMonitor](definitions-definitions-fortamonitor.md "check type definition")
+    *   [BlockMonitor](definitions-definitions-blockmonitor.md "check type definition")
+
+    *   [FortaMonitor](definitions-definitions-fortamonitor.md "check type definition")
+
+*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ### additionalProperties Constraints
 

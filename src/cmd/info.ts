@@ -15,6 +15,7 @@ import {
   getStackName,
   getTeamAPIkeysOrThrow,
   isTemplateResource,
+  removeDefenderIdReferences,
 } from '../utils';
 import {
   DefenderAction,
@@ -128,7 +129,7 @@ export default class DefenderInfo {
     await this.wrapper<ForkedNetworkRequest, DefenderForkedNetwork>(
       this.serverless,
       'Forked Networks',
-      this.resources?.['forked-networks'],
+      removeDefenderIdReferences(this.resources?.['forked-networks']),
       listForkedNetworks,
       (resource: DefenderForkedNetwork) => `${resource.stackResourceId}: ${resource.forkedNetworkId}`,
       stdOut.forkedNetworks,
@@ -143,7 +144,7 @@ export default class DefenderInfo {
     await this.wrapper<Monitor, DefenderMonitor>(
       this.serverless,
       'Monitors',
-      this.resources?.monitors,
+      removeDefenderIdReferences(this.resources?.monitors),
       listMonitors,
       (resource: DefenderMonitor) => `${resource.stackResourceId}: ${resource.monitorId}`,
       stdOut.monitors,
@@ -157,7 +158,7 @@ export default class DefenderInfo {
     await this.wrapper<Action, DefenderAction>(
       this.serverless,
       'Actions',
-      this.resources.actions,
+      removeDefenderIdReferences(this.resources.actions),
       listActions,
       (resource: DefenderAction) => `${resource.stackResourceId}: ${resource.actionId}`,
       stdOut.actions,
@@ -168,7 +169,7 @@ export default class DefenderInfo {
     await this.wrapper<Contract, DefenderContract>(
       this.serverless,
       'Contracts',
-      this.resources?.contracts,
+      removeDefenderIdReferences(this.resources?.contracts),
       listContracts,
       (resource: DefenderContract) => `${resource.network}-${resource.address}: ${resource.name}`,
       stdOut.contracts,
@@ -182,7 +183,7 @@ export default class DefenderInfo {
     await this.wrapper<Relayer, DefenderRelayer>(
       this.serverless,
       'Relayers',
-      this.resources?.relayers,
+      removeDefenderIdReferences(this.resources?.relayers),
       listRelayers,
       (resource: DefenderRelayer) => `${resource.stackResourceId}: ${resource.relayerId}`,
       stdOut.relayers,
@@ -193,7 +194,7 @@ export default class DefenderInfo {
     await this.wrapper<Notification, DefenderNotification>(
       this.serverless,
       'Notifications',
-      this.resources?.notifications,
+      removeDefenderIdReferences(this.resources?.notifications),
       listNotifications,
       (resource: DefenderNotification) => `${resource.stackResourceId}: ${resource.notificationId}`,
       stdOut.notifications,
@@ -204,7 +205,7 @@ export default class DefenderInfo {
     await this.wrapper<Category, DefenderCategory>(
       this.serverless,
       'Categories',
-      this.resources?.categories,
+      removeDefenderIdReferences(this.resources?.categories),
       listNotificationCategories,
       (resource: DefenderCategory) => `${resource.stackResourceId}: ${resource.categoryId}`,
       stdOut.categories,
