@@ -957,23 +957,23 @@ export default class DefenderDeploy {
         const newDigest = client.getCodeDigest({
           encodedZippedCode: code,
         });
-        const { codeDigest } = await client.get(match.actionId);
+        const { codeDigest, environmentVariables } = await client.get(match.actionId);
 
         const isSchedule = (
           o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderMonitorTrigger | DefenderMonitorFilterTrigger,
         ): o is DefenderScheduleTrigger => o.type === 'schedule';
 
         const mappedMatch = {
-          name: match.name,
-          trigger: {
+          'name': match.name,
+          'trigger': {
             type: match.trigger.type,
             frequency: (isSchedule(match.trigger) && match.trigger.frequencyMinutes) || undefined,
             cron: (isSchedule(match.trigger) && match.trigger.cron) || undefined,
           },
-          paused: match.paused,
-          relayerId: match.relayerId,
-          codeDigest: match.codeDigest,
-          environmentVariables: match.environmentVariables,
+          'paused': match.paused,
+          'relayerId': match.relayerId,
+          'codeDigest': match.codeDigest,
+          'environment-variables': environmentVariables,
         };
 
         if (
