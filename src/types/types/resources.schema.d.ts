@@ -176,6 +176,9 @@ export interface Action {
   relayer?: RelayerOrDefenderID;
   trigger: Trigger;
   paused: boolean;
+  'environment-variables'?: {
+    [k: string]: string;
+  };
 }
 export interface Relayer {
   name: string;

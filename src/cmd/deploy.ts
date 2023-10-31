@@ -973,6 +973,7 @@ export default class DefenderDeploy {
           paused: match.paused,
           relayerId: match.relayerId,
           codeDigest: match.codeDigest,
+          environmentVariables: match.environmentVariables,
         };
 
         if (
@@ -1006,12 +1007,14 @@ export default class DefenderDeploy {
           relayerId: maybeRelayer?.relayerId,
         });
 
+        await client.updateEnvironmentVariables(match.actionId, { variables: action['environment-variables'] ?? {} });
+
         if (newDigest === codeDigest) {
           return {
             name: match.stackResourceId!,
             id: match.actionId,
             success: true,
-            notice: `Skipped code upload - no changes detected for ${match.stackResourceId}`,
+            notice: `Skipped code upload - no code changes detected for ${match.stackResourceId}`,
             response: updatesAction,
           };
         } else {
@@ -1050,6 +1053,7 @@ export default class DefenderDeploy {
           paused: action.paused,
           relayerId: maybeRelayer?.relayerId,
           stackResourceId: stackResourceId,
+          environmentVariables: action['environment-variables'],
         });
         return {
           name: stackResourceId,

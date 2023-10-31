@@ -51,6 +51,10 @@ resources:
         type: 'schedule'
         frequency: 1500
       paused: false
+      # optional - unencrypted and scoped to the individual action
+      environment-variables:
+        hello: 'world!'
+    action-example-2: 2cbc3f58-d962-4be8-a158-1035be4b661c
 
   policies:
     policy-1:
@@ -210,6 +214,8 @@ Errors thrown during the `deploy` process, will not revert any prior changes. Co
 - Validation error of the `serverless.yml` file (see [Types and Schema validation](#Types-and-Schema-validation))
 
 Usually, fixing the error and retrying the deploy should suffice as any existing resources will fall within the `update` clause of the deployment. However, if unsure, you can always call `sls remove` to remove the entire stack, and retry.
+
+Action secrets are encrypted key-value pairs and injected at runtime into the lambda environment. Secrets are scoped to all actions automatically. Alternatively, you may use environment-variables to define key-value pairs that are scoped to the individual action, and available at runtime through `process.env`. Note that these values are not encrypted.
 
 ## Publish a new release
 
