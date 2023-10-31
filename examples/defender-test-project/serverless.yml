@@ -210,15 +210,15 @@ resources:
       # optional
       forta-last-processed-time: null
 
-  # forked-networks:
-  #   mainnet-fork:
-  #     name: mainnet-fork # restricted to alphanumeric characters and dashes (no whitespaces)
-  #     forked-network: mainnet # must be of type SupportedNetwork
-  #     rpc-url: https://rpc.phalcon.xyz/rpc_123
-  #     # optional
-  #     block-explorer-url: https://scan.phalcon.xyz/fork_123
-  #     # optional
-  #     api-key: null
+  forked-networks:
+    mainnet-fork:
+      name: mainnet-fork # restricted to alphanumeric characters and dashes (no whitespaces)
+      forked-network: mainnet # must be of type SupportedNetwork
+      rpc-url: https://rpc.phalcon.xyz/rpc_123
+      # optional
+      block-explorer-url: https://scan.phalcon.xyz/fork_123
+      # optional
+      api-key: null
 
 plugins:
   - '@openzeppelin/defender-as-code'
