@@ -957,7 +957,8 @@ export default class DefenderDeploy {
         const newDigest = client.getCodeDigest({
           encodedZippedCode: code,
         });
-        const { codeDigest, environmentVariables } = await client.get(match.actionId);
+        const { codeDigest } = await client.get(match.actionId);
+        const environmentVariables = await client.getEnvironmentVariables(match.actionId);
 
         const isSchedule = (
           o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderMonitorTrigger | DefenderMonitorFilterTrigger,
