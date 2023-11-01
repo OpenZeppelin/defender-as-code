@@ -24,6 +24,16 @@ Alternatively, you can install it directly into an existing project with:
 
 ## Setup
 
+There are a few ways you can set up the `serverless.yml` configuration:
+
+- Create it from scratch;
+- Use Defender's 2.0 Serverless export capability;
+- Leverage the example [template](https://github.com/OpenZeppelin/defender-as-code/blob/main/template/serverless.yml) provided in the `defender-as-code` repository.
+
+If you already have resources such as contracts, notifications, relayers, actions, etc. in Defender 2.0, you can export a `serverless.yml` configuration file containing these resources from the manage → advanced page.
+
+NOTE: If you have previously deployed with `defender-as-code` to the same account and subsequently created new resources through the Defender 2.0 user interface, the export function will automatically assign a `stackResourceId` to the new resources based on the name of your latest deployment stack. If you have not deployed using `defender-as-code` before, a default stack name of `mystack` will be used.
+
 This plugin allows you to define Actions, Monitors, Notifications, Categories, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an action, a relayer, a policy and a single relayer API key defined:
 
 ```yaml
@@ -80,7 +90,7 @@ This requires setting the `key` and `secret` under the `defender` property of th
 
 Ensure the Defender Team API Keys are setup with all appropriate API capabilities.
 
-The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same Defender team.
+The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same tenant.
 
 You may also reference existing Defender resources directly by their unique ID (e.g. `2cbc3f58-d962-4be8-a158-1035be4b661c`). These resources will not be managed by the plugin and will be ignored during the deploy process. However, you may reference them in other resources to update their configuration accordingly.
 A list of properties that support direct referencing:
