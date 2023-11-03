@@ -57,7 +57,8 @@
         "mantle",
         "scroll",
         "scroll-sepolia",
-        "meld"
+        "meld",
+        "meld-kanazawa"
       ]
     },
     "custom-network": {

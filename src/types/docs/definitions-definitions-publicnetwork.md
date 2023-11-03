@@ -48,3 +48,4 @@
 | `"scroll"`          |             |
 | `"scroll-sepolia"`  |             |
 | `"meld"`            |             |
+| `"meld-kanazawa"`   |             |
