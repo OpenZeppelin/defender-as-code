@@ -53,7 +53,11 @@
         "base",
         "base-goerli",
         "linea-goerli",
-        "linea"
+        "linea",
+        "mantle",
+        "scroll",
+        "scroll-sepolia",
+        "meld"
       ]
     },
     "custom-network": {

@@ -45,7 +45,11 @@ export type PublicNetwork =
   | 'base'
   | 'base-goerli'
   | 'linea-goerli'
-  | 'linea';
+  | 'linea'
+  | 'mantle'
+  | 'scroll'
+  | 'scroll-sepolia'
+  | 'meld';
 export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-security-alliance';
 export type ForkedNetwork = string;
 export type AddressFromRelayer = {} | string;

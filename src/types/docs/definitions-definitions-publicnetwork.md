@@ -44,3 +44,7 @@
 | `"base-goerli"`     |             |
 | `"linea-goerli"`    |             |
 | `"linea"`           |             |
+| `"mantle"`          |             |
+| `"scroll"`          |             |
+| `"scroll-sepolia"`  |             |
+| `"meld"`            |             |
