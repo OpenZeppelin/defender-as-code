@@ -4,13 +4,14 @@
 
 # action Properties
 
-| Property            | Type      | Required | Nullable       | Defined by                                                                                                                           |
-| :------------------ | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")       |
-| [path](#path)       | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")       |
-| [relayer](#relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")       |
-| [trigger](#trigger) | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger") |
-| [paused](#paused)   | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-action-properties-paused.md "definitions.schema.json#/definitions/action/properties/paused")   |
+| Property                                        | Type      | Required | Nullable       | Defined by                                                                                                                                                       |
+| :---------------------------------------------- | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")                                   |
+| [path](#path)                                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")                                   |
+| [relayer](#relayer)                             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")                                   |
+| [trigger](#trigger)                             | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger")                             |
+| [paused](#paused)                               | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-action-properties-paused.md "definitions.schema.json#/definitions/action/properties/paused")                               |
+| [environment-variables](#environment-variables) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-environment-variables.md "definitions.schema.json#/definitions/action/properties/environment-variables") |
 
 ## name
 
@@ -111,3 +112,21 @@ any of
 ### paused Type
 
 `boolean`
+
+## environment-variables
+
+
+
+`environment-variables`
+
+*   is optional
+
+*   Type: `object` ([Details](definitions-definitions-action-properties-environment-variables.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-action-properties-environment-variables.md "definitions.schema.json#/definitions/action/properties/environment-variables")
+
+### environment-variables Type
+
+`object` ([Details](definitions-definitions-action-properties-environment-variables.md))

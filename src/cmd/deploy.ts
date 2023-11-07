@@ -958,21 +958,23 @@ export default class DefenderDeploy {
           encodedZippedCode: code,
         });
         const { codeDigest } = await client.get(match.actionId);
+        const environmentVariables = await client.getEnvironmentVariables(match.actionId);
 
         const isSchedule = (
           o: DefenderWebhookTrigger | DefenderScheduleTrigger | DefenderMonitorTrigger | DefenderMonitorFilterTrigger,
         ): o is DefenderScheduleTrigger => o.type === 'schedule';
 
         const mappedMatch = {
-          name: match.name,
-          trigger: {
+          'name': match.name,
+          'trigger': {
             type: match.trigger.type,
             frequency: (isSchedule(match.trigger) && match.trigger.frequencyMinutes) || undefined,
             cron: (isSchedule(match.trigger) && match.trigger.cron) || undefined,
           },
-          paused: match.paused,
-          relayerId: match.relayerId,
-          codeDigest: match.codeDigest,
+          'paused': match.paused,
+          'relayerId': match.relayerId,
+          'codeDigest': match.codeDigest,
+          'environment-variables': environmentVariables,
         };
 
         if (
@@ -1006,12 +1008,14 @@ export default class DefenderDeploy {
           relayerId: maybeRelayer?.relayerId,
         });
 
+        await client.updateEnvironmentVariables(match.actionId, { variables: action['environment-variables'] ?? {} });
+
         if (newDigest === codeDigest) {
           return {
             name: match.stackResourceId!,
             id: match.actionId,
             success: true,
-            notice: `Skipped code upload - no changes detected for ${match.stackResourceId}`,
+            notice: `Skipped code upload - no code changes detected for ${match.stackResourceId}`,
             response: updatesAction,
           };
         } else {
@@ -1050,6 +1054,7 @@ export default class DefenderDeploy {
           paused: action.paused,
           relayerId: maybeRelayer?.relayerId,
           stackResourceId: stackResourceId,
+          environmentVariables: action['environment-variables'],
         });
         return {
           name: stackResourceId,

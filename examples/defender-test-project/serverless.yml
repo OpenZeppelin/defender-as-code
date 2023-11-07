@@ -44,6 +44,8 @@ resources:
       trigger:
         type: 'webhook'
       paused: false
+      environment-variables:
+        hello: 'world!'
     action-example-4: '516dfd2f-9715-47d4-bcdf-d1f9a7b4d80d'
 
   policies:

@@ -1,8 +1,8 @@
 # Defender as Code Serverless Plugin
 
-Defender as Code (DaC) is a Serverless Framework plugin for automated resource management on Defender.
+Defender as Code (DaC) is a Serverless Framework plugin for automated resource management and configuration as code.
 
-:warning: **This plugin is still under development. Bugs are expected. Use with care.**
+:warning: This plugin is under development and behavior might change. Handle with care.
 
 ## Prerequisites
 
@@ -23,6 +23,16 @@ Alternatively, you can install it directly into an existing project with:
 `yarn add @openzeppelin/defender-as-code`
 
 ## Setup
+
+There are a few ways you can set up the `serverless.yml` configuration:
+
+- Create it from scratch;
+- Use Defender's 2.0 Serverless export capability;
+- Leverage the example [template](https://github.com/OpenZeppelin/defender-as-code/blob/main/template/serverless.yml) provided in the `defender-as-code` repository.
+
+If you already have resources such as contracts, notifications, relayers, actions, etc. in Defender 2.0, you can export a `serverless.yml` configuration file containing these resources from the manage → advanced page.
+
+NOTE: If you have previously deployed with `defender-as-code` to the same account and subsequently created new resources through the Defender 2.0 user interface, the export function will automatically assign a `stackResourceId` to the new resources based on the name of your latest deployment stack. If you have not deployed using `defender-as-code` before, a default stack name of `mystack` will be used.
 
 This plugin allows you to define Actions, Monitors, Notifications, Categories, Relayers, Contracts, Policies and Secrets declaratively from a `serverless.yml` and provision them via the CLI using `serverless deploy`. An example template below with an action, a relayer, a policy and a single relayer API key defined:
 
@@ -51,6 +61,10 @@ resources:
         type: 'schedule'
         frequency: 1500
       paused: false
+      # optional - unencrypted and scoped to the individual action
+      environment-variables:
+        hello: 'world!'
+    action-example-2: 2cbc3f58-d962-4be8-a158-1035be4b661c
 
   policies:
     policy-1:
@@ -76,7 +90,7 @@ This requires setting the `key` and `secret` under the `defender` property of th
 
 Ensure the Defender Team API Keys are setup with all appropriate API capabilities.
 
-The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same Defender team.
+The `stackName` (e.g. mystack) is combined with the resource key (e.g. relayer-1) to uniquely identify each resource. This identifier is called the `stackResourceId` (e.g. mystack.relayer-1) and allows you to manage multiple deployments within the same tenant.
 
 You may also reference existing Defender resources directly by their unique ID (e.g. `2cbc3f58-d962-4be8-a158-1035be4b661c`). These resources will not be managed by the plugin and will be ignored during the deploy process. However, you may reference them in other resources to update their configuration accordingly.
 A list of properties that support direct referencing:
@@ -210,6 +224,8 @@ Errors thrown during the `deploy` process, will not revert any prior changes. Co
 - Validation error of the `serverless.yml` file (see [Types and Schema validation](#Types-and-Schema-validation))
 
 Usually, fixing the error and retrying the deploy should suffice as any existing resources will fall within the `update` clause of the deployment. However, if unsure, you can always call `sls remove` to remove the entire stack, and retry.
+
+Action secrets are encrypted key-value pairs and injected at runtime into the lambda environment. Secrets are scoped to all actions automatically. Alternatively, you may use environment-variables to define key-value pairs that are scoped to the individual action, and available at runtime through `process.env`. Note that these values are not encrypted.
 
 ## Publish a new release
 
