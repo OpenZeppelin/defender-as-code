@@ -24,6 +24,9 @@ resources:
         type: 'schedule'
         frequency: 1500
       paused: false
+      # optional - unencrypted and scoped to the individual action
+      environment-variables:
+        hello: 'world!'
 
   policies:
     policy-1:

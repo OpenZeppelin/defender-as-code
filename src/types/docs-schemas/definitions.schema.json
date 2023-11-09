@@ -702,7 +702,8 @@
           "else": {},
           "required": ["type"]
         },
-        "paused": { "type": "boolean" }
+        "paused": { "type": "boolean" },
+        "environment-variables": { "type": "object", "additionalProperties": { "type": "string" } }
       },
       "required": ["name", "path", "trigger", "paused"]
     },
