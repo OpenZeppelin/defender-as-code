@@ -30,6 +30,7 @@ export type PublicNetwork =
   | 'arbitrum'
   | 'arbitrum-nova'
   | 'arbitrum-goerli'
+  | 'arbitrum-sepolia'
   | 'optimism'
   | 'optimism-goerli'
   | 'celo'
