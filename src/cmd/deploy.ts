@@ -28,6 +28,7 @@ import {
   getNetworkClient,
   isDefenderId,
   removeDefenderIdReferences,
+  isForkedNetwork,
 } from '../utils';
 import {
   DefenderAction,
@@ -53,6 +54,7 @@ import {
   DefenderBlockMonitorResponse,
   Resources,
   DefenderForkedNetwork,
+  DefenderBlockWatcher,
 } from '../types';
 import keccak256 from 'keccak256';
 import {
@@ -808,9 +810,16 @@ export default class DefenderDeploy {
             monitor.type = match.type;
           }
 
-          const blockwatchersForNetwork = (await client.listBlockwatchers()).filter(
-            (b) => b.network === monitor.network,
-          );
+          let blockwatchersForNetwork: DefenderBlockWatcher[] = [];
+
+          // Check if network is forked network
+          if (isForkedNetwork(monitor.network)) {
+            blockwatchersForNetwork = (await client.listTenantBlockwatchers()).filter(
+              (b) => b.network === monitor.network,
+            );
+          } else {
+            blockwatchersForNetwork = (await client.listBlockwatchers()).filter((b) => b.network === monitor.network);
+          }
 
           const newMonitor = constructMonitor(
             this.serverless,
@@ -895,9 +904,17 @@ export default class DefenderDeploy {
         },
         // on create
         async (monitor: Monitor, stackResourceId: string) => {
-          const blockwatchersForNetwork = (await client.listBlockwatchers()).filter(
-            (b) => b.network === monitor.network,
-          );
+          let blockwatchersForNetwork: DefenderBlockWatcher[] = [];
+
+          // Check if network is forked network
+          if (isForkedNetwork(monitor.network)) {
+            blockwatchersForNetwork = (await client.listTenantBlockwatchers()).filter(
+              (b) => b.network === monitor.network,
+            );
+          } else {
+            blockwatchersForNetwork = (await client.listBlockwatchers()).filter((b) => b.network === monitor.network);
+          }
+
           const createdMonitor = await client.create(
             constructMonitor(
               this.serverless,
