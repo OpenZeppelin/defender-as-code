@@ -85,6 +85,14 @@
         "$ref": "definitions.schema.json#/definitions/forked-network-or-defender-id",
         "format": "uri-reference"
       }
+    },
+    "private-networks": {
+      "title": "Private Networks",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "definitions.schema.json#/definitions/private-network-or-defender-id",
+        "format": "uri-reference"
+      }
     }
   }
 }

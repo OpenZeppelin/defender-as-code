@@ -29,7 +29,7 @@ import {
   TeamKey,
   YSecret,
   Resources,
-  DefenderForkedNetwork,
+  DefenderTenantNetwork,
 } from '../types';
 import {
   Action,
@@ -39,6 +39,7 @@ import {
   Notification,
   Category,
   ForkedNetworkRequest,
+  PrivateNetworkRequest,
 } from '../types/types/resources.schema';
 
 export default class DefenderInfo {
@@ -121,18 +122,31 @@ export default class DefenderInfo {
       categories: [],
       secrets: [],
       forkedNetworks: [],
+      privateNetworks: [],
     };
 
     // Forked Networks
     const listForkedNetworks = () => getNetworkClient(this.teamKey!).listForkedNetworks();
 
-    await this.wrapper<ForkedNetworkRequest, DefenderForkedNetwork>(
+    await this.wrapper<ForkedNetworkRequest, DefenderTenantNetwork>(
       this.serverless,
       'Forked Networks',
       removeDefenderIdReferences(this.resources?.['forked-networks']),
       listForkedNetworks,
-      (resource: DefenderForkedNetwork) => `${resource.stackResourceId}: ${resource.forkedNetworkId}`,
+      (resource: DefenderTenantNetwork) => `${resource.stackResourceId}: ${resource.tenantNetworkId}`,
       stdOut.forkedNetworks,
+    );
+
+    // Private Networks
+    const listPrivateNetworks = () => getNetworkClient(this.teamKey!).listPrivateNetworks();
+
+    await this.wrapper<PrivateNetworkRequest, DefenderTenantNetwork>(
+      this.serverless,
+      'Private Networks',
+      removeDefenderIdReferences(this.resources?.['private-networks']),
+      listPrivateNetworks,
+      (resource: DefenderTenantNetwork) => `${resource.stackResourceId}: ${resource.tenantNetworkId}`,
+      stdOut.privateNetworks,
     );
 
     // Monitors

@@ -7,7 +7,7 @@
 
 export type ActionOrDefenderID = Action | DefenderID1;
 export type RelayerOrDefenderID = Relayer | DefenderID;
-export type Network = SupportedNetwork | ForkedNetwork;
+export type Network = SupportedNetwork | TenantNetwork;
 export type SupportedNetwork = PublicNetwork | CustomNetwork;
 export type PublicNetwork =
   | 'mainnet'
@@ -53,7 +53,7 @@ export type PublicNetwork =
   | 'meld'
   | 'meld-kanazawa';
 export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-security-alliance';
-export type ForkedNetwork = string;
+export type TenantNetwork = string;
 export type AddressFromRelayer = {} | string;
 export type WhitelistReceivers = string[];
 export type RelayerAPIKeys = string[];
@@ -122,14 +122,14 @@ export type PolicyOrDefenderID = Policy1 | DefenderID4;
 export type DefenderID4 = string;
 export type ContractOrDefenderID = Contract | DefenderID5;
 export type Address = string;
-export type Network1 = SupportedNetwork | ForkedNetwork;
+export type Network1 = SupportedNetwork | TenantNetwork;
 export type AbiType = StringABI | ArrayABI;
 export type StringABI = string;
 export type ArrayABI = unknown[];
 export type DefenderID5 = string;
 export type MonitorOrDefenderID = Monitor | DefenderID6;
 export type Monitor = BlockMonitor | FortaMonitor;
-export type Network2 = SupportedNetwork | ForkedNetwork;
+export type Network2 = SupportedNetwork | TenantNetwork;
 export type ContractOrDefenderID1 = Contract | DefenderID5;
 export type Contracts1 = ContractOrDefenderID1[];
 export type Address1 = string;
@@ -142,7 +142,7 @@ export type Channels = NotificationOrDefenderID2[];
 export type Event = EventItems[];
 export type Function = FunctionItems[];
 export type RiskCategory = 'NONE' | 'GOVERNANCE' | 'ACCESS-CONTROL' | 'SUSPICIOUS' | 'FINANCIAL' | 'TECHNICAL';
-export type Network3 = SupportedNetwork | ForkedNetwork;
+export type Network3 = SupportedNetwork | TenantNetwork;
 export type ContractOrDefenderID2 = Contract | DefenderID5;
 export type Contracts2 = ContractOrDefenderID2[];
 export type Address2 = string;
@@ -156,10 +156,16 @@ export type AlertIDs = string[];
 export type AgentIDs = string[];
 export type DefenderID6 = string;
 export type BlockExplorerApiKeyOrDefenderID = BlockExplorerApiKey | DefenderID7;
-export type Network4 = SupportedNetwork | ForkedNetwork;
+export type Network4 = SupportedNetwork | TenantNetwork;
 export type DefenderID7 = string;
 export type ForkedNetworkOrDefenderID = ForkedNetworkRequest | DefenderID8;
 export type DefenderID8 = string;
+export type PrivateNetworkOrDefenderID = PrivateNetworkRequest | DefenderID9;
+export type Address3 = string;
+export type Address4 = string;
+export type Address5 = string;
+export type Address6 = string;
+export type DefenderID9 = string;
 
 export interface Resources {
   actions?: Actions;
@@ -172,6 +178,7 @@ export interface Resources {
   monitors?: Monitors;
   'block-explorer-api-keys'?: BlockExplorerApiKeys;
   'forked-networks'?: ForkedNetworks;
+  'private-networks'?: PrivateNetworks;
 }
 export interface Actions {
   [k: string]: ActionOrDefenderID;
@@ -397,9 +404,34 @@ export interface ForkedNetworks {
   [k: string]: ForkedNetworkOrDefenderID;
 }
 export interface ForkedNetworkRequest {
-  name: ForkedNetwork;
-  'forked-network': SupportedNetwork;
+  name: TenantNetwork;
+  'supported-network': SupportedNetwork;
   'rpc-url': string;
   'api-key'?: string;
   'block-explorer-url'?: string;
+}
+export interface PrivateNetworks {
+  [k: string]: PrivateNetworkOrDefenderID;
+}
+export interface PrivateNetworkRequest {
+  name: TenantNetwork;
+  configuration: TenantNetworkConfiguration;
+  'rpc-url': string;
+  'api-key'?: string;
+  'block-explorer-url'?: string;
+}
+export interface TenantNetworkConfiguration {
+  symbol: string;
+  eips?: TenantNetworkEIPConfiguration;
+  'safe-contracts'?: SafeContracts;
+  'subgraph-url'?: string;
+}
+export interface TenantNetworkEIPConfiguration {
+  isEIP1559?: boolean;
+}
+export interface SafeContracts {
+  master: Address3;
+  'proxy-factory': Address4;
+  'multi-send-call-only': Address5;
+  'create-call'?: Address6;
 }

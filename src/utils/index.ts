@@ -34,7 +34,7 @@ import {
   DefenderMonitor,
   DefenderRelayer,
   DefenderBlockExplorerApiKey,
-  DefenderForkedNetwork,
+  DefenderTenantNetwork,
 } from '../types';
 import { sanitise } from './sanitise';
 import {
@@ -67,8 +67,9 @@ const getDefenderIdFromResource = <Y>(resource: Y, resourceType: ResourceType): 
       return (resource as DefenderCategory).categoryId;
     case 'Block Explorer Api Keys':
       return (resource as DefenderBlockExplorerApiKey).blockExplorerApiKeyId;
+    case 'Private Networks':
     case 'Forked Networks':
-      return (resource as DefenderForkedNetwork).forkedNetworkId;
+      return (resource as DefenderTenantNetwork).tenantNetworkId;
     case 'Contracts':
       const contract = resource as DefenderContract;
       return `${contract.network}-${contract.address}`;
@@ -536,7 +537,7 @@ export const removeDefenderIdReferences = <Y>(resources: { [k: string]: Y | Defe
   return resources as { [k: string]: Y } | undefined;
 };
 
-export const isForkedNetwork = (network?: Network): network is ForkedNetwork => {
+export const isTenantNetwork = (network?: Network): network is ForkedNetwork => {
   if (!network) return false;
   return !isValidNetwork(network);
 };

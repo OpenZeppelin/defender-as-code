@@ -59,12 +59,12 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
-## Definitions group forked-network
+## Definitions group tenant-network
 
 Reference this group by using
 
 ```json
-{"$ref":"definitions.schema.json#/definitions/forked-network"}
+{"$ref":"definitions.schema.json#/definitions/tenant-network"}
 ```
 
 | Property | Type | Required | Nullable | Defined by |
@@ -240,7 +240,7 @@ any of
 
     *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
 
-*   [ForkedNetwork](definitions-definitions-network-anyof-forkednetwork.md "check type definition")
+*   [TenantNetwork](definitions-definitions-network-anyof-tenantnetwork.md "check type definition")
 
 #### network Constraints
 
@@ -418,7 +418,7 @@ any of
 
     *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
 
-*   [ForkedNetwork](definitions-definitions-network-anyof-forkednetwork.md "check type definition")
+*   [TenantNetwork](definitions-definitions-network-anyof-tenantnetwork.md "check type definition")
 
 #### network Constraints
 
@@ -1607,7 +1607,7 @@ any of
 
     *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
 
-*   [ForkedNetwork](definitions-definitions-network-anyof-forkednetwork.md "check type definition")
+*   [TenantNetwork](definitions-definitions-network-anyof-tenantnetwork.md "check type definition")
 
 #### network Constraints
 
@@ -1971,7 +1971,7 @@ any of
 
     *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
 
-*   [ForkedNetwork](definitions-definitions-network-anyof-forkednetwork.md "check type definition")
+*   [TenantNetwork](definitions-definitions-network-anyof-tenantnetwork.md "check type definition")
 
 #### network Constraints
 
@@ -2305,6 +2305,17 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group private-network-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/private-network-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group block-explorer-api-key-or-defender-id
 
 Reference this group by using
@@ -2552,7 +2563,7 @@ any of
 
     *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
 
-*   [ForkedNetwork](definitions-definitions-network-anyof-forkednetwork.md "check type definition")
+*   [TenantNetwork](definitions-definitions-network-anyof-tenantnetwork.md "check type definition")
 
 #### network Constraints
 
@@ -2569,6 +2580,274 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group safe-contracts
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/safe-contracts"}
+```
+
+| Property                                      | Type     | Required | Nullable       | Defined by                                                                                                                                                         |
+| :-------------------------------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [master](#master)                             | `string` | Required | cannot be null | [Definitions](definitions-definitions-safecontracts-properties-address.md "definitions.schema.json#/definitions/safe-contracts/properties/master")                 |
+| [proxy-factory](#proxy-factory)               | `string` | Required | cannot be null | [Definitions](definitions-definitions-safecontracts-properties-address-1.md "definitions.schema.json#/definitions/safe-contracts/properties/proxy-factory")        |
+| [multi-send-call-only](#multi-send-call-only) | `string` | Required | cannot be null | [Definitions](definitions-definitions-safecontracts-properties-address-2.md "definitions.schema.json#/definitions/safe-contracts/properties/multi-send-call-only") |
+| [create-call](#create-call)                   | `string` | Optional | cannot be null | [Definitions](definitions-definitions-safecontracts-properties-address-3.md "definitions.schema.json#/definitions/safe-contracts/properties/create-call")          |
+
+### master
+
+
+
+`master`
+
+*   is required
+
+*   Type: `string` ([Address](definitions-definitions-safecontracts-properties-address.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-safecontracts-properties-address.md "definitions.schema.json#/definitions/safe-contracts/properties/master")
+
+#### master Type
+
+`string` ([Address](definitions-definitions-safecontracts-properties-address.md))
+
+#### master Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^0x[a-fA-F0-9]{40}$
+```
+
+[try pattern](https://regexr.com/?expression=%5E0x%5Ba-fA-F0-9%5D%7B40%7D%24 "try regular expression with regexr.com")
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+### proxy-factory
+
+
+
+`proxy-factory`
+
+*   is required
+
+*   Type: `string` ([Address](definitions-definitions-safecontracts-properties-address-1.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-safecontracts-properties-address-1.md "definitions.schema.json#/definitions/safe-contracts/properties/proxy-factory")
+
+#### proxy-factory Type
+
+`string` ([Address](definitions-definitions-safecontracts-properties-address-1.md))
+
+#### proxy-factory Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^0x[a-fA-F0-9]{40}$
+```
+
+[try pattern](https://regexr.com/?expression=%5E0x%5Ba-fA-F0-9%5D%7B40%7D%24 "try regular expression with regexr.com")
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+### multi-send-call-only
+
+
+
+`multi-send-call-only`
+
+*   is required
+
+*   Type: `string` ([Address](definitions-definitions-safecontracts-properties-address-2.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-safecontracts-properties-address-2.md "definitions.schema.json#/definitions/safe-contracts/properties/multi-send-call-only")
+
+#### multi-send-call-only Type
+
+`string` ([Address](definitions-definitions-safecontracts-properties-address-2.md))
+
+#### multi-send-call-only Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^0x[a-fA-F0-9]{40}$
+```
+
+[try pattern](https://regexr.com/?expression=%5E0x%5Ba-fA-F0-9%5D%7B40%7D%24 "try regular expression with regexr.com")
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+### create-call
+
+
+
+`create-call`
+
+*   is optional
+
+*   Type: `string` ([Address](definitions-definitions-safecontracts-properties-address-3.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-safecontracts-properties-address-3.md "definitions.schema.json#/definitions/safe-contracts/properties/create-call")
+
+#### create-call Type
+
+`string` ([Address](definitions-definitions-safecontracts-properties-address-3.md))
+
+#### create-call Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^0x[a-fA-F0-9]{40}$
+```
+
+[try pattern](https://regexr.com/?expression=%5E0x%5Ba-fA-F0-9%5D%7B40%7D%24 "try regular expression with regexr.com")
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+## Definitions group tenant-network-eip-configuration
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/tenant-network-eip-configuration"}
+```
+
+| Property                | Type      | Required | Nullable       | Defined by                                                                                                                                                                                |
+| :---------------------- | :-------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [isEIP1559](#iseip1559) | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-tenantnetworkeipconfiguration-properties-iseip1559.md "definitions.schema.json#/definitions/tenant-network-eip-configuration/properties/isEIP1559") |
+
+### isEIP1559
+
+
+
+`isEIP1559`
+
+*   is optional
+
+*   Type: `boolean`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-tenantnetworkeipconfiguration-properties-iseip1559.md "definitions.schema.json#/definitions/tenant-network-eip-configuration/properties/isEIP1559")
+
+#### isEIP1559 Type
+
+`boolean`
+
+## Definitions group tenant-network-configuration
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/tenant-network-configuration"}
+```
+
+| Property                          | Type     | Required | Nullable       | Defined by                                                                                                                                                                               |
+| :-------------------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [symbol](#symbol)                 | `string` | Required | cannot be null | [Definitions](definitions-definitions-tenantnetworkconfiguration-properties-symbol.md "definitions.schema.json#/definitions/tenant-network-configuration/properties/symbol")             |
+| [eips](#eips)                     | `object` | Optional | cannot be null | [Definitions](definitions-definitions-tenantnetworkeipconfiguration.md "definitions.schema.json#/definitions/tenant-network-configuration/properties/eips")                              |
+| [safe-contracts](#safe-contracts) | `object` | Optional | cannot be null | [Definitions](definitions-definitions-safecontracts.md "definitions.schema.json#/definitions/tenant-network-configuration/properties/safe-contracts")                                    |
+| [subgraph-url](#subgraph-url)     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-tenantnetworkconfiguration-properties-subgraph-url.md "definitions.schema.json#/definitions/tenant-network-configuration/properties/subgraph-url") |
+
+### symbol
+
+
+
+`symbol`
+
+*   is required
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-tenantnetworkconfiguration-properties-symbol.md "definitions.schema.json#/definitions/tenant-network-configuration/properties/symbol")
+
+#### symbol Type
+
+`string`
+
+#### symbol Constraints
+
+**maximum length**: the maximum number of characters for this string is: `6`
+
+**minimum length**: the minimum number of characters for this string is: `3`
+
+### eips
+
+
+
+`eips`
+
+*   is optional
+
+*   Type: `object` ([TenantNetworkEIPConfiguration](definitions-definitions-tenantnetworkeipconfiguration.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-tenantnetworkeipconfiguration.md "definitions.schema.json#/definitions/tenant-network-configuration/properties/eips")
+
+#### eips Type
+
+`object` ([TenantNetworkEIPConfiguration](definitions-definitions-tenantnetworkeipconfiguration.md))
+
+### safe-contracts
+
+
+
+`safe-contracts`
+
+*   is optional
+
+*   Type: `object` ([SafeContracts](definitions-definitions-safecontracts.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-safecontracts.md "definitions.schema.json#/definitions/tenant-network-configuration/properties/safe-contracts")
+
+#### safe-contracts Type
+
+`object` ([SafeContracts](definitions-definitions-safecontracts.md))
+
+### subgraph-url
+
+
+
+`subgraph-url`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-tenantnetworkconfiguration-properties-subgraph-url.md "definitions.schema.json#/definitions/tenant-network-configuration/properties/subgraph-url")
+
+#### subgraph-url Type
+
+`string`
+
+#### subgraph-url Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^(http(s)?://)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$
+```
+
+[try pattern](https://regexr.com/?expression=%5E\(http\(s\)%3F%3A%2F%2F\)%5B%5Cw.-%5D%2B\(%3F%3A%5C.%5B%5Cw%5C.-%5D%2B\)%2B%5B%5Cw%5C-%5C._~%3A%2F%3F%23%5B%5C%5D%40!%5C%24%26'%5C\(%5C\)%5C*%5C%2B%2C%3B%3D.%5D%2B%24 "try regular expression with regexr.com")
+
 ## Definitions group forked-network-request
 
 Reference this group by using
@@ -2579,8 +2858,8 @@ Reference this group by using
 
 | Property                                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                               |
 | :---------------------------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-7)                           | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")                    |
-| [forked-network](#forked-network)         | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/forked-network")                                       |
+| [name](#name-7)                           | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")                    |
+| [supported-network](#supported-network)   | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/supported-network")                                    |
 | [rpc-url](#rpc-url)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forked-network-request/properties/rpc-url")                       |
 | [api-key](#api-key-1)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forked-network-request/properties/api-key")                       |
 | [block-explorer-url](#block-explorer-url) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forked-network-request/properties/block-explorer-url") |
@@ -2593,21 +2872,21 @@ Reference this group by using
 
 *   is required
 
-*   Type: `string` ([ForkedNetwork](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md))
+*   Type: `string` ([TenantNetwork](definitions-definitions-forkednetworkrequest-properties-tenantnetwork.md))
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")
+*   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")
 
 #### name Type
 
-`string` ([ForkedNetwork](definitions-definitions-forkednetworkrequest-properties-forkednetwork.md))
+`string` ([TenantNetwork](definitions-definitions-forkednetworkrequest-properties-tenantnetwork.md))
 
-### forked-network
+### supported-network
 
 
 
-`forked-network`
+`supported-network`
 
 *   is required
 
@@ -2615,9 +2894,9 @@ Reference this group by using
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/forked-network")
+*   defined in: [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/supported-network")
 
-#### forked-network Type
+#### supported-network Type
 
 merged type ([SupportedNetwork](definitions-definitions-supportednetwork.md))
 
@@ -2650,10 +2929,10 @@ one (and only one) of
 **pattern**: the string must match the following regular expression:&#x20;
 
 ```regexp
-^(http(s)?://)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$
+^(http|https)://
 ```
 
-[try pattern](https://regexr.com/?expression=%5E\(http\(s\)%3F%3A%2F%2F\)%5B%5Cw.-%5D%2B\(%3F%3A%5C.%5B%5Cw%5C.-%5D%2B\)%2B%5B%5Cw%5C-%5C._~%3A%2F%3F%23%5B%5C%5D%40!%5C%24%26'%5C\(%5C\)%5C*%5C%2B%2C%3B%3D.%5D%2B%24 "try regular expression with regexr.com")
+[try pattern](https://regexr.com/?expression=%5E\(http%7Chttps\)%3A%2F%2F "try regular expression with regexr.com")
 
 ### api-key
 
@@ -2686,6 +2965,132 @@ one (and only one) of
 *   cannot be null
 
 *   defined in: [Definitions](definitions-definitions-forkednetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/forked-network-request/properties/block-explorer-url")
+
+#### block-explorer-url Type
+
+`string`
+
+#### block-explorer-url Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^(http(s)?://)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$
+```
+
+[try pattern](https://regexr.com/?expression=%5E\(http\(s\)%3F%3A%2F%2F\)%5B%5Cw.-%5D%2B\(%3F%3A%5C.%5B%5Cw%5C.-%5D%2B\)%2B%5B%5Cw%5C-%5C._~%3A%2F%3F%23%5B%5C%5D%40!%5C%24%26'%5C\(%5C\)%5C*%5C%2B%2C%3B%3D.%5D%2B%24 "try regular expression with regexr.com")
+
+## Definitions group private-network-request
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/private-network-request"}
+```
+
+| Property                                    | Type     | Required | Nullable       | Defined by                                                                                                                                                                                 |
+| :------------------------------------------ | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name-8)                             | `string` | Required | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/private-network-request/properties/name")                    |
+| [configuration](#configuration)             | `object` | Required | cannot be null | [Definitions](definitions-definitions-tenantnetworkconfiguration.md "definitions.schema.json#/definitions/private-network-request/properties/configuration")                               |
+| [rpc-url](#rpc-url-1)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/private-network-request/properties/rpc-url")                       |
+| [api-key](#api-key-2)                       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/private-network-request/properties/api-key")                       |
+| [block-explorer-url](#block-explorer-url-1) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/private-network-request/properties/block-explorer-url") |
+
+### name
+
+
+
+`name`
+
+*   is required
+
+*   Type: `string` ([TenantNetwork](definitions-definitions-privatenetworkrequest-properties-tenantnetwork.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-privatenetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/private-network-request/properties/name")
+
+#### name Type
+
+`string` ([TenantNetwork](definitions-definitions-privatenetworkrequest-properties-tenantnetwork.md))
+
+### configuration
+
+
+
+`configuration`
+
+*   is required
+
+*   Type: `object` ([TenantNetworkConfiguration](definitions-definitions-tenantnetworkconfiguration.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-tenantnetworkconfiguration.md "definitions.schema.json#/definitions/private-network-request/properties/configuration")
+
+#### configuration Type
+
+`object` ([TenantNetworkConfiguration](definitions-definitions-tenantnetworkconfiguration.md))
+
+### rpc-url
+
+
+
+`rpc-url`
+
+*   is required
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-privatenetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/private-network-request/properties/rpc-url")
+
+#### rpc-url Type
+
+`string`
+
+#### rpc-url Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^(http|https)://
+```
+
+[try pattern](https://regexr.com/?expression=%5E\(http%7Chttps\)%3A%2F%2F "try regular expression with regexr.com")
+
+### api-key
+
+
+
+`api-key`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-privatenetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/private-network-request/properties/api-key")
+
+#### api-key Type
+
+`string`
+
+### block-explorer-url
+
+
+
+`block-explorer-url`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-privatenetworkrequest-properties-block-explorer-url.md "definitions.schema.json#/definitions/private-network-request/properties/block-explorer-url")
 
 #### block-explorer-url Type
 

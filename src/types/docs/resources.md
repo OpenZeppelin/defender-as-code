@@ -16,6 +16,7 @@
 | [monitors](#monitors)                               | `object` | Optional | cannot be null | [Resources](resources-properties-monitors.md "resources.schema.json#/properties/monitors")                               |
 | [block-explorer-api-keys](#block-explorer-api-keys) | `object` | Optional | cannot be null | [Resources](resources-properties-block-explorer-api-keys.md "resources.schema.json#/properties/block-explorer-api-keys") |
 | [forked-networks](#forked-networks)                 | `object` | Optional | cannot be null | [Resources](resources-properties-forked-networks.md "resources.schema.json#/properties/forked-networks")                 |
+| [private-networks](#private-networks)               | `object` | Optional | cannot be null | [Resources](resources-properties-private-networks.md "resources.schema.json#/properties/private-networks")               |
 
 ## actions
 
@@ -196,3 +197,21 @@
 ### forked-networks Type
 
 `object` ([Forked Networks](resources-properties-forked-networks.md))
+
+## private-networks
+
+
+
+`private-networks`
+
+*   is optional
+
+*   Type: `object` ([Private Networks](resources-properties-private-networks.md))
+
+*   cannot be null
+
+*   defined in: [Resources](resources-properties-private-networks.md "resources.schema.json#/properties/private-networks")
+
+### private-networks Type
+
+`object` ([Private Networks](resources-properties-private-networks.md))
