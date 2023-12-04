@@ -225,9 +225,10 @@ resources:
       name: my-private-network # restricted to alphanumeric characters and dashes (no whitespaces)
       rpc-url: https://rpc.kaleido.io/
       # optional
+      api-key: null
+      # optional
       block-explorer-url: null
       # optional
-      api-key: null
       configuration:
         symbol: ETH
         # optional
