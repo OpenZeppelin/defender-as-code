@@ -1349,7 +1349,25 @@ export default class DefenderDeploy {
           name: privateNetwork.name,
           rpcUrl: privateNetwork['rpc-url'],
           blockExplorerUrl: privateNetwork['block-explorer-url'] ?? undefined,
-          configuration: privateNetwork['configuration'] ?? undefined,
+          configuration: privateNetwork['configuration']
+            ? {
+                symbol: privateNetwork['configuration']['symbol'],
+                subgraphURL: privateNetwork['configuration']['subgraph-url'],
+                eips: privateNetwork['configuration']['eips']
+                  ? {
+                      isEIP1559: privateNetwork['configuration']['eips']['isEIP1559'],
+                    }
+                  : undefined,
+                safeContracts: privateNetwork['configuration']['safe-contracts']
+                  ? {
+                      master: privateNetwork['configuration']['safe-contracts']?.master,
+                      proxyFactory: privateNetwork['configuration']['safe-contracts']?.['proxy-factory'],
+                      multisendCallOnly: privateNetwork['configuration']['safe-contracts']?.['multi-send-call-only'],
+                      createCall: privateNetwork['configuration']['safe-contracts']?.['create-call'],
+                    }
+                  : undefined,
+              }
+            : undefined,
           apiKey: privateNetwork['api-key'] ?? undefined,
           stackResourceId,
         });
