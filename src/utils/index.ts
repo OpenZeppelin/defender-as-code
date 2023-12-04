@@ -2,7 +2,7 @@ import Serverless from 'serverless';
 
 import _ from 'lodash';
 
-import { ForkedNetwork, Network, isValidNetwork } from '@openzeppelin/defender-sdk-base-client';
+import { TenantNetwork, Network, isValidNetwork } from '@openzeppelin/defender-sdk-base-client';
 import { ActionClient } from '@openzeppelin/defender-sdk-action-client';
 import { MonitorClient } from '@openzeppelin/defender-sdk-monitor-client';
 import { RelayClient } from '@openzeppelin/defender-sdk-relay-client';
@@ -537,7 +537,7 @@ export const removeDefenderIdReferences = <Y>(resources: { [k: string]: Y | Defe
   return resources as { [k: string]: Y } | undefined;
 };
 
-export const isTenantNetwork = (network?: Network): network is ForkedNetwork => {
+export const isTenantNetwork = (network?: Network): network is TenantNetwork => {
   if (!network) return false;
   return !isValidNetwork(network);
 };
