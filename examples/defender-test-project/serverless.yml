@@ -223,7 +223,7 @@ resources:
   private-networks:
     my-network:
       name: my-private-network # restricted to alphanumeric characters and dashes (no whitespaces)
-      rpc-url: https://u0x1wxrbg5-u0ib6pr2ld-rpc.us0-aws.kaleido.io/
+      rpc-url: https://rpc.kaleido.io/
       # optional
       block-explorer-url: null
       # optional
@@ -232,10 +232,10 @@ resources:
         symbol: ETH
         # optional
         safe-contracts:
-          master: 0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552
-          proxy-factory: 0xa6B71E26C5e0845f74c812102Ca7114b6a896AB2
-          multi-send-call-only: 0x40A2aCCbd92BCA938b02010E17A5b8929b49130D
-          create-call: 0x762fcF49C5EF21510755191BbeD6AA2a702f0348
+          master: '0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552'
+          proxy-factory: '0xa6B71E26C5e0845f74c812102Ca7114b6a896AB2'
+          multi-send-call-only: '0x40A2aCCbd92BCA938b02010E17A5b8929b49130D'
+          create-call: '0x762fcF49C5EF21510755191BbeD6AA2a702f0348'
         # optional
         subgraph-url: null
         # optional
