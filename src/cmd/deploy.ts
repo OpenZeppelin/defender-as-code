@@ -1296,23 +1296,28 @@ export default class DefenderDeploy {
 
         const mappedMatch = {
           'name': match.name,
-          'configuration': {
-            'symbol': match.configuration?.symbol,
-            'safe-contracts': match.configuration?.safeContracts
-              ? {
-                  'master': match.configuration?.safeContracts?.master,
-                  'proxy-contract': match.configuration?.safeContracts?.proxyFactory,
-                  'multi-send-call-only': match.configuration?.safeContracts?.multisendCallOnly,
-                  'create-call': match.configuration?.safeContracts?.createCall,
-                }
-              : undefined,
-            'subgraph-url': match.configuration?.subgraphURL,
-            'eips': match.configuration?.eips
-              ? {
-                  isEIP1995: match.configuration?.eips?.isEIP1559,
-                }
-              : undefined,
-          },
+          'configuration': match.configuration
+            ? {
+                'symbol': match.configuration?.symbol,
+                'safe-contracts': match.configuration?.safeContracts
+                  ? {
+                      'master': match.configuration?.safeContracts?.master,
+                      'proxy-factory': match.configuration?.safeContracts?.proxyFactory,
+                      'multi-send-call-only': match.configuration?.safeContracts?.multisendCallOnly,
+                      'create-call': match.configuration?.safeContracts?.createCall,
+                    }
+                  : undefined,
+                'subgraph-url':
+                  match.configuration?.subgraphURL === null || !!match.configuration?.subgraphURL
+                    ? match.configuration.subgraphURL
+                    : undefined,
+                'eips': match.configuration?.eips
+                  ? {
+                      isEIP1559: match.configuration?.eips?.isEIP1559,
+                    }
+                  : undefined,
+              }
+            : undefined,
           'rpc-url': match.rpcUrl,
           'api-key': match.apiKey === null || !!match.apiKey ? match.apiKey : undefined,
           'block-explorer-url':
@@ -1331,11 +1336,11 @@ export default class DefenderDeploy {
 
         const updatedPrivateNetwork = await client.updatePrivateNetwork(match.tenantNetworkId, {
           apiKey: privateNetwork['api-key'] ?? undefined,
-          blockExplorerUrl: privateNetwork['block-explorer-url'],
+          blockExplorerUrl: privateNetwork['block-explorer-url'] ?? undefined,
           configuration: privateNetwork['configuration']
             ? {
                 symbol: privateNetwork['configuration']['symbol'],
-                subgraphURL: privateNetwork['configuration']['subgraph-url'],
+                subgraphURL: privateNetwork['configuration']['subgraph-url'] ?? undefined,
                 eips: privateNetwork['configuration']['eips']
                   ? {
                       isEIP1559: privateNetwork['configuration']['eips']['isEIP1559'],
@@ -1370,7 +1375,7 @@ export default class DefenderDeploy {
           configuration: privateNetwork['configuration']
             ? {
                 symbol: privateNetwork['configuration']['symbol'],
-                subgraphURL: privateNetwork['configuration']['subgraph-url'],
+                subgraphURL: privateNetwork['configuration']['subgraph-url'] ?? undefined,
                 eips: privateNetwork['configuration']['eips']
                   ? {
                       isEIP1559: privateNetwork['configuration']['eips']['isEIP1559'],
