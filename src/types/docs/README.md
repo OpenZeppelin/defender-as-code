@@ -82,13 +82,23 @@
 
 *   [Policy](./definitions-definitions-policy.md) – `definitions.schema.json#/definitions/policy`
 
+*   [Private Networks](./resources-properties-private-networks.md) – `resources.schema.json#/properties/private-networks`
+
+*   [PrivateNetworkRequest](./definitions-definitions-privatenetworkrequest.md) – `definitions.schema.json#/definitions/private-network-request`
+
 *   [Relayer](./definitions-definitions-relayer.md) – `definitions.schema.json#/definitions/relayer`
 
 *   [Relayers](./resources-properties-relayers.md) – `resources.schema.json#/properties/relayers`
 
+*   [SafeContracts](./definitions-definitions-safecontracts.md) – `definitions.schema.json#/definitions/safe-contracts`
+
 *   [StackSecrets](./resources-properties-actionsecrets-properties-stacksecrets.md) – `resources.schema.json#/properties/secrets/properties/stack`
 
 *   [TelegramConfig](./definitions-definitions-telegramconfig.md) – `definitions.schema.json#/definitions/telegramBotConfig`
+
+*   [TenantNetworkConfiguration](./definitions-definitions-tenantnetworkconfiguration.md) – `definitions.schema.json#/definitions/tenant-network-configuration`
+
+*   [TenantNetworkEIPConfiguration](./definitions-definitions-tenantnetworkeipconfiguration.md) – `definitions.schema.json#/definitions/tenant-network-eip-configuration`
 
 *   [Trigger](./definitions-definitions-action-properties-trigger.md) – `definitions.schema.json#/definitions/action/properties/trigger`
 

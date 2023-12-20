@@ -30,7 +30,7 @@ import {
   TeamKey,
   YSecret,
   Resources,
-  DefenderForkedNetwork,
+  DefenderTenantNetwork,
 } from '../types';
 import {
   Action,
@@ -39,6 +39,7 @@ import {
   Relayer,
   Notification,
   ForkedNetworkRequest,
+  PrivateNetworkRequest,
 } from '../types/types/resources.schema';
 
 export default class DefenderRemove {
@@ -131,7 +132,8 @@ export default class DefenderRemove {
       notifications: DefenderNotification[];
       categories: DefenderCategory[];
       secrets: string[];
-      forkedNetworks: DefenderForkedNetwork[];
+      forkedNetworks: DefenderTenantNetwork[];
+      privateNetworks: DefenderTenantNetwork[];
     } = {
       stack: stackName,
       monitors: [],
@@ -142,29 +144,53 @@ export default class DefenderRemove {
       categories: [],
       secrets: [],
       forkedNetworks: [],
+      privateNetworks: [],
     };
 
     // Forked Networks
     const forkedNetworkClient = getNetworkClient(this.teamKey!);
     const listForkedNetworks = () => forkedNetworkClient.listForkedNetworks();
-    await this.wrapper<ForkedNetworkRequest, DefenderForkedNetwork>(
+    await this.wrapper<ForkedNetworkRequest, DefenderTenantNetwork>(
       this.serverless,
       'Forked Networks',
       removeDefenderIdReferences(this.resources?.['forked-networks']),
       listForkedNetworks,
-      async (forkedNetworks: DefenderForkedNetwork[]) => {
+      async (forkedNetworks: DefenderTenantNetwork[]) => {
         await Promise.all(
           forkedNetworks.map(async (e) => {
             this.log.progress(
               'component-remove-extra',
-              `Removing ${e.stackResourceId} (${e.forkedNetworkId}) from Defender`,
+              `Removing ${e.stackResourceId} (${e.tenantNetworkId}) from Defender`,
             );
-            await forkedNetworkClient.deleteForkedNetwork(e.forkedNetworkId);
-            this.log.success(`Removed ${e.stackResourceId} (${e.forkedNetworkId})`);
+            await forkedNetworkClient.deleteForkedNetwork(e.tenantNetworkId);
+            this.log.success(`Removed ${e.stackResourceId} (${e.tenantNetworkId})`);
           }),
         );
       },
       stdOut.forkedNetworks,
+    );
+
+    // Private Networks
+    const privateNetworkClient = getNetworkClient(this.teamKey!);
+    const listPrivateNetworks = () => privateNetworkClient.listPrivateNetworks();
+    await this.wrapper<PrivateNetworkRequest, DefenderTenantNetwork>(
+      this.serverless,
+      'Private Networks',
+      removeDefenderIdReferences(this.resources?.['private-networks']),
+      listPrivateNetworks,
+      async (privateNetworks: DefenderTenantNetwork[]) => {
+        await Promise.all(
+          privateNetworks.map(async (e) => {
+            this.log.progress(
+              'component-remove-extra',
+              `Removing ${e.stackResourceId} (${e.tenantNetworkId}) from Defender`,
+            );
+            await privateNetworkClient.deletePrivateNetwork(e.tenantNetworkId);
+            this.log.success(`Removed ${e.stackResourceId} (${e.tenantNetworkId})`);
+          }),
+        );
+      },
+      stdOut.privateNetworks,
     );
 
     // Monitors
