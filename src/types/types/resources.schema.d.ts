@@ -44,6 +44,7 @@ export type PublicNetwork =
   | 'hederatest'
   | 'zksync'
   | 'zksync-goerli'
+  | 'zksync-sepolia'
   | 'base'
   | 'base-goerli'
   | 'linea-goerli'
