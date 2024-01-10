@@ -25,6 +25,8 @@ export type PublicNetwork =
   | 'moonbeam'
   | 'matic'
   | 'mumbai'
+  | 'matic-zkevm'
+  | 'matic-zkevm-testnet'
   | 'avalanche'
   | 'fuji'
   | 'arbitrum'
