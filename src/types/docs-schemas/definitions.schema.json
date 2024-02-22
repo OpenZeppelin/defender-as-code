@@ -33,6 +33,8 @@
         "moonbeam",
         "matic",
         "mumbai",
+        "matic-zkevm",
+        "matic-zkevm-testnet",
         "avalanche",
         "fuji",
         "arbitrum",
@@ -69,8 +71,8 @@
       "type": "string",
       "enum": ["x-dfk-avax-chain", "x-dfk-avax-chain-test", "x-security-alliance"]
     },
-    "forked-network": {
-      "title": "ForkedNetwork",
+    "tenant-network": {
+      "title": "TenantNetwork",
       "type": "string"
     },
     "network": {
@@ -80,7 +82,7 @@
           "$ref": "definitions.schema.json#/definitions/supported-network"
         },
         {
-          "$ref": "definitions.schema.json#/definitions/forked-network"
+          "$ref": "definitions.schema.json#/definitions/tenant-network"
         }
       ]
     },
@@ -611,6 +613,17 @@
         { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
       ]
     },
+    "private-network-or-defender-id": {
+      "title": "PrivateNetworkOrDefenderID",
+      "anyOf": [
+        {
+          "type": "object",
+          "$ref": "definitions.schema.json#/definitions/private-network-request",
+          "format": "uri-reference"
+        },
+        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
+      ]
+    },
     "block-explorer-api-key-or-defender-id": {
       "title": "BlockExplorerApiKeyOrDefenderID",
       "anyOf": [
@@ -726,17 +739,93 @@
         { "title": "ArrayABI", "type": "array" }
       ]
     },
+    "safe-contracts": {
+      "title": "SafeContracts",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["master", "proxy-factory", "multi-send-call-only"],
+      "properties": {
+        "master": {
+          "$ref": "definitions.schema.json#/definitions/address",
+          "format": "uri-reference"
+        },
+        "proxy-factory": {
+          "$ref": "definitions.schema.json#/definitions/address",
+          "format": "uri-reference"
+        },
+        "multi-send-call-only": {
+          "$ref": "definitions.schema.json#/definitions/address",
+          "format": "uri-reference"
+        },
+        "create-call": {
+          "$ref": "definitions.schema.json#/definitions/address",
+          "format": "uri-reference"
+        }
+      }
+    },
+    "tenant-network-eip-configuration": {
+      "title": "TenantNetworkEIPConfiguration",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "isEIP1559": {
+          "type": "boolean"
+        }
+      }
+    },
+    "tenant-network-configuration": {
+      "title": "TenantNetworkConfiguration",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["symbol"],
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 6
+        },
+        "eips": {
+          "$ref": "definitions.schema.json#/definitions/tenant-network-eip-configuration"
+        },
+        "safe-contracts": {
+          "$ref": "definitions.schema.json#/definitions/safe-contracts"
+        },
+        "subgraph-url": {
+          "type": "string",
+          "pattern": "^(http(s)?://)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        }
+      }
+    },
     "forked-network-request": {
       "title": "ForkedNetworkRequest",
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "forked-network", "rpc-url"],
+      "required": ["name", "supported-network", "rpc-url"],
       "properties": {
-        "name": { "$ref": "definitions.schema.json#/definitions/forked-network" },
-        "forked-network": { "$ref": "definitions.schema.json#/definitions/supported-network" },
+        "name": { "$ref": "definitions.schema.json#/definitions/tenant-network" },
+        "supported-network": { "$ref": "definitions.schema.json#/definitions/supported-network" },
         "rpc-url": {
           "type": "string",
+          "pattern": "^(http|https)://"
+        },
+        "api-key": { "type": "string" },
+        "block-explorer-url": {
+          "type": "string",
           "pattern": "^(http(s)?://)[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        }
+      }
+    },
+    "private-network-request": {
+      "title": "PrivateNetworkRequest",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "configuration", "rpc-url"],
+      "properties": {
+        "name": { "$ref": "definitions.schema.json#/definitions/tenant-network" },
+        "configuration": { "$ref": "definitions.schema.json#/definitions/tenant-network-configuration" },
+        "rpc-url": {
+          "type": "string",
+          "pattern": "^(http|https)://"
         },
         "api-key": { "type": "string" },
         "block-explorer-url": {

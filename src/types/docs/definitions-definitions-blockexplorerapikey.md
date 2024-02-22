@@ -53,7 +53,7 @@ any of
 
     *   [CustomNetwork](definitions-definitions-customnetwork.md "check type definition")
 
-*   [ForkedNetwork](definitions-definitions-forkednetwork.md "check type definition")
+*   [TenantNetwork](definitions-definitions-tenantnetwork.md "check type definition")
 
 ### network Constraints
 
