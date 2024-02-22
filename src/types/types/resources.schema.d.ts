@@ -48,6 +48,7 @@ export type PublicNetwork =
   | 'zksync-goerli'
   | 'base'
   | 'base-goerli'
+  | 'base-sepolia'
   | 'linea-goerli'
   | 'linea'
   | 'mantle'
