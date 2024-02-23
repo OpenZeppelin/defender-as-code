@@ -388,8 +388,8 @@ export const constructMonitor = (
     addresses: monitorAddresses,
     abi: monitorABI,
     paused: monitor.paused,
-    autotaskCondition: actionCondition && actionCondition.actionId,
-    autotaskTrigger: actionTrigger && actionTrigger.actionId,
+    actionCondition: actionCondition && actionCondition.actionId,
+    actionTrigger: actionTrigger && actionTrigger.actionId,
     alertThreshold: threshold && {
       amount: threshold.amount,
       windowSeconds: threshold['window-seconds'],
