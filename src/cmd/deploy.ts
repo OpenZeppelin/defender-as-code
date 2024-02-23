@@ -874,7 +874,7 @@ export default class DefenderDeploy {
             paused: match.paused,
             skipABIValidation: match.skipABIValidation,
             alertThreshold: match.alertThreshold,
-            autotaskTrigger: match.notifyConfig?.autotaskId,
+            actionTrigger: match.notifyConfig?.actionId,
             alertTimeoutMs: match.notifyConfig?.timeoutMs,
             alertMessageBody: match.notifyConfig?.messageBody,
             alertMessageSubject: match.notifyConfig?.messageSubject,
@@ -896,9 +896,9 @@ export default class DefenderDeploy {
               blockConditions[0]!.txConditions[0]!.expression,
             privateFortaNodeId: (isForta(match) && match.privateFortaNodeId) || undefined,
             addresses: isBlock(match) ? addressRule && addressRule.addresses : match.fortaRule?.addresses,
-            autotaskCondition: isBlock(match)
-              ? addressRule && addressRule.autotaskCondition?.autotaskId
-              : match.fortaRule?.autotaskCondition?.autotaskId,
+            actionCondition: isBlock(match)
+              ? addressRule && addressRule.actionCondition?.actionId
+              : match.fortaRule?.actionCondition?.actionId,
             fortaLastProcessedTime: (isForta(match) && match.fortaLastProcessedTime) || undefined,
             agentIDs: (isForta(match) && match.fortaRule?.agentIDs) || undefined,
             fortaConditions: (isForta(match) && match.fortaRule.conditions) || undefined,

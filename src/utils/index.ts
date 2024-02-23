@@ -38,6 +38,7 @@ import {
 } from '../types';
 import { sanitise } from './sanitise';
 import {
+  AbiType,
   Action,
   ActionOrDefenderID,
   ActionSecrets,
@@ -317,6 +318,16 @@ const getDefenderContract = (
   return contracts.find((a) => `${a.network}-${a.address}` === `${resource.network}-${resource.address}`);
 };
 
+const parseMonitorAbi = (abi: AbiType | undefined) => {
+  // Because the way AbiType is typed (string | string[]), a list with 1 string item is interpreted as a string rather than string[]
+  // Therefore, JSON.parse may fail if the string is not a valid JSON
+  try {
+    return abi && JSON.stringify(typeof abi === 'string' ? JSON.parse(abi) : abi);
+  } catch (e) {
+    return abi && JSON.stringify([abi]);
+  }
+};
+
 export const constructMonitor = (
   context: Serverless,
   resources: Resources,
@@ -353,9 +364,8 @@ export const constructMonitor = (
   //        otherwise getDefenderContract will return old values
   const monitorContracts = monitor.contracts?.map((contract) => getDefenderContract(contract, contracts));
   // if monitor.abi is defined, we use that over the first entry from monitorContracts by default
-  const monitorABI =
-    (monitor.abi && JSON.stringify(typeof monitor.abi === 'string' ? JSON.parse(monitor.abi) : monitor.abi)) ||
-    monitorContracts?.[0]?.abi;
+  const monitorABI = parseMonitorAbi(monitor.abi) || monitorContracts?.[0]?.abi;
+
   // Pull addresses from either monitor.addresses or monitor.contracts
   const monitorAddresses =
     (monitorContracts &&
@@ -378,8 +388,8 @@ export const constructMonitor = (
     addresses: monitorAddresses,
     abi: monitorABI,
     paused: monitor.paused,
-    autotaskCondition: actionCondition && actionCondition.actionId,
-    autotaskTrigger: actionTrigger && actionTrigger.actionId,
+    actionCondition: actionCondition && actionCondition.actionId,
+    actionTrigger: actionTrigger && actionTrigger.actionId,
     alertThreshold: threshold && {
       amount: threshold.amount,
       windowSeconds: threshold['window-seconds'],
