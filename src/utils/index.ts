@@ -25,8 +25,6 @@ import {
   DefenderContract,
   ResourceType,
   DefenderBlockWatcher,
-  DefenderCategory,
-  DefenderNotificationReference,
   DefenderFortaMonitor,
   DefenderBlockMonitor,
   DefenderAPIError,
@@ -43,8 +41,6 @@ import {
   ActionOrDefenderID,
   ActionSecrets,
   AlertThreshold,
-  Category,
-  CategoryOrDefenderID,
   Contract,
   ContractOrDefenderID,
   DefenderID,
@@ -64,8 +60,6 @@ const getDefenderIdFromResource = <Y>(resource: Y, resourceType: ResourceType): 
       return (resource as DefenderRelayer).relayerId;
     case 'Notifications':
       return (resource as DefenderNotification).notificationId;
-    case 'Categories':
-      return (resource as DefenderCategory).categoryId;
     case 'Block Explorer Api Keys':
       return (resource as DefenderBlockExplorerApiKey).blockExplorerApiKeyId;
     case 'Private Networks':
@@ -256,37 +250,6 @@ export const constructNotification = (notification: Notification, stackResourceI
   }
 };
 
-export const constructNotificationCategory = (
-  context: Serverless,
-  resources: Resources,
-  category: Category,
-  stackResourceId: string,
-  notifications: DefenderNotification[],
-) => {
-  return {
-    name: category.name,
-    description: category.description,
-    notificationIds: (category['notification-ids']
-      ? category['notification-ids']
-          .map((notification) => {
-            const maybeNotification = getEquivalentResource<NotificationOrDefenderID | undefined, DefenderNotification>(
-              context,
-              notification,
-              resources?.notifications,
-              notifications,
-              'Notifications',
-            );
-            if (maybeNotification)
-              return {
-                notificationId: maybeNotification.notificationId,
-                type: maybeNotification.type,
-              } as DefenderNotificationReference;
-          })
-          .filter(isResource)
-      : []) as [] | [DefenderNotificationReference] | [DefenderNotificationReference, DefenderNotificationReference],
-    stackResourceId,
-  };
-};
 const isResource = <T>(item: T | undefined): item is T => {
   return !!item;
 };
@@ -298,15 +261,6 @@ const getDefenderAction = (
   if (!resource) return undefined;
   if (isDefenderId(resource)) return actions.find((a) => a.actionId === resource);
   return actions.find((a) => a.name === resource.name);
-};
-
-const getDefenderCategory = (
-  resource: CategoryOrDefenderID | undefined,
-  categories: DefenderCategory[],
-): DefenderCategory | undefined => {
-  if (!resource) return undefined;
-  if (isDefenderId(resource)) return categories.find((a) => a.categoryId === resource);
-  return categories.find((a) => a.name === resource.name);
 };
 
 const getDefenderContract = (
@@ -336,7 +290,6 @@ export const constructMonitor = (
   notifications: DefenderNotification[],
   actions: DefenderAction[],
   blockwatchers: DefenderBlockWatcher[],
-  categories: DefenderCategory[],
   contracts: DefenderContract[],
 ): DefenderBlockMonitor | DefenderFortaMonitor => {
   const actionCondition = getDefenderAction(monitor['action-condition'], actions);
@@ -356,9 +309,6 @@ export const constructMonitor = (
       return maybeNotification?.notificationId;
     })
     .filter(isResource);
-
-  const monitorCategory = notifyConfig.category;
-  const notificationCategoryId = getDefenderCategory(monitorCategory, categories)?.categoryId;
 
   // !NOTE: This depends on Contracts being deployed before Monitors
   //        otherwise getDefenderContract will return old values
@@ -398,7 +348,7 @@ export const constructMonitor = (
     alertMessageSubject: notifyConfig['message-subject'],
     alertTimeoutMs: notifyConfig.timeout,
     notificationChannels,
-    notificationCategoryId: _.isEmpty(notificationChannels) ? notificationCategoryId : undefined,
+    severityLevel: notifyConfig['severity-level'],
     riskCategory: monitor['risk-category'],
     stackResourceId: stackResourceId,
   };
