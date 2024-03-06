@@ -32,7 +32,6 @@
 | `"arbitrum-goerli"`     |             |
 | `"arbitrum-sepolia"`    |             |
 | `"optimism"`            |             |
-| `"optimism-goerli"`     |             |
 | `"optimism-sepolia"`    |             |
 | `"celo"`                |             |
 | `"alfajores"`           |             |
