@@ -34,7 +34,6 @@ export type PublicNetwork =
   | 'arbitrum-goerli'
   | 'arbitrum-sepolia'
   | 'optimism'
-  | 'optimism-goerli'
   | 'optimism-sepolia'
   | 'celo'
   | 'alfajores'
