@@ -45,7 +45,6 @@
 | `"zksync-goerli"`       |             |
 | `"zksync-sepolia"`      |             |
 | `"base"`                |             |
-| `"base-goerli"`         |             |
 | `"base-sepolia"`        |             |
 | `"linea-goerli"`        |             |
 | `"linea"`               |             |
