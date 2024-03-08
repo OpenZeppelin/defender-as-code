@@ -1244,7 +1244,7 @@ export default class DefenderDeploy {
       async (forkedNetwork: ForkedNetworkRequest, stackResourceId: string) => {
         const createdForkedNetwork = await client.createForkedNetwork({
           name: forkedNetwork.name,
-          supportedNetwork: forkedNetwork['supported-network'],
+          supportedNetwork: forkedNetwork['supported-network'] as any, // cast to prevent typing errors in deploy when networks in SDK are not aligned,
           rpcUrl: forkedNetwork['rpc-url'],
           blockExplorerUrl: forkedNetwork['block-explorer-url'] ?? undefined,
           apiKey: forkedNetwork['api-key'] ?? undefined,
