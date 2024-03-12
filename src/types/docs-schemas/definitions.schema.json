@@ -20,6 +20,7 @@
       "enum": [
         "mainnet",
         "sepolia",
+        "holesky",
         "goerli",
         "xdai",
         "sokol",
