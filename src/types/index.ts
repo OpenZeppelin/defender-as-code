@@ -16,7 +16,6 @@ import {
   NotificationType,
 } from '@openzeppelin/defender-sdk-monitor-client/lib/models/notification';
 
-import { NotificationCategory } from '@openzeppelin/defender-sdk-monitor-client/lib/models/category';
 import { CreateMonitorResponse, BlockWatcher } from '@openzeppelin/defender-sdk-monitor-client';
 import { TenantNetworkResponse } from '@openzeppelin/defender-sdk-network-client';
 
@@ -48,7 +47,6 @@ export type DefenderRelayer = RelayerGetResponse;
 export type DefenderAction = Action;
 export type DefenderBlockWatcher = BlockWatcher;
 export type DefenderNotification = NotificationSummary;
-export type DefenderCategory = NotificationCategory;
 export type DefenderNotificationReference = NotificationReference;
 export type DefenderMonitor = CreateMonitorResponse;
 export type DefenderBlockMonitorResponse = CreateBlockMonitorResponse;
@@ -87,7 +85,6 @@ export type ResourceType =
   | 'Monitors'
   | 'Relayers'
   | 'Notifications'
-  | 'Categories'
   | 'Actions'
   | 'Contracts'
   | 'Secrets'
@@ -148,6 +145,8 @@ export type YDatadogConfig = {
 export type YOpsgenieConfig = OpsgenieConfig;
 export type YPagerdutyConfig = PagerDutyConfig;
 
+export type YNotificationSeverityLevel = 'LOW' | 'MEDIUM' | 'HIGH';
+
 export type YNotification = SaveNotificationRequest & {
   type: NotificationType;
   name: string;
@@ -160,12 +159,6 @@ export type YNotification = SaveNotificationRequest & {
     | YEmailConfig
     | YOpsgenieConfig
     | YPagerdutyConfig;
-};
-
-export type YCategory = {
-  'name': string;
-  'description': string;
-  'notification-ids': YNotification[];
 };
 
 export type YBlockMonitor = {
@@ -183,8 +176,8 @@ export type YBlockMonitor = {
     'timeout'?: number;
     'message'?: string;
     'message-subject'?: string;
-    'category'?: YCategory;
     'channels': YNotification[];
+    'severity-level': YNotificationSeverityLevel;
   };
   'conditions'?: {
     event: { signature: string; expression?: string }[];
@@ -208,8 +201,8 @@ export type YFortaMonitor = {
     'timeout'?: number;
     'message'?: string;
     'message-subject'?: string;
-    'category'?: YCategory;
     'channels': YNotification[];
+    'severity-level': YNotificationSeverityLevel;
   };
   'conditions'?: {
     'min-scanner-count': number;
@@ -264,7 +257,6 @@ export type ListDefenderResources = {
   monitors: DefenderMonitor[];
   actions: DefenderAction[];
   notifications: DefenderNotification[];
-  categories: DefenderCategory[];
   contracts: DefenderContract[];
   relayerApiKeys: DefenderRelayerApiKey[];
   secrets: string[];

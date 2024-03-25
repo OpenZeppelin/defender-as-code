@@ -381,23 +381,6 @@
       },
       "required": ["type", "name", "paused", "config"]
     },
-    "category": {
-      "title": "Category",
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "description": { "type": "string" },
-        "notification-ids": {
-          "title": "CategoryNotificationIds",
-          "type": "array",
-          "items": {
-            "$ref": "definitions.schema.json#/definitions/notification-or-defender-id",
-            "format": "uri-reference"
-          }
-        }
-      },
-      "required": ["name"]
-    },
     "block-monitor": {
       "title": "BlockMonitor",
       "type": "object",
@@ -445,10 +428,7 @@
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
             "message-subject": { "type": "string" },
-            "category": {
-              "$ref": "definitions.schema.json#/definitions/category-or-defender-id",
-              "format": "uri-reference"
-            },
+            "severity-level": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
             "channels": {
               "title": "Channels",
               "type": "array",
@@ -530,10 +510,7 @@
             "timeout": { "type": "integer" },
             "message": { "type": "string" },
             "message-subject": { "type": "string" },
-            "category": {
-              "$ref": "definitions.schema.json#/definitions/category-or-defender-id",
-              "format": "uri-reference"
-            },
+            "severityLevel": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
             "channels": {
               "title": "Channels",
               "type": "array",
@@ -631,17 +608,6 @@
         {
           "type": "object",
           "$ref": "definitions.schema.json#/definitions/block-explorer-api-key",
-          "format": "uri-reference"
-        },
-        { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
-      ]
-    },
-    "category-or-defender-id": {
-      "title": "CategoryOrDefenderID",
-      "anyOf": [
-        {
-          "type": "object",
-          "$ref": "definitions.schema.json#/definitions/category",
           "format": "uri-reference"
         },
         { "type": "string", "$ref": "definitions.schema.json#/definitions/defender-id", "format": "uri-reference" }
