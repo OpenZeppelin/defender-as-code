@@ -12,6 +12,7 @@ export type SupportedNetwork = PublicNetwork | CustomNetwork;
 export type PublicNetwork =
   | 'mainnet'
   | 'sepolia'
+  | 'holesky'
   | 'goerli'
   | 'xdai'
   | 'sokol'
@@ -34,7 +35,6 @@ export type PublicNetwork =
   | 'arbitrum-goerli'
   | 'arbitrum-sepolia'
   | 'optimism'
-  | 'optimism-goerli'
   | 'optimism-sepolia'
   | 'celo'
   | 'alfajores'
