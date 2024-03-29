@@ -703,7 +703,7 @@
       "title": "AbiType",
       "anyOf": [
         { "title": "StringABI", "type": "string" },
-        { "title": "ArrayABI", "type": "array", "items": { "type": "string" } }
+        { "title": "ArrayABI", "type": "array" }
       ]
     },
     "safe-contracts": {

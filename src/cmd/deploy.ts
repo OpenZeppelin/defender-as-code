@@ -1473,7 +1473,7 @@ export default class DefenderDeploy {
     // Always deploy relayers before actions
     await this.deployRelayers(stdOut.relayers);
     await this.deployActions(stdOut.actions);
-    // Deploy notifications before monitors and categories
+    // Deploy notifications before monitors
     await this.deployNotifications(stdOut.notifications);
     await this.deployMonitors(stdOut.monitors);
     await this.deployBlockExplorerApiKey(stdOut.blockExplorerApiKeys);
