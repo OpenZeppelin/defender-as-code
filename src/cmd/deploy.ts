@@ -441,7 +441,7 @@ export default class DefenderDeploy {
         };
       },
       // on create
-      async (contract: Contract, stackResourceId: string) => {
+      async (contract: Contract, _stackResourceId: string) => {
         const importedContract = await client.addContract({
           name: contract.name,
           network: contract.network,
@@ -775,7 +775,6 @@ export default class DefenderDeploy {
             notificationChannels: match.notifyConfig?.notifications.map(
               (n: DefenderNotificationReference) => n.notificationId,
             ),
-            severityLevel: match.notifyConfig?.severityLevel,
             type: match.type,
             stackResourceId: match.stackResourceId,
             network: match.network,
