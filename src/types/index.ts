@@ -1,4 +1,4 @@
-import { JsonFragment } from '@ethersproject/abi';
+import { JsonFragment } from 'ethers';
 
 import { Network, SupportedNetwork } from '@openzeppelin/defender-sdk-base-client';
 import { Contract } from '@openzeppelin/defender-sdk-proposal-client/lib/models/contract';
