@@ -106,7 +106,7 @@ A list of properties that support direct referencing:
 ```yaml
 ...
 contracts:
-  contract-1: 'sepolia-0xd70d6A0480420b4C788AF91d0E1b0ca6141A9De8' # contractId of an existing resource in Defender
+  contract-1: 'sepolia-0x62034459131329bE4349A9cc322B03c63806Aa11' # contractId of an existing resource in Defender
 relayers:
   relayer-2: 'bcb659c6-7e11-4d37-a15b-0fa9f3d3442c' # relayerId of an existing relayer in Defender
 actions:
