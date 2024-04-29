@@ -92,6 +92,28 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group flashbotTransactionMode
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/flashbotTransactionMode"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group privateTransactionMode
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/privateTransactionMode"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group policy
 
 Reference this group by using
@@ -105,7 +127,7 @@ Reference this group by using
 | [gas-price-cap](#gas-price-cap)               | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-gas-price-cap.md "definitions.schema.json#/definitions/policy/properties/gas-price-cap")               |
 | [whitelist-receivers](#whitelist-receivers)   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-whitelistreceivers.md "definitions.schema.json#/definitions/policy/properties/whitelist-receivers")    |
 | [eip1559-pricing](#eip1559-pricing)           | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-eip1559-pricing.md "definitions.schema.json#/definitions/policy/properties/eip1559-pricing")           |
-| [private-transactions](#private-transactions) | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-private-transactions.md "definitions.schema.json#/definitions/policy/properties/private-transactions") |
+| [private-transactions](#private-transactions) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-private-transactions.md "definitions.schema.json#/definitions/policy/properties/private-transactions") |
 
 ### gas-price-cap
 
@@ -169,7 +191,7 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `boolean`
+*   Type: merged type ([Details](definitions-definitions-policy-properties-private-transactions.md))
 
 *   cannot be null
 
@@ -177,7 +199,15 @@ Reference this group by using
 
 #### private-transactions Type
 
-`boolean`
+merged type ([Details](definitions-definitions-policy-properties-private-transactions.md))
+
+one (and only one) of
+
+*   [Untitled boolean in Definitions](definitions-definitions-policy-properties-private-transactions-oneof-0.md "check type definition")
+
+*   one (and only one) of
+
+    *   [FlashbotTransactionMode](definitions-definitions-privatetransactionmode-oneof-flashbottransactionmode.md "check type definition")
 
 ## Definitions group relayer
 
