@@ -53,6 +53,7 @@ export type PublicNetwork =
   | 'linea-goerli'
   | 'linea'
   | 'mantle'
+  | 'mantle-sepolia'
   | 'scroll'
   | 'scroll-sepolia'
   | 'meld'

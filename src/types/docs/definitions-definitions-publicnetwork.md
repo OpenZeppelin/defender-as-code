@@ -51,6 +51,7 @@
 | `"linea-goerli"`        |             |
 | `"linea"`               |             |
 | `"mantle"`              |             |
+| `"mantle-sepolia"`      |             |
 | `"scroll"`              |             |
 | `"scroll-sepolia"`      |             |
 | `"meld"`                |             |
