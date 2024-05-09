@@ -775,6 +775,7 @@ export default class DefenderDeploy {
             notificationChannels: match.notifyConfig?.notifications.map(
               (n: DefenderNotificationReference) => n.notificationId,
             ),
+            severityLevel: match.notifyConfig?.severityLevel,
             type: match.type,
             stackResourceId: match.stackResourceId,
             network: match.network,
