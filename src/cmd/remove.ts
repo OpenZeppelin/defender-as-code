@@ -20,7 +20,6 @@ import {
 } from '../utils';
 import {
   DefenderAction,
-  DefenderCategory,
   DefenderContract,
   DefenderNotification,
   DefenderRelayer,
@@ -130,7 +129,6 @@ export default class DefenderRemove {
         relayerApiKeys: DefenderRelayerApiKey[];
       }[];
       notifications: DefenderNotification[];
-      categories: DefenderCategory[];
       secrets: string[];
       forkedNetworks: DefenderTenantNetwork[];
       privateNetworks: DefenderTenantNetwork[];
@@ -141,7 +139,6 @@ export default class DefenderRemove {
       contracts: [],
       relayers: [],
       notifications: [],
-      categories: [],
       secrets: [],
       forkedNetworks: [],
       privateNetworks: [],
@@ -310,30 +307,6 @@ export default class DefenderRemove {
       },
       stdOut.notifications,
     );
-
-    // Categories
-
-    // Temporarily Disabled
-    // const listNotificationCategories = () => monitorClient.listNotificationCategories();
-    // await this.wrapper<Category, DefenderCategory>(
-    //   this.serverless,
-    //   'Categories',
-    //   this.resources??.categories,
-    //   listNotificationCategories,
-    //   async (categories: DefenderCategory[]) => {
-    //     await Promise.all(
-    //       categories.map(async (e) => {
-    //         this.log.progress(
-    //           'component-remove-extra',
-    //           `Removing ${e.stackResourceId} (${e.categoryId}) from Defender`,
-    //         );
-    //         await monitorClient.deleteNotificationCategory(e.categoryId);
-    //         this.log.success(`Removed ${e.stackResourceId} (${e.categoryId})`);
-    //       }),
-    //     );
-    //   },
-    //   stdOut.categories,
-    // );
 
     // Secrets
     const listSecrets = () => actionClient.listSecrets().then((r) => r.secretNames ?? []);

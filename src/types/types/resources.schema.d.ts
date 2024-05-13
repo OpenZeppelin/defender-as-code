@@ -13,9 +13,7 @@ export type PublicNetwork =
   | 'mainnet'
   | 'sepolia'
   | 'holesky'
-  | 'goerli'
   | 'xdai'
-  | 'sokol'
   | 'fuse'
   | 'bsc'
   | 'bsctest'
@@ -32,7 +30,6 @@ export type PublicNetwork =
   | 'fuji'
   | 'arbitrum'
   | 'arbitrum-nova'
-  | 'arbitrum-goerli'
   | 'arbitrum-sepolia'
   | 'optimism'
   | 'optimism-sepolia'
@@ -45,12 +42,9 @@ export type PublicNetwork =
   | 'hedera'
   | 'hederatest'
   | 'zksync'
-  | 'zksync-goerli'
   | 'zksync-sepolia'
   | 'base'
-  | 'base-goerli'
   | 'base-sepolia'
-  | 'linea-goerli'
   | 'linea'
   | 'mantle'
   | 'mantle-sepolia'
@@ -119,64 +113,57 @@ export type PagerDutyEventType = 'change' | 'alert';
 export type PagerDutyEventAction = 'trigger' | 'acknowledge' | 'resolve';
 export type PagerDutySeverity = 'critical' | 'error' | 'warning' | 'info';
 export type DefenderID2 = string;
-export type CategoryOrDefenderID = Category | DefenderID3;
-export type NotificationOrDefenderID1 = Notification | DefenderID2;
-export type CategoryNotificationIds = NotificationOrDefenderID1[];
-export type DefenderID3 = string;
 export type RelayerOrDefenderID1 = Relayer | DefenderID;
-export type PolicyOrDefenderID = Policy1 | DefenderID4;
-export type DefenderID4 = string;
-export type ContractOrDefenderID = Contract | DefenderID5;
+export type PolicyOrDefenderID = Policy1 | DefenderID3;
+export type DefenderID3 = string;
+export type ContractOrDefenderID = Contract | DefenderID4;
 export type Address = string;
 export type Network1 = SupportedNetwork | TenantNetwork;
 export type AbiType = StringABI | ArrayABI;
 export type StringABI = string;
-export type ArrayABI = string[];
-export type DefenderID5 = string;
-export type MonitorOrDefenderID = Monitor | DefenderID6;
+export type ArrayABI = unknown[];
+export type DefenderID4 = string;
+export type MonitorOrDefenderID = Monitor | DefenderID5;
 export type Monitor = BlockMonitor | FortaMonitor;
 export type Network2 = SupportedNetwork | TenantNetwork;
-export type ContractOrDefenderID1 = Contract | DefenderID5;
+export type ContractOrDefenderID1 = Contract | DefenderID4;
 export type Contracts1 = ContractOrDefenderID1[];
 export type Address1 = string;
 export type Addresses = Address1[];
 export type ActionOrDefenderID1 = Action | DefenderID1;
 export type ActionOrDefenderID2 = Action | DefenderID1;
-export type CategoryOrDefenderID1 = Category | DefenderID3;
-export type NotificationOrDefenderID2 = Notification | DefenderID2;
-export type Channels = NotificationOrDefenderID2[];
+export type NotificationOrDefenderID1 = Notification | DefenderID2;
+export type Channels = NotificationOrDefenderID1[];
 export type Event = EventItems[];
 export type Function = FunctionItems[];
 export type RiskCategory = 'NONE' | 'GOVERNANCE' | 'ACCESS-CONTROL' | 'SUSPICIOUS' | 'FINANCIAL' | 'TECHNICAL';
 export type Network3 = SupportedNetwork | TenantNetwork;
-export type ContractOrDefenderID2 = Contract | DefenderID5;
+export type ContractOrDefenderID2 = Contract | DefenderID4;
 export type Contracts2 = ContractOrDefenderID2[];
 export type Address2 = string;
 export type Addresses1 = Address2[];
 export type ActionOrDefenderID3 = Action | DefenderID1;
 export type ActionOrDefenderID4 = Action | DefenderID1;
-export type CategoryOrDefenderID2 = Category | DefenderID3;
-export type NotificationOrDefenderID3 = Notification | DefenderID2;
-export type Channels1 = NotificationOrDefenderID3[];
+export type NotificationOrDefenderID2 = Notification | DefenderID2;
+export type Channels1 = NotificationOrDefenderID2[];
 export type AlertIDs = string[];
 export type AgentIDs = string[];
-export type DefenderID6 = string;
-export type BlockExplorerApiKeyOrDefenderID = BlockExplorerApiKey | DefenderID7;
+export type DefenderID5 = string;
+export type BlockExplorerApiKeyOrDefenderID = BlockExplorerApiKey | DefenderID6;
 export type Network4 = SupportedNetwork | TenantNetwork;
+export type DefenderID6 = string;
+export type ForkedNetworkOrDefenderID = ForkedNetworkRequest | DefenderID7;
 export type DefenderID7 = string;
-export type ForkedNetworkOrDefenderID = ForkedNetworkRequest | DefenderID8;
-export type DefenderID8 = string;
-export type PrivateNetworkOrDefenderID = PrivateNetworkRequest | DefenderID9;
+export type PrivateNetworkOrDefenderID = PrivateNetworkRequest | DefenderID8;
 export type Address3 = string;
 export type Address4 = string;
 export type Address5 = string;
 export type Address6 = string;
-export type DefenderID9 = string;
+export type DefenderID8 = string;
 
 export interface Resources {
   actions?: Actions;
   notifications?: Notifications;
-  categories?: Categories;
   relayers?: Relayers;
   policies?: Policies;
   contracts?: Contracts;
@@ -278,14 +265,6 @@ export interface PagerDutyConfig {
 export interface PagerDutyConfigCustomDetails {
   [k: string]: string;
 }
-export interface Categories {
-  [k: string]: CategoryOrDefenderID;
-}
-export interface Category {
-  name: string;
-  description?: string;
-  'notification-ids'?: CategoryNotificationIds;
-}
 export interface Relayers {
   [k: string]: RelayerOrDefenderID1;
 }
@@ -349,7 +328,7 @@ export interface NotifyConfig {
   timeout?: number;
   message?: string;
   'message-subject'?: string;
-  category?: CategoryOrDefenderID1;
+  'severity-level'?: 'LOW' | 'MEDIUM' | 'HIGH';
   channels: Channels;
 }
 export interface Conditions {
@@ -391,7 +370,7 @@ export interface NotifyConfig1 {
   timeout?: number;
   message?: string;
   'message-subject'?: string;
-  category?: CategoryOrDefenderID2;
+  severityLevel?: 'LOW' | 'MEDIUM' | 'HIGH';
   channels: Channels1;
 }
 export interface Conditions1 {

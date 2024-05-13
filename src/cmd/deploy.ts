@@ -20,7 +20,6 @@ import {
   getEquivalentResourceByKey,
   getConsolidatedSecrets,
   validateTypesAndSanitise,
-  constructNotificationCategory,
   validateAdditionalPermissionsOrThrow,
   getDeployClient,
   formatABI,
@@ -49,7 +48,6 @@ import {
   DefenderMonitorTrigger,
   DefenderMonitorFilterTrigger,
   DefenderBlockExplorerApiKey,
-  DefenderCategory,
   DefenderFortaMonitorResponse,
   DefenderBlockMonitorResponse,
   Resources,
@@ -63,8 +61,6 @@ import {
   Actions,
   BlockExplorerApiKey,
   BlockExplorerApiKeys,
-  Categories,
-  Category,
   Contract,
   Contracts,
   DefenderID,
@@ -116,7 +112,6 @@ export default class DefenderDeploy {
       monitors: [],
       actions: [],
       notifications: [],
-      categories: [],
       contracts: [],
       relayerApiKeys: [],
       secrets: [],
@@ -224,20 +219,6 @@ export default class DefenderDeploy {
       },
     );
 
-    // Notification Categories
-    const categories: Categories = this.resources?.categories ?? {};
-    const dCategories = await monitorClient.listNotificationCategories();
-    const categoryDifference = _.differenceWith(
-      dCategories,
-      Object.entries(categories),
-      (a: DefenderCategory, b: [string, Category | DefenderID]) => {
-        if (isDefenderId(b[1])) {
-          return a.categoryId === b[1];
-        }
-        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
-      },
-    );
-
     // Actions
     const actions: Actions = this.resources.actions ?? {};
     const actionClient = getActionClient(this.teamKey!);
@@ -282,7 +263,6 @@ export default class DefenderDeploy {
     difference.contracts = contractDifference;
     difference.monitors = monitorDifference;
     difference.notifications = notificationDifference;
-    difference.categories = categoryDifference;
     difference.actions = actionDifference;
     difference.secrets = secretsDifference;
     difference.blockExplorerApiKeys = blockExplorerApiKeyDifference;
@@ -461,7 +441,7 @@ export default class DefenderDeploy {
         };
       },
       // on create
-      async (contract: Contract, stackResourceId: string) => {
+      async (contract: Contract, _stackResourceId: string) => {
         const importedContract = await client.addContract({
           name: contract.name,
           network: contract.network,
@@ -713,97 +693,12 @@ export default class DefenderDeploy {
     );
   }
 
-  private async deployCategories(output: DeployOutput<DefenderCategory>) {
-    const categories: Categories = this.resources?.categories ?? {};
-    const client = getMonitorClient(this.teamKey!);
-    const notifications = await client.listNotificationChannels();
-    const retrieveExisting = () => client.listNotificationCategories();
-
-    await this.wrapper<Category, DefenderCategory>(
-      this.serverless,
-      'Categories',
-      removeDefenderIdReferences(categories),
-      retrieveExisting,
-      // on update
-      async (category: Category, match: DefenderCategory) => {
-        const matchStackResourceId =
-          match.stackResourceId ?? getResourceID(getStackName(this.serverless), _.kebabCase(match.name));
-        const newCategory = constructNotificationCategory(
-          this.serverless,
-          this.resources,
-          category,
-          matchStackResourceId,
-          notifications,
-        );
-
-        const mappedMatch = {
-          name: match.name,
-          description: match.description,
-          notificationIds: match.notificationIds,
-          stackResourceId: matchStackResourceId,
-        };
-        if (_.isEqual(validateTypesAndSanitise(newCategory), validateTypesAndSanitise(mappedMatch))) {
-          return {
-            name: matchStackResourceId,
-            id: match.categoryId,
-            success: false,
-            response: match,
-            notice: `Skipped ${matchStackResourceId} - no changes detected`,
-          };
-        }
-
-        const updatedCategory = await client.updateNotificationCategory(match.categoryId, {
-          categoryId: match.categoryId,
-          ...newCategory,
-        });
-
-        return {
-          name: matchStackResourceId,
-          id: updatedCategory.categoryId,
-          success: true,
-          response: updatedCategory,
-        };
-      },
-      // on create
-      async (_: Category, stackResourceId: string) => {
-        return {
-          name: stackResourceId,
-          id: '',
-          success: false,
-          notice: 'Creating custom notification categories is not yet supported',
-        };
-        // const createdCategory = await client.createNotificationCategory(
-        //   constructNotificationCategory(this.serverless, category, stackResourceId, notifications),
-        // );
-        // return {
-        //   name: stackResourceId,
-        //   id: createdCategory.categoryId,
-        //   success: true,
-        //   response: createdCategory,
-        // };
-      },
-      // on remove
-      async (_: DefenderCategory[]) => {
-        this.log.warn(`Deleting notification categories is not yet supported.`);
-        // await Promise.all(categories.map(async (n) => await client.deleteNotificationCategory(n.categoryId)));
-      },
-      // overrideMatchDefinition
-      // TODO: remove this when we allow creating new categories
-      (a: DefenderCategory, b: Category) => {
-        return a.name === b.name;
-      },
-      output,
-      this.ssotDifference?.categories,
-    );
-  }
-
   private async deployMonitors(output: DeployOutput<DefenderMonitor>) {
     try {
       const monitors: Monitors = this.resources?.monitors ?? {};
       const client = getMonitorClient(this.teamKey!);
       const actions = await getActionClient(this.teamKey!).list();
       const notifications = await client.listNotificationChannels();
-      const categories = await client.listNotificationCategories();
 
       // TODO: Add a new endpoint in defender-sdk which includes contract ABI and NatSpec
       const contracts = await getProposalClient(this.teamKey!).listContracts();
@@ -855,7 +750,6 @@ export default class DefenderDeploy {
             notifications,
             actions.items,
             blockwatchersForNetwork,
-            categories,
             contracts,
           );
 
@@ -881,9 +775,7 @@ export default class DefenderDeploy {
             notificationChannels: match.notifyConfig?.notifications.map(
               (n: DefenderNotificationReference) => n.notificationId,
             ),
-            notificationCategoryId: _.isEmpty(match.notifyConfig?.notifications)
-              ? match.notifyConfig?.notificationCategoryId
-              : undefined,
+            severityLevel: match.notifyConfig?.severityLevel,
             type: match.type,
             stackResourceId: match.stackResourceId,
             network: match.network,
@@ -950,7 +842,6 @@ export default class DefenderDeploy {
               notifications,
               actions.items,
               blockwatchersForNetwork,
-              categories,
               contracts,
             ),
           );
@@ -1527,11 +1418,6 @@ export default class DefenderDeploy {
       created: [],
       updated: [],
     };
-    const categories: DeployOutput<DefenderCategory> = {
-      removed: [],
-      created: [],
-      updated: [],
-    };
     const secrets: DeployOutput<string> = {
       removed: [],
       created: [],
@@ -1574,7 +1460,6 @@ export default class DefenderDeploy {
       contracts,
       relayers,
       notifications,
-      categories,
       secrets,
       blockExplorerApiKeys,
       forkedNetworks,
@@ -1588,9 +1473,8 @@ export default class DefenderDeploy {
     // Always deploy relayers before actions
     await this.deployRelayers(stdOut.relayers);
     await this.deployActions(stdOut.actions);
-    // Deploy notifications before monitors and categories
+    // Deploy notifications before monitors
     await this.deployNotifications(stdOut.notifications);
-    await this.deployCategories(stdOut.categories);
     await this.deployMonitors(stdOut.monitors);
     await this.deployBlockExplorerApiKey(stdOut.blockExplorerApiKeys);
 
