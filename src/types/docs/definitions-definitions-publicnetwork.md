@@ -45,6 +45,7 @@
 | `"base-sepolia"`        |             |
 | `"linea"`               |             |
 | `"mantle"`              |             |
+| `"mantle-sepolia"`      |             |
 | `"scroll"`              |             |
 | `"scroll-sepolia"`      |             |
 | `"meld"`                |             |

@@ -47,6 +47,7 @@ export type PublicNetwork =
   | 'base-sepolia'
   | 'linea'
   | 'mantle'
+  | 'mantle-sepolia'
   | 'scroll'
   | 'scroll-sepolia'
   | 'meld'
