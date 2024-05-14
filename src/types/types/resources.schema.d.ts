@@ -56,6 +56,13 @@ export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-se
 export type TenantNetwork = string;
 export type AddressFromRelayer = {} | string;
 export type WhitelistReceivers = string[];
+export type PrivateTransactionMode = FlashbotTransactionMode;
+/**
+ * Fast mode has 2 key differences from the default Protect experience:
+ * 1. Shared with all builders: By default, Protect transactions are only shared with the Flashbots Builder, which builds only a subset of all Ethereum blocks. In fast mode, transactions are shared with all registered builders to increase the number of blocks the user's transaction can be included in.
+ * 2. Larger refund paid to validator: By default, only 10% of MEV-Share refunds are paid to validators. In fast mode, validators receive 50% of refunds which makes it more likely that the user’s transactions will be chosen in a given block.
+ */
+export type FlashbotTransactionMode = 'flashbots-normal' | 'flashbots-fast';
 export type RelayerAPIKeys = string[];
 export type DefenderID = string;
 export type TriggerType = 'schedule' | 'webhook' | 'sentinel' | 'monitor-filter';
@@ -198,7 +205,7 @@ export interface Policy {
   'gas-price-cap'?: number;
   'whitelist-receivers'?: WhitelistReceivers;
   'eip1559-pricing'?: boolean;
-  'private-transactions'?: boolean;
+  'private-transactions'?: boolean | PrivateTransactionMode;
 }
 export interface Trigger {
   type: TriggerType;
@@ -275,7 +282,7 @@ export interface Policy1 {
   'gas-price-cap'?: number;
   'whitelist-receivers'?: WhitelistReceivers;
   'eip1559-pricing'?: boolean;
-  'private-transactions'?: boolean;
+  'private-transactions'?: boolean | PrivateTransactionMode;
 }
 export interface Contracts {
   [k: string]: ContractOrDefenderID;

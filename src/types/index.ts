@@ -2,7 +2,7 @@ import { JsonFragment } from 'ethers';
 
 import { Network, SupportedNetwork } from '@openzeppelin/defender-sdk-base-client';
 import { Contract } from '@openzeppelin/defender-sdk-proposal-client/lib/models/contract';
-import { RelayerGetResponse, RelayerApiKey } from '@openzeppelin/defender-sdk-relay-client/lib/models';
+import { RelayerGetResponse, RelayerApiKey, PrivateTransactionMode } from '@openzeppelin/defender-sdk-relay-client/lib/models';
 import { DefenderApiResponseError } from '@openzeppelin/defender-sdk-base-client/lib/api/api-error';
 
 import {
@@ -96,7 +96,7 @@ export type YPolicy = {
   'gas-price-cap'?: number;
   'whitelist-receivers'?: string[];
   'eip1559-pricing'?: boolean;
-  'private-transactions'?: boolean;
+  'private-transactions'?: boolean | PrivateTransactionMode;
 };
 
 export type YRelayer = {
