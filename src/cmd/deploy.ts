@@ -441,7 +441,7 @@ export default class DefenderDeploy {
         };
       },
       // on create
-      async (contract: Contract, stackResourceId: string) => {
+      async (contract: Contract, _stackResourceId: string) => {
         const importedContract = await client.addContract({
           name: contract.name,
           network: contract.network,
