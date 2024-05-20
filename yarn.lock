@@ -214,117 +214,117 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@openzeppelin/defender-sdk-account-client@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-account-client/-/defender-sdk-account-client-1.13.0.tgz#952f517b522734959346ab03dc823887a9ef1088"
-  integrity sha512-YwRBBil1ZVg1qri/az/6BE7zquMtn8jcRkPt/H9dV7sL0izKN1TBqNpUSvInLzLtGZsx0vIcyd6O7C1A24DezA==
+"@openzeppelin/defender-sdk-account-client@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-account-client/-/defender-sdk-account-client-1.13.1.tgz#8670fff98b35f70a10f6ed741e6d7c12ae539b69"
+  integrity sha512-xjPjXMDMwTB1Y6qYECKn1TwCXEyxjEKuOcj2FlRg+xvn1bpEJfye9NBCFXYZW4MDKABwMFBukU0gVspGaXe1ZQ==
   dependencies:
-    "@openzeppelin/defender-sdk-base-client" "^1.13.0"
+    "@openzeppelin/defender-sdk-base-client" "^1.13.1"
     axios "^1.6.7"
     lodash "^4.17.21"
 
-"@openzeppelin/defender-sdk-action-client@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-action-client/-/defender-sdk-action-client-1.13.0.tgz#e904ca7fec198e4b5db16aec2f3ffcc14517bdb8"
-  integrity sha512-ma/EV25rBRIGnM90KkLokis6QI+OjM3XEpVgUkLztLrcq6XPZBo0Fqe9RmtyCAfFQeQEIb735Q1lVfFqnkrU1Q==
+"@openzeppelin/defender-sdk-action-client@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-action-client/-/defender-sdk-action-client-1.13.1.tgz#13b300f033c05244d5f24c347ec6b58f8f07337e"
+  integrity sha512-iJC/wmE+GgbUdB74248Rw6YSgSld+/gKDf4rrKGzmKpxxxrB6Ro65QE9IxeJS3bWdy5snEEEaZnJGOsZSXqBlQ==
   dependencies:
-    "@openzeppelin/defender-sdk-base-client" "^1.13.0"
+    "@openzeppelin/defender-sdk-base-client" "^1.13.1"
     axios "^1.6.7"
     dotenv "^16.3.1"
     glob "^7.1.6"
     jszip "^3.10.1"
     lodash "^4.17.21"
 
-"@openzeppelin/defender-sdk-base-client@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-base-client/-/defender-sdk-base-client-1.13.0.tgz#9abe0c0ecfbde14ed793880d9c446803b2c167ef"
-  integrity sha512-XyCHF4Q//rInmJG6XM9x4JDiERJTCjmGX7FOmtbXYAKTTE5ygUvFU7gXJ5oxtbB2anPU3OJIPM25Shkd3+7dKw==
+"@openzeppelin/defender-sdk-base-client@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-base-client/-/defender-sdk-base-client-1.13.1.tgz#da1631f5bc943859c70740865954ffdadc308d44"
+  integrity sha512-FI7YdfgDf0px+cXbXyDkS0mpqzyySHeLkKj90ymzAy1/sGYKHNC03vyzMnMfIRuxa4bF15wdL4MCpA60PSWGpQ==
   dependencies:
     amazon-cognito-identity-js "^6.3.6"
     async-retry "^1.3.3"
 
-"@openzeppelin/defender-sdk-deploy-client@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-deploy-client/-/defender-sdk-deploy-client-1.13.0.tgz#b4a7d10c58f01f197432745b3e6a8308a72ce602"
-  integrity sha512-igLut1lIV52DWV9Bn8MrESgCvCQSOunqRZkSLC/KGCbEUTEyNoAHNsGMu9Z+K11RYCD0CHGnfAi0ODLsbrq6QA==
+"@openzeppelin/defender-sdk-deploy-client@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-deploy-client/-/defender-sdk-deploy-client-1.13.1.tgz#2840a37eceb9adae327f2f427533d1b9f7a886a8"
+  integrity sha512-zQEoURBRMknrOXLDNzK3gXiHfQbDImLKtEVPBOybya/MYqququBdNkRmPpSkJ45LHVbuxWyqRkkGFQp8+l/UQg==
   dependencies:
-    "@openzeppelin/defender-sdk-base-client" "^1.13.0"
+    "@openzeppelin/defender-sdk-base-client" "^1.13.1"
     axios "^1.6.7"
     lodash "^4.17.21"
 
-"@openzeppelin/defender-sdk-monitor-client@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-monitor-client/-/defender-sdk-monitor-client-1.13.0.tgz#f1cc9dadfa7edf9d8025fa9559929d6dffd532e8"
-  integrity sha512-pDUZQrDsXHOEkwGRQ/pI8PsbvSNFvcPypZpC5r++XrJLiExr6TltN4EJ5Q/ErmTdIjF1hRIYz0tSH3BLh4MYHg==
+"@openzeppelin/defender-sdk-monitor-client@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-monitor-client/-/defender-sdk-monitor-client-1.13.1.tgz#06323434efe79ac6b09075e51ff7295653d31fa2"
+  integrity sha512-3j6aj/fBc7/g5KDlRJ5epMO9f5W4R2PJGtNxsXWDYnX+7mXVR9uH+eKuCeGHBi9jWeYN3Je3UaapD0fZnrj8kA==
   dependencies:
-    "@openzeppelin/defender-sdk-base-client" "^1.13.0"
-    axios "^1.6.7"
-    ethers "^6.9.0"
-    lodash "^4.17.21"
-
-"@openzeppelin/defender-sdk-network-client@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-network-client/-/defender-sdk-network-client-1.13.0.tgz#9d3369ead761d15a59590638c9ae503e70d5695a"
-  integrity sha512-Rv9QBEBvEi407zZzCPnOrL8y8ByyQo7fwni5EBoRJQPj1HeM4uhZkLRNpq8YZOjjNhu648SP+L4F8Bbtdzmd9w==
-  dependencies:
-    "@openzeppelin/defender-sdk-base-client" "^1.13.0"
-    axios "^1.6.7"
-    lodash "^4.17.21"
-
-"@openzeppelin/defender-sdk-notification-channel-client@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-notification-channel-client/-/defender-sdk-notification-channel-client-1.13.0.tgz#c3078184a9ed290d219265beccdb55d01539b536"
-  integrity sha512-9OQOzpdsLhqtYK49BBARfgc++c4hT9gmIpO2u5D2ryKBJnRPDIhI0nO2beQFs5qWESfxghMFwq5OTi1TtGrfkA==
-  dependencies:
-    "@openzeppelin/defender-sdk-base-client" "^1.13.0"
-    axios "^1.6.7"
-    lodash "^4.17.21"
-
-"@openzeppelin/defender-sdk-proposal-client@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-proposal-client/-/defender-sdk-proposal-client-1.13.0.tgz#0b36ea4b73624e9941dfa9a85d3e41dc9e9a0f48"
-  integrity sha512-t1U+ZiIM7Q15SWHcecYcssjwmla5wTbciwZs3MEUXvbVjRLaxTu8ZectxxYKouZoj/ylMMgCASvH3VkbT6k2Tg==
-  dependencies:
-    "@openzeppelin/defender-sdk-base-client" "^1.13.0"
+    "@openzeppelin/defender-sdk-base-client" "^1.13.1"
     axios "^1.6.7"
     ethers "^6.9.0"
     lodash "^4.17.21"
 
-"@openzeppelin/defender-sdk-relay-client@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-relay-client/-/defender-sdk-relay-client-1.13.0.tgz#2b165b3899b245a63fa23a8ba55793d09a028d81"
-  integrity sha512-qZ34XIIP5qm9Kmbpm81bY7geiCxxoaeXOV1KJy0gEsz+J4noxqDqS9AJed2ee1z55Hy+Etng0XyEtmb4Kf9b+w==
+"@openzeppelin/defender-sdk-network-client@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-network-client/-/defender-sdk-network-client-1.13.1.tgz#6ce269bedcd3074bc14e6a9d15280c2a892e9beb"
+  integrity sha512-QR9dTZ6MuJ5o+GwAKH4Hxy+xuElI0iCwpVqN/ntHG0Ar7neHoq/f7jPtk04/DgEmrwTUMLzTKpZWmUO1fxiEMA==
   dependencies:
-    "@openzeppelin/defender-sdk-base-client" "^1.13.0"
+    "@openzeppelin/defender-sdk-base-client" "^1.13.1"
     axios "^1.6.7"
     lodash "^4.17.21"
 
-"@openzeppelin/defender-sdk-relay-signer-client@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-relay-signer-client/-/defender-sdk-relay-signer-client-1.13.0.tgz#0e7af427304e6e8b8c169d156bf60e7195d5f6fe"
-  integrity sha512-IgNsjmTdJ4mKIeEQc3TFaqvUqDgV/nxrzHgAFfnTSbt4AV9fGkThIeR0p/yC+vmVEaTKDxPREthDQmI/I4iXSg==
+"@openzeppelin/defender-sdk-notification-channel-client@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-notification-channel-client/-/defender-sdk-notification-channel-client-1.13.1.tgz#370d6737c4bdf6b038e0411bc5bd90e4a529b244"
+  integrity sha512-jCMIm7b89QzBA3ZN4iCYrPk+Km95F2D1l+t1ymA3lVdD1Ds97dMeYk2gMkNRQphS+7NLBmItOFv9tyrk7WmY/w==
   dependencies:
-    "@openzeppelin/defender-sdk-base-client" "^1.13.0"
+    "@openzeppelin/defender-sdk-base-client" "^1.13.1"
+    axios "^1.6.7"
+    lodash "^4.17.21"
+
+"@openzeppelin/defender-sdk-proposal-client@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-proposal-client/-/defender-sdk-proposal-client-1.13.1.tgz#8249fd9143831a8270146558d772bb7f0b8148fd"
+  integrity sha512-2VHYqY1vOET90EWJhmaCHb53Lw6r9vren6Q9VM5xbtM7qXGwe3EedfR5MrWjWaqgt/QjbHkO6JtWR0rVkn7vaQ==
+  dependencies:
+    "@openzeppelin/defender-sdk-base-client" "^1.13.1"
+    axios "^1.6.7"
+    ethers "^6.9.0"
+    lodash "^4.17.21"
+
+"@openzeppelin/defender-sdk-relay-client@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-relay-client/-/defender-sdk-relay-client-1.13.1.tgz#83b0fa1a24a8c2e6127b5ef5bcfe262e745524f6"
+  integrity sha512-oSHATNIXPvSSwkPMrCzj4FJmDx+NbderRoz8rmUd8rHNrVOcqyB8AEK6jYa1nkLRiLgsET/xXtvIL4C8bPrpkg==
+  dependencies:
+    "@openzeppelin/defender-sdk-base-client" "^1.13.1"
+    axios "^1.6.7"
+    lodash "^4.17.21"
+
+"@openzeppelin/defender-sdk-relay-signer-client@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk-relay-signer-client/-/defender-sdk-relay-signer-client-1.13.1.tgz#0ecca4858fce84ba904ba589f825329a04780671"
+  integrity sha512-+E9j621OtQn6AlXCdPckpltOw6cz8NDPHovyhVpDDAO1fp8JIjoDHl9L41PXoMHeeYj82Ex/HLNzLcL+igPaNQ==
+  dependencies:
+    "@openzeppelin/defender-sdk-base-client" "^1.13.1"
     amazon-cognito-identity-js "^6.3.6"
     axios "^1.6.7"
     ethers "^6.9.0"
     lodash "^4.17.21"
 
-"@openzeppelin/defender-sdk@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk/-/defender-sdk-1.13.0.tgz#f2e659414a6bd5f6c29a2c15001d7eafc9d90775"
-  integrity sha512-oX9NlKYfqbzJESo3AUJdV1nkAFaeeInTl3jvTUt9jIGCZ40i1KTsv2H0lBERusjKSvHLvUZ9tRkrtMGUmv43XQ==
+"@openzeppelin/defender-sdk@^1.13.1":
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/defender-sdk/-/defender-sdk-1.13.1.tgz#178ecaae358929a050720687975f852a0c2e5d71"
+  integrity sha512-GC3pCqtuG82z4cfGo8ze3sAFM2gwWv/1Do/HPtH4f+a8jTbNXpHqWIQXQ+9Utsq36reVsC60pBeQHUuHvumpyg==
   dependencies:
-    "@openzeppelin/defender-sdk-account-client" "^1.13.0"
-    "@openzeppelin/defender-sdk-action-client" "^1.13.0"
-    "@openzeppelin/defender-sdk-base-client" "^1.13.0"
-    "@openzeppelin/defender-sdk-deploy-client" "^1.13.0"
-    "@openzeppelin/defender-sdk-monitor-client" "^1.13.0"
-    "@openzeppelin/defender-sdk-network-client" "^1.13.0"
-    "@openzeppelin/defender-sdk-notification-channel-client" "^1.13.0"
-    "@openzeppelin/defender-sdk-proposal-client" "^1.13.0"
-    "@openzeppelin/defender-sdk-relay-client" "^1.13.0"
-    "@openzeppelin/defender-sdk-relay-signer-client" "^1.13.0"
+    "@openzeppelin/defender-sdk-account-client" "^1.13.1"
+    "@openzeppelin/defender-sdk-action-client" "^1.13.1"
+    "@openzeppelin/defender-sdk-base-client" "^1.13.1"
+    "@openzeppelin/defender-sdk-deploy-client" "^1.13.1"
+    "@openzeppelin/defender-sdk-monitor-client" "^1.13.1"
+    "@openzeppelin/defender-sdk-network-client" "^1.13.1"
+    "@openzeppelin/defender-sdk-notification-channel-client" "^1.13.1"
+    "@openzeppelin/defender-sdk-proposal-client" "^1.13.1"
+    "@openzeppelin/defender-sdk-relay-client" "^1.13.1"
+    "@openzeppelin/defender-sdk-relay-signer-client" "^1.13.1"
 
 "@polka/url@^0.5.0":
   version "0.5.0"
