@@ -51,7 +51,9 @@ export type PublicNetwork =
   | 'scroll'
   | 'scroll-sepolia'
   | 'meld'
-  | 'meld-kanazawa';
+  | 'meld-kanazawa'
+  | 'japan'
+  | 'japan-testnet';
 export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-security-alliance';
 export type TenantNetwork = string;
 export type AddressFromRelayer = {} | string;

@@ -70,7 +70,9 @@
         "scroll",
         "scroll-sepolia",
         "meld",
-        "meld-kanazawa"
+        "meld-kanazawa",
+        "japan",
+        "japan-testnet"
       ]
     },
     "custom-network": {

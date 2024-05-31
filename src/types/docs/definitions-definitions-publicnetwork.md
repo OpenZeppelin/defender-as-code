@@ -50,3 +50,5 @@
 | `"scroll-sepolia"`      |             |
 | `"meld"`                |             |
 | `"meld-kanazawa"`       |             |
+| `"japan"`               |             |
+| `"japan-testnet"`       |             |
