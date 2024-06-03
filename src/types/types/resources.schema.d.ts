@@ -13,14 +13,12 @@ export type PublicNetwork =
    | 'alfajores'
    | 'amoy'
    | 'arbitrum'
-   | 'arbitrum-goerli'
    | 'arbitrum-nova'
    | 'arbitrum-sepolia'
    | 'aurora'
    | 'auroratest'
    | 'avalanche'
    | 'base'
-   | 'base-goerli'
    | 'base-sepolia'
    | 'bsc'
    | 'bsctest'
@@ -29,39 +27,44 @@ export type PublicNetwork =
    | 'fantomtest'
    | 'fuji'
    | 'fuse'
-   | 'goerli'
    | 'harmony-s0'
    | 'harmony-test-s0'
    | 'hedera'
    | 'hederatest'
+   | 'holesky'
    | 'linea'
-   | 'linea-goerli'
    | 'mainnet'
    | 'mantle'
+   | 'mantle-sepolia'
    | 'matic'
    | 'matic-zkevm'
    | 'matic-zkevm-testnet'
    | 'meld'
-   | 'meld-kanazawa';
-  | 'moonbase'
+   | 'meld-kanazawa'
+   | 'moonbase'
    | 'moonbeam'
    | 'moonriver'
    | 'mumbai'
    | 'optimism'
-   | 'optimism-goerli'
    | 'optimism-sepolia'
    | 'scroll'
    | 'scroll-sepolia'
    | 'sepolia'
-   | 'sokol'
    | 'xdai'
    | 'zksync'
-   | 'zksync-goerli'
-   | 'zksync-sepolia'
+   | 'zksync-sepolia';
+
 export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-security-alliance';
 export type TenantNetwork = string;
 export type AddressFromRelayer = {} | string;
 export type WhitelistReceivers = string[];
+export type PrivateTransactionMode = FlashbotTransactionMode;
+/**
+ * Fast mode has 2 key differences from the default Protect experience:
+ * 1. Shared with all builders: By default, Protect transactions are only shared with the Flashbots Builder, which builds only a subset of all Ethereum blocks. In fast mode, transactions are shared with all registered builders to increase the number of blocks the user's transaction can be included in.
+ * 2. Larger refund paid to validator: By default, only 10% of MEV-Share refunds are paid to validators. In fast mode, validators receive 50% of refunds which makes it more likely that the user’s transactions will be chosen in a given block.
+ */
+export type FlashbotTransactionMode = 'flashbots-normal' | 'flashbots-fast';
 export type RelayerAPIKeys = string[];
 export type DefenderID = string;
 export type TriggerType = 'schedule' | 'webhook' | 'sentinel' | 'monitor-filter';
@@ -119,72 +122,65 @@ export type PagerDutyEventType = 'change' | 'alert';
 export type PagerDutyEventAction = 'trigger' | 'acknowledge' | 'resolve';
 export type PagerDutySeverity = 'critical' | 'error' | 'warning' | 'info';
 export type DefenderID2 = string;
-export type CategoryOrDefenderID = Category | DefenderID3;
-export type NotificationOrDefenderID1 = Notification | DefenderID2;
-export type CategoryNotificationIds = NotificationOrDefenderID1[];
-export type DefenderID3 = string;
 export type RelayerOrDefenderID1 = Relayer | DefenderID;
-export type PolicyOrDefenderID = Policy1 | DefenderID4;
-export type DefenderID4 = string;
-export type ContractOrDefenderID = Contract | DefenderID5;
+export type PolicyOrDefenderID = Policy1 | DefenderID3;
+export type DefenderID3 = string;
+export type ContractOrDefenderID = Contract | DefenderID4;
 export type Address = string;
 export type Network1 = SupportedNetwork | TenantNetwork;
 export type AbiType = StringABI | ArrayABI;
 export type StringABI = string;
-export type ArrayABI = string[];
-export type DefenderID5 = string;
-export type MonitorOrDefenderID = Monitor | DefenderID6;
+export type ArrayABI = unknown[];
+export type DefenderID4 = string;
+export type MonitorOrDefenderID = Monitor | DefenderID5;
 export type Monitor = BlockMonitor | FortaMonitor;
 export type Network2 = SupportedNetwork | TenantNetwork;
-export type ContractOrDefenderID1 = Contract | DefenderID5;
+export type ContractOrDefenderID1 = Contract | DefenderID4;
 export type Contracts1 = ContractOrDefenderID1[];
 export type Address1 = string;
 export type Addresses = Address1[];
 export type ActionOrDefenderID1 = Action | DefenderID1;
 export type ActionOrDefenderID2 = Action | DefenderID1;
-export type CategoryOrDefenderID1 = Category | DefenderID3;
-export type NotificationOrDefenderID2 = Notification | DefenderID2;
-export type Channels = NotificationOrDefenderID2[];
+export type NotificationOrDefenderID1 = Notification | DefenderID2;
+export type Channels = NotificationOrDefenderID1[];
 export type Event = EventItems[];
 export type Function = FunctionItems[];
 export type RiskCategory = 'NONE' | 'GOVERNANCE' | 'ACCESS-CONTROL' | 'SUSPICIOUS' | 'FINANCIAL' | 'TECHNICAL';
 export type Network3 = SupportedNetwork | TenantNetwork;
-export type ContractOrDefenderID2 = Contract | DefenderID5;
+export type ContractOrDefenderID2 = Contract | DefenderID4;
 export type Contracts2 = ContractOrDefenderID2[];
 export type Address2 = string;
 export type Addresses1 = Address2[];
 export type ActionOrDefenderID3 = Action | DefenderID1;
 export type ActionOrDefenderID4 = Action | DefenderID1;
-export type CategoryOrDefenderID2 = Category | DefenderID3;
-export type NotificationOrDefenderID3 = Notification | DefenderID2;
-export type Channels1 = NotificationOrDefenderID3[];
+export type NotificationOrDefenderID2 = Notification | DefenderID2;
+export type Channels1 = NotificationOrDefenderID2[];
 export type AlertIDs = string[];
 export type AgentIDs = string[];
-export type DefenderID6 = string;
-export type BlockExplorerApiKeyOrDefenderID = BlockExplorerApiKey | DefenderID7;
+export type DefenderID5 = string;
+export type BlockExplorerApiKeyOrDefenderID = BlockExplorerApiKey | DefenderID6;
 export type Network4 = SupportedNetwork | TenantNetwork;
+export type DefenderID6 = string;
+export type ForkedNetworkOrDefenderID = ForkedNetworkRequest | DefenderID7;
 export type DefenderID7 = string;
-export type ForkedNetworkOrDefenderID = ForkedNetworkRequest | DefenderID8;
-export type DefenderID8 = string;
-export type PrivateNetworkOrDefenderID = PrivateNetworkRequest | DefenderID9;
+export type PrivateNetworkOrDefenderID = PrivateNetworkRequest | DefenderID8;
 export type Address3 = string;
 export type Address4 = string;
 export type Address5 = string;
 export type Address6 = string;
-export type DefenderID9 = string;
+export type DefenderID8 = string;
 
 export interface Resources {
-   actions?: Actions;
-   notifications?: Notifications;
-   categories?: Categories;
-   relayers?: Relayers;
-   policies?: Policies;
-   contracts?: Contracts;
-   secrets?: ActionSecrets;
-   monitors?: Monitors;
-   'block-explorer-api-keys'?: BlockExplorerApiKeys;
-   'forked-networks'?: ForkedNetworks;
-   'private-networks'?: PrivateNetworks;
+  actions?: Actions;
+  notifications?: Notifications;
+  relayers?: Relayers;
+  policies?: Policies;
+  contracts?: Contracts;
+  secrets?: ActionSecrets;
+  monitors?: Monitors;
+  'block-explorer-api-keys'?: BlockExplorerApiKeys;
+  'forked-networks'?: ForkedNetworks;
+  'private-networks'?: PrivateNetworks;
 }
 export interface Actions {
    [k: string]: ActionOrDefenderID;
@@ -208,10 +204,10 @@ export interface Relayer {
    'api-keys'?: RelayerAPIKeys;
 }
 export interface Policy {
-   'gas-price-cap'?: number;
-   'whitelist-receivers'?: WhitelistReceivers;
-   'eip1559-pricing'?: boolean;
-   'private-transactions'?: boolean;
+  'gas-price-cap'?: number;
+  'whitelist-receivers'?: WhitelistReceivers;
+  'eip1559-pricing'?: boolean;
+  'private-transactions'?: boolean | PrivateTransactionMode;
 }
 export interface Trigger {
    type: TriggerType;
@@ -278,14 +274,7 @@ export interface PagerDutyConfig {
 export interface PagerDutyConfigCustomDetails {
    [k: string]: string;
 }
-export interface Categories {
-   [k: string]: CategoryOrDefenderID;
-}
-export interface Category {
-   name: string;
-   description?: string;
-   'notification-ids'?: CategoryNotificationIds;
-}
+
 export interface Relayers {
    [k: string]: RelayerOrDefenderID1;
 }
@@ -293,10 +282,10 @@ export interface Policies {
    [k: string]: PolicyOrDefenderID;
 }
 export interface Policy1 {
-   'gas-price-cap'?: number;
-   'whitelist-receivers'?: WhitelistReceivers;
-   'eip1559-pricing'?: boolean;
-   'private-transactions'?: boolean;
+  'gas-price-cap'?: number;
+  'whitelist-receivers'?: WhitelistReceivers;
+  'eip1559-pricing'?: boolean;
+  'private-transactions'?: boolean | PrivateTransactionMode;
 }
 export interface Contracts {
    [k: string]: ContractOrDefenderID;
@@ -346,11 +335,11 @@ export interface AlertThreshold {
    'window-seconds': number;
 }
 export interface NotifyConfig {
-   timeout?: number;
-   message?: string;
-   'message-subject'?: string;
-   category?: CategoryOrDefenderID1;
-   channels: Channels;
+  timeout?: number;
+  message?: string;
+  'message-subject'?: string;
+  'severity-level'?: 'LOW' | 'MEDIUM' | 'HIGH';
+  channels: Channels;
 }
 export interface Conditions {
    event?: Event;
@@ -388,11 +377,11 @@ export interface AlertThreshold1 {
    'window-seconds'?: number;
 }
 export interface NotifyConfig1 {
-   timeout?: number;
-   message?: string;
-   'message-subject'?: string;
-   category?: CategoryOrDefenderID2;
-   channels: Channels1;
+  timeout?: number;
+  message?: string;
+  'message-subject'?: string;
+  severityLevel?: 'LOW' | 'MEDIUM' | 'HIGH';
+  channels: Channels1;
 }
 export interface Conditions1 {
    'min-scanner-count': number;

@@ -8,7 +8,6 @@
 | :-------------------------------------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------- |
 | [actions](#actions)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-actions.md "resources.schema.json#/properties/actions")                                 |
 | [notifications](#notifications)                     | `object` | Optional | cannot be null | [Resources](resources-properties-notifications.md "resources.schema.json#/properties/notifications")                     |
-| [categories](#categories)                           | `object` | Optional | cannot be null | [Resources](resources-properties-categories.md "resources.schema.json#/properties/categories")                           |
 | [relayers](#relayers)                               | `object` | Optional | cannot be null | [Resources](resources-properties-relayers.md "resources.schema.json#/properties/relayers")                               |
 | [policies](#policies)                               | `object` | Optional | cannot be null | [Resources](resources-properties-policies.md "resources.schema.json#/properties/policies")                               |
 | [contracts](#contracts)                             | `object` | Optional | cannot be null | [Resources](resources-properties-contracts.md "resources.schema.json#/properties/contracts")                             |
@@ -53,24 +52,6 @@
 ### notifications Type
 
 `object` ([Notifications](resources-properties-notifications.md))
-
-## categories
-
-
-
-`categories`
-
-*   is optional
-
-*   Type: `object` ([Categories](resources-properties-categories.md))
-
-*   cannot be null
-
-*   defined in: [Resources](resources-properties-categories.md "resources.schema.json#/properties/categories")
-
-### categories Type
-
-`object` ([Categories](resources-properties-categories.md))
 
 ## relayers
 

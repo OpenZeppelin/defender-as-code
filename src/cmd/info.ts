@@ -19,7 +19,6 @@ import {
 } from '../utils';
 import {
   DefenderAction,
-  DefenderCategory,
   DefenderContract,
   DefenderNotification,
   DefenderRelayer,
@@ -37,7 +36,6 @@ import {
   Monitor,
   Relayer,
   Notification,
-  Category,
   ForkedNetworkRequest,
   PrivateNetworkRequest,
 } from '../types/types/resources.schema';
@@ -119,7 +117,6 @@ export default class DefenderInfo {
       contracts: [],
       relayers: [],
       notifications: [],
-      categories: [],
       secrets: [],
       forkedNetworks: [],
       privateNetworks: [],
@@ -212,17 +209,6 @@ export default class DefenderInfo {
       listNotifications,
       (resource: DefenderNotification) => `${resource.stackResourceId}: ${resource.notificationId}`,
       stdOut.notifications,
-    );
-
-    // Categories
-    const listNotificationCategories = () => getMonitorClient(this.teamKey!).listNotificationCategories();
-    await this.wrapper<Category, DefenderCategory>(
-      this.serverless,
-      'Categories',
-      removeDefenderIdReferences(this.resources?.categories),
-      listNotificationCategories,
-      (resource: DefenderCategory) => `${resource.stackResourceId}: ${resource.categoryId}`,
-      stdOut.categories,
     );
 
     // Secrets

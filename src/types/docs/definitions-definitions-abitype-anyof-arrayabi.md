@@ -1,3 +1,3 @@
 ## 1 Type
 
-`string[]`
+`array` ([ArrayABI](definitions-definitions-abitype-anyof-arrayabi.md))
