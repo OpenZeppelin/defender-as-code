@@ -71,7 +71,9 @@
         "sepolia",
         "xdai",
         "zksync",
-        "zksync-sepolia"
+        "zksync-sepolia",
+        "japan",
+        "japan-testnet"
       ]
     },
     "custom-network": {

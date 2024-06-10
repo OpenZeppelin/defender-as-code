@@ -51,4 +51,5 @@
 | `"xdai"`                |             |
 | `"zksync"`              |             |
 | `"zksync-sepolia"`      |             |
-
+| `"japan"`               |             |
+| `"japan-testnet"`       |             |
