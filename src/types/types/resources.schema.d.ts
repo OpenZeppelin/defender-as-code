@@ -33,6 +33,7 @@ export type PublicNetwork =
   | 'hederatest'
   | 'holesky'
   | 'linea'
+  | 'linea-sepolia'
   | 'mainnet'
   | 'mantle'
   | 'mantle-sepolia'
