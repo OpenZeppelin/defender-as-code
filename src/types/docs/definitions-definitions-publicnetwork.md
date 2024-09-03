@@ -31,6 +31,7 @@
 | `"hederatest"`          |             |
 | `"holesky"`             |             |
 | `"linea"`               |             |
+| `"linea-sepolia"`       |             |
 | `"mainnet"`             |             |
 | `"mantle"`              |             |
 | `"mantle-sepolia"`      |             |
