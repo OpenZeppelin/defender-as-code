@@ -700,8 +700,7 @@ export default class DefenderDeploy {
       const actions = await getActionClient(this.teamKey!).list();
       const notifications = await client.listNotificationChannels();
 
-      // TODO: Add a new endpoint in defender-sdk which includes contract ABI and NatSpec
-      const contracts = await getProposalClient(this.teamKey!).listContracts();
+      const contracts = await getProposalClient(this.teamKey!).listContracts({ includeAbi: true });
 
       const retrieveExisting = () => client.list().then((r) => r.items);
 
