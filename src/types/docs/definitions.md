@@ -92,6 +92,28 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group flashbotTransactionMode
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/flashbotTransactionMode"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
+## Definitions group privateTransactionMode
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/privateTransactionMode"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group policy
 
 Reference this group by using
@@ -105,7 +127,7 @@ Reference this group by using
 | [gas-price-cap](#gas-price-cap)               | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-gas-price-cap.md "definitions.schema.json#/definitions/policy/properties/gas-price-cap")               |
 | [whitelist-receivers](#whitelist-receivers)   | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-whitelistreceivers.md "definitions.schema.json#/definitions/policy/properties/whitelist-receivers")    |
 | [eip1559-pricing](#eip1559-pricing)           | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-eip1559-pricing.md "definitions.schema.json#/definitions/policy/properties/eip1559-pricing")           |
-| [private-transactions](#private-transactions) | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-private-transactions.md "definitions.schema.json#/definitions/policy/properties/private-transactions") |
+| [private-transactions](#private-transactions) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-policy-properties-private-transactions.md "definitions.schema.json#/definitions/policy/properties/private-transactions") |
 
 ### gas-price-cap
 
@@ -169,7 +191,7 @@ Reference this group by using
 
 *   is optional
 
-*   Type: `boolean`
+*   Type: merged type ([Details](definitions-definitions-policy-properties-private-transactions.md))
 
 *   cannot be null
 
@@ -177,7 +199,15 @@ Reference this group by using
 
 #### private-transactions Type
 
-`boolean`
+merged type ([Details](definitions-definitions-policy-properties-private-transactions.md))
+
+one (and only one) of
+
+*   [Untitled boolean in Definitions](definitions-definitions-policy-properties-private-transactions-oneof-0.md "check type definition")
+
+*   one (and only one) of
+
+    *   [FlashbotTransactionMode](definitions-definitions-privatetransactionmode-oneof-flashbottransactionmode.md "check type definition")
 
 ## Definitions group relayer
 
@@ -1443,74 +1473,6 @@ one (and only one) of
 
 *   [PagerDutyConfig](definitions-definitions-pagerdutyconfig.md "check type definition")
 
-## Definitions group category
-
-Reference this group by using
-
-```json
-{"$ref":"definitions.schema.json#/definitions/category"}
-```
-
-| Property                              | Type     | Required | Nullable       | Defined by                                                                                                                                                        |
-| :------------------------------------ | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-3)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-category-properties-name.md "definitions.schema.json#/definitions/category/properties/name")                                |
-| [description](#description)           | `string` | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-description.md "definitions.schema.json#/definitions/category/properties/description")                  |
-| [notification-ids](#notification-ids) | `array`  | Optional | cannot be null | [Definitions](definitions-definitions-category-properties-categorynotificationids.md "definitions.schema.json#/definitions/category/properties/notification-ids") |
-
-### name
-
-
-
-`name`
-
-*   is required
-
-*   Type: `string`
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-category-properties-name.md "definitions.schema.json#/definitions/category/properties/name")
-
-#### name Type
-
-`string`
-
-### description
-
-
-
-`description`
-
-*   is optional
-
-*   Type: `string`
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-category-properties-description.md "definitions.schema.json#/definitions/category/properties/description")
-
-#### description Type
-
-`string`
-
-### notification-ids
-
-
-
-`notification-ids`
-
-*   is optional
-
-*   Type: an array of merged types ([NotificationOrDefenderID](definitions-definitions-category-properties-categorynotificationids-notificationordefenderid.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-category-properties-categorynotificationids.md "definitions.schema.json#/definitions/category/properties/notification-ids")
-
-#### notification-ids Type
-
-an array of merged types ([NotificationOrDefenderID](definitions-definitions-category-properties-categorynotificationids-notificationordefenderid.md))
-
 ## Definitions group block-monitor
 
 Reference this group by using
@@ -1521,7 +1483,7 @@ Reference this group by using
 
 | Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                                                |
 | :------------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [name](#name-4)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/block-monitor/properties/name")                               |
+| [name](#name-3)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/block-monitor/properties/name")                               |
 | [type](#type-2)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/block-monitor/properties/type")                               |
 | [network](#network-2)                       | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-monitor/properties/network")                                                 |
 | [contracts](#contracts)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-contracts.md "definitions.schema.json#/definitions/block-monitor/properties/contracts")                     |
@@ -1884,7 +1846,7 @@ Reference this group by using
 
 | Property                                                | Type      | Required | Nullable       | Defined by                                                                                                                                                                            |
 | :------------------------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [name](#name-5)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/forta-monitor/properties/name")                                           |
+| [name](#name-4)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/forta-monitor/properties/name")                                           |
 | [type](#type-3)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/forta-monitor/properties/type")                                           |
 | [network](#network-3)                                   | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/forta-monitor/properties/network")                                                             |
 | [contracts](#contracts-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-contracts.md "definitions.schema.json#/definitions/forta-monitor/properties/contracts")                                 |
@@ -2327,17 +2289,6 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
-## Definitions group category-or-defender-id
-
-Reference this group by using
-
-```json
-{"$ref":"definitions.schema.json#/definitions/category-or-defender-id"}
-```
-
-| Property | Type | Required | Nullable | Defined by |
-| :------- | :--- | :------- | :------- | :--------- |
-
 ## Definitions group notification-or-defender-id
 
 Reference this group by using
@@ -2381,7 +2332,7 @@ Reference this group by using
 
 | Property                                        | Type      | Required | Nullable       | Defined by                                                                                                                                                       |
 | :---------------------------------------------- | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-6)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")                                   |
+| [name](#name-5)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")                                   |
 | [path](#path)                                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")                                   |
 | [relayer](#relayer)                             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")                 |
 | [trigger](#trigger)                             | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger")                             |
@@ -2858,7 +2809,7 @@ Reference this group by using
 
 | Property                                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                               |
 | :---------------------------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-7)                           | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")                    |
+| [name](#name-6)                           | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")                    |
 | [supported-network](#supported-network)   | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/supported-network")                                    |
 | [rpc-url](#rpc-url)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forked-network-request/properties/rpc-url")                       |
 | [api-key](#api-key-1)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forked-network-request/properties/api-key")                       |
@@ -2990,7 +2941,7 @@ Reference this group by using
 
 | Property                                    | Type     | Required | Nullable       | Defined by                                                                                                                                                                                 |
 | :------------------------------------------ | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-8)                             | `string` | Required | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/private-network-request/properties/name")                    |
+| [name](#name-7)                             | `string` | Required | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/private-network-request/properties/name")                    |
 | [configuration](#configuration)             | `object` | Required | cannot be null | [Definitions](definitions-definitions-tenantnetworkconfiguration.md "definitions.schema.json#/definitions/private-network-request/properties/configuration")                               |
 | [rpc-url](#rpc-url-1)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/private-network-request/properties/rpc-url")                       |
 | [api-key](#api-key-2)                       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/private-network-request/properties/api-key")                       |

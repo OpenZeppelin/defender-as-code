@@ -21,14 +21,6 @@
         "format": "uri-reference"
       }
     },
-    "categories": {
-      "title": "Categories",
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "definitions.schema.json#/definitions/category-or-defender-id",
-        "format": "uri-reference"
-      }
-    },
     "relayers": {
       "title": "Relayers",
       "type": "object",

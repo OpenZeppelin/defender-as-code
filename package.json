@@ -1,6 +1,6 @@
 {
   "name": "@openzeppelin/defender-as-code",
-  "version": "2.6.0",
+  "version": "3.0.0",
   "description": "Configure your Defender environment via code",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -70,7 +70,7 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "@openzeppelin/defender-sdk": "^1.10.0",
+    "@openzeppelin/defender-sdk": "^1.13.1",
     "keccak256": "^1.0.6",
     "lodash": "^4.17.21",
     "prompt": "^1.3.0"
