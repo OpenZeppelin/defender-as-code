@@ -30,10 +30,6 @@
 
 *   [BlockMonitor](./definitions-definitions-blockmonitor.md) – `definitions.schema.json#/definitions/block-monitor`
 
-*   [Categories](./resources-properties-categories.md) – `resources.schema.json#/properties/categories`
-
-*   [Category](./definitions-definitions-category.md) – `definitions.schema.json#/definitions/category`
-
 *   [Conditions](./definitions-definitions-blockmonitor-properties-conditions.md) – `definitions.schema.json#/definitions/block-monitor/properties/conditions`
 
 *   [Conditions](./definitions-definitions-fortamonitor-properties-conditions.md) – `definitions.schema.json#/definitions/forta-monitor/properties/conditions`
@@ -119,8 +115,6 @@
 *   [AlertIDs](./definitions-definitions-fortamonitor-properties-conditions-properties-alertids.md) – `definitions.schema.json#/definitions/forta-monitor/properties/conditions/properties/alert-ids`
 
 *   [ArrayABI](./definitions-definitions-abitype-anyof-arrayabi.md) – `definitions.schema.json#/definitions/abi/anyOf/1`
-
-*   [CategoryNotificationIds](./definitions-definitions-category-properties-categorynotificationids.md) – `definitions.schema.json#/definitions/category/properties/notification-ids`
 
 *   [Channels](./definitions-definitions-blockmonitor-properties-notifyconfig-properties-channels.md) – `definitions.schema.json#/definitions/block-monitor/properties/notify-config/properties/channels`
 

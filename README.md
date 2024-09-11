@@ -76,7 +76,7 @@ resources:
   relayers:
     relayer-1:
       name: 'Test Relayer 1'
-      network: 'goerli'
+      network: 'sepolia'
       min-balance: 1000
       policy: ${self:resources.policies.policy-1}
       api-keys:
@@ -99,16 +99,14 @@ A list of properties that support direct referencing:
 - `action-trigger` may reference an `actionid` in Monitor
 - `action-condition` may reference an `actionId` in Monitor
 - `address-from-relayer` may reference a `relayerId` in Relayer
-- `notification-ids` may reference multiple `notificationId` in Category
 - `notify-config.channels` may reference multiple `notificationId` in Monitor
-- `notify-config.category` may reference a `categoryId` in Monitor
 - `contracts` may be used over `addresses` and reference multiple `contractId` in Monitor
   The following is an example of how a direct reference to a Defender contract and relayer can be used in monitor and action respectively:
 
 ```yaml
 ...
 contracts:
-  contract-1: 'goerli-0xd70d6A0480420b4C788AF91d0E1b0ca6141A9De8' # contractId of an existing resource in Defender
+  contract-1: 'sepolia-0x62034459131329bE4349A9cc322B03c63806Aa11' # contractId of an existing resource in Defender
 relayers:
   relayer-2: 'bcb659c6-7e11-4d37-a15b-0fa9f3d3442c' # relayerId of an existing relayer in Defender
 actions:
@@ -124,7 +122,7 @@ monitors:
   block-example:
     name: 'Block Example'
     type: 'BLOCK'
-    network: 'goerli'
+    network: 'sepolia'
     risk-category: 'TECHNICAL'
     # optional - either contracts OR addresses should be defined
     contracts:
@@ -208,14 +206,6 @@ You can use `sls invoke --function <stack_resource_id>` to manually run an actio
 More information can be found on our documentation page [here](https://docs.openzeppelin.com/defender/serverless-plugin.html)
 
 ## Caveats
-
-Note that when setting up the notification configuration for a monitor, the `channels` property will always be prioritised over `category`. A notification category can only be associated to a monitor with no linked notification channels. This means that the `channels` property should be assigned the value `[]` in order to prioritise the `category` property.
-
-```yaml
-notify-config:
-  channels: [] # assign channels as empty list if you wish to use a category
-  category: ${self:resources.categories.medium-severity} # optional
-```
 
 Errors thrown during the `deploy` process, will not revert any prior changes. Common errors are:
 

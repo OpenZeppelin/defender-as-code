@@ -9,7 +9,7 @@
 | [timeout](#timeout)                 | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-timeout.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/timeout")                 |
 | [message](#message)                 | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/message")                 |
 | [message-subject](#message-subject) | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-message-subject.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/message-subject") |
-| [category](#category)               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-categoryordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/category")   |
+| [severityLevel](#severitylevel)     | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-severitylevel.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/severityLevel")     |
 | [channels](#channels)               | `array`   | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/channels")               |
 
 ## timeout
@@ -66,33 +66,33 @@
 
 `string`
 
-## category
+## severityLevel
 
 
 
-`category`
+`severityLevel`
 
 *   is optional
 
-*   Type: merged type ([CategoryOrDefenderID](definitions-definitions-fortamonitor-properties-notifyconfig-properties-categoryordefenderid.md))
+*   Type: `string`
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-categoryordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/category")
+*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig-properties-severitylevel.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/severityLevel")
 
-### category Type
+### severityLevel Type
 
-merged type ([CategoryOrDefenderID](definitions-definitions-fortamonitor-properties-notifyconfig-properties-categoryordefenderid.md))
+`string`
 
-any of
+### severityLevel Constraints
 
-*   [Category](definitions-definitions-category.md "check type definition")
+**enum**: the value of this property must be equal to one of the following values:
 
-*   [DefenderID](definitions-definitions-defenderid.md "check type definition")
-
-### category Constraints
-
-**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+| Value      | Explanation |
+| :--------- | :---------- |
+| `"LOW"`    |             |
+| `"MEDIUM"` |             |
+| `"HIGH"`   |             |
 
 ## channels
 
