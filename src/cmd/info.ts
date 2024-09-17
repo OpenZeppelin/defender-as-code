@@ -16,6 +16,7 @@ import {
   getTeamAPIkeysOrThrow,
   isTemplateResource,
   removeDefenderIdReferences,
+  getRelayGroupClient,
 } from '../utils';
 import {
   DefenderAction,
@@ -29,6 +30,7 @@ import {
   YSecret,
   Resources,
   DefenderTenantNetwork,
+  DefenderRelayerGroup,
 } from '../types';
 import {
   Action,
@@ -38,6 +40,7 @@ import {
   Notification,
   ForkedNetworkRequest,
   PrivateNetworkRequest,
+  RelayerGroup,
 } from '../types/types/resources.schema';
 
 export default class DefenderInfo {
@@ -116,6 +119,7 @@ export default class DefenderInfo {
       actions: [],
       contracts: [],
       relayers: [],
+      relayerGroups: [],
       notifications: [],
       secrets: [],
       forkedNetworks: [],
@@ -198,6 +202,17 @@ export default class DefenderInfo {
       listRelayers,
       (resource: DefenderRelayer) => `${resource.stackResourceId}: ${resource.relayerId}`,
       stdOut.relayers,
+    );
+
+    // Relayer Groups
+    const listRelayerGroups = () => getRelayGroupClient(this.teamKey!).list();
+    await this.wrapper<RelayerGroup, DefenderRelayerGroup>(
+      this.serverless,
+      'Relayers',
+      removeDefenderIdReferences(this.resources?.relayers),
+      listRelayerGroups,
+      (resource: DefenderRelayerGroup) => `${resource.stackResourceId}: ${resource.relayerGroupId}`,
+      stdOut.relayerGroups,
     );
 
     // Notifications

@@ -29,6 +29,14 @@
         "format": "uri-reference"
       }
     },
+    "relayer-groups": {
+      "title": "RelayerGroups",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "definitions.schema.json#/definitions/relayer-group-or-defender-id",
+        "format": "uri-reference"
+      }
+    },
     "policies": {
       "title": "Policies",
       "type": "object",

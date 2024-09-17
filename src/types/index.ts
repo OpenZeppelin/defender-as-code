@@ -2,7 +2,13 @@ import { JsonFragment } from 'ethers';
 
 import { Network, SupportedNetwork } from '@openzeppelin/defender-sdk-base-client';
 import { Contract } from '@openzeppelin/defender-sdk-proposal-client/lib/models/contract';
-import { RelayerGetResponse, RelayerApiKey, PrivateTransactionMode } from '@openzeppelin/defender-sdk-relay-client/lib/models';
+import {
+  RelayerGetResponse,
+  RelayerApiKey,
+  PrivateTransactionMode,
+} from '@openzeppelin/defender-sdk-relay-client/lib/models';
+import { RelayerGroupResponse, RelayerGroupRelayer } from '@openzeppelin/defender-sdk-relay-group-client/lib/models';
+
 import { DefenderApiResponseError } from '@openzeppelin/defender-sdk-base-client/lib/api/api-error';
 
 import {
@@ -44,6 +50,8 @@ export type DefenderRelayerApiKey = RelayerApiKey;
 export type DefenderSecretsMap = SecretsMap;
 export type DefenderContract = Contract;
 export type DefenderRelayer = RelayerGetResponse;
+export type DefenderRelayerGroup = RelayerGroupResponse;
+export type DefenderRelayerGroupRelayer = RelayerGroupRelayer;
 export type DefenderAction = Action;
 export type DefenderBlockWatcher = BlockWatcher;
 export type DefenderNotification = NotificationSummary;
@@ -84,6 +92,7 @@ export interface IDefenderServerless {
 export type ResourceType =
   | 'Monitors'
   | 'Relayers'
+  | 'Relayer Groups'
   | 'Notifications'
   | 'Actions'
   | 'Contracts'
@@ -106,6 +115,29 @@ export type YRelayer = {
   'policy'?: YPolicy;
   'api-keys': any[];
   'address-from-relayer'?: YRelayer;
+};
+
+export type YRelayerGroupRelayer = {
+  'relayer-id': string;
+  'address': string;
+  'key-id'?: string;
+  'balance'?: string;
+};
+
+export type YRelayerGroup = {
+  'name': string;
+  'network': Network;
+  'min-balance': number;
+  'policies'?: YPolicy;
+  'api-keys': any[];
+  'relayers': YRelayerGroupRelayer[];
+  'user-weight-caps': {
+    [user: string]: number;
+  };
+  'notification-channels': {
+    'events': ('pending' | 'sent' | 'submitted' | 'inmempool' | 'mined' | 'confirmed' | 'failed' | 'expired')[];
+    'notification-ids': string[];
+  };
 };
 
 export type YAction = {
@@ -259,6 +291,7 @@ export type ListDefenderResources = {
   notifications: DefenderNotification[];
   contracts: DefenderContract[];
   relayerApiKeys: DefenderRelayerApiKey[];
+  relayerGroupApiKeys: DefenderRelayerApiKey[];
   secrets: string[];
   blockExplorerApiKeys: DefenderBlockExplorerApiKey[];
   forkedNetworks: DefenderTenantNetwork[];

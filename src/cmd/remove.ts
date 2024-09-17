@@ -17,6 +17,7 @@ import {
   getTeamAPIkeysOrThrow,
   isTemplateResource,
   removeDefenderIdReferences,
+  getRelayGroupClient,
 } from '../utils';
 import {
   DefenderAction,
@@ -30,6 +31,7 @@ import {
   YSecret,
   Resources,
   DefenderTenantNetwork,
+  DefenderRelayerGroup,
 } from '../types';
 import {
   Action,
@@ -39,6 +41,7 @@ import {
   Notification,
   ForkedNetworkRequest,
   PrivateNetworkRequest,
+  RelayerGroup,
 } from '../types/types/resources.schema';
 
 export default class DefenderRemove {
@@ -127,6 +130,10 @@ export default class DefenderRemove {
       relayers: {
         relayerId: string;
         relayerApiKeys: DefenderRelayerApiKey[];
+      }[];
+      relayerGroups: {
+        relayerGroupId: string;
+        relayerGroupApiKeys: DefenderRelayerApiKey[];
       }[];
       notifications: DefenderNotification[];
       secrets: string[];
@@ -279,6 +286,41 @@ export default class DefenderRemove {
           stdOut.relayers.push({
             relayerId: relayer.relayerId,
             relayerApiKeys,
+          });
+        }),
+      );
+    } catch (e) {
+      this.log.tryLogDefenderError(e);
+    }
+
+    try {
+      // Relayer Group API keys
+      const relayGroupClient = getRelayGroupClient(this.teamKey!);
+      const listRelayerGroups = await relayGroupClient.list();
+      const existingRelayerGroups = listRelayerGroups.filter((e) =>
+        isTemplateResource<RelayerGroup, DefenderRelayerGroup>(
+          this.serverless,
+          e,
+          'Relayer Groups',
+          removeDefenderIdReferences(this.resources?.['relayer-groups']) ?? {},
+        ),
+      );
+      this.log.error('Deleting Relayer Groups is currently only possible via the Defender UI.');
+      this.log.progress('component-info', `Retrieving Relayer Group API Keys`);
+      await Promise.all(
+        existingRelayerGroups.map(async (relayerGroup) => {
+          this.log.progress('component-info', `Retrieving API Keys for relayer group ${relayerGroup.stackResourceId}`);
+          const relayerGroupApiKeys = await relayGroupClient.listKeys(relayerGroup.relayerGroupId);
+          await Promise.all(
+            relayerGroupApiKeys.map(async (e) => {
+              this.log.progress('component-remove-extra', `Removing ${e.stackResourceId} (${e.keyId}) from Defender`);
+              await relayGroupClient.deleteKey(e.relayerId, e.keyId);
+              this.log.success(`Removed ${e.stackResourceId} (${e.keyId})`);
+            }),
+          );
+          stdOut.relayerGroups.push({
+            relayerGroupId: relayerGroup.relayerGroupId,
+            relayerGroupApiKeys,
           });
         }),
       );

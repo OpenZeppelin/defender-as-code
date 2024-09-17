@@ -1,0 +1,3 @@
+## events Type
+
+`string[]`

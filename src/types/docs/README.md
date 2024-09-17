@@ -62,6 +62,8 @@
 
 *   [Notification](./definitions-definitions-notification.md) – `definitions.schema.json#/definitions/notification`
 
+*   [NotificationChannels](./definitions-definitions-notificationchannels.md) – `definitions.schema.json#/definitions/notification-channels`
+
 *   [Notifications](./resources-properties-notifications.md) – `resources.schema.json#/properties/notifications`
 
 *   [NotifyConfig](./definitions-definitions-blockmonitor-properties-notifyconfig.md) – `definitions.schema.json#/definitions/block-monitor/properties/notify-config`
@@ -84,6 +86,12 @@
 
 *   [Relayer](./definitions-definitions-relayer.md) – `definitions.schema.json#/definitions/relayer`
 
+*   [RelayerGroup](./definitions-definitions-relayergroup.md) – `definitions.schema.json#/definitions/relayer-group`
+
+*   [RelayerGroupRelayer](./definitions-definitions-relayergrouprelayer.md) – `definitions.schema.json#/definitions/relayer-group-relayer`
+
+*   [RelayerGroups](./resources-properties-relayergroups.md) – `resources.schema.json#/properties/relayer-groups`
+
 *   [Relayers](./resources-properties-relayers.md) – `resources.schema.json#/properties/relayers`
 
 *   [SafeContracts](./definitions-definitions-safecontracts.md) – `definitions.schema.json#/definitions/safe-contracts`
@@ -103,6 +111,8 @@
 *   [Untitled object in Definitions](./definitions-definitions-action-properties-environment-variables.md) – `definitions.schema.json#/definitions/action/properties/environment-variables`
 
 *   [UrlConfig](./definitions-definitions-urlconfig.md) – `definitions.schema.json#/definitions/urlConfig`
+
+*   [UserWeightCaps](./definitions-definitions-relayergroup-properties-userweightcaps.md) – `definitions.schema.json#/definitions/relayer-group/properties/user-weight-caps`
 
 ### Arrays
 
@@ -128,7 +138,11 @@
 
 *   [Event](./definitions-definitions-blockmonitor-properties-conditions-properties-event.md) – `definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/event`
 
+*   [Events](./definitions-definitions-notificationchannels-properties-events.md) – `definitions.schema.json#/definitions/notification-channels/properties/events`
+
 *   [Function](./definitions-definitions-blockmonitor-properties-conditions-properties-function.md) – `definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/function`
+
+*   [NotificationIds](./definitions-definitions-notificationchannels-properties-notificationids.md) – `definitions.schema.json#/definitions/notification-channels/properties/notification-ids`
 
 *   [OpsgenieConfigActions](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigactions.md) – `definitions.schema.json#/definitions/opsgenieConfig/properties/actions`
 
@@ -139,6 +153,10 @@
 *   [OpsgenieConfigVisibleTo](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigvisibleto.md) – `definitions.schema.json#/definitions/opsgenieConfig/properties/visibleTo`
 
 *   [RelayerAPIKeys](./definitions-definitions-relayer-properties-relayerapikeys.md) – `definitions.schema.json#/definitions/relayer/properties/api-keys`
+
+*   [RelayerGroupAPIKeys](./definitions-definitions-relayergroup-properties-relayergroupapikeys.md) – `definitions.schema.json#/definitions/relayer-group/properties/api-keys`
+
+*   [Relayers](./definitions-definitions-relayergroup-properties-relayers.md) – `definitions.schema.json#/definitions/relayer-group/properties/relayers`
 
 *   [WhitelistReceivers](./definitions-definitions-policy-properties-whitelistreceivers.md) – `definitions.schema.json#/definitions/policy/properties/whitelist-receivers`
 
