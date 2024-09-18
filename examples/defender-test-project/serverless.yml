@@ -106,6 +106,18 @@ resources:
       # optional
       policy: ${self:resources.policies.policy-1}
 
+  relayer-groups:
+    relayer-group-1:
+      name: 'Sepolia Relayer Group'
+      network: 'sepolia'
+      relayers: 2
+      # optional
+      policy: ${self:resources.policies.policy-1}
+      min-balance: 1000
+      # optional
+      api-keys:
+        - key1
+
   notifications:
     email-1:
       type: 'email'

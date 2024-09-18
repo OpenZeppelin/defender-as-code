@@ -241,14 +241,9 @@
           "type": "integer"
         },
         "relayers": {
-          "title": "Relayers",
-          "type": "array",
-          "items": {
-            "$ref": "definitions.schema.json#/definitions/relayer-group-relayer",
-            "format": "uri-reference"
-          }
+          "type": "integer"
         },
-        "policies": {
+        "policy": {
           "$ref": "definitions.schema.json#/definitions/policy",
           "format": "uri-reference"
         },

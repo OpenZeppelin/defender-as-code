@@ -4,7 +4,7 @@ import { Logging } from 'serverless/classes/Plugin';
 
 import Logger from '../utils/logger';
 
-// import { tailLogsFor } from '@openzeppelin/defender-autotask-client/lib/utils';
+import { tailLogsFor } from '@openzeppelin/defender-sdk-action-client/lib/utils';
 
 import { getActionClient, getEquivalentResourceByKey, getTeamAPIkeysOrThrow } from '../utils';
 import { DefenderAction, TeamKey } from '../types';
@@ -38,14 +38,13 @@ export default class DefenderLogs {
     try {
       this.log.notice('========================================================');
       this.log.progress('logs', `Running Defender Logs on stack function: ${this.options.function}`);
-      // const client = getActionClient(this.teamKey!);
-      // const list = (await client.list()).items;
+      const client = getActionClient(this.teamKey!);
+      const list = (await client.list()).items;
 
-      // const defenderAction = getEquivalentResourceByKey<DefenderAction>(this.options.function!, list);
+      const defenderAction = getEquivalentResourceByKey<DefenderAction>(this.options.function!, list);
 
-      // TODO: Update with Defender equivalent once I find it
-      // if (defenderAction) await tailLogsFor(client, defenderAction!.actionId);
-      // else this.log.error(`No action with stackResourceId: ${this.options.function} found.`);
+      if (defenderAction) await tailLogsFor(client, defenderAction!.actionId);
+      else this.log.error(`No action with stackResourceId: ${this.options.function} found.`);
       this.log.notice('========================================================');
     } catch (e) {
       this.log.tryLogDefenderError(e);

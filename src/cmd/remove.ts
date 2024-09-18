@@ -145,6 +145,7 @@ export default class DefenderRemove {
       actions: [],
       contracts: [],
       relayers: [],
+      relayerGroups: [],
       notifications: [],
       secrets: [],
       forkedNetworks: [],

@@ -13,8 +13,8 @@
 | [name](#name)                                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayergroup-properties-name.md "definitions.schema.json#/definitions/relayer-group/properties/name")                       |
 | [network](#network)                             | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/relayer-group/properties/network")                                         |
 | [min-balance](#min-balance)                     | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayergroup-properties-min-balance.md "definitions.schema.json#/definitions/relayer-group/properties/min-balance")         |
-| [relayers](#relayers)                           | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayergroup-properties-relayers.md "definitions.schema.json#/definitions/relayer-group/properties/relayers")               |
-| [policies](#policies)                           | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer-group/properties/policies")                                         |
+| [relayers](#relayers)                           | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-relayergroup-properties-relayers.md "definitions.schema.json#/definitions/relayer-group/properties/relayers")               |
+| [policy](#policy)                               | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer-group/properties/policy")                                           |
 | [user-weight-caps](#user-weight-caps)           | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayergroup-properties-userweightcaps.md "definitions.schema.json#/definitions/relayer-group/properties/user-weight-caps") |
 | [notification-channels](#notification-channels) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-notificationchannels.md "definitions.schema.json#/definitions/relayer-group/properties/notification-channels")              |
 | [api-keys](#api-keys)                           | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayergroup-properties-relayergroupapikeys.md "definitions.schema.json#/definitions/relayer-group/properties/api-keys")    |
@@ -95,7 +95,7 @@ any of
 
 *   is optional
 
-*   Type: `object[]` ([RelayerGroupRelayer](definitions-definitions-relayergrouprelayer.md))
+*   Type: `integer`
 
 *   cannot be null
 
@@ -103,13 +103,13 @@ any of
 
 ### relayers Type
 
-`object[]` ([RelayerGroupRelayer](definitions-definitions-relayergrouprelayer.md))
+`integer`
 
-## policies
+## policy
 
 
 
-`policies`
+`policy`
 
 *   is optional
 
@@ -117,13 +117,13 @@ any of
 
 *   cannot be null
 
-*   defined in: [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer-group/properties/policies")
+*   defined in: [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer-group/properties/policy")
 
-### policies Type
+### policy Type
 
 `object` ([Policy](definitions-definitions-policy.md))
 
-### policies Constraints
+### policy Constraints
 
 **URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 

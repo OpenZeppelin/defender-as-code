@@ -156,8 +156,6 @@
 
 *   [RelayerGroupAPIKeys](./definitions-definitions-relayergroup-properties-relayergroupapikeys.md) – `definitions.schema.json#/definitions/relayer-group/properties/api-keys`
 
-*   [Relayers](./definitions-definitions-relayergroup-properties-relayers.md) – `definitions.schema.json#/definitions/relayer-group/properties/relayers`
-
 *   [WhitelistReceivers](./definitions-definitions-policy-properties-whitelistreceivers.md) – `definitions.schema.json#/definitions/policy/properties/whitelist-receivers`
 
 ## Version Note

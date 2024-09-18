@@ -688,22 +688,29 @@ export default class DefenderDeploy {
           );
           relayerGroup.network = match.network!;
         }
+        if (match.relayers.length !== relayerGroup.relayers) {
+          this.log.warn(
+            `Detected a change in the number of relayers from ${match.relayers.length} to ${relayerGroup.relayers} for Relayer Group: ${match.stackResourceId}. Defender does not currently allow updates to the number of relayers once a Relayer Group is created. This change will be ignored. To enforce this change, remove this relayer group and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the relayer group. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this relayer group.`,
+          );
+          relayerGroup.relayers = match.relayers.length;
+        }
         const mappedMatch = {
           'name': match.name,
           'network': match.network,
           'min-balance': parseInt(match.minBalance.toString()),
-          'policies': {
+          'policy': {
             'gas-price-cap': match.policies.gasPriceCap,
             'whitelist-receivers': match.policies.whitelistReceivers,
             'eip1559-pricing': match.policies.EIP1559Pricing,
             'private-transactions': match.policies.privateTransactions,
           },
-          'relayers': match.relayers,
+          'relayers': match.relayers.length,
           'notification-channels': match.notificationChannels && {
             'events': match.notificationChannels.events,
             'notification-ids': match.notificationChannels.notificationIds,
           },
         };
+
         let updatedRelayerGroup = undefined;
         if (
           !_.isEqual(
@@ -714,11 +721,11 @@ export default class DefenderDeploy {
           updatedRelayerGroup = await client.update(match.relayerGroupId, {
             name: relayerGroup.name,
             minBalance: relayerGroup['min-balance'],
-            policies: relayerGroup.policies && {
-              whitelistReceivers: relayerGroup.policies['whitelist-receivers'],
-              gasPriceCap: relayerGroup.policies['gas-price-cap'],
-              EIP1559Pricing: relayerGroup.policies['eip1559-pricing'],
-              privateTransactions: relayerGroup.policies['private-transactions'],
+            policies: relayerGroup.policy && {
+              whitelistReceivers: relayerGroup.policy['whitelist-receivers'],
+              gasPriceCap: relayerGroup.policy['gas-price-cap'],
+              EIP1559Pricing: relayerGroup.policy['eip1559-pricing'],
+              privateTransactions: relayerGroup.policy['private-transactions'],
             },
             notificationChannels: relayerGroup['notification-channels'] && {
               events: relayerGroup['notification-channels'].events,
@@ -783,13 +790,13 @@ export default class DefenderDeploy {
           name: relayerGroup.name,
           network: relayerGroup.network,
           minBalance: relayerGroup['min-balance'],
-          policies: relayerGroup.policies && {
-            whitelistReceivers: relayerGroup.policies['whitelist-receivers'],
-            gasPriceCap: relayerGroup.policies['gas-price-cap'],
-            EIP1559Pricing: relayerGroup.policies['eip1559-pricing'],
-            privateTransactions: relayerGroup.policies['private-transactions'],
+          policies: relayerGroup.policy && {
+            whitelistReceivers: relayerGroup.policy['whitelist-receivers'],
+            gasPriceCap: relayerGroup.policy['gas-price-cap'],
+            EIP1559Pricing: relayerGroup.policy['eip1559-pricing'],
+            privateTransactions: relayerGroup.policy['private-transactions'],
           },
-          relayers: relayerGroup.relayers?.length,
+          relayers: relayerGroup.relayers,
           stackResourceId,
         });
 
