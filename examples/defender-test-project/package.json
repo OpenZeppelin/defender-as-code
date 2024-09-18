@@ -17,7 +17,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@openzeppelin/defender-as-code": "../../lib",
+    "@openzeppelin/defender-as-code": "^3.0.0",
     "serverless": "^3.20.0"
   }
 }
