@@ -735,6 +735,8 @@ export default class DefenderDeploy {
             'events': match.notificationChannels.events,
             'notification-ids': match.notificationChannels.notificationIds,
           },
+          // Not yet supported in SDK
+          // 'user-weight-caps': match.userWeightCaps,
         };
 
         let updatedRelayerGroup = undefined;
@@ -757,6 +759,8 @@ export default class DefenderDeploy {
               events: relayerGroup['notification-channels'].events,
               notificationIds: notificationChannelIds,
             },
+            // Not yet supported in SDK
+            // userWeightCaps: relayerGroup['user-weight-caps'],
           });
         }
 
