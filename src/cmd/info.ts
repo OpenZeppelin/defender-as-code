@@ -208,8 +208,8 @@ export default class DefenderInfo {
     const listRelayerGroups = () => getRelayGroupClient(this.teamKey!).list();
     await this.wrapper<RelayerGroup, DefenderRelayerGroup>(
       this.serverless,
-      'Relayers',
-      removeDefenderIdReferences(this.resources?.relayers),
+      'Relayer Groups',
+      removeDefenderIdReferences(this.resources?.['relayer-groups']),
       listRelayerGroups,
       (resource: DefenderRelayerGroup) => `${resource.stackResourceId}: ${resource.relayerGroupId}`,
       stdOut.relayerGroups,

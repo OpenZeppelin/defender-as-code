@@ -367,7 +367,7 @@ export default class DefenderRemove {
           deletes: secrets,
           secrets: {},
         });
-        this.log.success(`Removed (${secrets.join(', ')})`);
+        if (secrets.length) this.log.success(`Removed (${secrets.join(', ')})`);
       },
       stdOut.secrets,
     );
