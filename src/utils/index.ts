@@ -35,6 +35,7 @@ import {
   DefenderBlockExplorerApiKey,
   DefenderTenantNetwork,
   DefenderRelayerGroup,
+  YWebhookConfig,
 } from '../types';
 import { sanitise } from './sanitise';
 import {
@@ -253,12 +254,19 @@ export const constructNotification = (notification: Notification, stackResourceI
       currentConfig = notification.config as YPagerdutyConfig;
       config = currentConfig;
       return { ...commonNotification, config };
+    case 'webhook':
+      currentConfig = notification.config as YWebhookConfig;
+      config = {
+        url: currentConfig.url,
+        secret: currentConfig.secret,
+      };
+      return { ...commonNotification, config };
     default:
       throw new Error(`Incompatible notification type ${notification.type}`);
   }
 };
 
-const isResource = <T>(item: T | undefined): item is T => {
+export const isResource = <T>(item: T | undefined): item is T => {
   return !!item;
 };
 

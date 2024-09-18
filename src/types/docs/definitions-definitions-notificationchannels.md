@@ -39,7 +39,7 @@
 
 *   is required
 
-*   Type: `string[]` ([DefenderID](definitions-definitions-defenderid.md))
+*   Type: an array of merged types ([NotificationOrDefenderID](definitions-definitions-notificationchannels-properties-notificationids-notificationordefenderid.md))
 
 *   cannot be null
 
@@ -47,4 +47,4 @@
 
 ### notification-ids Type
 
-`string[]` ([DefenderID](definitions-definitions-defenderid.md))
+an array of merged types ([NotificationOrDefenderID](definitions-definitions-notificationchannels-properties-notificationids-notificationordefenderid.md))

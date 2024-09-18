@@ -198,7 +198,7 @@
           "title": "NotificationIds",
           "type": "array",
           "items": {
-            "$ref": "definitions.schema.json#/definitions/defender-id",
+            "$ref": "definitions.schema.json#/definitions/notification-or-defender-id",
             "format": "uri-reference"
           }
         }

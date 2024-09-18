@@ -29,6 +29,7 @@ import {
   removeDefenderIdReferences,
   isTenantNetwork,
   getRelayGroupClient,
+  isResource,
 } from '../utils';
 import {
   DefenderAction,
@@ -71,6 +72,7 @@ import {
   Monitor,
   Monitors,
   Notification,
+  NotificationOrDefenderID,
   Notifications,
   PrivateNetworkRequest,
   PrivateNetworks,
@@ -694,6 +696,30 @@ export default class DefenderDeploy {
           );
           relayerGroup.relayers = match.relayers.length;
         }
+
+        const monitorClient = getMonitorClient(this.teamKey!);
+        const notifications = await monitorClient.listNotificationChannels();
+
+        const notificationChannelIds = relayerGroup['notification-channels']?.['notification-ids']
+          .map((notification) => {
+            const maybeNotification = getEquivalentResource<NotificationOrDefenderID | undefined, DefenderNotification>(
+              this.serverless,
+              notification,
+              this.resources?.notifications,
+              notifications,
+              'Notifications',
+            );
+            return maybeNotification?.notificationId;
+          })
+          .filter(isResource) as string[];
+
+        if (relayerGroup['notification-channels']) {
+          relayerGroup['notification-channels'] = {
+            'events': relayerGroup['notification-channels']?.events,
+            'notification-ids': notificationChannelIds,
+          };
+        }
+
         const mappedMatch = {
           'name': match.name,
           'network': match.network,
@@ -729,7 +755,7 @@ export default class DefenderDeploy {
             },
             notificationChannels: relayerGroup['notification-channels'] && {
               events: relayerGroup['notification-channels'].events,
-              notificationIds: relayerGroup['notification-channels']['notification-ids'],
+              notificationIds: notificationChannelIds,
             },
           });
         }
@@ -1685,12 +1711,12 @@ export default class DefenderDeploy {
     await this.deployPrivateNetworks(stdOut.privateNetworks);
     await this.deploySecrets(stdOut.secrets);
     await this.deployContracts(stdOut.contracts);
+    await this.deployNotifications(stdOut.notifications);
     // Always deploy relayers before actions
     await this.deployRelayers(stdOut.relayers);
     await this.deployRelayerGroups(stdOut.relayerGroups);
     await this.deployActions(stdOut.actions);
     // Deploy notifications before monitors
-    await this.deployNotifications(stdOut.notifications);
     await this.deployMonitors(stdOut.monitors);
     await this.deployBlockExplorerApiKey(stdOut.blockExplorerApiKeys);
 

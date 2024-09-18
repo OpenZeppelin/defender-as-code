@@ -1,8 +1,8 @@
-## items Type
+## opsgenieUser Type
 
 `object` ([OpsgenieUser](definitions-definitions-opsgenieuser.md))
 
-# items Properties
+# opsgenieUser Properties
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                                         |
 | :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |

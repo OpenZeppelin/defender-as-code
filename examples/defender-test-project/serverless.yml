@@ -110,14 +110,21 @@ resources:
     relayer-group-1:
       name: 'Sepolia Relayer Group'
       network: 'sepolia'
+      min-balance: 1000
+      # optional
       relayers: 2
       # optional
       policy: ${self:resources.policies.policy-1}
-      min-balance: 1000
       # optional
       api-keys:
         - key1
-
+      # optional
+      notification-channels:
+        notification-ids:
+          - ${self:resources.notifications.webhook-1} # only webhooks are allowed here
+        events:
+          - 'pending'
+          
   notifications:
     email-1:
       type: 'email'
@@ -131,6 +138,13 @@ resources:
       name: 'Workspace Slack'
       config:
         url: ${self:custom.config.notifications.slack}
+      paused: false
+    webhook-1:
+      type: 'webhook'
+      name: 'Alert Webhook'
+      config:
+        url:
+          - ${self:custom.config.notifications.webhook}
       paused: false
 
   monitors:

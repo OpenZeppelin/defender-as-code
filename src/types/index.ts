@@ -130,13 +130,13 @@ export type YRelayerGroup = {
   'min-balance': number;
   'policies'?: YPolicy;
   'api-keys': any[];
-  'relayers': YRelayerGroupRelayer[];
+  'relayers': number;
   'user-weight-caps': {
     [user: string]: number;
   };
   'notification-channels': {
     'events': ('pending' | 'sent' | 'submitted' | 'inmempool' | 'mined' | 'confirmed' | 'failed' | 'expired')[];
-    'notification-ids': string[];
+    'notification-ids': (YNotification | string)[];
   };
 };
 
@@ -172,6 +172,11 @@ export type YEmailConfig = {
 export type YDatadogConfig = {
   'api-key': string;
   'metric-prefix': string;
+};
+
+export type YWebhookConfig = {
+  url: string;
+  secret?: string;
 };
 
 export type YOpsgenieConfig = OpsgenieConfig;
