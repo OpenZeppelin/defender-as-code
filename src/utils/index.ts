@@ -49,6 +49,7 @@ import {
   NotificationOrDefenderID,
   NotifyConfig,
 } from '../types/types/resources.schema';
+import Logger from './logger';
 
 const getDefenderIdFromResource = <Y>(resource: Y, resourceType: ResourceType): DefenderID => {
   switch (resourceType) {
@@ -86,10 +87,16 @@ export const getEquivalentResource = <Y, D>(
 ) => {
   if (resource) {
     if (isDefenderId(resource)) {
-      return currentResources.find((e) => getDefenderIdFromResource(e, type) === resource);
+      const foundResource = currentResources.find((e) => getDefenderIdFromResource(e, type) === resource);
+      if (!foundResource) Logger.getInstance().warn(`Resource ${resource} not found in Defender. Skipping...`);
+      return foundResource;
     }
     const [key, value] = Object.entries(resources ?? {}).find((a) => _.isEqual(a[1], resource))!;
-    return currentResources.find((e) => (e as any).stackResourceId === getResourceID(getStackName(context), key));
+    const foundResource = currentResources.find(
+      (e) => (e as any).stackResourceId === getResourceID(getStackName(context), key),
+    );
+    if (!foundResource) Logger.getInstance().warn(`Resource ${key} not found in Defender. Skipping...`);
+    return foundResource;
   }
 };
 
