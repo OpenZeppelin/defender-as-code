@@ -54,3 +54,4 @@
 | `"zksync-sepolia"`      |             |
 | `"japan"`               |             |
 | `"japan-testnet"`       |             |
+| `"unichain-sepolia"`    |             |
