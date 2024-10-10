@@ -1,0 +1,3 @@
+## balance Type
+
+`string`

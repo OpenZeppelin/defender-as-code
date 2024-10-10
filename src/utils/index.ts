@@ -6,6 +6,7 @@ import { TenantNetwork, Network, isValidNetwork } from '@openzeppelin/defender-s
 import { ActionClient } from '@openzeppelin/defender-sdk-action-client';
 import { MonitorClient } from '@openzeppelin/defender-sdk-monitor-client';
 import { RelayClient } from '@openzeppelin/defender-sdk-relay-client';
+import { RelayGroupClient } from '@openzeppelin/defender-sdk-relay-group-client';
 import { ProposalClient } from '@openzeppelin/defender-sdk-proposal-client';
 import { DeployClient } from '@openzeppelin/defender-sdk-deploy-client';
 import { NetworkClient } from '@openzeppelin/defender-sdk-network-client';
@@ -33,6 +34,8 @@ import {
   DefenderRelayer,
   DefenderBlockExplorerApiKey,
   DefenderTenantNetwork,
+  DefenderRelayerGroup,
+  YWebhookConfig,
 } from '../types';
 import { sanitise } from './sanitise';
 import {
@@ -59,6 +62,8 @@ const getDefenderIdFromResource = <Y>(resource: Y, resourceType: ResourceType): 
       return (resource as DefenderMonitor).monitorId;
     case 'Relayers':
       return (resource as DefenderRelayer).relayerId;
+    case 'Relayer Groups':
+      return (resource as DefenderRelayerGroup).relayerGroupId;
     case 'Notifications':
       return (resource as DefenderNotification).notificationId;
     case 'Block Explorer Api Keys':
@@ -188,6 +193,10 @@ export const getRelayClient = (key: TeamKey): RelayClient => {
   return new RelayClient(key);
 };
 
+export const getRelayGroupClient = (key: TeamKey): RelayGroupClient => {
+  return new RelayGroupClient(key);
+};
+
 export const getProposalClient = (key: TeamKey): ProposalClient => {
   return new ProposalClient(key);
 };
@@ -252,12 +261,19 @@ export const constructNotification = (notification: Notification, stackResourceI
       currentConfig = notification.config as YPagerdutyConfig;
       config = currentConfig;
       return { ...commonNotification, config };
+    case 'webhook':
+      currentConfig = notification.config as YWebhookConfig;
+      config = {
+        url: currentConfig.url,
+        secret: currentConfig.secret,
+      };
+      return { ...commonNotification, config };
     default:
       throw new Error(`Incompatible notification type ${notification.type}`);
   }
 };
 
-const isResource = <T>(item: T | undefined): item is T => {
+export const isResource = <T>(item: T | undefined): item is T => {
   return !!item;
 };
 

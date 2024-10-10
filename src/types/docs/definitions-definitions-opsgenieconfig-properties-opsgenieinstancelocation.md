@@ -1,8 +1,8 @@
-## opsgenieInstanceLocation Type
+## instanceLocation Type
 
-`string` ([OpsgenieInstanceLocation](definitions-definitions-opsgenieinstancelocation.md))
+`string` ([OpsgenieInstanceLocation](definitions-definitions-opsgenieconfig-properties-opsgenieinstancelocation.md))
 
-## opsgenieInstanceLocation Constraints
+## instanceLocation Constraints
 
 **enum**: the value of this property must be equal to one of the following values:
 
