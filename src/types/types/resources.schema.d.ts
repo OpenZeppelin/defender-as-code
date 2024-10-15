@@ -55,7 +55,8 @@ export type PublicNetwork =
   | 'zksync'
   | 'zksync-sepolia'
   | 'japan'
-  | 'japan-testnet';
+  | 'japan-testnet'
+  | 'unichain-sepolia';
 export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-security-alliance';
 export type TenantNetwork = string;
 export type AddressFromRelayer = {} | string;

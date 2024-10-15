@@ -67,7 +67,8 @@
         "zksync",
         "zksync-sepolia",
         "japan",
-        "japan-testnet"
+        "japan-testnet",
+        "unichain-sepolia"
       ]
     },
     "custom-network": {
