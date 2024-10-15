@@ -1,8 +1,8 @@
-## opsgeniePriorityLevel Type
+## priority Type
 
-`string` ([OpsgeniePriorityLevel](definitions-definitions-opsgenieprioritylevel.md))
+`string` ([OpsgeniePriorityLevel](definitions-definitions-opsgenieconfig-properties-opsgenieprioritylevel.md))
 
-## opsgeniePriorityLevel Constraints
+## priority Constraints
 
 **enum**: the value of this property must be equal to one of the following values:
 

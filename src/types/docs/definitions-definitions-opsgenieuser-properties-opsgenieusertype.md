@@ -1,8 +1,8 @@
-## opsgenieUserType Type
+## type Type
 
-`string` ([OpsgenieUserType](definitions-definitions-opsgenieusertype.md))
+`string` ([OpsgenieUserType](definitions-definitions-opsgenieuser-properties-opsgenieusertype.md))
 
-## opsgenieUserType Constraints
+## type Constraints
 
 **enum**: the value of this property must be equal to one of the following values:
 

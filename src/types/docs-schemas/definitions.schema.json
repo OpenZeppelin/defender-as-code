@@ -171,6 +171,100 @@
           "items": {
             "type": "string"
           }
+        },
+        "relayer-group-id": {
+          "$ref": "definitions.schema.json#/definitions/defender-id",
+          "format": "uri-reference"
+        },
+        "notification-channels": {
+          "$ref": "definitions.schema.json#/definitions/notification-channels",
+          "format": "uri-reference"
+        }
+      },
+      "required": ["name", "network", "min-balance"]
+    },
+    "notification-channels": {
+      "title": "NotificationChannels",
+      "type": "object",
+      "properties": {
+        "events": {
+          "title": "Events",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["pending", "sent", "submitted", "inmempool", "mined", "confirmed", "failed", "expired"]
+          }
+        },
+        "notification-ids": {
+          "title": "NotificationIds",
+          "type": "array",
+          "items": {
+            "$ref": "definitions.schema.json#/definitions/notification-or-defender-id",
+            "format": "uri-reference"
+          }
+        }
+      },
+      "required": ["events", "notification-ids"]
+    },
+    "relayer-group-relayer": {
+      "title": "RelayerGroupRelayer",
+      "type": "object",
+      "properties": {
+        "relayer-id": {
+          "$ref": "definitions.schema.json#/definitions/defender-id",
+          "format": "uri-reference"
+        },
+        "address": {
+          "$ref": "definitions.schema.json#/definitions/address",
+          "format": "uri-reference"
+        },
+        "key-id": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "string"
+        }
+      },
+      "required": ["relayerId", "address"]
+    },
+    "relayer-group": {
+      "title": "RelayerGroup",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "network": {
+          "$ref": "definitions.schema.json#/definitions/network",
+          "format": "uri-reference"
+        },
+        "min-balance": {
+          "type": "integer"
+        },
+        "relayers": {
+          "type": "integer"
+        },
+        "policy": {
+          "$ref": "definitions.schema.json#/definitions/policy",
+          "format": "uri-reference"
+        },
+        "user-weight-caps": {
+          "title": "UserWeightCaps",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        },
+        "notification-channels": {
+          "$ref": "definitions.schema.json#/definitions/notification-channels",
+          "format": "uri-reference"
+        },
+        "api-keys": {
+          "title": "RelayerGroupAPIKeys",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": ["name", "network", "min-balance"]
@@ -776,6 +870,21 @@
         {
           "type": "object",
           "$ref": "definitions.schema.json#/definitions/relayer",
+          "format": "uri-reference"
+        },
+        {
+          "type": "string",
+          "$ref": "definitions.schema.json#/definitions/defender-id",
+          "format": "uri-reference"
+        }
+      ]
+    },
+    "relayer-group-or-defender-id": {
+      "title": "RelayerGroupOrDefenderID",
+      "anyOf": [
+        {
+          "type": "object",
+          "$ref": "definitions.schema.json#/definitions/relayer-group",
           "format": "uri-reference"
         },
         {

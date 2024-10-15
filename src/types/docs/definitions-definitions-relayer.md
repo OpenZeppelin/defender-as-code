@@ -8,14 +8,16 @@
 
 # 0 Properties
 
-| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                                     |
-| :-------------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "definitions.schema.json#/definitions/relayer/properties/name")                               |
-| [network](#network)                           | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/relayer/properties/network")                                            |
-| [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "definitions.schema.json#/definitions/relayer/properties/min-balance")                 |
-| [address-from-relayer](#address-from-relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
-| [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer/properties/policy")                                              |
-| [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "definitions.schema.json#/definitions/relayer/properties/api-keys")                 |
+| Property                                        | Type      | Required | Nullable       | Defined by                                                                                                                                                     |
+| :---------------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "definitions.schema.json#/definitions/relayer/properties/name")                               |
+| [network](#network)                             | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/relayer/properties/network")                                            |
+| [min-balance](#min-balance)                     | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "definitions.schema.json#/definitions/relayer/properties/min-balance")                 |
+| [address-from-relayer](#address-from-relayer)   | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
+| [policy](#policy)                               | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer/properties/policy")                                              |
+| [api-keys](#api-keys)                           | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "definitions.schema.json#/definitions/relayer/properties/api-keys")                 |
+| [relayer-group-id](#relayer-group-id)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-defenderid.md "definitions.schema.json#/definitions/relayer/properties/relayer-group-id")                                |
+| [notification-channels](#notification-channels) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-notificationchannels.md "definitions.schema.json#/definitions/relayer/properties/notification-channels")                 |
 
 ## name
 
@@ -148,3 +150,55 @@ any of
 ### api-keys Type
 
 `string[]`
+
+## relayer-group-id
+
+
+
+`relayer-group-id`
+
+*   is optional
+
+*   Type: `string` ([DefenderID](definitions-definitions-defenderid.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-defenderid.md "definitions.schema.json#/definitions/relayer/properties/relayer-group-id")
+
+### relayer-group-id Type
+
+`string` ([DefenderID](definitions-definitions-defenderid.md))
+
+### relayer-group-id Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-(8|9|a|b)[0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+```
+
+[try pattern](https://regexr.com/?expression=%5E%5B0-9a-fA-F%5D%7B8%7D-%5B0-9a-fA-F%5D%7B4%7D-4%5B0-9a-fA-F%5D%7B3%7D-\(8%7C9%7Ca%7Cb\)%5B0-9a-fA-F%5D%7B3%7D-%5B0-9a-fA-F%5D%7B12%7D%24 "try regular expression with regexr.com")
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+## notification-channels
+
+
+
+`notification-channels`
+
+*   is optional
+
+*   Type: `object` ([NotificationChannels](definitions-definitions-notificationchannels.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-notificationchannels.md "definitions.schema.json#/definitions/relayer/properties/notification-channels")
+
+### notification-channels Type
+
+`object` ([NotificationChannels](definitions-definitions-notificationchannels.md))
+
+### notification-channels Constraints
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")

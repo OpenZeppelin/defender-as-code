@@ -9,6 +9,7 @@
 | [actions](#actions)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-actions.md "resources.schema.json#/properties/actions")                                 |
 | [notifications](#notifications)                     | `object` | Optional | cannot be null | [Resources](resources-properties-notifications.md "resources.schema.json#/properties/notifications")                     |
 | [relayers](#relayers)                               | `object` | Optional | cannot be null | [Resources](resources-properties-relayers.md "resources.schema.json#/properties/relayers")                               |
+| [relayer-groups](#relayer-groups)                   | `object` | Optional | cannot be null | [Resources](resources-properties-relayergroups.md "resources.schema.json#/properties/relayer-groups")                    |
 | [policies](#policies)                               | `object` | Optional | cannot be null | [Resources](resources-properties-policies.md "resources.schema.json#/properties/policies")                               |
 | [contracts](#contracts)                             | `object` | Optional | cannot be null | [Resources](resources-properties-contracts.md "resources.schema.json#/properties/contracts")                             |
 | [secrets](#secrets)                                 | `object` | Optional | cannot be null | [Resources](resources-properties-actionsecrets.md "resources.schema.json#/properties/secrets")                           |
@@ -70,6 +71,24 @@
 ### relayers Type
 
 `object` ([Relayers](resources-properties-relayers.md))
+
+## relayer-groups
+
+
+
+`relayer-groups`
+
+*   is optional
+
+*   Type: `object` ([RelayerGroups](resources-properties-relayergroups.md))
+
+*   cannot be null
+
+*   defined in: [Resources](resources-properties-relayergroups.md "resources.schema.json#/properties/relayer-groups")
+
+### relayer-groups Type
+
+`object` ([RelayerGroups](resources-properties-relayergroups.md))
 
 ## policies
 

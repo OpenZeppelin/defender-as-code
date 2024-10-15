@@ -1,8 +1,8 @@
-## pagerDutySeverity Type
+## severity Type
 
-`string` ([PagerDutySeverity](definitions-definitions-pagerdutyseverity.md))
+`string` ([PagerDutySeverity](definitions-definitions-pagerdutyconfig-properties-pagerdutyseverity.md))
 
-## pagerDutySeverity Constraints
+## severity Constraints
 
 **enum**: the value of this property must be equal to one of the following values:
 

@@ -1,8 +1,8 @@
-## pagerDutyEventType Type
+## eventType Type
 
-`string` ([PagerDutyEventType](definitions-definitions-pagerdutyeventtype.md))
+`string` ([PagerDutyEventType](definitions-definitions-pagerdutyconfig-properties-pagerdutyeventtype.md))
 
-## pagerDutyEventType Constraints
+## eventType Constraints
 
 **enum**: the value of this property must be equal to one of the following values:
 

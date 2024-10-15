@@ -28,6 +28,8 @@ import {
   isDefenderId,
   removeDefenderIdReferences,
   isTenantNetwork,
+  getRelayGroupClient,
+  isResource,
 } from '../utils';
 import {
   DefenderAction,
@@ -53,6 +55,7 @@ import {
   Resources,
   DefenderTenantNetwork,
   DefenderBlockWatcher,
+  DefenderRelayerGroup,
 } from '../types';
 import keccak256 from 'keccak256';
 import {
@@ -69,10 +72,13 @@ import {
   Monitor,
   Monitors,
   Notification,
+  NotificationOrDefenderID,
   Notifications,
   PrivateNetworkRequest,
   PrivateNetworks,
   Relayer,
+  RelayerGroup,
+  RelayerGroups,
   RelayerOrDefenderID,
   Relayers,
   SupportedNetwork,
@@ -114,6 +120,7 @@ export default class DefenderDeploy {
       notifications: [],
       contracts: [],
       relayerApiKeys: [],
+      relayerGroupApiKeys: [],
       secrets: [],
       blockExplorerApiKeys: [],
       forkedNetworks: [],
@@ -201,6 +208,33 @@ export default class DefenderDeploy {
             (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
           );
           difference.relayerApiKeys.push(...relayerApiKeyDifference);
+        }
+      }),
+    );
+
+    // Relayer Groups
+    const relayerGroups: RelayerGroups = this.resources?.['relayer-groups'] ?? {};
+    const relayerGroupClient = getRelayGroupClient(this.teamKey!);
+    const dRelayerGroups = await relayerGroupClient.list();
+
+    // Relayer Group API keys
+    await Promise.all(
+      Object.entries(relayerGroups).map(async ([id, relayerGroup]: [string, RelayerGroup | DefenderID]) => {
+        if (isDefenderId(relayerGroup)) return;
+        const dRelayerGroup = getEquivalentResourceByKey<DefenderRelayerGroup>(
+          getResourceID(getStackName(this.serverless), id),
+          dRelayerGroups,
+        );
+        if (dRelayerGroup) {
+          const dRelayerGroupApiKeys = await relayerGroupClient.listKeys(dRelayerGroup.relayerGroupId);
+          const configuredKeys = relayerGroup['api-keys'] ?? [];
+          const relayerGroupApiKeyDifference = _.differenceWith(
+            dRelayerGroupApiKeys,
+            configuredKeys,
+            (a: DefenderRelayerApiKey, b: string) =>
+              a.stackResourceId === getResourceID(dRelayerGroup.stackResourceId!, b),
+          );
+          difference.relayerGroupApiKeys.push(...relayerGroupApiKeyDifference);
         }
       }),
     );
@@ -293,6 +327,10 @@ export default class DefenderDeploy {
       relayerApiKeys:
         withResources.relayerApiKeys.length > 0
           ? withResources.relayerApiKeys.map((a) => `${a.stackResourceId ?? a.apiKey} (${a.keyId})`)
+          : undefined,
+      relayerGroupApiKeys:
+        withResources.relayerGroupApiKeys.length > 0
+          ? withResources.relayerGroupApiKeys.map((a) => `${a.stackResourceId ?? a.apiKey} (${a.keyId})`)
           : undefined,
       secrets: withResources.secrets.length > 0 ? withResources.secrets.map((a) => `${a}`) : undefined,
       forkedNetworks:
@@ -621,6 +659,201 @@ export default class DefenderDeploy {
           id: createdRelayer.relayerId,
           success: true,
           response: createdRelayer,
+        };
+      },
+      // on remove requires manual interaction
+      undefined,
+      undefined,
+      output,
+    );
+  }
+
+  private async deployRelayerGroups(
+    output: DeployOutput<DefenderRelayerGroup> & {
+      relayerGroupKeys: DeployOutput<DefenderRelayerApiKey>;
+    },
+  ) {
+    const relayerGroups: RelayerGroups = this.resources?.['relayer-groups'] ?? {};
+    const client = getRelayGroupClient(this.teamKey!);
+    const retrieveExisting = () => client.list();
+    await this.wrapper<RelayerGroup, DefenderRelayerGroup>(
+      this.serverless,
+      'Relayer Groups',
+      removeDefenderIdReferences(relayerGroups),
+      retrieveExisting,
+      // on update
+      async (relayerGroup: RelayerGroup, match: DefenderRelayerGroup) => {
+        // Warn users when they try to change the relayer group network
+        if (match.network !== relayerGroup.network) {
+          this.log.warn(
+            `Detected a network change from ${match.network} to ${relayerGroup.network} for Relayer Group: ${match.stackResourceId}. Defender does not currently allow updates to the network once a Relayer Group is created. This change will be ignored. To enforce this change, remove this relayer group and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the relayer group. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this relayer group.`,
+          );
+          relayerGroup.network = match.network!;
+        }
+        if (match.relayers.length !== relayerGroup.relayers) {
+          this.log.warn(
+            `Detected a change in the number of relayers from ${match.relayers.length} to ${relayerGroup.relayers} for Relayer Group: ${match.stackResourceId}. Defender does not currently allow updates to the number of relayers once a Relayer Group is created. This change will be ignored. To enforce this change, remove this relayer group and create a new one. Alternatively, you can change the unique identifier (stack resource ID), to force a new creation of the relayer group. Note that this change might cause errors further in the deployment process for resources that have any dependencies to this relayer group.`,
+          );
+          relayerGroup.relayers = match.relayers.length;
+        }
+
+        const monitorClient = getMonitorClient(this.teamKey!);
+        const notifications = await monitorClient.listNotificationChannels();
+
+        const notificationChannelIds = relayerGroup['notification-channels']?.['notification-ids']
+          .map((notification) => {
+            const maybeNotification = getEquivalentResource<NotificationOrDefenderID | undefined, DefenderNotification>(
+              this.serverless,
+              notification,
+              this.resources?.notifications,
+              notifications,
+              'Notifications',
+            );
+            return maybeNotification?.notificationId;
+          })
+          .filter(isResource) as string[];
+
+        if (relayerGroup['notification-channels']) {
+          relayerGroup['notification-channels'] = {
+            'events': relayerGroup['notification-channels']?.events,
+            'notification-ids': notificationChannelIds,
+          };
+        }
+
+        const mappedMatch = {
+          'name': match.name,
+          'network': match.network,
+          'min-balance': parseInt(match.minBalance.toString()),
+          'policy': {
+            'gas-price-cap': match.policies.gasPriceCap,
+            'whitelist-receivers': match.policies.whitelistReceivers,
+            'eip1559-pricing': match.policies.EIP1559Pricing,
+            'private-transactions': match.policies.privateTransactions,
+          },
+          'relayers': match.relayers.length,
+          'notification-channels': match.notificationChannels && {
+            'events': match.notificationChannels.events,
+            'notification-ids': match.notificationChannels.notificationIds,
+          },
+          // Not yet supported in SDK
+          // 'user-weight-caps': match.userWeightCaps,
+        };
+
+        let updatedRelayerGroup = undefined;
+        if (
+          !_.isEqual(
+            validateTypesAndSanitise(_.omit(relayerGroup, ['api-keys'])),
+            validateTypesAndSanitise(mappedMatch),
+          )
+        ) {
+          updatedRelayerGroup = await client.update(match.relayerGroupId, {
+            name: relayerGroup.name,
+            minBalance: relayerGroup['min-balance'],
+            policies: relayerGroup.policy && {
+              whitelistReceivers: relayerGroup.policy['whitelist-receivers'],
+              gasPriceCap: relayerGroup.policy['gas-price-cap'],
+              EIP1559Pricing: relayerGroup.policy['eip1559-pricing'],
+              privateTransactions: relayerGroup.policy['private-transactions'],
+            },
+            notificationChannels: relayerGroup['notification-channels'] && {
+              events: relayerGroup['notification-channels'].events,
+              notificationIds: notificationChannelIds,
+            },
+            // Not yet supported in SDK
+            // userWeightCaps: relayerGroup['user-weight-caps'],
+          });
+        }
+
+        // check existing keys and remove / create accordingly
+        const existingRelayerGroupKeys = await client.listKeys(match.relayerGroupId);
+        const configuredKeys = relayerGroup['api-keys'] ?? [];
+        const inDefender = _.differenceWith(
+          existingRelayerGroupKeys,
+          configuredKeys,
+          (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(match.stackResourceId!, b),
+        );
+
+        // delete key in Defender thats not defined in template
+        if (isSSOT(this.serverless) && inDefender.length > 0) {
+          this.log.info(`Unused resources found on Defender:`);
+          this.log.info(JSON.stringify(inDefender, null, 2));
+          this.log.progress('component-deploy-extra', `Removing resources from Defender`);
+          await Promise.all(inDefender.map(async (key) => await client.deleteKey(match.relayerGroupId, key.keyId)));
+          this.log.success(`Removed resources from Defender`);
+          output.relayerGroupKeys.removed.push(...inDefender);
+        }
+
+        const inTemplate = _.differenceWith(
+          configuredKeys,
+          existingRelayerGroupKeys,
+          (a: string, b: DefenderRelayerApiKey) => getResourceID(match.stackResourceId!, a) === b.stackResourceId,
+        );
+
+        // create key in Defender thats defined in template
+        if (inTemplate) {
+          await Promise.all(
+            inTemplate.map(async (key) => {
+              const keyStackResource = getResourceID(match.stackResourceId!, key);
+              const createdKey = await client.createKey(match.relayerGroupId, {
+                stackResourceId: keyStackResource,
+              });
+              this.log.success(`Created API Key (${keyStackResource}) for Relayer Group (${match.relayerGroupId})`);
+              const keyPath = `${process.cwd()}/.defender/relayer-group-keys/${keyStackResource}.json`;
+              await this.serverless.utils.writeFile(keyPath, JSON.stringify({ ...createdKey }, null, 2));
+              this.log.info(`API Key details stored in ${keyPath}`, 1);
+              output.relayerGroupKeys.created.push(createdKey);
+            }),
+          );
+        }
+
+        return {
+          name: match.stackResourceId!,
+          id: match.relayerGroupId,
+          success: !!updatedRelayerGroup,
+          response: updatedRelayerGroup ?? match,
+          notice: !updatedRelayerGroup ? `Skipped ${match.stackResourceId} - no changes detected` : undefined,
+        };
+      },
+      // on create
+      async (relayerGroup: RelayerGroup, stackResourceId: string) => {
+        const createdRelayerGroup = await client.create({
+          name: relayerGroup.name,
+          network: relayerGroup.network,
+          minBalance: relayerGroup['min-balance'],
+          policies: relayerGroup.policy && {
+            whitelistReceivers: relayerGroup.policy['whitelist-receivers'],
+            gasPriceCap: relayerGroup.policy['gas-price-cap'],
+            EIP1559Pricing: relayerGroup.policy['eip1559-pricing'],
+            privateTransactions: relayerGroup.policy['private-transactions'],
+          },
+          relayers: relayerGroup.relayers,
+          stackResourceId,
+        });
+
+        const relayerGroupKeys = relayerGroup['api-keys'];
+        if (relayerGroupKeys) {
+          await Promise.all(
+            relayerGroupKeys.map(async (key) => {
+              const keyStackResource = getResourceID(stackResourceId, key);
+              const createdKey = await client.createKey(createdRelayerGroup.relayerGroupId, {
+                stackResourceId: keyStackResource,
+              });
+              this.log.success(
+                `Created API Key (${keyStackResource}) for Relayer Group (${createdRelayerGroup.relayerGroupId})`,
+              );
+              const keyPath = `${process.cwd()}/.defender/relayer-group-keys/${keyStackResource}.json`;
+              await this.serverless.utils.writeFile(keyPath, JSON.stringify({ ...createdKey }, null, 2));
+              this.log.info(`API Key details stored in ${keyPath}`, 1);
+              output.relayerGroupKeys.created.push(createdKey);
+            }),
+          );
+        }
+
+        return {
+          name: stackResourceId,
+          id: createdRelayerGroup.relayerGroupId,
+          success: true,
+          response: createdRelayerGroup,
         };
       },
       // on remove requires manual interaction
@@ -1434,6 +1667,18 @@ export default class DefenderDeploy {
         updated: [],
       },
     };
+    const relayerGroups: DeployOutput<DefenderRelayerGroup> & {
+      relayerGroupKeys: DeployOutput<DefenderRelayerApiKey>;
+    } = {
+      removed: [],
+      created: [],
+      updated: [],
+      relayerGroupKeys: {
+        removed: [],
+        created: [],
+        updated: [],
+      },
+    };
     const blockExplorerApiKeys: DeployOutput<DefenderBlockExplorerApiKey> = {
       removed: [],
       created: [],
@@ -1458,6 +1703,7 @@ export default class DefenderDeploy {
       actions: actions,
       contracts,
       relayers,
+      relayerGroups,
       notifications,
       secrets,
       blockExplorerApiKeys,
@@ -1469,11 +1715,12 @@ export default class DefenderDeploy {
     await this.deployPrivateNetworks(stdOut.privateNetworks);
     await this.deploySecrets(stdOut.secrets);
     await this.deployContracts(stdOut.contracts);
+    await this.deployNotifications(stdOut.notifications);
     // Always deploy relayers before actions
     await this.deployRelayers(stdOut.relayers);
+    await this.deployRelayerGroups(stdOut.relayerGroups);
     await this.deployActions(stdOut.actions);
     // Deploy notifications before monitors
-    await this.deployNotifications(stdOut.notifications);
     await this.deployMonitors(stdOut.monitors);
     await this.deployBlockExplorerApiKey(stdOut.blockExplorerApiKeys);
 

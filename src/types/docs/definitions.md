@@ -217,14 +217,16 @@ Reference this group by using
 {"$ref":"definitions.schema.json#/definitions/relayer"}
 ```
 
-| Property                                      | Type      | Required | Nullable       | Defined by                                                                                                                                                     |
-| :-------------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "definitions.schema.json#/definitions/relayer/properties/name")                               |
-| [network](#network)                           | Merged    | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-network.md "definitions.schema.json#/definitions/relayer/properties/network")                         |
-| [min-balance](#min-balance)                   | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "definitions.schema.json#/definitions/relayer/properties/min-balance")                 |
-| [address-from-relayer](#address-from-relayer) | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
-| [policy](#policy)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer/properties/policy")                                              |
-| [api-keys](#api-keys)                         | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "definitions.schema.json#/definitions/relayer/properties/api-keys")                 |
+| Property                                        | Type      | Required | Nullable       | Defined by                                                                                                                                                     |
+| :---------------------------------------------- | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name)                                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-name.md "definitions.schema.json#/definitions/relayer/properties/name")                               |
+| [network](#network)                             | Merged    | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-network.md "definitions.schema.json#/definitions/relayer/properties/network")                         |
+| [min-balance](#min-balance)                     | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayer-properties-min-balance.md "definitions.schema.json#/definitions/relayer/properties/min-balance")                 |
+| [address-from-relayer](#address-from-relayer)   | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-addressfromrelayer.md "definitions.schema.json#/definitions/relayer/properties/address-from-relayer") |
+| [policy](#policy)                               | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer/properties/policy")                                              |
+| [api-keys](#api-keys)                           | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-relayerapikeys.md "definitions.schema.json#/definitions/relayer/properties/api-keys")                 |
+| [relayer-group-id](#relayer-group-id)           | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-relayer-properties-defenderid.md "definitions.schema.json#/definitions/relayer/properties/relayer-group-id")             |
+| [notification-channels](#notification-channels) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-notificationchannels.md "definitions.schema.json#/definitions/relayer/properties/notification-channels")                 |
 
 ### name
 
@@ -358,6 +360,403 @@ any of
 
 `string[]`
 
+### relayer-group-id
+
+
+
+`relayer-group-id`
+
+*   is optional
+
+*   Type: `string` ([DefenderID](definitions-definitions-relayer-properties-defenderid.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-relayer-properties-defenderid.md "definitions.schema.json#/definitions/relayer/properties/relayer-group-id")
+
+#### relayer-group-id Type
+
+`string` ([DefenderID](definitions-definitions-relayer-properties-defenderid.md))
+
+#### relayer-group-id Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-(8|9|a|b)[0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+```
+
+[try pattern](https://regexr.com/?expression=%5E%5B0-9a-fA-F%5D%7B8%7D-%5B0-9a-fA-F%5D%7B4%7D-4%5B0-9a-fA-F%5D%7B3%7D-\(8%7C9%7Ca%7Cb\)%5B0-9a-fA-F%5D%7B3%7D-%5B0-9a-fA-F%5D%7B12%7D%24 "try regular expression with regexr.com")
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+### notification-channels
+
+
+
+`notification-channels`
+
+*   is optional
+
+*   Type: `object` ([NotificationChannels](definitions-definitions-notificationchannels.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-notificationchannels.md "definitions.schema.json#/definitions/relayer/properties/notification-channels")
+
+#### notification-channels Type
+
+`object` ([NotificationChannels](definitions-definitions-notificationchannels.md))
+
+#### notification-channels Constraints
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+## Definitions group notification-channels
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/notification-channels"}
+```
+
+| Property                              | Type    | Required | Nullable       | Defined by                                                                                                                                                                         |
+| :------------------------------------ | :------ | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [events](#events)                     | `array` | Required | cannot be null | [Definitions](definitions-definitions-notificationchannels-properties-events.md "definitions.schema.json#/definitions/notification-channels/properties/events")                    |
+| [notification-ids](#notification-ids) | `array` | Required | cannot be null | [Definitions](definitions-definitions-notificationchannels-properties-notificationids.md "definitions.schema.json#/definitions/notification-channels/properties/notification-ids") |
+
+### events
+
+
+
+`events`
+
+*   is required
+
+*   Type: `string[]`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-notificationchannels-properties-events.md "definitions.schema.json#/definitions/notification-channels/properties/events")
+
+#### events Type
+
+`string[]`
+
+### notification-ids
+
+
+
+`notification-ids`
+
+*   is required
+
+*   Type: an array of merged types ([NotificationOrDefenderID](definitions-definitions-notificationchannels-properties-notificationids-notificationordefenderid.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-notificationchannels-properties-notificationids.md "definitions.schema.json#/definitions/notification-channels/properties/notification-ids")
+
+#### notification-ids Type
+
+an array of merged types ([NotificationOrDefenderID](definitions-definitions-notificationchannels-properties-notificationids-notificationordefenderid.md))
+
+## Definitions group relayer-group-relayer
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/relayer-group-relayer"}
+```
+
+| Property                  | Type     | Required | Nullable       | Defined by                                                                                                                                                             |
+| :------------------------ | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [relayer-id](#relayer-id) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-relayergrouprelayer-properties-defenderid.md "definitions.schema.json#/definitions/relayer-group-relayer/properties/relayer-id") |
+| [address](#address)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-relayergrouprelayer-properties-address.md "definitions.schema.json#/definitions/relayer-group-relayer/properties/address")       |
+| [key-id](#key-id)         | `string` | Optional | cannot be null | [Definitions](definitions-definitions-relayergrouprelayer-properties-key-id.md "definitions.schema.json#/definitions/relayer-group-relayer/properties/key-id")         |
+| [balance](#balance)       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-relayergrouprelayer-properties-balance.md "definitions.schema.json#/definitions/relayer-group-relayer/properties/balance")       |
+
+### relayer-id
+
+
+
+`relayer-id`
+
+*   is optional
+
+*   Type: `string` ([DefenderID](definitions-definitions-relayergrouprelayer-properties-defenderid.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-relayergrouprelayer-properties-defenderid.md "definitions.schema.json#/definitions/relayer-group-relayer/properties/relayer-id")
+
+#### relayer-id Type
+
+`string` ([DefenderID](definitions-definitions-relayergrouprelayer-properties-defenderid.md))
+
+#### relayer-id Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-(8|9|a|b)[0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+```
+
+[try pattern](https://regexr.com/?expression=%5E%5B0-9a-fA-F%5D%7B8%7D-%5B0-9a-fA-F%5D%7B4%7D-4%5B0-9a-fA-F%5D%7B3%7D-\(8%7C9%7Ca%7Cb\)%5B0-9a-fA-F%5D%7B3%7D-%5B0-9a-fA-F%5D%7B12%7D%24 "try regular expression with regexr.com")
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+### address
+
+
+
+`address`
+
+*   is required
+
+*   Type: `string` ([Address](definitions-definitions-relayergrouprelayer-properties-address.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-relayergrouprelayer-properties-address.md "definitions.schema.json#/definitions/relayer-group-relayer/properties/address")
+
+#### address Type
+
+`string` ([Address](definitions-definitions-relayergrouprelayer-properties-address.md))
+
+#### address Constraints
+
+**pattern**: the string must match the following regular expression:&#x20;
+
+```regexp
+^0x[a-fA-F0-9]{40}$
+```
+
+[try pattern](https://regexr.com/?expression=%5E0x%5Ba-fA-F0-9%5D%7B40%7D%24 "try regular expression with regexr.com")
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+### key-id
+
+
+
+`key-id`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-relayergrouprelayer-properties-key-id.md "definitions.schema.json#/definitions/relayer-group-relayer/properties/key-id")
+
+#### key-id Type
+
+`string`
+
+### balance
+
+
+
+`balance`
+
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-relayergrouprelayer-properties-balance.md "definitions.schema.json#/definitions/relayer-group-relayer/properties/balance")
+
+#### balance Type
+
+`string`
+
+## Definitions group relayer-group
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/relayer-group"}
+```
+
+| Property                                          | Type      | Required | Nullable       | Defined by                                                                                                                                                        |
+| :------------------------------------------------ | :-------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [name](#name-1)                                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-relayergroup-properties-name.md "definitions.schema.json#/definitions/relayer-group/properties/name")                       |
+| [network](#network-1)                             | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/relayer-group/properties/network")                                         |
+| [min-balance](#min-balance-1)                     | `integer` | Required | cannot be null | [Definitions](definitions-definitions-relayergroup-properties-min-balance.md "definitions.schema.json#/definitions/relayer-group/properties/min-balance")         |
+| [relayers](#relayers)                             | `integer` | Optional | cannot be null | [Definitions](definitions-definitions-relayergroup-properties-relayers.md "definitions.schema.json#/definitions/relayer-group/properties/relayers")               |
+| [policy](#policy-1)                               | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer-group/properties/policy")                                           |
+| [user-weight-caps](#user-weight-caps)             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-relayergroup-properties-userweightcaps.md "definitions.schema.json#/definitions/relayer-group/properties/user-weight-caps") |
+| [notification-channels](#notification-channels-1) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-notificationchannels.md "definitions.schema.json#/definitions/relayer-group/properties/notification-channels")              |
+| [api-keys](#api-keys-1)                           | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-relayergroup-properties-relayergroupapikeys.md "definitions.schema.json#/definitions/relayer-group/properties/api-keys")    |
+
+### name
+
+
+
+`name`
+
+*   is required
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-relayergroup-properties-name.md "definitions.schema.json#/definitions/relayer-group/properties/name")
+
+#### name Type
+
+`string`
+
+### network
+
+
+
+`network`
+
+*   is required
+
+*   Type: merged type ([Network](definitions-definitions-network.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/relayer-group/properties/network")
+
+#### network Type
+
+merged type ([Network](definitions-definitions-network.md))
+
+any of
+
+*   one (and only one) of
+
+    *   [PublicNetwork](definitions-definitions-supportednetwork-oneof-publicnetwork.md "check type definition")
+
+    *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
+
+*   [TenantNetwork](definitions-definitions-network-anyof-tenantnetwork.md "check type definition")
+
+#### network Constraints
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+### min-balance
+
+
+
+`min-balance`
+
+*   is required
+
+*   Type: `integer`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-relayergroup-properties-min-balance.md "definitions.schema.json#/definitions/relayer-group/properties/min-balance")
+
+#### min-balance Type
+
+`integer`
+
+### relayers
+
+
+
+`relayers`
+
+*   is optional
+
+*   Type: `integer`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-relayergroup-properties-relayers.md "definitions.schema.json#/definitions/relayer-group/properties/relayers")
+
+#### relayers Type
+
+`integer`
+
+### policy
+
+
+
+`policy`
+
+*   is optional
+
+*   Type: `object` ([Policy](definitions-definitions-policy.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-policy.md "definitions.schema.json#/definitions/relayer-group/properties/policy")
+
+#### policy Type
+
+`object` ([Policy](definitions-definitions-policy.md))
+
+#### policy Constraints
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+### user-weight-caps
+
+
+
+`user-weight-caps`
+
+*   is optional
+
+*   Type: `object` ([UserWeightCaps](definitions-definitions-relayergroup-properties-userweightcaps.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-relayergroup-properties-userweightcaps.md "definitions.schema.json#/definitions/relayer-group/properties/user-weight-caps")
+
+#### user-weight-caps Type
+
+`object` ([UserWeightCaps](definitions-definitions-relayergroup-properties-userweightcaps.md))
+
+### notification-channels
+
+
+
+`notification-channels`
+
+*   is optional
+
+*   Type: `object` ([NotificationChannels](definitions-definitions-notificationchannels.md))
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-notificationchannels.md "definitions.schema.json#/definitions/relayer-group/properties/notification-channels")
+
+#### notification-channels Type
+
+`object` ([NotificationChannels](definitions-definitions-notificationchannels.md))
+
+#### notification-channels Constraints
+
+**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
+
+### api-keys
+
+
+
+`api-keys`
+
+*   is optional
+
+*   Type: `string[]`
+
+*   cannot be null
+
+*   defined in: [Definitions](definitions-definitions-relayergroup-properties-relayergroupapikeys.md "definitions.schema.json#/definitions/relayer-group/properties/api-keys")
+
+#### api-keys Type
+
+`string[]`
+
 ## Definitions group contract
 
 Reference this group by using
@@ -368,9 +767,9 @@ Reference this group by using
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                                 |
 | :-------------------- | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-1)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "definitions.schema.json#/definitions/contract/properties/name")         |
-| [address](#address)   | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-address.md "definitions.schema.json#/definitions/contract/properties/address")   |
-| [network](#network-1) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/contract/properties/network")                       |
+| [name](#name-2)       | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-name.md "definitions.schema.json#/definitions/contract/properties/name")         |
+| [address](#address-1) | `string` | Required | cannot be null | [Definitions](definitions-definitions-contract-properties-address.md "definitions.schema.json#/definitions/contract/properties/address")   |
+| [network](#network-2) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/contract/properties/network")                       |
 | [abi](#abi)           | Merged   | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/contract/properties/abi")                           |
 | [nat-spec](#nat-spec) | `string` | Optional | cannot be null | [Definitions](definitions-definitions-contract-properties-nat-spec.md "definitions.schema.json#/definitions/contract/properties/nat-spec") |
 
@@ -1366,7 +1765,7 @@ Reference this group by using
 | Property          | Type      | Required | Nullable       | Defined by                                                                                                                                             |
 | :---------------- | :-------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [type](#type-1)   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-notificationtype.md "definitions.schema.json#/definitions/notification/properties/type") |
-| [name](#name-2)   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-name.md "definitions.schema.json#/definitions/notification/properties/name")             |
+| [name](#name-3)   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-name.md "definitions.schema.json#/definitions/notification/properties/name")             |
 | [paused](#paused) | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-paused.md "definitions.schema.json#/definitions/notification/properties/paused")         |
 | [config](#config) | Merged    | Required | cannot be null | [Definitions](definitions-definitions-notification-properties-config.md "definitions.schema.json#/definitions/notification/properties/config")         |
 
@@ -1483,9 +1882,9 @@ Reference this group by using
 
 | Property                                    | Type      | Required | Nullable       | Defined by                                                                                                                                                                |
 | :------------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [name](#name-3)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/block-monitor/properties/name")                               |
+| [name](#name-4)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-name.md "definitions.schema.json#/definitions/block-monitor/properties/name")                               |
 | [type](#type-2)                             | `string`  | Required | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-type.md "definitions.schema.json#/definitions/block-monitor/properties/type")                               |
-| [network](#network-2)                       | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-monitor/properties/network")                                                 |
+| [network](#network-3)                       | Merged    | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-monitor/properties/network")                                                 |
 | [contracts](#contracts)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-contracts.md "definitions.schema.json#/definitions/block-monitor/properties/contracts")                     |
 | [addresses](#addresses)                     | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-blockmonitor-properties-addresses.md "definitions.schema.json#/definitions/block-monitor/properties/addresses")                     |
 | [abi](#abi-1)                               | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/block-monitor/properties/abi")                                                     |
@@ -1846,9 +2245,9 @@ Reference this group by using
 
 | Property                                                | Type      | Required | Nullable       | Defined by                                                                                                                                                                            |
 | :------------------------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [name](#name-4)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/forta-monitor/properties/name")                                           |
+| [name](#name-5)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/forta-monitor/properties/name")                                           |
 | [type](#type-3)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/forta-monitor/properties/type")                                           |
-| [network](#network-3)                                   | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/forta-monitor/properties/network")                                                             |
+| [network](#network-4)                                   | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/forta-monitor/properties/network")                                                             |
 | [contracts](#contracts-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-contracts.md "definitions.schema.json#/definitions/forta-monitor/properties/contracts")                                 |
 | [addresses](#addresses-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/forta-monitor/properties/addresses")                                 |
 | [abi](#abi-2)                                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/forta-monitor/properties/abi")                                                                 |
@@ -2234,6 +2633,17 @@ Reference this group by using
 | Property | Type | Required | Nullable | Defined by |
 | :------- | :--- | :------- | :------- | :--------- |
 
+## Definitions group relayer-group-or-defender-id
+
+Reference this group by using
+
+```json
+{"$ref":"definitions.schema.json#/definitions/relayer-group-or-defender-id"}
+```
+
+| Property | Type | Required | Nullable | Defined by |
+| :------- | :--- | :------- | :------- | :--------- |
+
 ## Definitions group action-or-defender-id
 
 Reference this group by using
@@ -2332,7 +2742,7 @@ Reference this group by using
 
 | Property                                        | Type      | Required | Nullable       | Defined by                                                                                                                                                       |
 | :---------------------------------------------- | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-5)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")                                   |
+| [name](#name-6)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")                                   |
 | [path](#path)                                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")                                   |
 | [relayer](#relayer)                             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")                 |
 | [trigger](#trigger)                             | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger")                             |
@@ -2468,7 +2878,7 @@ Reference this group by using
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                                                |
 | :-------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [key](#key)           | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/key") |
-| [network](#network-4) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/network")                        |
+| [network](#network-5) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/network")                        |
 
 ### key
 
@@ -2809,7 +3219,7 @@ Reference this group by using
 
 | Property                                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                               |
 | :---------------------------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-6)                           | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")                    |
+| [name](#name-7)                           | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")                    |
 | [supported-network](#supported-network)   | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/supported-network")                                    |
 | [rpc-url](#rpc-url)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forked-network-request/properties/rpc-url")                       |
 | [api-key](#api-key-1)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forked-network-request/properties/api-key")                       |
@@ -2941,7 +3351,7 @@ Reference this group by using
 
 | Property                                    | Type     | Required | Nullable       | Defined by                                                                                                                                                                                 |
 | :------------------------------------------ | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-7)                             | `string` | Required | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/private-network-request/properties/name")                    |
+| [name](#name-8)                             | `string` | Required | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/private-network-request/properties/name")                    |
 | [configuration](#configuration)             | `object` | Required | cannot be null | [Definitions](definitions-definitions-tenantnetworkconfiguration.md "definitions.schema.json#/definitions/private-network-request/properties/configuration")                               |
 | [rpc-url](#rpc-url-1)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/private-network-request/properties/rpc-url")                       |
 | [api-key](#api-key-2)                       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/private-network-request/properties/api-key")                       |
