@@ -27,8 +27,6 @@ export type PublicNetwork =
   | 'fantomtest'
   | 'fuji'
   | 'fuse'
-  | 'harmony-s0'
-  | 'harmony-test-s0'
   | 'hedera'
   | 'hederatest'
   | 'holesky'
