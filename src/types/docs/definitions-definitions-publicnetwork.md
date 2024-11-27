@@ -53,3 +53,5 @@
 | `"japan"`               |             |
 | `"japan-testnet"`       |             |
 | `"unichain-sepolia"`    |             |
+| `"geist-polter"`        |             |
+| `"geist-mainnet"`       |             |
