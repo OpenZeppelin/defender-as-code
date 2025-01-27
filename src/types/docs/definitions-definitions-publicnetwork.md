@@ -55,3 +55,5 @@
 | `"unichain-sepolia"`    |             |
 | `"geist-polter"`        |             |
 | `"geist-mainnet"`       |             |
+| `"abstract"`            |             |
+| `"abstract-sepolia"`    |             |

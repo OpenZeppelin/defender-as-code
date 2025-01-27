@@ -68,7 +68,9 @@
         "japan-testnet",
         "unichain-sepolia",
         "geist-polter",
-        "geist-mainnet"
+        "geist-mainnet",
+        "abstract",
+        "abstract-sepolia"
       ]
     },
     "custom-network": {
