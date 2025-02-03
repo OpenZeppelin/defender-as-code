@@ -56,7 +56,9 @@ export type PublicNetwork =
   | 'japan-testnet'
   | 'unichain-sepolia'
   | 'geist-polter'
-  | 'geist-mainnet';
+  | 'geist-mainnet'
+  | 'peaq'
+  | 'peaq-agung';
 export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-security-alliance';
 export type TenantNetwork = string;
 export type AddressFromRelayer = {} | string;
