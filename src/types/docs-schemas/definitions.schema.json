@@ -16,7 +16,14 @@
     "risk-category": {
       "title": "RiskCategory",
       "type": "string",
-      "enum": ["NONE", "GOVERNANCE", "ACCESS-CONTROL", "SUSPICIOUS", "FINANCIAL", "TECHNICAL"]
+      "enum": [
+        "NONE",
+        "GOVERNANCE",
+        "ACCESS-CONTROL",
+        "SUSPICIOUS",
+        "FINANCIAL",
+        "TECHNICAL"
+      ]
     },
     "public-network": {
       "title": "PublicNetwork",
@@ -66,6 +73,7 @@
         "zksync-sepolia",
         "japan",
         "japan-testnet",
+        "unichain",
         "unichain-sepolia",
         "geist-polter",
         "geist-mainnet",
@@ -76,7 +84,11 @@
     "custom-network": {
       "title": "CustomNetwork",
       "type": "string",
-      "enum": ["x-dfk-avax-chain", "x-dfk-avax-chain-test", "x-security-alliance"]
+      "enum": [
+        "x-dfk-avax-chain",
+        "x-dfk-avax-chain-test",
+        "x-security-alliance"
+      ]
     },
     "tenant-network": {
       "title": "TenantNetwork",
@@ -108,7 +120,10 @@
       "title": "FlashbotTransactionMode",
       "type": "string",
       "description": "Fast mode has 2 key differences from the default Protect experience: \n1. Shared with all builders: By default, Protect transactions are only shared with the Flashbots Builder, which builds only a subset of all Ethereum blocks. In fast mode, transactions are shared with all registered builders to increase the number of blocks the user's transaction can be included in.\n2. Larger refund paid to validator: By default, only 10% of MEV-Share refunds are paid to validators. In fast mode, validators receive 50% of refunds which makes it more likely that the user’s transactions will be chosen in a given block.",
-      "enum": ["flashbots-normal", "flashbots-fast"]
+      "enum": [
+        "flashbots-normal",
+        "flashbots-fast"
+      ]
     },
     "privateTransactionMode": {
       "title": "PrivateTransactionMode",
@@ -122,9 +137,19 @@
       "title": "Policy",
       "type": "object",
       "properties": {
-        "gas-price-cap": { "type": "integer" },
-        "whitelist-receivers": { "title": "WhitelistReceivers", "type": "array", "items": { "type": "string" } },
-        "eip1559-pricing": { "type": "boolean" },
+        "gas-price-cap": {
+          "type": "integer"
+        },
+        "whitelist-receivers": {
+          "title": "WhitelistReceivers",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "eip1559-pricing": {
+          "type": "boolean"
+        },
         "private-transactions": {
           "oneOf": [
             {
@@ -183,7 +208,11 @@
           "format": "uri-reference"
         }
       },
-      "required": ["name", "network", "min-balance"]
+      "required": [
+        "name",
+        "network",
+        "min-balance"
+      ]
     },
     "notification-channels": {
       "title": "NotificationChannels",
@@ -194,7 +223,16 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": ["pending", "sent", "submitted", "inmempool", "mined", "confirmed", "failed", "expired"]
+            "enum": [
+              "pending",
+              "sent",
+              "submitted",
+              "inmempool",
+              "mined",
+              "confirmed",
+              "failed",
+              "expired"
+            ]
           }
         },
         "notification-ids": {
@@ -206,7 +244,10 @@
           }
         }
       },
-      "required": ["events", "notification-ids"]
+      "required": [
+        "events",
+        "notification-ids"
+      ]
     },
     "relayer-group-relayer": {
       "title": "RelayerGroupRelayer",
@@ -227,7 +268,10 @@
           "type": "string"
         }
       },
-      "required": ["relayerId", "address"]
+      "required": [
+        "relayerId",
+        "address"
+      ]
     },
     "relayer-group": {
       "title": "RelayerGroup",
@@ -269,7 +313,11 @@
           }
         }
       },
-      "required": ["name", "network", "min-balance"]
+      "required": [
+        "name",
+        "network",
+        "min-balance"
+      ]
     },
     "contract": {
       "title": "Contract",
@@ -293,12 +341,25 @@
           "type": "string"
         }
       },
-      "required": ["name", "address", "network"]
+      "required": [
+        "name",
+        "address",
+        "network"
+      ]
     },
     "notificationType": {
       "title": "NotificationType",
       "type": "string",
-      "enum": ["slack", "email", "discord", "telegram", "datadog", "webhook", "opsgenie", "pager-duty"]
+      "enum": [
+        "slack",
+        "email",
+        "discord",
+        "telegram",
+        "datadog",
+        "webhook",
+        "opsgenie",
+        "pager-duty"
+      ]
     },
     "datadogConfig": {
       "title": "DatadogConfig",
@@ -313,7 +374,10 @@
           "pattern": "^[A-Za-z]+[A-Za-z0-9_\\.]*\\.$"
         }
       },
-      "required": ["api-key", "metric-prefix"]
+      "required": [
+        "api-key",
+        "metric-prefix"
+      ]
     },
     "urlConfig": {
       "title": "UrlConfig",
@@ -324,7 +388,9 @@
           "format": "uri"
         }
       },
-      "required": ["url"]
+      "required": [
+        "url"
+      ]
     },
     "telegramBotConfig": {
       "title": "TelegramConfig",
@@ -337,7 +403,10 @@
           "type": "string"
         }
       },
-      "required": ["bot-token", "chat-id"]
+      "required": [
+        "bot-token",
+        "chat-id"
+      ]
     },
     "emailConfig": {
       "title": "EmailConfig",
@@ -353,22 +422,38 @@
           "default": []
         }
       },
-      "required": ["emails"]
+      "required": [
+        "emails"
+      ]
     },
     "opsgenieUserType": {
       "title": "OpsgenieUserType",
       "type": "string",
-      "enum": ["team", "user", "escalation", "schedule"]
+      "enum": [
+        "team",
+        "user",
+        "escalation",
+        "schedule"
+      ]
     },
     "opsgeniePriorityLevel": {
       "title": "OpsgeniePriorityLevel",
       "type": "string",
-      "enum": ["P1", "P2", "P3", "P4", "P5"]
+      "enum": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ]
     },
     "opsgenieInstanceLocation": {
       "title": "OpsgenieInstanceLocation",
       "type": "string",
-      "enum": ["US", "EU"]
+      "enum": [
+        "US",
+        "EU"
+      ]
     },
     "opsgenieUser": {
       "title": "OpsgenieUser",
@@ -387,7 +472,10 @@
           "$ref": "definitions.schema.json#/definitions/opsgenieUserType"
         }
       },
-      "required": ["type", "username"],
+      "required": [
+        "type",
+        "username"
+      ],
       "additionalProperties": false
     },
     "opsgenieConfig": {
@@ -454,23 +542,38 @@
           "maxLength": 25000
         }
       },
-      "required": ["apiKey", "instanceLocation"],
+      "required": [
+        "apiKey",
+        "instanceLocation"
+      ],
       "additionalProperties": false
     },
     "pagerDutyEventType": {
       "title": "PagerDutyEventType",
       "type": "string",
-      "enum": ["change", "alert"]
+      "enum": [
+        "change",
+        "alert"
+      ]
     },
     "pagerDutyEventAction": {
       "title": "PagerDutyEventAction",
       "type": "string",
-      "enum": ["trigger", "acknowledge", "resolve"]
+      "enum": [
+        "trigger",
+        "acknowledge",
+        "resolve"
+      ]
     },
     "pagerDutySeverity": {
       "title": "PagerDutySeverity",
       "type": "string",
-      "enum": ["critical", "error", "warning", "info"]
+      "enum": [
+        "critical",
+        "error",
+        "warning",
+        "info"
+      ]
     },
     "pagerDutyConfig": {
       "title": "PagerDutyConfig",
@@ -521,9 +624,16 @@
         }
       },
       "then": {
-        "required": ["eventAction", "severity"]
+        "required": [
+          "eventAction",
+          "severity"
+        ]
       },
-      "required": ["token", "eventType", "routingKey"],
+      "required": [
+        "token",
+        "eventType",
+        "routingKey"
+      ],
       "additionalProperties": false
     },
     "notification": {
@@ -571,7 +681,12 @@
           ]
         }
       },
-      "required": ["type", "name", "paused", "config"]
+      "required": [
+        "type",
+        "name",
+        "paused",
+        "config"
+      ]
     },
     "block-monitor": {
       "title": "BlockMonitor",
@@ -582,7 +697,9 @@
         },
         "type": {
           "type": "string",
-          "enum": ["BLOCK"]
+          "enum": [
+            "BLOCK"
+          ]
         },
         "network": {
           "$ref": "definitions.schema.json#/definitions/network",
@@ -618,7 +735,10 @@
               "type": "integer"
             }
           },
-          "required": ["amount", "window-seconds"]
+          "required": [
+            "amount",
+            "window-seconds"
+          ]
         },
         "paused": {
           "type": "boolean"
@@ -639,7 +759,10 @@
           "oneOf": [
             {
               "type": "string",
-              "enum": ["safe", "finalized"]
+              "enum": [
+                "safe",
+                "finalized"
+              ]
             },
             {
               "type": "integer"
@@ -661,7 +784,11 @@
             },
             "severity-level": {
               "type": "string",
-              "enum": ["LOW", "MEDIUM", "HIGH"]
+              "enum": [
+                "LOW",
+                "MEDIUM",
+                "HIGH"
+              ]
             },
             "channels": {
               "title": "Channels",
@@ -672,7 +799,9 @@
               }
             }
           },
-          "required": ["channels"]
+          "required": [
+            "channels"
+          ]
         },
         "conditions": {
           "title": "Conditions",
@@ -692,7 +821,9 @@
                     "type": "string"
                   }
                 },
-                "required": ["signature"]
+                "required": [
+                  "signature"
+                ]
               }
             },
             "function": {
@@ -709,7 +840,9 @@
                     "type": "string"
                   }
                 },
-                "required": ["signature"]
+                "required": [
+                  "signature"
+                ]
               }
             },
             "transaction": {
@@ -721,7 +854,12 @@
           "$ref": "definitions.schema.json#/definitions/risk-category"
         }
       },
-      "required": ["name", "type", "network", "notify-config"]
+      "required": [
+        "name",
+        "type",
+        "network",
+        "notify-config"
+      ]
     },
     "forta-monitor": {
       "title": "FortaMonitor",
@@ -732,7 +870,9 @@
         },
         "type": {
           "type": "string",
-          "enum": ["FORTA"]
+          "enum": [
+            "FORTA"
+          ]
         },
         "network": {
           "$ref": "definitions.schema.json#/definitions/network",
@@ -795,7 +935,11 @@
             },
             "severityLevel": {
               "type": "string",
-              "enum": ["LOW", "MEDIUM", "HIGH"]
+              "enum": [
+                "LOW",
+                "MEDIUM",
+                "HIGH"
+              ]
             },
             "channels": {
               "title": "Channels",
@@ -806,7 +950,9 @@
               }
             }
           },
-          "required": ["channels"]
+          "required": [
+            "channels"
+          ]
         },
         "conditions": {
           "title": "Conditions",
@@ -817,7 +963,14 @@
             },
             "severity": {
               "type": "integer",
-              "enum": [0, 1, 2, 3, 4, 5]
+              "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
             },
             "alert-ids": {
               "title": "AlertIDs",
@@ -827,7 +980,9 @@
               }
             }
           },
-          "required": ["min-scanner-count"]
+          "required": [
+            "min-scanner-count"
+          ]
         },
         "forta-node-id": {
           "type": "string"
@@ -846,10 +1001,18 @@
           "$ref": "definitions.schema.json#/definitions/risk-category"
         }
       },
-      "required": ["name", "type", "notify-config"],
+      "required": [
+        "name",
+        "type",
+        "notify-config"
+      ],
       "dependencies": {
-        "addresses": ["network"],
-        "network": ["addresses"]
+        "addresses": [
+          "network"
+        ],
+        "network": [
+          "addresses"
+        ]
       }
     },
     "monitor": {
@@ -1037,7 +1200,12 @@
             "type": {
               "title": "TriggerType",
               "type": "string",
-              "enum": ["schedule", "webhook", "sentinel", "monitor-filter"]
+              "enum": [
+                "schedule",
+                "webhook",
+                "sentinel",
+                "monitor-filter"
+              ]
             },
             "cron": {
               "title": "TriggerCron",
@@ -1058,15 +1226,21 @@
           "then": {
             "oneOf": [
               {
-                "required": ["cron"]
+                "required": [
+                  "cron"
+                ]
               },
               {
-                "required": ["frequency"]
+                "required": [
+                  "frequency"
+                ]
               }
             ]
           },
           "else": {},
-          "required": ["type"]
+          "required": [
+            "type"
+          ]
         },
         "paused": {
           "type": "boolean"
@@ -1078,7 +1252,12 @@
           }
         }
       },
-      "required": ["name", "path", "trigger", "paused"]
+      "required": [
+        "name",
+        "path",
+        "trigger",
+        "paused"
+      ]
     },
     "block-explorer-api-key": {
       "title": "BlockExplorerApiKey",
@@ -1092,7 +1271,10 @@
           "format": "uri-reference"
         }
       },
-      "required": ["key", "network"]
+      "required": [
+        "key",
+        "network"
+      ]
     },
     "abi": {
       "title": "AbiType",
@@ -1111,7 +1293,11 @@
       "title": "SafeContracts",
       "type": "object",
       "additionalProperties": false,
-      "required": ["master", "proxy-factory", "multi-send-call-only"],
+      "required": [
+        "master",
+        "proxy-factory",
+        "multi-send-call-only"
+      ],
       "properties": {
         "master": {
           "$ref": "definitions.schema.json#/definitions/address",
@@ -1145,7 +1331,9 @@
       "title": "TenantNetworkConfiguration",
       "type": "object",
       "additionalProperties": false,
-      "required": ["symbol"],
+      "required": [
+        "symbol"
+      ],
       "properties": {
         "symbol": {
           "type": "string",
@@ -1168,7 +1356,11 @@
       "title": "ForkedNetworkRequest",
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "supported-network", "rpc-url"],
+      "required": [
+        "name",
+        "supported-network",
+        "rpc-url"
+      ],
       "properties": {
         "name": {
           "$ref": "definitions.schema.json#/definitions/tenant-network"
@@ -1193,7 +1385,11 @@
       "title": "PrivateNetworkRequest",
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "configuration", "rpc-url"],
+      "required": [
+        "name",
+        "configuration",
+        "rpc-url"
+      ],
       "properties": {
         "name": {
           "$ref": "definitions.schema.json#/definitions/tenant-network"
