@@ -54,6 +54,7 @@ export type PublicNetwork =
   | 'zksync-sepolia'
   | 'japan'
   | 'japan-testnet'
+  | 'unichain'
   | 'unichain-sepolia'
   | 'geist-polter'
   | 'geist-mainnet'
