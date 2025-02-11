@@ -58,7 +58,7 @@ export type PublicNetwork =
   | 'unichain-sepolia'
   | 'geist-polter'
   | 'geist-mainnet'
-  | 'peaq'
+  | 'peaq-mainnet'
   | 'peaq-agung';
 export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-security-alliance';
 export type TenantNetwork = string;
