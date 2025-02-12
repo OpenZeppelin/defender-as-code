@@ -27,8 +27,6 @@ export type PublicNetwork =
   | 'fantomtest'
   | 'fuji'
   | 'fuse'
-  | 'harmony-s0'
-  | 'harmony-test-s0'
   | 'hedera'
   | 'hederatest'
   | 'holesky'
@@ -56,7 +54,12 @@ export type PublicNetwork =
   | 'zksync-sepolia'
   | 'japan'
   | 'japan-testnet'
-  | 'unichain-sepolia';
+  | 'unichain'
+  | 'unichain-sepolia'
+  | 'geist-polter'
+  | 'geist-mainnet'
+  | 'peaq'
+  | 'peaq-agung';
 export type CustomNetwork = 'x-dfk-avax-chain' | 'x-dfk-avax-chain-test' | 'x-security-alliance';
 export type TenantNetwork = string;
 export type AddressFromRelayer = {} | string;
