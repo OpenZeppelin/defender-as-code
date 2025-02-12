@@ -56,5 +56,5 @@
 | `"unichain-sepolia"`    |             |
 | `"geist-polter"`        |             |
 | `"geist-mainnet"`       |             |
-| `"peaq"`                |             |
+| `"peaq-mainnet"`        |             |
 | `"peaq-agung"`          |             |
