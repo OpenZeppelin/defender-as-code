@@ -78,7 +78,9 @@
         "geist-polter",
         "geist-mainnet",
         "peaq-mainnet",
-        "peaq-agung"
+        "peaq-agung",
+        "sophon",
+        "sophon-testnet"
       ]
     },
     "custom-network": {
