@@ -58,3 +58,5 @@
 | `"geist-mainnet"`       |             |
 | `"peaq-mainnet"`        |             |
 | `"peaq-agung"`          |             |
+| `"sophon"`              |             |
+| `"sophon-testnet"`      |             |
