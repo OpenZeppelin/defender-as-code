@@ -50,7 +50,6 @@ import {
   DefenderMonitorTrigger,
   DefenderMonitorFilterTrigger,
   DefenderBlockExplorerApiKey,
-  DefenderFortaMonitorResponse,
   DefenderBlockMonitorResponse,
   Resources,
   DefenderTenantNetwork,
@@ -944,7 +943,6 @@ export default class DefenderDeploy {
         retrieveExisting,
         // on update
         async (monitor: Monitor, match: DefenderMonitor) => {
-          const isForta = (o: DefenderMonitor): o is DefenderFortaMonitorResponse => o.type === 'FORTA';
           const isBlock = (o: DefenderMonitor): o is DefenderBlockMonitorResponse => o.type === 'BLOCK';
 
           // Warn users when they try to change the monitor network
@@ -1018,14 +1016,8 @@ export default class DefenderDeploy {
               blockConditions &&
               blockConditions[0]!.txConditions.length > 0 &&
               blockConditions[0]!.txConditions[0]!.expression,
-            privateFortaNodeId: (isForta(match) && match.privateFortaNodeId) || undefined,
-            addresses: isBlock(match) ? addressRule && addressRule.addresses : match.fortaRule?.addresses,
-            actionCondition: isBlock(match)
-              ? addressRule && addressRule.actionCondition?.actionId
-              : match.fortaRule?.actionCondition?.actionId,
-            fortaLastProcessedTime: (isForta(match) && match.fortaLastProcessedTime) || undefined,
-            agentIDs: (isForta(match) && match.fortaRule?.agentIDs) || undefined,
-            fortaConditions: (isForta(match) && match.fortaRule.conditions) || undefined,
+            addresses: addressRule && addressRule.addresses,
+            actionCondition: addressRule && addressRule.actionCondition?.actionId,
             riskCategory: match.riskCategory,
           };
 

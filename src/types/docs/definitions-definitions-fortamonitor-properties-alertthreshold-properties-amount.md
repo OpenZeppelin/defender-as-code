@@ -1,3 +1,0 @@
-## amount Type
-
-`integer`

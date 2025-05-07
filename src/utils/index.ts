@@ -26,7 +26,6 @@ import {
   DefenderContract,
   ResourceType,
   DefenderBlockWatcher,
-  DefenderFortaMonitor,
   DefenderBlockMonitor,
   DefenderAPIError,
   Resources,
@@ -314,7 +313,7 @@ export const constructMonitor = (
   actions: DefenderAction[],
   blockwatchers: DefenderBlockWatcher[],
   contracts: DefenderContract[],
-): DefenderBlockMonitor | DefenderFortaMonitor => {
+): DefenderBlockMonitor => {
   const actionCondition = getDefenderAction(monitor['action-condition'], actions);
   const actionTrigger = getDefenderAction(monitor['action-trigger'], actions);
 
@@ -376,22 +375,6 @@ export const constructMonitor = (
     stackResourceId: stackResourceId,
   };
 
-  if (monitor.type === 'FORTA') {
-    const fortaMonitor: DefenderFortaMonitor = {
-      ...commonMonitor,
-      type: 'FORTA',
-      privateFortaNodeId: monitor['forta-node-id'],
-      agentIDs: monitor['agent-ids'],
-      fortaConditions: {
-        alertIDs: monitor.conditions && monitor.conditions['alert-ids'],
-        minimumScannerCount: (monitor.conditions && monitor.conditions['min-scanner-count']) || 1, // default to 1
-        severity: monitor.conditions?.severity,
-      },
-      fortaLastProcessedTime: monitor['forta-last-processed-time'],
-    };
-    return fortaMonitor;
-  }
-
   if (monitor.type === 'BLOCK') {
     const compatibleBlockWatcher = blockwatchers.find((b) => b.confirmLevel === monitor['confirm-level']);
     if (!compatibleBlockWatcher) {
@@ -429,7 +412,7 @@ export const constructMonitor = (
     return blockMonitor;
   }
 
-  throw new Error('Incompatible monitor type. Type must be either FORTA or BLOCK');
+  throw new Error('Incompatible monitor type. Type must be BLOCK');
 };
 
 export const validateAdditionalPermissionsOrThrow = async <T>(

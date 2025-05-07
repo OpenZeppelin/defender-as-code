@@ -27,9 +27,7 @@ import { TenantNetworkResponse } from '@openzeppelin/defender-sdk-network-client
 
 import {
   CreateBlockMonitorResponse,
-  CreateFortaMonitorResponse,
   ExternalCreateBlockMonitorRequest,
-  ExternalCreateFortaMonitorRequest,
   NotificationReference,
   MonitorRiskCategory,
 } from '@openzeppelin/defender-sdk-monitor-client/lib/models/monitor';
@@ -58,9 +56,7 @@ export type DefenderNotification = NotificationSummary;
 export type DefenderNotificationReference = NotificationReference;
 export type DefenderMonitor = CreateMonitorResponse;
 export type DefenderBlockMonitorResponse = CreateBlockMonitorResponse;
-export type DefenderFortaMonitorResponse = CreateFortaMonitorResponse;
 export type DefenderBlockMonitor = ExternalCreateBlockMonitorRequest;
-export type DefenderFortaMonitor = ExternalCreateFortaMonitorRequest;
 export type DefenderSlackConfig = SlackConfig;
 export type DefenderDatadogConfig = DatadogConfig;
 export type DefenderDiscordConfig = DiscordConfig;
@@ -224,35 +220,7 @@ export type YBlockMonitor = {
   'risk-category': DefenderMonitorRiskCategory;
 };
 
-export type YFortaMonitor = {
-  'name': string;
-  'type': 'FORTA';
-  'network'?: Network;
-  'addresses'?: string[];
-  'abi'?: string | string[] | JsonFragment[];
-  'alert-threshold'?: { 'amount': number; 'window-seconds': number };
-  'paused'?: boolean;
-  'action-condition'?: YAction;
-  'action-trigger'?: YAction;
-  'notify-config': {
-    'timeout'?: number;
-    'message'?: string;
-    'message-subject'?: string;
-    'channels': YNotification[];
-    'severity-level': YNotificationSeverityLevel;
-  };
-  'conditions'?: {
-    'min-scanner-count': number;
-    'severity'?: 0 | 1 | 2 | 3 | 4 | 5;
-    'alert-ids'?: string[];
-  };
-  'forta-node-id'?: string;
-  'agent-ids'?: string[];
-  'forta-last-processed-time'?: string;
-  'risk-category': DefenderMonitorRiskCategory;
-};
-
-export type YMonitor = YBlockMonitor | YFortaMonitor;
+export type YMonitor = YBlockMonitor;
 
 export type YContract = {
   'name': string;

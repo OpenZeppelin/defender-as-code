@@ -1,3 +1,0 @@
-## agent-ids Type
-
-`string[]`

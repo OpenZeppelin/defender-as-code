@@ -1,3 +1,0 @@
-## timeout Type
-
-`integer`

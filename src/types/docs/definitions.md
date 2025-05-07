@@ -2235,382 +2235,6 @@ one (and only one) of
 | `"FINANCIAL"`      |             |
 | `"TECHNICAL"`      |             |
 
-## Definitions group forta-monitor
-
-Reference this group by using
-
-```json
-{"$ref":"definitions.schema.json#/definitions/forta-monitor"}
-```
-
-| Property                                                | Type      | Required | Nullable       | Defined by                                                                                                                                                                            |
-| :------------------------------------------------------ | :-------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [name](#name-5)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/forta-monitor/properties/name")                                           |
-| [type](#type-3)                                         | `string`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/forta-monitor/properties/type")                                           |
-| [network](#network-4)                                   | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/forta-monitor/properties/network")                                                             |
-| [contracts](#contracts-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-contracts.md "definitions.schema.json#/definitions/forta-monitor/properties/contracts")                                 |
-| [addresses](#addresses-1)                               | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/forta-monitor/properties/addresses")                                 |
-| [abi](#abi-2)                                           | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/forta-monitor/properties/abi")                                                                 |
-| [alert-threshold](#alert-threshold-1)                   | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/forta-monitor/properties/alert-threshold")                      |
-| [paused](#paused-2)                                     | `boolean` | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-paused.md "definitions.schema.json#/definitions/forta-monitor/properties/paused")                                       |
-| [action-condition](#action-condition-1)                 | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")                                         |
-| [action-trigger](#action-trigger-1)                     | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")                                           |
-| [notify-config](#notify-config-1)                       | `object`  | Required | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config")                          |
-| [conditions](#conditions-1)                             | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "definitions.schema.json#/definitions/forta-monitor/properties/conditions")                               |
-| [forta-node-id](#forta-node-id)                         | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "definitions.schema.json#/definitions/forta-monitor/properties/forta-node-id")                         |
-| [forta-last-processed-time](#forta-last-processed-time) | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-forta-last-processed-time.md "definitions.schema.json#/definitions/forta-monitor/properties/forta-last-processed-time") |
-| [agent-ids](#agent-ids)                                 | `array`   | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "definitions.schema.json#/definitions/forta-monitor/properties/agent-ids")                                  |
-| [risk-category](#risk-category-1)                       | `string`  | Optional | cannot be null | [Definitions](definitions-definitions-fortamonitor-properties-riskcategory.md "definitions.schema.json#/definitions/forta-monitor/properties/risk-category")                          |
-
-### name
-
-
-
-`name`
-
-*   is required
-
-*   Type: `string`
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-name.md "definitions.schema.json#/definitions/forta-monitor/properties/name")
-
-#### name Type
-
-`string`
-
-### type
-
-
-
-`type`
-
-*   is required
-
-*   Type: `string`
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-type.md "definitions.schema.json#/definitions/forta-monitor/properties/type")
-
-#### type Type
-
-`string`
-
-#### type Constraints
-
-**enum**: the value of this property must be equal to one of the following values:
-
-| Value     | Explanation |
-| :-------- | :---------- |
-| `"FORTA"` |             |
-
-### network
-
-
-
-`network`
-
-*   is optional
-
-*   Type: merged type ([Network](definitions-definitions-network.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/forta-monitor/properties/network")
-
-#### network Type
-
-merged type ([Network](definitions-definitions-network.md))
-
-any of
-
-*   one (and only one) of
-
-    *   [PublicNetwork](definitions-definitions-supportednetwork-oneof-publicnetwork.md "check type definition")
-
-    *   [CustomNetwork](definitions-definitions-supportednetwork-oneof-customnetwork.md "check type definition")
-
-*   [TenantNetwork](definitions-definitions-network-anyof-tenantnetwork.md "check type definition")
-
-#### network Constraints
-
-**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
-
-### contracts
-
-
-
-`contracts`
-
-*   is optional
-
-*   Type: an array of merged types ([ContractOrDefenderID](definitions-definitions-fortamonitor-properties-contracts-contractordefenderid.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-contracts.md "definitions.schema.json#/definitions/forta-monitor/properties/contracts")
-
-#### contracts Type
-
-an array of merged types ([ContractOrDefenderID](definitions-definitions-fortamonitor-properties-contracts-contractordefenderid.md))
-
-### addresses
-
-
-
-`addresses`
-
-*   is optional
-
-*   Type: `string[]` ([Address](definitions-definitions-fortamonitor-properties-addresses-address.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-addresses.md "definitions.schema.json#/definitions/forta-monitor/properties/addresses")
-
-#### addresses Type
-
-`string[]` ([Address](definitions-definitions-fortamonitor-properties-addresses-address.md))
-
-### abi
-
-
-
-`abi`
-
-*   is optional
-
-*   Type: merged type ([AbiType](definitions-definitions-abitype.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-abitype.md "definitions.schema.json#/definitions/forta-monitor/properties/abi")
-
-#### abi Type
-
-merged type ([AbiType](definitions-definitions-abitype.md))
-
-any of
-
-*   [StringABI](definitions-definitions-abitype-anyof-stringabi.md "check type definition")
-
-*   [ArrayABI](definitions-definitions-abitype-anyof-arrayabi.md "check type definition")
-
-### alert-threshold
-
-
-
-`alert-threshold`
-
-*   is optional
-
-*   Type: `object` ([AlertThreshold](definitions-definitions-fortamonitor-properties-alertthreshold.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-alertthreshold.md "definitions.schema.json#/definitions/forta-monitor/properties/alert-threshold")
-
-#### alert-threshold Type
-
-`object` ([AlertThreshold](definitions-definitions-fortamonitor-properties-alertthreshold.md))
-
-### paused
-
-
-
-`paused`
-
-*   is optional
-
-*   Type: `boolean`
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-paused.md "definitions.schema.json#/definitions/forta-monitor/properties/paused")
-
-#### paused Type
-
-`boolean`
-
-### action-condition
-
-
-
-`action-condition`
-
-*   is optional
-
-*   Type: merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-condition")
-
-#### action-condition Type
-
-merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
-
-any of
-
-*   [Action](definitions-definitions-action.md "check type definition")
-
-*   [DefenderID](definitions-definitions-actionordefenderid-anyof-defenderid.md "check type definition")
-
-#### action-condition Constraints
-
-**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
-
-### action-trigger
-
-
-
-`action-trigger`
-
-*   is optional
-
-*   Type: merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-actionordefenderid.md "definitions.schema.json#/definitions/forta-monitor/properties/action-trigger")
-
-#### action-trigger Type
-
-merged type ([ActionOrDefenderID](definitions-definitions-actionordefenderid.md))
-
-any of
-
-*   [Action](definitions-definitions-action.md "check type definition")
-
-*   [DefenderID](definitions-definitions-actionordefenderid-anyof-defenderid.md "check type definition")
-
-#### action-trigger Constraints
-
-**URI reference**: the string must be a URI reference, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
-
-### notify-config
-
-
-
-`notify-config`
-
-*   is required
-
-*   Type: `object` ([NotifyConfig](definitions-definitions-fortamonitor-properties-notifyconfig.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-notifyconfig.md "definitions.schema.json#/definitions/forta-monitor/properties/notify-config")
-
-#### notify-config Type
-
-`object` ([NotifyConfig](definitions-definitions-fortamonitor-properties-notifyconfig.md))
-
-### conditions
-
-
-
-`conditions`
-
-*   is optional
-
-*   Type: `object` ([Conditions](definitions-definitions-fortamonitor-properties-conditions.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-conditions.md "definitions.schema.json#/definitions/forta-monitor/properties/conditions")
-
-#### conditions Type
-
-`object` ([Conditions](definitions-definitions-fortamonitor-properties-conditions.md))
-
-### forta-node-id
-
-
-
-`forta-node-id`
-
-*   is optional
-
-*   Type: `string`
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-forta-node-id.md "definitions.schema.json#/definitions/forta-monitor/properties/forta-node-id")
-
-#### forta-node-id Type
-
-`string`
-
-### forta-last-processed-time
-
-
-
-`forta-last-processed-time`
-
-*   is optional
-
-*   Type: `string`
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-forta-last-processed-time.md "definitions.schema.json#/definitions/forta-monitor/properties/forta-last-processed-time")
-
-#### forta-last-processed-time Type
-
-`string`
-
-### agent-ids
-
-
-
-`agent-ids`
-
-*   is optional
-
-*   Type: `string[]`
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-agentids.md "definitions.schema.json#/definitions/forta-monitor/properties/agent-ids")
-
-#### agent-ids Type
-
-`string[]`
-
-### risk-category
-
-
-
-`risk-category`
-
-*   is optional
-
-*   Type: `string` ([RiskCategory](definitions-definitions-fortamonitor-properties-riskcategory.md))
-
-*   cannot be null
-
-*   defined in: [Definitions](definitions-definitions-fortamonitor-properties-riskcategory.md "definitions.schema.json#/definitions/forta-monitor/properties/risk-category")
-
-#### risk-category Type
-
-`string` ([RiskCategory](definitions-definitions-fortamonitor-properties-riskcategory.md))
-
-#### risk-category Constraints
-
-**enum**: the value of this property must be equal to one of the following values:
-
-| Value              | Explanation |
-| :----------------- | :---------- |
-| `"NONE"`           |             |
-| `"GOVERNANCE"`     |             |
-| `"ACCESS-CONTROL"` |             |
-| `"SUSPICIOUS"`     |             |
-| `"FINANCIAL"`      |             |
-| `"TECHNICAL"`      |             |
-
 ## Definitions group monitor
 
 Reference this group by using
@@ -2742,11 +2366,11 @@ Reference this group by using
 
 | Property                                        | Type      | Required | Nullable       | Defined by                                                                                                                                                       |
 | :---------------------------------------------- | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-6)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")                                   |
+| [name](#name-5)                                 | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-name.md "definitions.schema.json#/definitions/action/properties/name")                                   |
 | [path](#path)                                   | `string`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-path.md "definitions.schema.json#/definitions/action/properties/path")                                   |
 | [relayer](#relayer)                             | Merged    | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-relayerordefenderid.md "definitions.schema.json#/definitions/action/properties/relayer")                 |
 | [trigger](#trigger)                             | `object`  | Required | cannot be null | [Definitions](definitions-definitions-action-properties-trigger.md "definitions.schema.json#/definitions/action/properties/trigger")                             |
-| [paused](#paused-3)                             | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-action-properties-paused.md "definitions.schema.json#/definitions/action/properties/paused")                               |
+| [paused](#paused-2)                             | `boolean` | Required | cannot be null | [Definitions](definitions-definitions-action-properties-paused.md "definitions.schema.json#/definitions/action/properties/paused")                               |
 | [environment-variables](#environment-variables) | `object`  | Optional | cannot be null | [Definitions](definitions-definitions-action-properties-environment-variables.md "definitions.schema.json#/definitions/action/properties/environment-variables") |
 
 ### name
@@ -2878,7 +2502,7 @@ Reference this group by using
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                                                |
 | :-------------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [key](#key)           | `string` | Required | cannot be null | [Definitions](definitions-definitions-blockexplorerapikey-properties-key.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/key") |
-| [network](#network-5) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/network")                        |
+| [network](#network-4) | Merged   | Required | cannot be null | [Definitions](definitions-definitions-network.md "definitions.schema.json#/definitions/block-explorer-api-key/properties/network")                        |
 
 ### key
 
@@ -3219,7 +2843,7 @@ Reference this group by using
 
 | Property                                  | Type     | Required | Nullable       | Defined by                                                                                                                                                                               |
 | :---------------------------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-7)                           | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")                    |
+| [name](#name-6)                           | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/name")                    |
 | [supported-network](#supported-network)   | Merged   | Required | cannot be null | [Definitions](definitions-definitions-supportednetwork.md "definitions.schema.json#/definitions/forked-network-request/properties/supported-network")                                    |
 | [rpc-url](#rpc-url)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/forked-network-request/properties/rpc-url")                       |
 | [api-key](#api-key-1)                     | `string` | Optional | cannot be null | [Definitions](definitions-definitions-forkednetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/forked-network-request/properties/api-key")                       |
@@ -3351,7 +2975,7 @@ Reference this group by using
 
 | Property                                    | Type     | Required | Nullable       | Defined by                                                                                                                                                                                 |
 | :------------------------------------------ | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [name](#name-8)                             | `string` | Required | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/private-network-request/properties/name")                    |
+| [name](#name-7)                             | `string` | Required | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-tenantnetwork.md "definitions.schema.json#/definitions/private-network-request/properties/name")                    |
 | [configuration](#configuration)             | `object` | Required | cannot be null | [Definitions](definitions-definitions-tenantnetworkconfiguration.md "definitions.schema.json#/definitions/private-network-request/properties/configuration")                               |
 | [rpc-url](#rpc-url-1)                       | `string` | Required | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-rpc-url.md "definitions.schema.json#/definitions/private-network-request/properties/rpc-url")                       |
 | [api-key](#api-key-2)                       | `string` | Optional | cannot be null | [Definitions](definitions-definitions-privatenetworkrequest-properties-api-key.md "definitions.schema.json#/definitions/private-network-request/properties/api-key")                       |
