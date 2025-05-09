@@ -147,7 +147,7 @@ export type StringABI = string;
 export type ArrayABI = unknown[];
 export type DefenderID6 = string;
 export type MonitorOrDefenderID = Monitor | DefenderID7;
-export type Monitor = BlockMonitor | FortaMonitor;
+export type Monitor = BlockMonitor;
 export type Network3 = SupportedNetwork | TenantNetwork;
 export type ContractOrDefenderID1 = Contract | DefenderID6;
 export type Contracts1 = ContractOrDefenderID1[];
@@ -160,28 +160,17 @@ export type Channels = NotificationOrDefenderID2[];
 export type Event = EventItems[];
 export type Function = FunctionItems[];
 export type RiskCategory = 'NONE' | 'GOVERNANCE' | 'ACCESS-CONTROL' | 'SUSPICIOUS' | 'FINANCIAL' | 'TECHNICAL';
-export type Network4 = SupportedNetwork | TenantNetwork;
-export type ContractOrDefenderID2 = Contract | DefenderID6;
-export type Contracts2 = ContractOrDefenderID2[];
-export type Address2 = string;
-export type Addresses1 = Address2[];
-export type ActionOrDefenderID3 = Action | DefenderID3;
-export type ActionOrDefenderID4 = Action | DefenderID3;
-export type NotificationOrDefenderID3 = Notification | DefenderID1;
-export type Channels1 = NotificationOrDefenderID3[];
-export type AlertIDs = string[];
-export type AgentIDs = string[];
 export type DefenderID7 = string;
 export type BlockExplorerApiKeyOrDefenderID = BlockExplorerApiKey | DefenderID8;
-export type Network5 = SupportedNetwork | TenantNetwork;
+export type Network4 = SupportedNetwork | TenantNetwork;
 export type DefenderID8 = string;
 export type ForkedNetworkOrDefenderID = ForkedNetworkRequest | DefenderID9;
 export type DefenderID9 = string;
 export type PrivateNetworkOrDefenderID = PrivateNetworkRequest | DefenderID10;
+export type Address2 = string;
 export type Address3 = string;
 export type Address4 = string;
 export type Address5 = string;
-export type Address6 = string;
 export type DefenderID10 = string;
 
 export interface Resources {
@@ -400,46 +389,12 @@ export interface FunctionItems {
   signature: string;
   expression?: string;
 }
-export interface FortaMonitor {
-  name: string;
-  type: 'FORTA';
-  network?: Network4;
-  contracts?: Contracts2;
-  addresses?: Addresses1;
-  abi?: AbiType;
-  'alert-threshold'?: AlertThreshold1;
-  paused?: boolean;
-  'action-condition'?: ActionOrDefenderID3;
-  'action-trigger'?: ActionOrDefenderID4;
-  'notify-config': NotifyConfig1;
-  conditions?: Conditions1;
-  'forta-node-id'?: string;
-  'forta-last-processed-time'?: string;
-  'agent-ids'?: AgentIDs;
-  'risk-category'?: RiskCategory;
-}
-export interface AlertThreshold1 {
-  amount?: number;
-  'window-seconds'?: number;
-}
-export interface NotifyConfig1 {
-  timeout?: number;
-  message?: string;
-  'message-subject'?: string;
-  severityLevel?: 'LOW' | 'MEDIUM' | 'HIGH';
-  channels: Channels1;
-}
-export interface Conditions1 {
-  'min-scanner-count': number;
-  severity?: 0 | 1 | 2 | 3 | 4 | 5;
-  'alert-ids'?: AlertIDs;
-}
 export interface BlockExplorerApiKeys {
   [k: string]: BlockExplorerApiKeyOrDefenderID;
 }
 export interface BlockExplorerApiKey {
   key: string;
-  network: Network5;
+  network: Network4;
 }
 export interface ForkedNetworks {
   [k: string]: ForkedNetworkOrDefenderID;
@@ -471,8 +426,8 @@ export interface TenantNetworkEIPConfiguration {
   isEIP1559?: boolean;
 }
 export interface SafeContracts {
-  master: Address3;
-  'proxy-factory': Address4;
-  'multi-send-call-only': Address5;
-  'create-call'?: Address6;
+  master: Address2;
+  'proxy-factory': Address3;
+  'multi-send-call-only': Address4;
+  'create-call'?: Address5;
 }

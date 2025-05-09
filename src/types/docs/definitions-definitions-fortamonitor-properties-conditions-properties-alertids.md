@@ -1,3 +1,0 @@
-## alert-ids Type
-
-`string[]`

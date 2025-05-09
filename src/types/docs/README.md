@@ -22,8 +22,6 @@
 
 *   [AlertThreshold](./definitions-definitions-blockmonitor-properties-alertthreshold.md) – `definitions.schema.json#/definitions/block-monitor/properties/alert-threshold`
 
-*   [AlertThreshold](./definitions-definitions-fortamonitor-properties-alertthreshold.md) – `definitions.schema.json#/definitions/forta-monitor/properties/alert-threshold`
-
 *   [Block Explorer Api Keys](./resources-properties-block-explorer-api-keys.md) – `resources.schema.json#/properties/block-explorer-api-keys`
 
 *   [BlockExplorerApiKey](./definitions-definitions-blockexplorerapikey.md) – `definitions.schema.json#/definitions/block-explorer-api-key`
@@ -31,8 +29,6 @@
 *   [BlockMonitor](./definitions-definitions-blockmonitor.md) – `definitions.schema.json#/definitions/block-monitor`
 
 *   [Conditions](./definitions-definitions-blockmonitor-properties-conditions.md) – `definitions.schema.json#/definitions/block-monitor/properties/conditions`
-
-*   [Conditions](./definitions-definitions-fortamonitor-properties-conditions.md) – `definitions.schema.json#/definitions/forta-monitor/properties/conditions`
 
 *   [Config](./definitions-definitions-notification-properties-config.md) – `definitions.schema.json#/definitions/notification/properties/config`
 
@@ -50,8 +46,6 @@
 
 *   [ForkedNetworkRequest](./definitions-definitions-forkednetworkrequest.md) – `definitions.schema.json#/definitions/forked-network-request`
 
-*   [FortaMonitor](./definitions-definitions-fortamonitor.md) – `definitions.schema.json#/definitions/forta-monitor`
-
 *   [FunctionItems](./definitions-definitions-blockmonitor-properties-conditions-properties-function-functionitems.md) – `definitions.schema.json#/definitions/block-monitor/properties/conditions/properties/function/items`
 
 *   [GlobalSecrets](./resources-properties-actionsecrets-properties-globalsecrets.md) – `resources.schema.json#/properties/secrets/properties/global`
@@ -67,8 +61,6 @@
 *   [Notifications](./resources-properties-notifications.md) – `resources.schema.json#/properties/notifications`
 
 *   [NotifyConfig](./definitions-definitions-blockmonitor-properties-notifyconfig.md) – `definitions.schema.json#/definitions/block-monitor/properties/notify-config`
-
-*   [NotifyConfig](./definitions-definitions-fortamonitor-properties-notifyconfig.md) – `definitions.schema.json#/definitions/forta-monitor/properties/notify-config`
 
 *   [OpsgenieConfigDetails](./definitions-definitions-opsgenieconfig-properties-opsgenieconfigdetails.md) – `definitions.schema.json#/definitions/opsgenieConfig/properties/details`
 
@@ -118,21 +110,11 @@
 
 *   [Addresses](./definitions-definitions-blockmonitor-properties-addresses.md) – `definitions.schema.json#/definitions/block-monitor/properties/addresses`
 
-*   [Addresses](./definitions-definitions-fortamonitor-properties-addresses.md) – `definitions.schema.json#/definitions/forta-monitor/properties/addresses`
-
-*   [AgentIDs](./definitions-definitions-fortamonitor-properties-agentids.md) – `definitions.schema.json#/definitions/forta-monitor/properties/agent-ids`
-
-*   [AlertIDs](./definitions-definitions-fortamonitor-properties-conditions-properties-alertids.md) – `definitions.schema.json#/definitions/forta-monitor/properties/conditions/properties/alert-ids`
-
 *   [ArrayABI](./definitions-definitions-abitype-anyof-arrayabi.md) – `definitions.schema.json#/definitions/abi/anyOf/1`
 
 *   [Channels](./definitions-definitions-blockmonitor-properties-notifyconfig-properties-channels.md) – `definitions.schema.json#/definitions/block-monitor/properties/notify-config/properties/channels`
 
-*   [Channels](./definitions-definitions-fortamonitor-properties-notifyconfig-properties-channels.md) – `definitions.schema.json#/definitions/forta-monitor/properties/notify-config/properties/channels`
-
 *   [Contracts](./definitions-definitions-blockmonitor-properties-contracts.md) – `definitions.schema.json#/definitions/block-monitor/properties/contracts`
-
-*   [Contracts](./definitions-definitions-fortamonitor-properties-contracts.md) – `definitions.schema.json#/definitions/forta-monitor/properties/contracts`
 
 *   [Emails](./definitions-definitions-emailconfig-properties-emails.md) – `definitions.schema.json#/definitions/emailConfig/properties/emails`
 

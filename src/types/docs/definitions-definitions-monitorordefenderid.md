@@ -8,8 +8,6 @@ any of
 
     *   [BlockMonitor](definitions-definitions-blockmonitor.md "check type definition")
 
-    *   [FortaMonitor](definitions-definitions-fortamonitor.md "check type definition")
-
 *   [DefenderID](definitions-definitions-defenderid.md "check type definition")
 
 ## additionalProperties Constraints

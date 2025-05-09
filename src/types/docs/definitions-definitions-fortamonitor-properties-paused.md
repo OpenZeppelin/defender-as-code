@@ -1,3 +1,0 @@
-## paused Type
-
-`boolean`

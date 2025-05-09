@@ -1,3 +1,0 @@
-## window-seconds Type
-
-`integer`

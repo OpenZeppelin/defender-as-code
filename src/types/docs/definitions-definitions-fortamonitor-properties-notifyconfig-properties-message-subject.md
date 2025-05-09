@@ -1,3 +1,0 @@
-## message-subject Type
-
-`string`
