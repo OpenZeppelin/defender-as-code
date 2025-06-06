@@ -125,180 +125,257 @@ export default class DefenderDeploy {
       forkedNetworks: [],
       privateNetworks: [],
     };
+
     // Contracts
     const contracts: Contracts = this.resources?.contracts ?? {};
-    const adminClient = getProposalClient(this.teamKey!);
-    const dContracts = await adminClient.listContracts();
-    const contractDifference = _.differenceWith(
-      dContracts,
-      Object.entries(contracts),
-      (a: DefenderContract, b: [string, Contract | DefenderID]) => {
-        const contractId = `${a.network}-${a.address}`;
-        if (isDefenderId(b[1])) {
-          return contractId === b[1];
-        }
-        return contractId === `${b[1].network}-${b[1].address}`;
-      },
-    );
+    try {
+      const adminClient = getProposalClient(this.teamKey!);
+      const dContracts = await adminClient.listContracts();
+      const contractDifference = _.differenceWith(
+        dContracts,
+        Object.entries(contracts),
+        (a: DefenderContract, b: [string, Contract | DefenderID]) => {
+          const contractId = `${a.network}-${a.address}`;
+          if (isDefenderId(b[1])) {
+            return contractId === b[1];
+          }
+          return contractId === `${b[1].network}-${b[1].address}`;
+        },
+      );
+      difference.contracts = contractDifference;
+    } catch (error) {
+      this.log.warn(
+        `Failed to list contracts for SSOT difference calculation: ${error}. Skipping contract difference check.`,
+      );
+    }
 
     // Forked Networks
     const forkedNetworks: ForkedNetworks = this.resources?.['forked-networks'] ?? {};
-    const networkClient = getNetworkClient(this.teamKey!);
-    const forkedNetworkItems = await networkClient.listForkedNetworks();
-    const forkedNetworkDifference = _.differenceWith(
-      forkedNetworkItems,
-      Object.entries(forkedNetworks),
-      (a: DefenderTenantNetwork, b: [string, ForkedNetworkRequest | DefenderID]) => {
-        if (isDefenderId(b[1])) {
-          return a.tenantNetworkId === b[1];
-        }
-        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
-      },
-    );
+    try {
+      const networkClient = getNetworkClient(this.teamKey!);
+      const forkedNetworkItems = await networkClient.listForkedNetworks();
+      const forkedNetworkDifference = _.differenceWith(
+        forkedNetworkItems,
+        Object.entries(forkedNetworks),
+        (a: DefenderTenantNetwork, b: [string, ForkedNetworkRequest | DefenderID]) => {
+          if (isDefenderId(b[1])) {
+            return a.tenantNetworkId === b[1];
+          }
+          return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+        },
+      );
+      difference.forkedNetworks = forkedNetworkDifference;
+    } catch (error) {
+      this.log.warn(
+        `Failed to list forked networks for SSOT difference calculation: ${error}. Skipping forked network difference check.`,
+      );
+    }
 
     // Private Networks
     const privateNetworks: PrivateNetworks = this.resources?.['private-networks'] ?? {};
-    const privateNetworkItems = await networkClient.listPrivateNetworks();
-    const privateNetworkDifference = _.differenceWith(
-      privateNetworkItems,
-      Object.entries(privateNetworks),
-      (a: DefenderTenantNetwork, b: [string, PrivateNetworkRequest | DefenderID]) => {
-        if (isDefenderId(b[1])) {
-          return a.tenantNetworkId === b[1];
-        }
-        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
-      },
-    );
+    try {
+      const networkClient = getNetworkClient(this.teamKey!);
+      const privateNetworkItems = await networkClient.listPrivateNetworks();
+      const privateNetworkDifference = _.differenceWith(
+        privateNetworkItems,
+        Object.entries(privateNetworks),
+        (a: DefenderTenantNetwork, b: [string, PrivateNetworkRequest | DefenderID]) => {
+          if (isDefenderId(b[1])) {
+            return a.tenantNetworkId === b[1];
+          }
+          return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+        },
+      );
+      difference.privateNetworks = privateNetworkDifference;
+    } catch (error) {
+      this.log.warn(
+        `Failed to list private networks for SSOT difference calculation: ${error}. Skipping private network difference check.`,
+      );
+    }
 
     // Monitors
     const monitors: Monitors = this.resources?.monitors ?? {};
-    const monitorClient = getMonitorClient(this.teamKey!);
-    const monitorItems = (await monitorClient.list()).items;
-    const monitorDifference = _.differenceWith(
-      monitorItems,
-      Object.entries(monitors),
-      (a: DefenderMonitor, b: [string, Monitor | DefenderID]) => {
-        if (isDefenderId(b[1])) {
-          return a.monitorId === b[1];
-        }
-        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
-      },
-    );
+    try {
+      const monitorClient = getMonitorClient(this.teamKey!);
+      const monitorItems = (await monitorClient.list()).items;
+      const monitorDifference = _.differenceWith(
+        monitorItems,
+        Object.entries(monitors),
+        (a: DefenderMonitor, b: [string, Monitor | DefenderID]) => {
+          if (isDefenderId(b[1])) {
+            return a.monitorId === b[1];
+          }
+          return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+        },
+      );
+      difference.monitors = monitorDifference;
+    } catch (error) {
+      this.log.warn(
+        `Failed to list monitors for SSOT difference calculation: ${error}. Skipping monitor difference check.`,
+      );
+    }
 
     // Relayers
     const relayers: Relayers = this.resources?.relayers ?? {};
-    const relayerClient = getRelayClient(this.teamKey!);
-    const dRelayers = (await relayerClient.list()).items;
+    let dRelayers: DefenderRelayer[] = [];
+    try {
+      const relayerClient = getRelayClient(this.teamKey!);
+      dRelayers = (await relayerClient.list()).items;
 
-    // Relayers API keys
-    await Promise.all(
-      Object.entries(relayers).map(async ([id, relayer]: [string, Relayer | DefenderID]) => {
-        if (isDefenderId(relayer)) return;
-        const dRelayer = getEquivalentResourceByKey<DefenderRelayer>(
-          getResourceID(getStackName(this.serverless), id),
-          dRelayers,
-        );
-        if (dRelayer) {
-          const dRelayerApiKeys = await relayerClient.listKeys(dRelayer.relayerId);
-          const configuredKeys = relayer['api-keys'] ?? [];
-          const relayerApiKeyDifference = _.differenceWith(
-            dRelayerApiKeys,
-            configuredKeys,
-            (a: DefenderRelayerApiKey, b: string) => a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
+      // Relayers API keys
+      await Promise.all(
+        Object.entries(relayers).map(async ([id, relayer]: [string, Relayer | DefenderID]) => {
+          if (isDefenderId(relayer)) return;
+          const dRelayer = getEquivalentResourceByKey<DefenderRelayer>(
+            getResourceID(getStackName(this.serverless), id),
+            dRelayers,
           );
-          difference.relayerApiKeys.push(...relayerApiKeyDifference);
-        }
-      }),
-    );
+          if (dRelayer) {
+            try {
+              const dRelayerApiKeys = await relayerClient.listKeys(dRelayer.relayerId);
+              const configuredKeys = relayer['api-keys'] ?? [];
+              const relayerApiKeyDifference = _.differenceWith(
+                dRelayerApiKeys,
+                configuredKeys,
+                (a: DefenderRelayerApiKey, b: string) =>
+                  a.stackResourceId === getResourceID(dRelayer.stackResourceId!, b),
+              );
+              difference.relayerApiKeys.push(...relayerApiKeyDifference);
+            } catch (error) {
+              this.log.warn(
+                `Failed to list API keys for relayer ${dRelayer.relayerId}: ${error}. Skipping relayer API key difference check for this relayer.`,
+              );
+            }
+          }
+        }),
+      );
+    } catch (error) {
+      this.log.warn(
+        `Failed to list relayers for SSOT difference calculation: ${error}. Skipping relayer difference check.`,
+      );
+    }
 
     // Relayer Groups
     const relayerGroups: RelayerGroups = this.resources?.['relayer-groups'] ?? {};
-    const relayerGroupClient = getRelayGroupClient(this.teamKey!);
-    const dRelayerGroups = await relayerGroupClient.list();
+    try {
+      const relayerGroupClient = getRelayGroupClient(this.teamKey!);
+      const dRelayerGroups = await relayerGroupClient.list();
 
-    // Relayer Group API keys
-    await Promise.all(
-      Object.entries(relayerGroups).map(async ([id, relayerGroup]: [string, RelayerGroup | DefenderID]) => {
-        if (isDefenderId(relayerGroup)) return;
-        const dRelayerGroup = getEquivalentResourceByKey<DefenderRelayerGroup>(
-          getResourceID(getStackName(this.serverless), id),
-          dRelayerGroups,
-        );
-        if (dRelayerGroup) {
-          const dRelayerGroupApiKeys = await relayerGroupClient.listKeys(dRelayerGroup.relayerGroupId);
-          const configuredKeys = relayerGroup['api-keys'] ?? [];
-          const relayerGroupApiKeyDifference = _.differenceWith(
-            dRelayerGroupApiKeys,
-            configuredKeys,
-            (a: DefenderRelayerApiKey, b: string) =>
-              a.stackResourceId === getResourceID(dRelayerGroup.stackResourceId!, b),
+      // Relayer Group API keys
+      await Promise.all(
+        Object.entries(relayerGroups).map(async ([id, relayerGroup]: [string, RelayerGroup | DefenderID]) => {
+          if (isDefenderId(relayerGroup)) return;
+          const dRelayerGroup = getEquivalentResourceByKey<DefenderRelayerGroup>(
+            getResourceID(getStackName(this.serverless), id),
+            dRelayerGroups,
           );
-          difference.relayerGroupApiKeys.push(...relayerGroupApiKeyDifference);
-        }
-      }),
-    );
+          if (dRelayerGroup) {
+            try {
+              const dRelayerGroupApiKeys = await relayerGroupClient.listKeys(dRelayerGroup.relayerGroupId);
+              const configuredKeys = relayerGroup['api-keys'] ?? [];
+              const relayerGroupApiKeyDifference = _.differenceWith(
+                dRelayerGroupApiKeys,
+                configuredKeys,
+                (a: DefenderRelayerApiKey, b: string) =>
+                  a.stackResourceId === getResourceID(dRelayerGroup.stackResourceId!, b),
+              );
+              difference.relayerGroupApiKeys.push(...relayerGroupApiKeyDifference);
+            } catch (error) {
+              this.log.warn(
+                `Failed to list API keys for relayer group ${dRelayerGroup.relayerGroupId}: ${error}. Skipping relayer group API key difference check for this relayer group.`,
+              );
+            }
+          }
+        }),
+      );
+    } catch (error) {
+      this.log.warn(
+        `Failed to list relayer groups for SSOT difference calculation: ${error}. Skipping relayer group difference check. This may be due to the relayer groups feature not being enabled for your account.`,
+      );
+    }
 
     // Notifications
     const notifications: Notifications = this.resources?.notifications ?? {};
-    const dNotifications = await monitorClient.listNotificationChannels();
-    const notificationDifference = _.differenceWith(
-      dNotifications,
-      Object.entries(notifications),
-      (a: DefenderNotification, b: [string, Notification | DefenderID]) => {
-        if (isDefenderId(b[1])) {
-          return a.notificationId === b[1];
-        }
-        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
-      },
-    );
+    try {
+      const monitorClient = getMonitorClient(this.teamKey!);
+      const dNotifications = await monitorClient.listNotificationChannels();
+      const notificationDifference = _.differenceWith(
+        dNotifications,
+        Object.entries(notifications),
+        (a: DefenderNotification, b: [string, Notification | DefenderID]) => {
+          if (isDefenderId(b[1])) {
+            return a.notificationId === b[1];
+          }
+          return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+        },
+      );
+      difference.notifications = notificationDifference;
+    } catch (error) {
+      this.log.warn(
+        `Failed to list notifications for SSOT difference calculation: ${error}. Skipping notification difference check.`,
+      );
+    }
 
     // Actions
     const actions: Actions = this.resources.actions ?? {};
-    const actionClient = getActionClient(this.teamKey!);
-    const dActions = (await actionClient.list()).items;
-    const actionDifference = _.differenceWith(
-      dActions,
-      Object.entries(actions),
-      (a: DefenderAction, b: [string, ActionOrDefenderID]) => {
-        if (isDefenderId(b[1])) {
-          return a.actionId === b[1];
-        }
-        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
-      },
-    );
+    try {
+      const actionClient = getActionClient(this.teamKey!);
+      const dActions = (await actionClient.list()).items;
+      const actionDifference = _.differenceWith(
+        dActions,
+        Object.entries(actions),
+        (a: DefenderAction, b: [string, ActionOrDefenderID]) => {
+          if (isDefenderId(b[1])) {
+            return a.actionId === b[1];
+          }
+          return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+        },
+      );
+      difference.actions = actionDifference;
+    } catch (error) {
+      this.log.warn(
+        `Failed to list actions for SSOT difference calculation: ${error}. Skipping action difference check.`,
+      );
+    }
 
     // Secrets
-    const allSecrets = getConsolidatedSecrets(this.serverless, this.resources);
-    const dSecrets = (await actionClient.listSecrets()).secretNames ?? [];
-    const secretsDifference = _.differenceWith(
-      dSecrets,
-      Object.values(allSecrets).map((k, _) => Object.keys(k)[0] ?? ''),
-      (a: string, b: string) => a === b,
-    );
+    try {
+      const allSecrets = getConsolidatedSecrets(this.serverless, this.resources);
+      const actionClient = getActionClient(this.teamKey!);
+      const dSecrets = (await actionClient.listSecrets()).secretNames ?? [];
+      const secretsDifference = _.differenceWith(
+        dSecrets,
+        Object.values(allSecrets).map((k, _) => Object.keys(k)[0] ?? ''),
+        (a: string, b: string) => a === b,
+      );
+      difference.secrets = secretsDifference;
+    } catch (error) {
+      this.log.warn(
+        `Failed to list secrets for SSOT difference calculation: ${error}. Skipping secrets difference check.`,
+      );
+    }
 
     // Block Explorer Api Keys
     const blockExplorerApiKeys: BlockExplorerApiKeys = this.resources?.['block-explorer-api-keys'] ?? {};
-    const deployClient = getDeployClient(this.teamKey!);
-    const dBlockExplorerApiKeys = await deployClient.listBlockExplorerApiKeys();
-    const blockExplorerApiKeyDifference = _.differenceWith(
-      dBlockExplorerApiKeys,
-      Object.entries(blockExplorerApiKeys ?? []),
-      (a: DefenderBlockExplorerApiKey, b: [string, BlockExplorerApiKey | DefenderID]) => {
-        if (isDefenderId(b[1])) {
-          return a.blockExplorerApiKeyId === b[1];
-        }
-        return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
-      },
-    );
-
-    difference.forkedNetworks = forkedNetworkDifference;
-    difference.privateNetworks = privateNetworkDifference;
-    difference.contracts = contractDifference;
-    difference.monitors = monitorDifference;
-    difference.notifications = notificationDifference;
-    difference.actions = actionDifference;
-    difference.secrets = secretsDifference;
-    difference.blockExplorerApiKeys = blockExplorerApiKeyDifference;
+    try {
+      const deployClient = getDeployClient(this.teamKey!);
+      const dBlockExplorerApiKeys = await deployClient.listBlockExplorerApiKeys();
+      const blockExplorerApiKeyDifference = _.differenceWith(
+        dBlockExplorerApiKeys,
+        Object.entries(blockExplorerApiKeys ?? []),
+        (a: DefenderBlockExplorerApiKey, b: [string, BlockExplorerApiKey | DefenderID]) => {
+          if (isDefenderId(b[1])) {
+            return a.blockExplorerApiKeyId === b[1];
+          }
+          return a.stackResourceId === getResourceID(getStackName(this.serverless), b[0]);
+        },
+      );
+      difference.blockExplorerApiKeys = blockExplorerApiKeyDifference;
+    } catch (error) {
+      this.log.warn(
+        `Failed to list block explorer API keys for SSOT difference calculation: ${error}. Skipping block explorer API key difference check.`,
+      );
+    }
 
     return difference;
   }
