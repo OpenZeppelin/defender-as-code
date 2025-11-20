@@ -1,9 +1,9 @@
 service: defender-as-code-template
 configValidationMode: error
-frameworkVersion: '3'
+frameworkVersion: '4'
 
 provider:
-  name: defender
+  name: aws
   stage: ${opt:stage, 'dev'}
   stackName: 'mystack'
   # SSOT: use this template as a single source of truth.
